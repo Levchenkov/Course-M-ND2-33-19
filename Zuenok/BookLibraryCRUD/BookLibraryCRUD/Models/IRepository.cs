@@ -1,4 +1,5 @@
-﻿namespace BookLibraryCRUD {
+﻿namespace BookLibraryCRUD
+{
     public interface IRepository<out T>
     {
         T Get(int id);

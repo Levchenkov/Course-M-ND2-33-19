@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace BookLibraryCRUD {
+namespace BookLibraryCRUD
+{
     public interface ILibrary : IRepository<Book>
     {
         bool Add(Book book);

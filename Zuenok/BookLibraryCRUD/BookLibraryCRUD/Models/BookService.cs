@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BookLibraryCRUD {
+namespace BookLibraryCRUD
+{
     public class BookService
     {
         private readonly ILibrary repository;

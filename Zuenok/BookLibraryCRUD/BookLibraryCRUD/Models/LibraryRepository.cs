@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BookLibraryCRUD {
+namespace BookLibraryCRUD
+{
     public class LibraryRepository : ILibrary
     {
         private readonly IList<Book> data;

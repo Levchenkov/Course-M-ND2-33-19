@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace BookLibraryCRUD {
+namespace BookLibraryCRUD
+{
     public class LibraryContext
     {
         public IList<Book> Books { get; set; }

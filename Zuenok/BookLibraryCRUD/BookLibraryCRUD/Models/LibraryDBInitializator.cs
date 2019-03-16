@@ -2,7 +2,8 @@
 using System.IO;
 using System.Runtime.Serialization.Json;
 
-namespace BookLibraryCRUD {
+namespace BookLibraryCRUD
+{
     public class LibraryDBInitializator : LibraryContext
     {
         private readonly DataContractJsonSerializer jsonFormatter =

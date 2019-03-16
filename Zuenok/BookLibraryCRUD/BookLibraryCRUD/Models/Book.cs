@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Serialization;
 
-namespace BookLibraryCRUD {
+namespace BookLibraryCRUD
+{
     [DataContract]
     public class Book
     {
