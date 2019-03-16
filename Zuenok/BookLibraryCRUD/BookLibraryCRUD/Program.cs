@@ -20,7 +20,7 @@ namespace BookLibraryCRUD
         T GetLast();
     }
 
-    public interface IBookCRUD : IRepository<Book>
+    public interface ILibraryCRUD : IRepository<Book>
     {
         bool Add(Book book);
         bool Edit(int id);
@@ -28,16 +28,31 @@ namespace BookLibraryCRUD
         IEnumerable<Book> GetBooks();
     }
 
-    public class BookRepository : IBookCRUD
+    public class LibraryContext
     {
-        private readonly IList<Book> data;
+        public IList<Book> Books { get; set; }
+    }
 
-        public BookRepository() => data = new List<Book>
+    public class LibraryDBInitializator : LibraryContext
+    {
+        public LibraryDBInitializator() => Books = new List<Book>
         {
             new Book {Id = 1, Title = "Title1"},
             new Book {Id = 2, Title = "Title2"},
             new Book {Id = 3, Title = "Title3"}
         };
+    }
+
+    public class LibraryRepository : ILibraryCRUD
+    {
+        private readonly IList<Book> data;
+        private readonly LibraryContext db;
+
+        public LibraryRepository()
+        {
+            db = new LibraryDBInitializator();
+            data = db.Books;
+        }
 
         public Book Get(int id)
         {
@@ -90,9 +105,9 @@ namespace BookLibraryCRUD
 
     public class BookService
     {
-        private readonly IBookCRUD repository;
+        private readonly ILibraryCRUD repository;
 
-        public BookService(IBookCRUD repository)
+        public BookService(ILibraryCRUD repository)
         {
             if (repository != null) this.repository = repository;
             Books = repository?.GetBooks();
@@ -154,7 +169,7 @@ namespace BookLibraryCRUD
         {
             Console.WriteLine("Hello Books!");
 
-            IBookCRUD repository = new BookRepository();
+            ILibraryCRUD repository = new LibraryRepository();
             var bookService = new BookService(repository);
 
             try
