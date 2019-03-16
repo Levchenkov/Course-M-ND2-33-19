@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -29,38 +28,34 @@ namespace BookLibraryCRUD
         IEnumerable<Book> GetBooks();
     }
 
-
     public class BookRepository : IBookCRUD
     {
         private readonly IList<Book> data;
 
-        public BookRepository()
+        public BookRepository() => data = new List<Book>
         {
-            data = new List<Book>
-            {
-                new Book {Id = 1, Title = "Title1"},
-                new Book {Id = 2, Title = "Title2"},
-                new Book {Id = 3, Title = "Title3"},
-            };
+            new Book {Id = 1, Title = "Title1"},
+            new Book {Id = 2, Title = "Title2"},
+            new Book {Id = 3, Title = "Title3"}
+        };
+
+        public Book Get(int id)
+        {
+            var result = data.FirstOrDefault(x => x.Id == id);
+            return result ?? throw new Exception($"Element with id = {id} not found.");
         }
 
-        public Book Get(int id) => data.FirstOrDefault(x => x.Id == id);
-
-        public Book GetLast() => data.LastOrDefault();
+        public Book GetLast()
+        {
+            var result = data.LastOrDefault();
+            return result ?? throw new Exception("Book library is empty.");
+        }
 
         public bool Add(Book book)
         {
             if (book == null) return false;
             data.Add(book);
             return true;
-        }
-
-        private void EditForm(Book book)
-        {
-            Console.WriteLine($"Book \"{book.Title}\" edit.\n");
-            Console.Write("Enter new book title: ");
-            book.Title = Console.ReadLine();
-            Console.WriteLine("".PadRight(50, '\u2500'));
         }
 
         public bool Edit(int id)
@@ -83,12 +78,19 @@ namespace BookLibraryCRUD
         {
             return data;
         }
+
+        private void EditForm(Book book)
+        {
+            Console.WriteLine($"Book \"{book.Title}\" edit.\n");
+            Console.Write("Enter new book title: ");
+            book.Title = Console.ReadLine();
+            Console.WriteLine("".PadRight(50, '\u2500'));
+        }
     }
 
     public class BookService
     {
         private readonly IBookCRUD repository;
-        public IEnumerable<Book> Books { get; }
 
         public BookService(IBookCRUD repository)
         {
@@ -96,11 +98,19 @@ namespace BookLibraryCRUD
             Books = repository?.GetBooks();
         }
 
-        public Book Get(int id) => repository?.Get(id) != null
-            ? repository.Get(id)
-            : repository?.GetLast();
+        public IEnumerable<Book> Books { get; }
 
-        public int GetLastId() => repository.GetLast().Id;
+        public Book Get(int id)
+        {
+            return repository?.Get(id) != null
+                ? repository.Get(id)
+                : repository?.GetLast();
+        }
+
+        public int GetLastId()
+        {
+            return repository.GetLast().Id;
+        }
 
         public void AddBook(string title)
         {
@@ -137,9 +147,7 @@ namespace BookLibraryCRUD
         {
             Console.WriteLine("*".PadRight(20, '*'));
             foreach (var book in bookService.Books)
-            {
                 Console.WriteLine($"Id book [{book.Id}] : {book.Title}");
-            }
         }
 
         private static void Main()
@@ -149,7 +157,11 @@ namespace BookLibraryCRUD
             IBookCRUD repository = new BookRepository();
             var bookService = new BookService(repository);
 
-            Console.WriteLine(bookService.Get(bookService.GetLastId() + 10000).Title);
+            try
+            {
+                Console.WriteLine(bookService.Get(bookService.GetLastId() + 1000).Title);
+            }
+            catch (Exception e) { Console.WriteLine(e.Message); }
 
             bookService.AddBook("War and piece, part 1.");
             Console.WriteLine(bookService.Get(bookService.GetLastId()).Id.ToString(),
