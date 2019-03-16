@@ -58,6 +58,9 @@ namespace BookLibraryCRUD
         private void EditForm(Book book)
         {
             Console.WriteLine($"Book \"{book.Title}\" edit.\n");
+            Console.Write("Enter new book title: ");
+            book.Title = Console.ReadLine();
+            Console.WriteLine("".PadRight(50, '\u2500'));
         }
 
         public bool Edit(int id)
@@ -68,7 +71,13 @@ namespace BookLibraryCRUD
             return true;
         }
 
-        public bool Delete(int id) => true;
+        public bool Delete(int id)
+        {
+            var result = data.FirstOrDefault(x => x.Id == id);
+            if (result == null) return false;
+            data.Remove(result);
+            return true;
+        }
 
         public IEnumerable<Book> GetBooks()
         {
@@ -91,7 +100,7 @@ namespace BookLibraryCRUD
             ? repository.Get(id)
             : repository?.GetLast();
 
-        public int GetLastId()=> repository.GetLast().Id;
+        public int GetLastId() => repository.GetLast().Id;
 
         public void AddBook(string title)
         {
@@ -102,12 +111,37 @@ namespace BookLibraryCRUD
                 ? $"Book \"{title}\" added successfully."
                 : $"Attention!! book \"{title}\" not added.");
         }
+
+        public void EditBook(int id)
+        {
+            var book = repository.Get(id);
+            Console.WriteLine(repository.Edit(id)
+                                  ? $"Book \"{book.Title}\" updated successfully."
+                                  : $"Attention!! book \"{book.Title}\" not updated.");
+        }
+
+        public void DeleteBook(int id)
+        {
+            var book = repository.Get(id);
+            Console.WriteLine(repository.Delete(id)
+                                  ? $"Book \"{book.Title}\" deleted successfully."
+                                  : $"Attention!! book \"{book.Title}\" not deleted.");
+        }
     }
 
 #endregion Services
 
     internal class Program
     {
+        private static void OutBooks(BookService bookService)
+        {
+            Console.WriteLine("*".PadRight(20, '*'));
+            foreach (var book in bookService.Books)
+            {
+                Console.WriteLine($"Id book [{book.Id}] : {book.Title}");
+            }
+        }
+
         private static void Main()
         {
             Console.WriteLine("Hello Books!");
@@ -115,20 +149,27 @@ namespace BookLibraryCRUD
             IBookCRUD repository = new BookRepository();
             var bookService = new BookService(repository);
 
-            try { Console.WriteLine(bookService.Get(bookService.GetLastId()+1).Title); }
-            catch (Exception e) { Console.WriteLine(e.Message); }
+            Console.WriteLine(bookService.Get(bookService.GetLastId() + 10000).Title);
 
             bookService.AddBook("War and piece, part 1.");
-            Console.WriteLine(bookService.Get(10).Id.ToString(), bookService.Get(10).Title);
+            Console.WriteLine(bookService.Get(bookService.GetLastId()).Id.ToString(),
+                              bookService.Get(bookService.GetLastId()).Title);
 
             bookService.AddBook("War and piece, part 2.");
-            Console.WriteLine(bookService.Get(10).Id.ToString(), bookService.Get(10).Title);
+            Console.WriteLine(bookService.Get(bookService.GetLastId()).Id.ToString(),
+                              bookService.Get(bookService.GetLastId()).Title);
+
+            OutBooks(bookService);
 
             Console.WriteLine("*".PadRight(20, '*'));
-            foreach (var book in bookService.Books)
-            {
-                Console.WriteLine($"Id book [{book.Id}] : {book.Title}");
-            }
+            bookService.EditBook(bookService.GetLastId());
+            OutBooks(bookService);
+
+            Console.WriteLine("*".PadRight(20, '*'));
+            bookService.DeleteBook(bookService.GetLastId());
+            OutBooks(bookService);
+
+            Console.WriteLine();
         }
     }
 }
