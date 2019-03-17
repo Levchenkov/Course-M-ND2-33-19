@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalog", "BookCatalog\BookCatalog.csproj", "{E19C484F-9B40-45F1-B4D3-A5B25AA85CBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalogTest", "BookCatalogTest\BookCatalogTest.csproj", "{B600A244-0412-46AB-83B5-281738F3B776}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E19C484F-9B40-45F1-B4D3-A5B25AA85CBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E19C484F-9B40-45F1-B4D3-A5B25AA85CBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E19C484F-9B40-45F1-B4D3-A5B25AA85CBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E19C484F-9B40-45F1-B4D3-A5B25AA85CBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B600A244-0412-46AB-83B5-281738F3B776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B600A244-0412-46AB-83B5-281738F3B776}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B600A244-0412-46AB-83B5-281738F3B776}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B600A244-0412-46AB-83B5-281738F3B776}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FEC5E6E3-5123-4C66-AD85-BB0EAA33F07D}
+	EndGlobalSection
+EndGlobal
