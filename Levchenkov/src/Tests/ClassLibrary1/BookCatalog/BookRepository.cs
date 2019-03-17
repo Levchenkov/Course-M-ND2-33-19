@@ -1,4 +1,6 @@
-﻿namespace BookCatalog
+﻿using System;
+
+namespace BookCatalog
 {
     public class BookRepository : IElement<Book>
     {

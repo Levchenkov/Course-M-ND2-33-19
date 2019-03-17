@@ -1,4 +1,6 @@
-﻿namespace BookCatalog
+﻿using System.Runtime.Serialization;
+
+namespace BookCatalog
 {
     [DataContract]
     public class Book
