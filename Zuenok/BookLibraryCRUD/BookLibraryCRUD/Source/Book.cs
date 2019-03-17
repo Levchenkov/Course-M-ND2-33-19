@@ -2,6 +2,10 @@
 
 namespace BookLibraryCRUD
 {
+    /// <summary>
+    /// Book entity,
+    /// serialized for json class
+    /// </summary>
     [DataContract]
     public class Book
     {

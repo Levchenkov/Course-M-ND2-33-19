@@ -4,6 +4,10 @@ using System.Runtime.Serialization.Json;
 
 namespace BookLibraryCRUD
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// Initializes a new instance of the <see cref="T:BookLibraryCRUD.LibraryContext" /> class.
+    /// </summary>
     public class LibraryDBInitializator : LibraryContext
     {
         private readonly DataContractJsonSerializer jsonFormatter =
@@ -11,6 +15,11 @@ namespace BookLibraryCRUD
 
         private readonly string path = @"../../../App_Data/library.json";
 
+        /// <summary>
+        /// Reads data from a json file to the
+        /// list Books:<see cref="LibraryContext"/> of library books;
+        /// if the data file does not exist, creates it with 3 test records.
+        /// </summary>
         public LibraryDBInitializator()
         {
             using (var fs =
@@ -33,6 +42,9 @@ namespace BookLibraryCRUD
             }
         }
 
+        /// <summary>
+        /// Flushing data to json file
+        /// </summary>
         public void SetDbToJson()
         {
             using (var fs =
