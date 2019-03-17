@@ -1,32 +1,127 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.Serialization.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BookLibraryCRUD;
-using Moq;
+//using Moq;
 
 namespace UnitTestBookLibrary
 {
     [TestClass]
-    public class BookLibraryTest
+    public class LibraryDBInitializatorTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void LibraryDBInitializatorTest_DataDoesNotExist_ShouldReturnData()
         {
-            var bookId = 1;
-            //initialization
-            var bookRepositoryMock = new Mock<ILibrary>();
-            bookRepositoryMock.Setup(x => x.Get(It.IsAny<int>())).Returns(new Book { Id = bookId, Title = "qwe" });
+            // Arrange
+            LibraryDBInitializator db;
 
-            var subject = new BookService(bookRepositoryMock.Object); // mock
+            // Act
+            db = new LibraryDBInitializator();
+
+            // Assert
+            Assert.IsNotNull(db.Books);
+        }
+
+        [TestMethod]
+        public void SetDbToJsonTest_OutDataFileNotEmpty()
+        {
+            var jsonFormatter =
+                new DataContractJsonSerializer(typeof(List<Book>));
+            var path = @"../../../App_Data/library.json";
+
+            File.WriteAllText(path, string.Empty);
+
+            // Arrange
+            var db = new LibraryDBInitializator();
+
+            // Act
+            db.SetDbToJson();
+
+            // Assert
+            Assert.IsTrue(new FileInfo(path).Length > 0);
+        }
+    }
+
+    [TestClass]
+    public class LibraryRepositoryTest
+    {
+        private readonly ILibrary repository = new LibraryRepository();
+
+        [TestMethod]
+        public void GetParamIdTest_SouldReturnId()
+        {
+            //initialization
+            var Books = repository.GetBooks();
+            var enumerable = Books.ToList();
+            var _bookTitle = enumerable.First().Title;
+            var _bookId = enumerable.First().Id;
 
             //call
-            var result = subject.Get(bookId);
-
+            var result = repository.Get(_bookId);
 
             //verification
             Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.Id);
+            Assert.AreEqual(_bookTitle, result.Title);
+        }
 
-            bookRepositoryMock.Verify(x => x.Get(It.IsAny<int>()), Times.Once); //spy
+        [TestMethod]
+        public void GetLastTest_SouldReturnLastBook()
+        {
+            //initialization
+            var Books = repository.GetBooks();
+            var bk = Books.Last().Title;
 
+            //call
+            var result = repository.GetLast();
+
+            //verification
+            Assert.IsNotNull(result);
+            Assert.AreEqual(bk, result.Title);
+        }
+
+        [TestMethod]
+        public void AddTest_SouldReturnTrue()
+        {
+            //initialization
+            var Books = repository.GetBooks();
+            var bk = new Book {Id = 1000, Title = "qwe"};
+
+            //call
+            var result = repository.Add(bk);
+
+            //verification
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void DeleteTest_SouldReturnTrue()
+        {
+            //initialization
+            var Books = repository.GetBooks();
+            var idLast = repository.GetLast().Id;
+
+            //call
+            var result = repository.Delete(idLast);
+
+            //verification
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void GetBooksTest_SouldReturnIList()
+        {
+            //initialization
+
+            //call
+            var result = repository.GetBooks();
+
+            //verification
+            Assert.IsNotNull(result);
         }
     }
+
+    //[TestClass]
+    public class BookServiceTest { }
 }
