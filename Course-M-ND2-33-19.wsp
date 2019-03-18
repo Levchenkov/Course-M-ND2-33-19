@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalogJSON", "BookCatalogJSON\BookCatalogJSON.csproj", "{E1D85CB4-1D1C-4152-8494-CDA5C46C43D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookCatalogJSON", "Y:\C#\code\BookCatalogJSON\BookCatalogJSON\BookCatalogJSON.csproj", "{E1D85CB4-1D1C-4152-8494-CDA5C46C43D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject2", "XUnitTestProject2\XUnitTestProject2.csproj", "{60995214-0B04-4DEC-97C9-0F7CB85B80F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestProject2", "Y:\C#\code\BookCatalogJSON\XUnitTestProject2\XUnitTestProject2.csproj", "{60995214-0B04-4DEC-97C9-0F7CB85B80F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
