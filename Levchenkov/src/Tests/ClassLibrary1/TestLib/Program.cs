@@ -10,15 +10,21 @@ namespace TestLib
             JsonFileHandler jsonFileHandler = new JsonFileHandler();
             BookRepository bookRepository = new BookRepository(jsonFileHandler);
 
-            //bookRepository.SaveChanges();
+            //bookRepository.Add(new Book { Id = 4, Title = "New book" });
 
-            Book newBook = bookRepository.Get(3);
+            bookRepository.SaveChanges();
 
-            Console.WriteLine("Book id: {0}, book title: {1}", newBook.Id, newBook.Title);
+            WriteBook(bookRepository.Get(1));
+            WriteBook(bookRepository.Get(3));
+            WriteBook(bookRepository.Get(2));
+            WriteBook(bookRepository.Get(4));
 
 
-            //Console.WriteLine("Hello World!");
+        }
 
+        static void WriteBook(Book book)
+        {
+            Console.WriteLine("Book id: {0}, title: {1}", book.Id, book.Title);
         }
     }
 }

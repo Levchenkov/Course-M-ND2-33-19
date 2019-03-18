@@ -14,14 +14,6 @@ namespace ClassLibrary1
         {
             this.fileHandler = fileHandler;
             data = fileHandler.Load().ToList();
-
-            //data = new List<Book>
-            //{
-            //    new Book { Id = 1, Title = "Book 1" },
-            //    new Book { Id = 2, Title = "Book 2" },
-            //    new Book { Id = 3, Title = "Book 3" }
-            //};
-
         }
 
 

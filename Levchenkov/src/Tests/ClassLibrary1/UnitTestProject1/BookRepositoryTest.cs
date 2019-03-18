@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ClassLibrary1;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -136,6 +137,19 @@ namespace UnitTestProject1
             var subject = new BookRepository(fileHandlerMock.Object);
 
             Assert.IsFalse(subject.Remove(new Book() { Id = 4, Title = "Book 4" }));
+        }
+
+
+        [TestMethod]
+        public void SaveChanges_BookAdded_ShouldSaveWithBook()
+        {
+            var fileHandlerMock = new Mock<IFileHandler>();
+            var subject = new BookRepository(fileHandlerMock.Object);
+
+            subject.Add(new Book { Id = 4, Title = "New book" });
+            subject.SaveChanges();
+
+            fileHandlerMock.Verify(x => x.Save(It.Is<List<Book>>(list => list.Any(y => y.Id == 4))), Times.Once);
         }
     }
 }

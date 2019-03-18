@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Json;
 
@@ -9,30 +8,25 @@ namespace ClassLibrary1
     {
 
         private DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(List<Book>));
-        private const string patch = "Books.json";
+        private const string path = "Books.json";
 
 
         IEnumerable<Book> IFileHandler.Load()
         {
-            using (FileStream fileStream = File.Open("Books.json", FileMode.Open, FileAccess.Read))
+            using (FileStream fileStream = File.Open(path, FileMode.Open, FileAccess.Read))
             {
                 return (IEnumerable<Book>)jsonSerializer.ReadObject(fileStream);
             }
         }
 
+
         public void Save(List<Book> books)
         {
-            using (MemoryStream memoryStream = new MemoryStream())
+            using (FileStream fileStream = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write))
             {
-                jsonSerializer.WriteObject(memoryStream, books);
-
-                using (FileStream fileStream = File.Open("Books.json", FileMode.OpenOrCreate, FileAccess.Write))
-                {
-                    memoryStream.WriteTo(fileStream);
-                    fileStream.Flush();
-                }
-
+                jsonSerializer.WriteObject(fileStream, books);
             }
         }
     }
 }
+
