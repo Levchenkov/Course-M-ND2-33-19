@@ -7,5 +7,6 @@
         void Add(T item);
         bool Edit(T item);
         bool Remove(T item);
+        void SaveChanges();
     }
 }
