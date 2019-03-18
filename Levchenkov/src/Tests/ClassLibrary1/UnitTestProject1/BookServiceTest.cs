@@ -7,13 +7,28 @@ using Moq;
 
 namespace UnitTestProject1
 {
-    public class BookRepositoryStub : IRepository<Book>
-    {
-        public Book Get(int id)
-        {
-            return new Book {Id = id};
-        }
-    }
+    //public class BookRepositoryStub : IRepository<Book>
+    //{
+    //    public void Add(Book item)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public bool Edit(Book item)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    public Book Get(int id)
+    //    {
+    //        return new Book {Id = id};
+    //    }
+
+    //    public bool Remove(Book item)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 
     [TestClass]
     public class BookServiceTest
