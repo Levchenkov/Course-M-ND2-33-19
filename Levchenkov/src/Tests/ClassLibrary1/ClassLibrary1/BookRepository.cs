@@ -9,6 +9,7 @@ namespace ClassLibrary1
         private readonly IList<Book> data;
         private readonly IFileHandler fileHandler;
 
+
         public BookRepository(IFileHandler fileHandler)
         {
             this.fileHandler = fileHandler;
@@ -28,10 +29,7 @@ namespace ClassLibrary1
         }
 
 
-        public void Add(Book item)
-        {
-            data.Add(item);
-        }
+        public void Add(Book item) => data.Add(item);
 
 
         public bool Edit(Book item)
@@ -48,9 +46,6 @@ namespace ClassLibrary1
         }
 
 
-        public bool Remove(Book item)
-        {
-            throw new NotImplementedException();
-        }
+        public bool Remove(Book item) => data.Remove(item);
     }
 }

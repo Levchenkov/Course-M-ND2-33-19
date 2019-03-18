@@ -97,6 +97,7 @@ namespace UnitTestProject1
             Assert.AreEqual("New book 4", result.Title);
         }
 
+
         [TestMethod]
         public void Edit_BookDoesNotExist_ShouldNotBeChanged()
         {
@@ -110,6 +111,31 @@ namespace UnitTestProject1
 
             Assert.IsFalse(subject.Edit(book));
 
+        }
+
+
+        [TestMethod]
+        public void Remove_BookExist_ShouldReturn()
+        {
+            var fileHandlerMock = new Mock<IFileHandler>();
+            var book = new Book() { Id = 4, Title = "Book 4" };
+            fileHandlerMock.Setup(x => x.Load()).Returns(new List<Book> { book });
+
+            var subject = new BookRepository(fileHandlerMock.Object);
+
+            Assert.IsTrue(subject.Remove(book));
+        }
+
+
+        [TestMethod]
+        public void Remove_BookDoseNotExist_ShouldReturn()
+        {
+            var fileHandlerMock = new Mock<IFileHandler>();
+            fileHandlerMock.Setup(x => x.Load()).Returns(new List<Book> { new Book() { Id = 5, Title = "Book 5" } });
+
+            var subject = new BookRepository(fileHandlerMock.Object);
+
+            Assert.IsFalse(subject.Remove(new Book() { Id = 4, Title = "Book 4" }));
         }
     }
 }
