@@ -53,8 +53,10 @@ namespace BookLibraryCRUD
         /// <returns>true if successful</returns>
         public bool Add(Book book)
         {
-            if (book == null) return false;
-            data.Add(book);
+            var cnt = data?.Count ?? 0;
+            data?.Add(book);
+            if (data?.Count == cnt) return false;
+
             db.SetDbToJson();
             return true;
         }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Runtime.Serialization.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BookLibraryCRUD;
+using Moq;
+
 //using Moq;
 
 namespace UnitTestBookLibrary
@@ -122,6 +124,34 @@ namespace UnitTestBookLibrary
         }
     }
 
-    //[TestClass]
-    public class BookServiceTest { }
+    [TestClass]
+    public class BookServiceTest
+    {
+        [TestMethod]
+        public void AddBookTest_SouldReturn()
+        {
+            var _title = "qwerty";
+            // Arrange
+
+
+
+            //var mock = new Mock<LibraryContext>();
+            //mock.Setup(x => x.Books.Add(new Book{Id=1000,Title=_title}));
+            //var mockBooks = mock.Object;
+
+            var repository = new Mock<ILibrary>();
+            repository.Setup(x=>x.Add(new Book{Id = 1000, Title = _title}));
+
+            var lib = repository.Object;
+
+            var ll = lib.GetBooks();
+
+            // Act
+            //lib.AddBook(_title);
+
+            // Assert
+            //mockLib.Verify();
+
+        }
+    }
 }
