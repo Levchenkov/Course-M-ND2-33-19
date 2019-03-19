@@ -6,7 +6,7 @@ namespace BookLibraryCRUD
 {
     /// <inheritdoc />
     /// <summary>
-    /// Core business logic for implementing CRUD
+    ///     Core business logic for implementing CRUD
     /// </summary>
     public class LibraryRepository : ILibrary
     {
@@ -14,7 +14,7 @@ namespace BookLibraryCRUD
         private readonly LibraryDBInitializator db;
 
         /// <summary>
-        /// Ctor for init <see cref="LibraryRepository"/>
+        ///     Ctor for init <see cref="LibraryRepository" />
         /// </summary>
         public LibraryRepository()
         {
@@ -24,7 +24,7 @@ namespace BookLibraryCRUD
 
         /// <inheritdoc />
         /// <summary>
-        /// Implementation of access by ID
+        ///     Implementation of access by ID
         /// </summary>
         /// <param name="id">ID code</param>
         /// <returns>Book by ID</returns>
@@ -36,64 +36,61 @@ namespace BookLibraryCRUD
 
         /// <inheritdoc />
         /// <summary>
-        /// Accessing the last item in the book library
+        ///     Accessing the last item in the book library
         /// </summary>
         /// <returns>Last book</returns>
         public Book GetLast()
         {
-            var result = data.LastOrDefault();
-            return result ?? throw new Exception("Book library is empty.");
+            return data.LastOrDefault();
         }
 
         /// <inheritdoc />
         /// <summary>
-        /// Creating and adding a new book to the list of library books
+        ///     Creating and adding a new book to the list of library books
         /// </summary>
-        /// <param name="book">New entity of the <see cref="LibraryContext"/></param>
+        /// <param name="book">New entity of the <see cref="LibraryContext" /></param>
         /// <returns>true if successful</returns>
-        public bool Add(Book book)
+        public void Add(Book book)
         {
-            var cnt = data?.Count ?? 0;
-            data?.Add(book);
-            if (data?.Count == cnt) return false;
-
-            db.SetDbToJson();
-            return true;
+            data.Add(book);
+            db.SaveDbToJson();
         }
 
         /// <inheritdoc />
         /// <summary>
-        /// Editing book entity from list of library books
+        ///     Editing book entity from list of library books
         /// </summary>
         /// <param name="id">ID code</param>
         /// <returns>true if successful</returns>
-        public bool Edit(int id)
+        public void Edit(int id)
         {
             var result = data.FirstOrDefault(x => x.Id == id);
-            if (result == null) return false;
-            EditForm(result);
-            db.SetDbToJson();
-            return true;
+            if (result != null)
+            {
+                EditForm(result);
+                db.SaveDbToJson();
+            }
         }
 
         /// <inheritdoc />
         /// <summary>
-        /// Deleting book entity from list of library books
+        ///     Deleting book entity from list of library books
         /// </summary>
         /// <param name="id">ID code</param>
         /// <returns>true if successful</returns>
-        public bool Delete(int id)
+        public void Delete(int id)
         {
             var result = data.FirstOrDefault(x => x.Id == id);
-            if (result == null) return false;
-            data.Remove(result);
-            db.SetDbToJson();
-            return true;
+            if (result != null)
+            {
+                data.Remove(result);
+                db.SaveDbToJson();
+            }
         }
 
         /// <inheritdoc />
         /// <summary>
-        /// Returns a list of all library books.
+        ///     Returns a list of all library books.
         /// </summary>
         /// <returns>IList data about all the books</returns>
         public IEnumerable<Book> GetBooks()
@@ -102,7 +99,7 @@ namespace BookLibraryCRUD
         }
 
         /// <summary>
-        /// Simple form for edit book entity
+        ///     Simple form for edit book entity
         /// </summary>
         /// <param name="book">Book entity</param>
         private void EditForm(Book book)

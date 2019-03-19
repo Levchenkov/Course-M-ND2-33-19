@@ -6,7 +6,7 @@ namespace BookLibraryCRUD
 {
     /// <inheritdoc />
     /// <summary>
-    /// Initializes a new instance of the <see cref="T:BookLibraryCRUD.LibraryContext" /> class.
+    ///     Initializes a new instance of the <see cref="T:BookLibraryCRUD.LibraryContext" /> class.
     /// </summary>
     public class LibraryDBInitializator : LibraryContext
     {
@@ -16,9 +16,9 @@ namespace BookLibraryCRUD
         private readonly string path = @"../../../App_Data/library.json";
 
         /// <summary>
-        /// Reads data from a json file to the
-        /// list Books:<see cref="LibraryContext"/> of library books;
-        /// if the data file does not exist, creates it with 3 test records.
+        ///     Reads data from a json file to the
+        ///     list Books:<see cref="LibraryContext" /> of library books;
+        ///     if the data file does not exist, creates it with 3 test records.
         /// </summary>
         public LibraryDBInitializator()
         {
@@ -43,9 +43,9 @@ namespace BookLibraryCRUD
         }
 
         /// <summary>
-        /// Flushing data to json file
+        ///     Flushing data to json file
         /// </summary>
-        public void SetDbToJson()
+        public void SaveDbToJson()
         {
             using (var fs =
                 new FileStream(@"../../../App_Data/library.json", FileMode.Truncate))

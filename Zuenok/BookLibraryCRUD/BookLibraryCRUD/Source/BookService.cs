@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using BookLibraryCRUD.Source;
 
 namespace BookLibraryCRUD
 {
+    /// <inheritdoc />
     /// <summary>
     ///     CRUD library service
     /// </summary>
-    public class BookService
+    public class BookService : IBookService
     {
         /// <summary>
         ///     Book repository
@@ -36,9 +38,8 @@ namespace BookLibraryCRUD
         /// <returns>Book entity</returns>
         public Book Get(int id)
         {
-            return repository?.Get(id) != null
-                ? repository.Get(id)
-                : repository?.GetLast();
+            var book = repository.Get(id);
+            return book ?? repository.GetLast();
         }
 
         /// <summary>
@@ -47,7 +48,9 @@ namespace BookLibraryCRUD
         /// <returns>ID code</returns>
         public int GetLastId()
         {
-            return repository.GetLast().Id;
+            var res = repository.GetLast()?.Id;
+            if (res != null) return (int) res;
+            throw new Exception($"Element with id = {(int?) null} not found.");
         }
 
         /// <summary>
@@ -57,13 +60,11 @@ namespace BookLibraryCRUD
         /// <param name="title">new title Book</param>
         public void AddBook(string title)
         {
-            Console.WriteLine(repository.Add(new Book
-            {
-                Id = repository.GetLast().Id + 1, Title = title
-            })
-                ? $"Book \"{title}\" added successfully."
-                : $"Attention!! book \"{title}\" not added.");
+            var newId = repository.GetLast() == null ? 1 : repository.GetLast().Id + 1;
+            var newBook = new Book {Id = newId, Title = title};
+            repository.Add(newBook);
         }
+
 
         /// <summary>
         ///     Editing of the book entity
@@ -72,10 +73,7 @@ namespace BookLibraryCRUD
         /// <param name="id">ID code</param>
         public void EditBook(int id)
         {
-            var book = repository.Get(id);
-            Console.WriteLine(repository.Edit(id)
-                                  ? $"Book \"{book.Title}\" updated successfully."
-                                  : $"Attention!! book \"{book.Title}\" not updated.");
+            repository.Edit(id);
         }
 
         /// <summary>
@@ -84,10 +82,7 @@ namespace BookLibraryCRUD
         /// <param name="id">ID code</param>
         public void DeleteBook(int id)
         {
-            var book = repository.Get(id);
-            Console.WriteLine(repository.Delete(id)
-                                  ? $"Book \"{book.Title}\" deleted successfully."
-                                  : $"Attention!! book \"{book.Title}\" not deleted.");
+            repository.Delete(id);
         }
     }
 }

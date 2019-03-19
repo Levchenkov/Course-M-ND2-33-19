@@ -4,7 +4,7 @@ using BookLibraryCRUD;
 namespace BookLibraryExampleProgram
 {
     /// <summary>
-    /// Example of using BookLibraryCRUD library
+    ///     Example of using BookLibraryCRUD library
     /// </summary>
     internal class Program
     {

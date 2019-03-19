@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Json;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BookLibraryCRUD;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
-//using Moq;
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
 namespace UnitTestBookLibrary
 {
@@ -17,10 +18,9 @@ namespace UnitTestBookLibrary
         public void LibraryDBInitializatorTest_DataDoesNotExist_ShouldReturnData()
         {
             // Arrange
-            LibraryDBInitializator db;
 
             // Act
-            db = new LibraryDBInitializator();
+            var db = new LibraryDBInitializator();
 
             // Assert
             Assert.IsNotNull(db.Books);
@@ -39,7 +39,7 @@ namespace UnitTestBookLibrary
             var db = new LibraryDBInitializator();
 
             // Act
-            db.SetDbToJson();
+            db.SaveDbToJson();
 
             // Assert
             Assert.IsTrue(new FileInfo(path).Length > 0);
@@ -52,20 +52,23 @@ namespace UnitTestBookLibrary
         private readonly ILibrary repository = new LibraryRepository();
 
         [TestMethod]
-        public void GetParamIdTest_SouldReturnId()
+        public void GetParamIdTest_SouldReturn_Id()
         {
+            var bookId = 1;
             //initialization
-            var Books = repository.GetBooks();
-            var enumerable = Books.ToList();
-            var _bookTitle = enumerable.First().Title;
-            var _bookId = enumerable.First().Id;
+            var bookRepositoryMock = new Mock<ILibrary>();
+            bookRepositoryMock.Setup(x => x.Get(It.IsAny<int>()))
+                              .Returns(new Book {Id = bookId, Title = "qwe"});
+            var subject = new BookService(bookRepositoryMock.Object); // mock
 
             //call
-            var result = repository.Get(_bookId);
+            var result = subject.Get(bookId);
 
             //verification
             Assert.IsNotNull(result);
-            Assert.AreEqual(_bookTitle, result.Title);
+            Assert.AreEqual(1, result.Id);
+
+            bookRepositoryMock.Verify(x => x.Get(It.IsAny<int>()), Times.Once); //spy
         }
 
         [TestMethod]
@@ -86,29 +89,31 @@ namespace UnitTestBookLibrary
         [TestMethod]
         public void AddTest_SouldReturnTrue()
         {
-            //initialization
-            var Books = repository.GetBooks();
-            var bk = new Book {Id = 1000, Title = "qwe"};
+            // initialization
+            var mock = new Mock<ILibrary>();
+            mock.Setup(a => a.Add(It.IsAny<Book>())).Verifiable();
+            var result = mock.Object;
 
-            //call
-            var result = repository.Add(bk);
+            // call
+            result.Add(new Book());
 
-            //verification
-            Assert.IsTrue(result);
+            // verification
+            mock.Verify();
         }
 
         [TestMethod]
         public void DeleteTest_SouldReturnTrue()
         {
-            //initialization
-            var Books = repository.GetBooks();
-            var idLast = repository.GetLast().Id;
+            // initialization
+            var mock = new Mock<ILibrary>();
+            mock.Setup(x => x.Delete(It.IsAny<int>())).Verifiable();
+            var result = mock.Object;
 
-            //call
-            var result = repository.Delete(idLast);
+            // call
+            result.Delete(2);
 
-            //verification
-            Assert.IsTrue(result);
+            // verification
+            mock.Verify();
         }
 
         [TestMethod]
@@ -124,34 +129,79 @@ namespace UnitTestBookLibrary
         }
     }
 
+
     [TestClass]
     public class BookServiceTest
     {
         [TestMethod]
-        public void AddBookTest_SouldReturn()
+        public void AddBookTest_SouldReturn_NewItem()
         {
-            var _title = "qwerty";
-            // Arrange
+            var _title = "empty";
+            var book1 = new Book {Id = 111, Title = "=111"};
+            var book2 = new Book {Id = 112, Title = "=112"};
+            var Books = new List<Book> {book1, book2};
 
+            var mockRepository = new Mock<ILibrary>();
+            mockRepository.Setup(x => x.GetBooks()).Returns(Books);
+            mockRepository.Setup(x => x.GetLast()).Returns(book2);
+            mockRepository.Setup(x => x.Add(It.IsAny<Book>())).Verifiable();
 
+            var subject = new BookService(mockRepository.Object);
 
-            //var mock = new Mock<LibraryContext>();
-            //mock.Setup(x => x.Books.Add(new Book{Id=1000,Title=_title}));
-            //var mockBooks = mock.Object;
+            subject.AddBook(_title);
+            var res = subject.Books.Last();
 
-            var repository = new Mock<ILibrary>();
-            repository.Setup(x=>x.Add(new Book{Id = 1000, Title = _title}));
+            mockRepository.Verify();
+        }
 
-            var lib = repository.Object;
+        [TestMethod]
+        public void EditBook_SouldReturn_ModifiedItem()
+        {
+            var _title = "empty";
+            var book = new Book {Id = 111, Title = _title};
 
-            var ll = lib.GetBooks();
+            var mockRepository = new Mock<ILibrary>();
+            mockRepository.Setup(x => x.GetLast()).Returns(() => book);
 
-            // Act
-            //lib.AddBook(_title);
+            var subject = new BookService(mockRepository.Object);
+            subject.EditBook(111);
+            var res = subject.Get(111);
 
-            // Assert
-            //mockLib.Verify();
+            Assert.IsNotNull(res);
+            Assert.AreEqual(111, res.Id);
+        }
 
+        [TestMethod]
+        public void DeleteBook_SouldReturn_RemovedItem()
+        {
+            var book1 = new Book {Id = 111, Title = "=111"};
+            var book2 = new Book {Id = 112, Title = "=112"};
+            var Books = new List<Book> {book1, book2};
+
+            var mockRepository = new Mock<ILibrary>();
+            mockRepository.Setup(x => x.GetBooks()).Returns(() => Books);
+
+            var subject = new BookService(mockRepository.Object);
+            subject.DeleteBook(111);
+            var res = subject.Get(111);
+
+            Assert.IsNull(res);
+        }
+
+        [TestMethod]
+        public void GetLastId_SouldReturn_LastItemId()
+        {
+            var _title = "empty";
+            var book = new Book {Id = 111, Title = _title};
+
+            var mockRepository = new Mock<ILibrary>();
+            mockRepository.Setup(x => x.GetLast()).Returns(() => book);
+
+            var subject = new BookService(mockRepository.Object);
+            var result = subject.GetLastId();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(111, result);
         }
     }
 }
