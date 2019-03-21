@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalog", "BookCatalog\BookCatalog.csproj", "{5F274143-1D8D-4235-B010-A2ECEE0FD2D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalogTest", "BookCatalogTest\BookCatalogTest.csproj", "{C5D58CB3-0F6C-4F49-A9BE-D2008E567F98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLib", "TestLib\TestLib.csproj", "{83404EAB-0006-43D2-A50C-1C3AA9953956}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F274143-1D8D-4235-B010-A2ECEE0FD2D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F274143-1D8D-4235-B010-A2ECEE0FD2D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F274143-1D8D-4235-B010-A2ECEE0FD2D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F274143-1D8D-4235-B010-A2ECEE0FD2D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5D58CB3-0F6C-4F49-A9BE-D2008E567F98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5D58CB3-0F6C-4F49-A9BE-D2008E567F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5D58CB3-0F6C-4F49-A9BE-D2008E567F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5D58CB3-0F6C-4F49-A9BE-D2008E567F98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83404EAB-0006-43D2-A50C-1C3AA9953956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83404EAB-0006-43D2-A50C-1C3AA9953956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83404EAB-0006-43D2-A50C-1C3AA9953956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83404EAB-0006-43D2-A50C-1C3AA9953956}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
