@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using BookLibraryCRUD.Source;
 
 namespace BookLibraryCRUD
 {
-    /// <inheritdoc />
     /// <summary>
     ///     CRUD library service
     /// </summary>
-    public class BookService : IBookService
+    public class BookService
     {
         /// <summary>
         ///     Book repository

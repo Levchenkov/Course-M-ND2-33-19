@@ -20,7 +20,7 @@ namespace BookLibraryCRUD
         /// </summary>
         /// <param name="id">ID book</param>
         /// <returns>true if successful</returns>
-        void Edit(int id);
+        Book Edit(int id);
 
 
         /// <summary>

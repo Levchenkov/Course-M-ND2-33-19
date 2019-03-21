@@ -62,7 +62,7 @@ namespace BookLibraryCRUD
         /// </summary>
         /// <param name="id">ID code</param>
         /// <returns>true if successful</returns>
-        public void Edit(int id)
+        public Book Edit(int id)
         {
             var result = data.FirstOrDefault(x => x.Id == id);
             if (result != null)
@@ -70,6 +70,8 @@ namespace BookLibraryCRUD
                 EditForm(result);
                 db.SaveDbToJson();
             }
+
+            return result;
         }
 
         /// <inheritdoc />
