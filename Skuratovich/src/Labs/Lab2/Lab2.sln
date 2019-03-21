@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2.WEB", "Lab2.WEB\Lab2.WEB.csproj", "{17546A28-A26E-4BFD-915A-03E0A136B3BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2.DAL", "Lab2.DAL\Lab2.DAL.csproj", "{7AAEE125-A79C-43D1-923C-67C3096F586E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17546A28-A26E-4BFD-915A-03E0A136B3BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17546A28-A26E-4BFD-915A-03E0A136B3BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17546A28-A26E-4BFD-915A-03E0A136B3BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17546A28-A26E-4BFD-915A-03E0A136B3BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AAEE125-A79C-43D1-923C-67C3096F586E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AAEE125-A79C-43D1-923C-67C3096F586E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AAEE125-A79C-43D1-923C-67C3096F586E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AAEE125-A79C-43D1-923C-67C3096F586E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
