@@ -13,12 +13,7 @@ namespace BookCatalog2
     {
         static void Main(string[] args)
         {
-            Catalog myCatalog = JsonFile.Load();
             
-            //Catalog.Delete(myCatalog, 9);
-            Catalog.Edit(myCatalog, 1, new Book() { Title = "I use Edit method", Id = 100500 });
-            JsonFile.Save(myCatalog);
-            Catalog.ShowAllBooks(myCatalog);
 
             ReadLine();
         }

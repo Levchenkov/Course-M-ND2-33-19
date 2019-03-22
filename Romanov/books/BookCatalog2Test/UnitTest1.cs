@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BookCatalog2;
 using System.Collections.Generic;
+using Moq;
 
 namespace BookCatalog2Test
 {
@@ -14,9 +15,10 @@ namespace BookCatalog2Test
             //arrange
             Catalog catalog = new Catalog();
             catalog.Books = new List<Catalog.Book>();
-            var testBook = new Catalog.Book() { Title = "test", Id = 123 };
+           // var testBook = new Catalog.Book() { Title = "test", Id = 123 };
+            var mockBook = new Mock<Catalog.Book>();
             //act
-            Catalog.Add(catalog, testBook);
+            Catalog.Add(catalog, mockBook);
             //assert
             Assert.AreEqual(123, catalog.Books[0].Id);
         }

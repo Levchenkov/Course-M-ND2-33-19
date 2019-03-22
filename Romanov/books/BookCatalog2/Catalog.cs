@@ -7,46 +7,25 @@ using Newtonsoft.Json;
 
 namespace BookCatalog2
 {
-    public class Catalog 
+    interface IBookCatalogPossibility<T> where T: class
     {
-        public List<Book> Books { get; set; }
+        void Add(T book);
+        void Del(int index);
+    }
 
-        public class Book
-        {
-            public string Title { get; set; }
-            public int Id { get; set; }
-        }
-        public static void ShowAllBooks(Catalog catalog)
-        {
-            foreach (var book in catalog.Books)
-            {
-                Console.WriteLine($"Id: {book.Id}\t Title: {book.Title}");
-            }
-        }
-        public static Catalog InitCatalog()
-        {
-            Catalog catalog = new Catalog();
-            catalog.Books = new List<Book>();
-            return catalog;
-        }
+    public class Book
+    {
+        public string Title { get; set; }
+        public int Id { get; set; }
+    }
 
-        public Book Get(Catalog catalog, int x)
-        {
-            return catalog.Books[x];
-        }
+    public class Catalog : IBookCatalogPossibility<Book>
+    {
+        private List<Book> Books { get; set; }
 
-        public static void Add(Catalog catalog, Book book)
-        {
-            catalog.Books.Add(book);
-        }
-        public static void Delete(Catalog catalog, int x)
-        {
-            catalog.Books.RemoveAt(x);
-        }
-        public static void Edit(Catalog catalog, int x, Book book)
-        {
-            catalog.Books[x] = book;
-        }
+        public void Add(Book book) => Books.Add(book);
+
+        public void Del(int index) => Books.RemoveAt(index);
     }
     
 }
