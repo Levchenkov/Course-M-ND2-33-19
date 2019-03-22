@@ -23,15 +23,14 @@ namespace BookCatalog2
 
     public class Catalog : IBookCatalogPossibility<Book>
     {
-        private List<Book> Books { get; set; }
+        public List<Book> Books { get; set; }
 
         public void Add(Book book) => Books.Add(book);
-
         public void Del(int index) => Books.RemoveAt(index);
-
         public void Edit(Book book, int index) => Books[index] = book;
-
         public Book GetT(int index) => Books[index];
+
+        public Catalog() => Books = new List<Book>();
     }
     
 }
