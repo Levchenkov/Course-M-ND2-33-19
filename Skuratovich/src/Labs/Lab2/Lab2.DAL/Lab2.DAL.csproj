@@ -7,5 +7,13 @@
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="JsonFileHandler.cs" />
+    <Compile Remove="Interfaces\DAL\GenericRepository.cs" />
+    <Compile Remove="Interfaces\DAL\IStudentRepository.cs" />
+    <Compile Remove="Interfaces\DAL\StudentRepository.cs" />
+    <Compile Remove="Interfaces\DAL\UnitOfWork.cs" />
   </ItemGroup>
 </Project>
