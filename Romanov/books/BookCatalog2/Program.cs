@@ -17,15 +17,17 @@ namespace BookCatalog2
             var catalog = new Catalog();
             
             catalog.Add(new Book { Id = 1, Title = "Romanov" });
-            catalog.Add(new Book { Id = 1, Title = "Ivanov" });
-            catalog.Add(new Book { Id = 1, Title = "Sidorov" });
+            catalog.Add(new Book { Id = 2, Title = "Ivanov" });
+            catalog.Add(new Book { Id = 3, Title = "Sidorov" });
             return catalog;
         }
         static void Main(string[] args)
         {
+            //JsonFile.Save(ExampleInitializeOfBookCatalog());
             var catalog = JsonFile.Load();
-            catalog.Add(new Book { Title = "Piece and war", Id = 6 });
-            JsonFile.Save(catalog);
+            WriteLine(catalog.Compare(0, 4));
+            
+            
             ReadLine();
         }
     }
