@@ -12,6 +12,7 @@ namespace BookCatalog2
         void Add(T book);
         void Del(int index);
         T GetT(int index);
+        void Edit(T book, int index);
     }
 
     public class Book
@@ -28,11 +29,9 @@ namespace BookCatalog2
 
         public void Del(int index) => Books.RemoveAt(index);
 
-        public Book GetT(int index)
-        {
-            var book = Books[index];
-            return book;
-        }
+        public void Edit(Book book, int index) => Books[index] = book;
+
+        public Book GetT(int index) => Books[index];
     }
     
 }
