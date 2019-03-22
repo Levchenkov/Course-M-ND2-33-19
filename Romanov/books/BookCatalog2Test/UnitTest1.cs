@@ -10,29 +10,26 @@ namespace BookCatalog2Test
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void Ctor_Must_Include_Smth()
         {
-            //arrange
-            Catalog catalog = new Catalog();
-            catalog.Books = new List<Catalog.Book>();
-           // var testBook = new Catalog.Book() { Title = "test", Id = 123 };
-            var mockBook = new Mock<Catalog.Book>();
-            //act
-            Catalog.Add(catalog, mockBook);
-            //assert
-            Assert.AreEqual(123, catalog.Books[0].Id);
+            var result = new Catalog() { Books = new List<Book>() };
+            Assert.IsNotNull(result);
         }
         [TestMethod]
-        public void TestMethod2()
+        public void Get_BookExist()
         {
-            //arrange
-            Catalog catalog = new Catalog();
-            catalog.Books = new List<Catalog.Book>();
-            var testBook = new Catalog.Book() { Title = "test", Id = 123 };
-            //act
-            Catalog.Add(catalog, testBook);
-            //assert
-            Assert.AreEqual("test", catalog.Books[0].Title);
+            var mockjsonFile = new Mock<IBookCatalogPossibility<Book>>();
+            mockjsonFile.Setup(x => x.GetT(1)).Returns(new Book { Id = 1, Title = "TestMockTitleForBook" });
+            
+        }
+        [TestMethod]
+        public void DelTest()
+        {
+            var mock = new Mock<Catalog>();
+            
+            var s = mock.SetupAllProperties();
+            s.Setup(x => x.Compare(1, 2)).Returns(false);
+
         }
     }
 }

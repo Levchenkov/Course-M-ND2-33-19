@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace BookCatalog2
 {
-    interface IBookCatalogPossibility<T> where T: class
+    public interface IBookCatalogPossibility<T> where T: class
     {
         void Add(T book);
         void Del(int index);
