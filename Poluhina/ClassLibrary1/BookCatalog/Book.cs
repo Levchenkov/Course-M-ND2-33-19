@@ -6,6 +6,9 @@ namespace BookCatalog
     public class Book
     {
         [DataMember]
+        public int Id { get; set; }
+
+        [DataMember]
         public string Name { get; set; }
 
         [DataMember]

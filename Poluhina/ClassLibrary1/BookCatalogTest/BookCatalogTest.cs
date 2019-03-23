@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Collections.Generic;
 
 namespace BookCatalog.Tests
 {
@@ -55,22 +54,6 @@ namespace BookCatalog.Tests
             int count = actual.GetCount();
             // Assert
             Assert.AreEqual(4, count);
-        }
-    }
-    [TestClass]
-    public class BookInitializationTest
-    {
-        [TestMethod]
-        public void Property_listBooks_Value_IsNotNull()
-        {
-            // Arrange
-            var mock = new Mock<BookInitialization>();
-            mock.Setup(a => a.listBooks).Returns(() => new List<Book>());
-            var actual = mock.Object;
-            // Act
-            var list = actual.listBooks;
-            // Assert
-            Assert.IsNotNull(list);
         }
     }
 }
