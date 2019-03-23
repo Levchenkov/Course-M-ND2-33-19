@@ -1,0 +1,36 @@
+[
+  {
+    "Author": "1",
+    
+    "Created": "\/Date(1553329183359+0300)\/",
+    "DeliveryRequired": true,
+    "Description": "dsa",
+    "Ganre": 32,
+    "Id": 1,
+    "IsPaper": true,
+    "Languages": 2,
+    "Title": "asd"
+  },
+  {
+    "Author": "2",
+    "Created": "\/Date(1553329400913+0300)\/",
+    "DeliveryRequired": true,
+    "Description": "2",
+    "Ganre": 32,
+    "Id": 2,
+    "IsPaper": true,
+    "Languages": 1,
+    "Title": "2"
+  },
+  {
+    "Author": "2",
+    "Created": "\/Date(1553329416316+0300)\/",
+    "DeliveryRequired": true,
+    "Description": "2",
+    "Ganre": 32,
+    "Id": 2,
+    "IsPaper": true,
+    "Languages": 1,
+    "Title": "2"
+  }
+]

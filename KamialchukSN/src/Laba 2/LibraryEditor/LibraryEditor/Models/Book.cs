@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace LibraryEditor.Models
@@ -10,19 +9,19 @@ namespace LibraryEditor.Models
         [DataMember]
         public int Id { get; set; }
         [DataMember]
+        public string Author { get; set; }
+        [DataMember]
         public string Title { get; set; }
         [DataMember]
         public string Description { get; set; }
         [DataMember]
-        public string Author { get; set; }
-        [DataMember]
         public DateTime Created { get; set; }
         [DataMember]
-        public IEnumerable<EnumGanre> Ganre { get; set; }
+        public EnumGanre Ganre { get; set; }
         [DataMember]
         public bool IsPaper { get; set; }
         [DataMember]
-        public IEnumerable<EnumLanguages> Languages { get; set; }
+        public EnumLanguages Languages { get; set; }
         [DataMember]
         public bool DeliveryRequired { get; set; }
     }
@@ -37,6 +36,7 @@ namespace LibraryEditor.Models
         Other = 32
     }
 
+    [Flags]
     public enum EnumLanguages
     {
         Russian = 1,

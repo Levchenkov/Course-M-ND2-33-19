@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace LibraryEditor.Models
 {
     public class BookRepository : IRepository<Book>
     {
-        private IList<Book> data;
+        private List<Book> data;
         private IFileHandler fileHandler;
 
         public BookRepository(IFileHandler fileHandler)
@@ -29,18 +28,22 @@ namespace LibraryEditor.Models
         public void Add(Book entity)
         {
             data.Add(entity);
+            fileHandler.Save(data);
         }
 
-        public void Edit(Book entity)
+        public void Edit(int id, Book entity)
         {
-            Delete(entity.Id);
-            Add(entity);
+            var changeEntity = data.First(x => x.Id == id);
+            var index = data.IndexOf(changeEntity);
+            if (index != -1)
+                data[index] = entity;
+            fileHandler.Save(data);
         }
 
         public void Delete(int id)
         {
-            var book = Get(id);
-            data.Remove(book);
+            data.RemoveAll(x => x.Id == id);
+            fileHandler.Save(data);
         }
 
         public void SaveChanges()
