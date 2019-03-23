@@ -15,5 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lab2.DAL\Lab2.DAL.csproj" />
+    <ProjectReference Include="..\Lab2.Repository\Lab2.Repository.csproj" />
   </ItemGroup>
 </Project>
