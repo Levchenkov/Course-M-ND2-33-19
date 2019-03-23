@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -14,19 +14,31 @@
         <h3>Распродажа книг</h3>
         <table>
             <tr>
-                <td><p>Id книги</p></td>
-                <td><p>Автор</p></td>
-                <td><p>Заглавие</p></td>
+                <td><p>Id</p></td>
+                <td><p>Author</p></td>
+                <td><p>Title</p></td>
+                <td><p>Description</p></td>
+                <td><p>Created</p></td>
+                <td><p>Ganre</p></td>
+                <td><p>IsPaper</p></td>
+                <td><p>Languages</p></td>
+                <td><p>DeliveryRequired</p></td>
                 <td></td>
             </tr>
             @foreach (var b in ViewBag.Books)
             {
-                <tr>
-                    <td><p>@b.Id</p></td>
-                    <td><p>@b.Author</p></td>
-                    <td><p>@b.Title</p></td>
-                    <td><p><a href="/Home/Edit/@b.Id">Изменить</a></p></td>
-                </tr>
+            <tr>
+                <td><p>@b.Id</p></td>
+                <td><p>@b.Author</p></td>
+                <td><p>@b.Title</p></td>
+                <td><p>@b.Description</p></td>
+                <td><p>@b.Created</p></td>
+                <td><p>@b.Ganre</p></td>
+                <td><p>@b.IsPaper</p></td>
+                <td><p>@b.Languages</p></td>
+                <td><p>@b.DeliveryRequired</p></td>
+                <td><p><a href="/Home/Edit/@b.Id">Изменить</a></p></td>
+            </tr>
             }
         </table>
     </div>

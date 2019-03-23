@@ -51,6 +51,5 @@ namespace LibraryEditor.Models
         {
             fileHandler.Save(Data.ToList());
         }
-
     }
 }

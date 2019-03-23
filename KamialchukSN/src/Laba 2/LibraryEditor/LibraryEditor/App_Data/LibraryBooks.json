@@ -15,7 +15,7 @@
     "Created": "\/Date(1553329400913+0300)\/",
     "DeliveryRequired": true,
     "Description": "Good book",
-    "Ganre": 32,
+    "Ganre": 8,
     "Id": 2,
     "IsPaper": true,
     "Languages": 1,
@@ -24,12 +24,12 @@
   {
     "Author": "Conan Doyle",
     "Created": "\/Date(1553329416316+0300)\/",
-    "DeliveryRequired": true,
+    "DeliveryRequired": false,
     "Description": "Good book",
-    "Ganre": 32,
-    "Id": 2,
+    "Ganre": 16,
+    "Id": 3,
     "IsPaper": true,
-    "Languages": 1,
+    "Languages": 3,
     "Title": "The Red-headed League"
   }
 ]
