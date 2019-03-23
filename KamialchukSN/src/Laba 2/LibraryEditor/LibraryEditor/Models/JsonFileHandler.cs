@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Json;
 
 namespace LibraryEditor.Models
 {
-    public class JsonFileHandler: IFileHandler
+    public class JsonFileHandler : IFileHandler
     {
         DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(List<Book>));
 
