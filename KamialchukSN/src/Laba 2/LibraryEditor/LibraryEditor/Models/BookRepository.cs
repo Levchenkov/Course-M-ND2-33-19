@@ -6,18 +6,19 @@ namespace LibraryEditor.Models
 {
     public class BookRepository : IRepository<Book>
     {
-        private List<Book> data;
         private IFileHandler fileHandler;
+
+        public List<Book> Data { get; private set; }
 
         public BookRepository(IFileHandler fileHandler)
         {
             this.fileHandler = fileHandler;
-            data = fileHandler.Load().ToList();
+            Data = fileHandler.Load().ToList();
         }
 
         public Book Get(int id)
         {
-            var result = data.FirstOrDefault(x => x.Id == id);
+            var result = Data.FirstOrDefault(x => x.Id == id);
             if (result != null)
             {
                 return result;
@@ -27,28 +28,28 @@ namespace LibraryEditor.Models
 
         public void Add(Book entity)
         {
-            data.Add(entity);
-            fileHandler.Save(data);
+            Data.Add(entity);
+            fileHandler.Save(Data);
         }
 
         public void Edit(int id, Book entity)
         {
-            var changeEntity = data.First(x => x.Id == id);
-            var index = data.IndexOf(changeEntity);
+            var changeEntity = Data.First(x => x.Id == id);
+            var index = Data.IndexOf(changeEntity);
             if (index != -1)
-                data[index] = entity;
-            fileHandler.Save(data);
+                Data[index] = entity;
+            fileHandler.Save(Data);
         }
 
         public void Delete(int id)
         {
-            data.RemoveAll(x => x.Id == id);
-            fileHandler.Save(data);
+            Data.RemoveAll(x => x.Id == id);
+            fileHandler.Save(Data);
         }
 
         public void SaveChanges()
         {
-            fileHandler.Save(data.ToList());
+            fileHandler.Save(Data.ToList());
         }
 
     }

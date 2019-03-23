@@ -1,36 +1,35 @@
 [
   {
-    "Author": "1",
-    
+    "Author": "O.Henry",
     "Created": "\/Date(1553329183359+0300)\/",
     "DeliveryRequired": true,
-    "Description": "dsa",
+    "Description": "Good book",
     "Ganre": 32,
     "Id": 1,
     "IsPaper": true,
     "Languages": 2,
-    "Title": "asd"
+    "Title": "The Ransom of Red Chief"
   },
   {
-    "Author": "2",
+    "Author": "Epeli Hauofa",
     "Created": "\/Date(1553329400913+0300)\/",
     "DeliveryRequired": true,
-    "Description": "2",
+    "Description": "Good book",
     "Ganre": 32,
     "Id": 2,
     "IsPaper": true,
     "Languages": 1,
-    "Title": "2"
+    "Title": "The Glorious Pacific Way"
   },
   {
-    "Author": "2",
+    "Author": "Conan Doyle",
     "Created": "\/Date(1553329416316+0300)\/",
     "DeliveryRequired": true,
-    "Description": "2",
+    "Description": "Good book",
     "Ganre": 32,
     "Id": 2,
     "IsPaper": true,
     "Languages": 1,
-    "Title": "2"
+    "Title": "The Red-headed League"
   }
 ]
