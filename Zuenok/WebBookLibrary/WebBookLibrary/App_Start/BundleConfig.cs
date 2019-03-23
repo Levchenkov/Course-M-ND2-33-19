@@ -23,7 +23,8 @@ namespace WebBookLibrary
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                                                                  "~/Content/bootstrap.css",
-                                                                 "~/Content/site.css"));
+                                                                 "~/Content/site.css",
+                                                                 "~/Content/book-lib-style.css"));
         }
     }
 }

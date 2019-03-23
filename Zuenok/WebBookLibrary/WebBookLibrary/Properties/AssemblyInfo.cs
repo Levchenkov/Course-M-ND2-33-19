@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // связанных с этой сборкой.
 [assembly: AssemblyTitle("WebBookLibrary")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyConfiguration("Web")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("WebBookLibrary")]
-[assembly: AssemblyCopyright("© , 2019")]
+[assembly: AssemblyCopyright("©SergiroZ, 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

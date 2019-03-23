@@ -1,0 +1,18 @@
+﻿.splash {
+    background-image: url(/Content/img/intelligent-books-to-read.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.bg-color-light {
+    background-color: #e0e4a8;
+}
+
+.bg-color-dark {
+    background-color: #606247;
+}
+
+.text-color-light {
+    background-color: #606247;
+    color: #e0e4a8;
+}
