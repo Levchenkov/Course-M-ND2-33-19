@@ -8,4 +8,8 @@
     <ProjectReference Include="..\Lab2.Contracts\Lab2.Contracts.csproj" />
     <ProjectReference Include="..\Entities\Lab2.Entities.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="bootstrap" Version="4.3.1" />
+  </ItemGroup>
 </Project>
