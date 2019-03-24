@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -7,11 +7,11 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Книжный магазин</title>
+    <title>Books</title>
 </head>
 <body>
     <div>
-        <h3>Распродажа книг</h3>
+        <h3>Book repository</h3>
         <table>
             <tr>
                 <td><p>Id</p></td>
@@ -27,18 +27,22 @@
             </tr>
             @foreach (var b in ViewBag.Books)
             {
-            <tr>
-                <td><p>@b.Id</p></td>
-                <td><p>@b.Author</p></td>
-                <td><p>@b.Title</p></td>
-                <td><p>@b.Description</p></td>
-                <td><p>@b.Created</p></td>
-                <td><p>@b.Ganre</p></td>
-                <td><p>@b.IsPaper</p></td>
-                <td><p>@b.Languages</p></td>
-                <td><p>@b.DeliveryRequired</p></td>
-                <td><p><a href="/Home/Edit/@b.Id">Изменить</a></p></td>
-            </tr>
+                <tr>
+                    <td><p>@b.Id</p></td>
+                    <td><p>@b.Author</p></td>
+                    <td><p>@b.Title</p></td>
+                    <td><p>@b.Description</p></td>
+                    <td><p>@b.Created.ToString("dd.MM.yyy")</p></td>
+                    <td><p>@b.Ganre</p></td>
+                    <td><p>@b.IsPaper</p></td>
+                    <td><p>@b.Languages</p></td>
+                    <td><p>@b.DeliveryRequired</p></td>
+                    <td>
+                        @Html.ActionLink("Add", "Add") |
+                        @Html.ActionLink("Edit", "Edit", new { id = b.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = b.Id })
+                    </td>
+                </tr>
             }
         </table>
     </div>

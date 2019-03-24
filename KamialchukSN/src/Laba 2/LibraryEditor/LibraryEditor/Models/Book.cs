@@ -17,30 +17,12 @@ namespace LibraryEditor.Models
         [DataMember]
         public DateTime Created { get; set; }
         [DataMember]
-        public EnumGanre Ganre { get; set; }
+        public string Ganre { get; set; }
         [DataMember]
         public bool IsPaper { get; set; }
         [DataMember]
-        public EnumLanguages Languages { get; set; }
+        public string Languages { get; set; }
         [DataMember]
         public bool DeliveryRequired { get; set; }
-    }
-
-    public enum EnumGanre
-    {
-        Crime = 1,
-        Detective = 2,
-        Science = 4,
-        Fantasy = 8,
-        Romance = 16,
-        Other = 32
-    }
-
-    [Flags]
-    public enum EnumLanguages
-    {
-        Russian = 1,
-        English = 2,
-        France = 4
     }
 }

@@ -32,9 +32,9 @@ namespace LibraryEditor.Models
             fileHandler.Save(Data);
         }
 
-        public void Edit(int id, Book entity)
+        public void Edit(Book entity)
         {
-            var changeEntity = Data.First(x => x.Id == id);
+            var changeEntity = Data.First(x => x.Id == entity.Id);
             var index = Data.IndexOf(changeEntity);
             if (index != -1)
                 Data[index] = entity;

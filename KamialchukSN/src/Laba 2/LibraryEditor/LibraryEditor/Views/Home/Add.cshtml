@@ -1,0 +1,68 @@
+﻿@model LibraryEditor.Models.Book
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add</title>
+</head>
+<body>
+    <div>
+        <h3>Add book</h3>
+        @using (Html.BeginForm("Add", "Home", FormMethod.Post))
+        {
+            @Html.Label("Id:")
+            <br />
+            @Html.TextBoxFor(x => x.Id)
+            <br />
+
+            @Html.Label("Author:")
+            <br />
+            @Html.TextBoxFor(x => x.Author)
+            <br />
+
+            @Html.LabelFor(x => x.Title, "Title:")
+            <br />
+            @Html.TextBoxFor(x => x.Title)
+            <br />
+
+            @Html.LabelFor(x => x.Description, "Description:")
+            <br />
+            @Html.TextAreaFor(x => x.Description, 3, 40, null)
+            <br />
+
+            @Html.LabelFor(x => x.Created, "Created:")
+            <br />
+            <input type="date" name="Created" />
+            <br />
+
+            @Html.LabelFor(x => x.Ganre, "Ganre:")
+            <br />
+            @Html.DropDownListFor(x => x.Ganre, new SelectList(new string[] { "Crime", "Detective", "Science", "Fantasy", "Romance", "Other" }))
+            <br />
+
+            @Html.LabelFor(x => x.IsPaper, "IsPaper:")
+            <br />
+            @Html.CheckBoxFor(x => x.IsPaper, true)
+            <br />
+
+            @Html.LabelFor(x => x.Languages, "Languages:")
+            <br />
+            @Html.ListBoxFor(x => x.Languages, new MultiSelectList(new string[] { "Russian", "English", "France" }))
+            <br />
+
+            @Html.LabelFor(x => x.DeliveryRequired, "DeliveryRequired:")
+            <br />
+            @Html.RadioButtonFor(x => x.DeliveryRequired, true)
+            <span>Yes</span>
+            @Html.RadioButtonFor(x => x.DeliveryRequired, false)
+            <span>No</span>
+            <p><input type="submit" value="Send" /></p>
+        }
+    </div>
+</body>
+</html>
