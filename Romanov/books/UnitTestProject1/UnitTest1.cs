@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BookCatalog2;
+using Moq;
 
 namespace UnitTestProject1
 {
@@ -25,6 +26,46 @@ namespace UnitTestProject1
             var indexForGet = 0;
             Assert.IsNotNull(catalog.GetT(indexForGet));
         }
-
+        [TestMethod]
+        public void TestAdd()
+        {
+            // Arrange
+            var mock = new Mock<Catalog>();
+            var act = mock.Object;
+            // Act
+            act.Add(new Book());
+            act.Add(new Book());
+            // Assert
+            Assert.AreEqual(2, act.Books.Count);
+        }
+        [TestMethod]
+        public void TestDel()
+        {
+            // Arrange
+            var mock = new Mock<Catalog>();
+            var act = mock.Object;
+            act.Add(new Book());
+            act.Add(new Book());
+            // Act
+            act.Del(0);
+            // Assert
+            Assert.AreEqual(1,act.Books.Count);
+        }
+        [TestMethod]
+        public void TestGEt()
+        {
+            // Arrange
+            var mock = new Mock<Catalog>();
+            var act = mock.Object;
+            var testBook = new Book() { Id = 1, Title = "test" };
+            act.Add(new Book());
+            act.Add(new Book());
+            act.Add(new Book());
+            // Act
+            var t = act.GetT(0);
+            // Assert
+            Assert.IsNotNull(t);
+        }
+        
     }
 }
