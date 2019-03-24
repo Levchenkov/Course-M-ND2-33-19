@@ -1,50 +1,39 @@
 ﻿@{
-    Layout = null;
+    ViewBag.Title = "Home Page";
 }
 
-<!DOCTYPE html>
+<h3>Book repository</h3>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Books</title>
-</head>
-<body>
-    <div>
-        <h3>Book repository</h3>
-        <table>
-            <tr>
-                <td><p>Id</p></td>
-                <td><p>Author</p></td>
-                <td><p>Title</p></td>
-                <td><p>Description</p></td>
-                <td><p>Created</p></td>
-                <td><p>Ganre</p></td>
-                <td><p>IsPaper</p></td>
-                <td><p>Languages</p></td>
-                <td><p>DeliveryRequired</p></td>
-                <td></td>
-            </tr>
-            @foreach (var b in ViewBag.Books)
-            {
-                <tr>
-                    <td><p>@b.Id</p></td>
-                    <td><p>@b.Author</p></td>
-                    <td><p>@b.Title</p></td>
-                    <td><p>@b.Description</p></td>
-                    <td><p>@b.Created.ToString("dd.MM.yyy")</p></td>
-                    <td><p>@b.Ganre</p></td>
-                    <td><p>@b.IsPaper</p></td>
-                    <td><p>@b.Languages</p></td>
-                    <td><p>@b.DeliveryRequired</p></td>
-                    <td>
-                        @Html.ActionLink("Add", "Add") |
-                        @Html.ActionLink("Edit", "Edit", new { id = b.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = b.Id })
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
-</body>
-</html>
+<table class="table table-bordered table-hover">
+    <tr>
+        <td>Id</td>
+        <td>Author</td>
+        <td>Title</td>
+        <td>Description</td>
+        <td>Created</td>
+        <td>Ganre</td>
+        <td>IsPaper</td>
+        <td>Languages</td>
+        <td>DeliveryRequired</td>
+        <td>@Html.ActionLink("Add", "Add")</td>
+    </tr>
+
+    @foreach (var b in ViewBag.Books)
+    {
+        <tr>
+            <td>@b.Id</td>
+            <td>@b.Author</td>
+            <td>@b.Title</td>
+            <td>@b.Description</td>
+            <td>@b.Created.ToString("dd.MM.yyy")</td>
+            <td>@b.Ganre</td>
+            <td>@b.IsPaper</td>
+            <td>@b.Languages</td>
+            <td>@b.DeliveryRequired</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = b.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = b.Id })
+            </td>
+        </tr>
+    }
+</table>
