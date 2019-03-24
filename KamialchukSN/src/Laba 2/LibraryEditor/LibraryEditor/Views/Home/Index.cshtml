@@ -28,7 +28,7 @@
             <td>@b.Created.ToString("dd.MM.yyy")</td>
             <td>@b.Ganre</td>
             <td>@b.IsPaper</td>
-            <td>@b.Languages</td>
+            <td>@String.Join("/", b.Languages)</td>
             <td>@b.DeliveryRequired</td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = b.Id }) |

@@ -21,7 +21,7 @@ namespace LibraryEditor.Models
         [DataMember]
         public bool IsPaper { get; set; }
         [DataMember]
-        public string Languages { get; set; }
+        public string[] Languages { get; set; }
         [DataMember]
         public bool DeliveryRequired { get; set; }
     }

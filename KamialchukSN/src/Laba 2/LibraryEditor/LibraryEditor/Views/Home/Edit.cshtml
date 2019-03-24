@@ -25,58 +25,58 @@
         <td>@ViewBag.Book.Created.ToString("dd.MM.yyy")</td>
         <td>@ViewBag.Book.Ganre</td>
         <td>@ViewBag.Book.IsPaper</td>
-        <td>@ViewBag.Book.Languages</td>
+        <td>@String.Join("/", ViewBag.Book.Languages)</td>
         <td>@ViewBag.Book.DeliveryRequired</td>
     </tr>
 </table>
 @using (Html.BeginForm("Edit", "Home", FormMethod.Post))
 {
-<div class="panel-success">
-    <div class="panel-heading text-center">
-        <h3>Book editor</h3>
-    </div>
-    <div class="panel-body">
-        @Html.HiddenFor(x => x.Id)
-        <div class="form-group">
-            @Html.LabelFor(x => x.Author)
-            @Html.TextBoxFor(x => x.Author,  new { @class = "form-control" } )
+    <div class="panel-success">
+        <div class="panel-heading text-center">
+            <h3>Book editor</h3>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(x => x.Title)
-            @Html.TextBoxFor(x => x.Title,  new { @class = "form-control" } )
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(x => x.Description)
-            @Html.TextAreaFor(x => x.Description, 3, 40, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(x => x.Created)
-            <input type="date" name="Created" class="form-control" />
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(x => x.Ganre)
-            @Html.DropDownListFor(x => x.Ganre, new SelectList(new string[] { "Crime", "Detective", "Science", "Fantasy", "Romance", "Other" }), new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(x => x.IsPaper)
-            @Html.CheckBoxFor(x => x.IsPaper, new { @class = "btn btn-default" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(x => x.Languages)
-            @Html.ListBoxFor(x => x.Languages, new MultiSelectList(new string[] { "Russian", "English", "France" }), new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(x => x.DeliveryRequired)
-            @Html.RadioButtonFor(x => x.DeliveryRequired, true, new { @class = "btn btn-default" })
-            <span>Yes</span>
-            @Html.RadioButtonFor(x => x.DeliveryRequired, false, new { @class = "btn btn-default" })
-            <span>No</span>
-        </div>
-        <div class="form-group">
-            <div class="text-center">
-                <input type="submit" value="Send" class="btn btn-success" />
+        <div class="panel-body">
+            @Html.HiddenFor(x => x.Id)
+            <div class="form-group">
+                @Html.LabelFor(x => x.Author)
+                @Html.TextBoxFor(x => x.Author, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Title)
+                @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Description)
+                @Html.TextAreaFor(x => x.Description, 3, 40, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Created)
+                <input type="date" name="Created" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Ganre)
+                @Html.DropDownListFor(x => x.Ganre, new SelectList(new string[] { "Crime", "Detective", "Science", "Fantasy", "Romance", "Other" }), new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.IsPaper)
+                @Html.CheckBoxFor(x => x.IsPaper, new { @class = "btn btn-default" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Languages)
+                @Html.ListBoxFor(x => x.Languages, new MultiSelectList(new string[] { "Russian", "English", "France" }), new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.DeliveryRequired)
+                @Html.RadioButtonFor(x => x.DeliveryRequired, true, new { @class = "btn btn-default" })
+                <span>Yes</span>
+                @Html.RadioButtonFor(x => x.DeliveryRequired, false, new { @class = "btn btn-default" })
+                <span>No</span>
+            </div>
+            <div class="form-group">
+                <div class="text-center">
+                    <input type="submit" value="Send" class="btn btn-success" />
+                </div>
             </div>
         </div>
     </div>
- </div>
- }
+}
