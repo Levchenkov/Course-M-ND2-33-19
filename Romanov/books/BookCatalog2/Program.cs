@@ -11,7 +11,6 @@ namespace BookCatalog2
 {
     public class Program
     {
-
         public static Catalog ExampleInitializeOfBookCatalog()
         {
             var catalog = new Catalog();
@@ -25,7 +24,13 @@ namespace BookCatalog2
         {
             //JsonFile.Save(ExampleInitializeOfBookCatalog());
             var catalog = JsonFile.Load();
-            WriteLine(catalog.Compare(0, 4));
+            //catalog.Add(new Book() { Id = 4, Title = "Test add method" });
+            //JsonFile.Save(catalog);
+            //catalog.Del(0);
+            //JsonFile.Save(catalog);
+            catalog.Edit(new Book() { Id = 11, Title = "Test Edit method" }, 0);
+            JsonFile.Save(catalog);
+            //WriteLine(catalog.Compare(0, 1));
             
             
             ReadLine();
