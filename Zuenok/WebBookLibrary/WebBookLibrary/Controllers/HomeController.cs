@@ -23,8 +23,6 @@ namespace WebBookLibrary.Controllers
 
         public ActionResult Edit(int id)
         {
-            // if (id == null)
-            // return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             var book =
                 bookRepository.GetBooks().FirstOrDefault(x => x.Id == id);
 
