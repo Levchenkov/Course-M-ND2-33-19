@@ -1,17 +1,15 @@
-﻿using System;
-using Lab2.Contracts;
-using Lab2.Entities;
+﻿using Lab2.Contracts;
 
 namespace Lab2.Repository
 {
     public class RepositoryWrapper : IRepositoryWrapper
     {
-        private IBookFileHandler _bookFileHendler;
+        public JsonFileHandler _bookFileHandler;
         private IBookRepository _book;
 
-        public RepositoryWrapper(IBookFileHandler bookFileHendler)
+        public RepositoryWrapper(JsonFileHandler bookFileHandler)
         {
-            _bookFileHendler = bookFileHendler;
+            _bookFileHandler = bookFileHandler;
         }
 
         public IBookRepository Book
@@ -20,7 +18,7 @@ namespace Lab2.Repository
             {
                 if (_book == null)
                 {
-                    _book = new BookRepository(_bookFileHendler);
+                    _book = new BookRepository(_bookFileHandler);
                 }
 
                 return _book;

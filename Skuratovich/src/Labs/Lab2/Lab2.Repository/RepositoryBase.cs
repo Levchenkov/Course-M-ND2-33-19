@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Lab2.Contracts;
-using Lab2.Entities;
 
 namespace Lab2.Repository
 {
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
-        //protected RepositoryHandler RepositoryHandler { get; set; }
-
         // Context
         private readonly IList<T> data;
         private readonly IFileHandler<T> fileHandler;

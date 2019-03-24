@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lab2.Contracts;
-using Lab2.Entities;
 using Lab2.Entities.Models;
 
 namespace Lab2.Repository
@@ -27,7 +26,7 @@ namespace Lab2.Repository
             return GetAll();
         }
 
-        public Book GetBookById(int id)
+        public Book GetBookById(int? id)
         {
             var result = FirstOrDefault(x => x.Id == id);
             if (result != null)

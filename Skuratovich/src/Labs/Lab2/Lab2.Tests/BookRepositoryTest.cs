@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Lab2.Contracts;
 using Lab2.Entities;
 using Lab2.Entities.Models;
 using Lab2.Repository;

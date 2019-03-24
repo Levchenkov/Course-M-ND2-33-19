@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Lab2.Entities
+namespace Lab2.Contracts
 {
     public interface IFileHandler<T>
     {
