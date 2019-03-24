@@ -2,16 +2,16 @@
 
 namespace BookCatalogue
 {
-    public class BookService
+    public class BookService : IService<Book>
     {
-        IBookRepository bookRepository;
+        IRepository<Book> bookRepository;
 
-        public BookService(IBookRepository bookRepository)
+        public BookService(IRepository<Book> bookRepository)
         {
             this.bookRepository = bookRepository;
         }
 
-        public void AddBook(Book book)
+        public void Add(Book book)
         {
             if(book == null)
             {
@@ -23,7 +23,7 @@ namespace BookCatalogue
             }
         }
 
-        public Book GetBook(int id)
+        public Book Get(int id)
         {
             if(id <= 0)
             {
@@ -31,13 +31,13 @@ namespace BookCatalogue
             }
             else
             {
-                return bookRepository.GetBook(id);
+                return bookRepository.Get(id);
             }
         }
 
-        public IEnumerable<Book> GetBooks()
+        public IEnumerable<Book> GetAll()
         {
-            return bookRepository.GetBooks();
+            return bookRepository.GetAll();
         }
 
         public void Remove(int id)

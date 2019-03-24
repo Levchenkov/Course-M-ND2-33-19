@@ -23,9 +23,9 @@ namespace BookCatalogueTests
             var books = new List<Book>();
             var book = new Book();
             book.Id = 1;
-            book.Name = "Hello";
+            book.Title = "Hello";
             book.Author = "World";
-            book.YearOfIssue = 1984;
+            book.DateOfissue = 1984;
             books.Add(book);
             dataContext.Save(books);
 

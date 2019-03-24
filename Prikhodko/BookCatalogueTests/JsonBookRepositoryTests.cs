@@ -64,7 +64,7 @@ namespace BookCatalogueTests
             jsonBookRepository.Add(book);
 
             // Act
-            var actual = jsonBookRepository.GetBook(book.Id);
+            var actual = jsonBookRepository.Get(book.Id);
 
 
             //Assert
@@ -78,7 +78,7 @@ namespace BookCatalogueTests
             JsonBookRepository jsonBookRepository = new JsonBookRepository();
 
             // Act
-            var actual = jsonBookRepository.GetBook(0);
+            var actual = jsonBookRepository.Get(0);
 
 
             //Assert
@@ -94,7 +94,7 @@ namespace BookCatalogueTests
             jsonBookRepository.Add(book);
 
             //Act
-            var books = jsonBookRepository.GetBooks();
+            var books = jsonBookRepository.GetAll();
 
             //Assert
             Assert.IsNotNull(books);
@@ -137,24 +137,24 @@ namespace BookCatalogueTests
             // Arrange
             JsonBookRepository jsonBookRepository = new JsonBookRepository();
             Book book = new Book();
-            book.Name = "Hello";
+            book.Title = "Hello";
             book.Author = "Sasha";
-            book.YearOfIssue = 1984;
+            book.DateOfissue = 1984;
             jsonBookRepository.Add(book);
             int id = book.Id;
             Book book2 = new Book();
-            book2.Name = "World";
+            book2.Title = "World";
             book2.Author = "Vasya";
-            book2.YearOfIssue = 1991;
+            book2.DateOfissue = 1991;
             book2.Id = id;
 
             // Act
             jsonBookRepository.Update(book2);
 
             //Assert
-            Assert.AreEqual("World", book.Name);
+            Assert.AreEqual("World", book.Title);
             Assert.AreEqual("Vasya", book.Author);
-            Assert.AreEqual(1991, book.YearOfIssue);
+            Assert.AreEqual(1991, book.DateOfissue);
 
         }
 
@@ -164,23 +164,23 @@ namespace BookCatalogueTests
             // Arrange
             JsonBookRepository jsonBookRepository = new JsonBookRepository();
             Book book = new Book();
-            book.Name = "Hello";
+            book.Title = "Hello";
             book.Author = "Sasha";
-            book.YearOfIssue = 1984;
+            book.DateOfissue = 1984;
             jsonBookRepository.Add(book);
             Book book2 = new Book();
-            book2.Name = "World";
+            book2.Title = "World";
             book2.Author = "Vasya";
-            book2.YearOfIssue = 1991;
+            book2.DateOfissue = 1991;
             book2.Id = 0;
 
             // Act
             jsonBookRepository.Update(book2);
 
             //Assert
-            Assert.AreEqual("Hello", book.Name);
+            Assert.AreEqual("Hello", book.Title);
             Assert.AreEqual("Sasha", book.Author);
-            Assert.AreEqual(1984, book.YearOfIssue);
+            Assert.AreEqual(1984, book.DateOfissue);
         }
     }
 }

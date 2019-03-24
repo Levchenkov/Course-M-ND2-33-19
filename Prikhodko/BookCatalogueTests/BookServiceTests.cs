@@ -13,12 +13,12 @@ namespace BookCatalogueTests
         public void AddBookTest_PassValidBook_ShouldAddBookToRepository()
         {
             // Arrange
-            var repositoryMock = new Mock<IBookRepository>();
+            var repositoryMock = new Mock<IRepository>();
             BookService bookService = new BookService(repositoryMock.Object);
             var bookMock = new Mock<Book>();
 
             // Act
-            bookService.AddBook(bookMock.Object);
+            bookService.Add(bookMock.Object);
 
             //Assert
             repositoryMock.Verify(x => x.Add(bookMock.Object), Times.Once);
@@ -28,11 +28,11 @@ namespace BookCatalogueTests
         public void AddBookTest_PassNull_ShouldNotAddBookToRepository()
         {
             // Arrange
-            var repositoryMock = new Mock<IBookRepository>();
+            var repositoryMock = new Mock<IRepository>();
             BookService bookService = new BookService(repositoryMock.Object);
 
             // Act
-            bookService.AddBook(null);
+            bookService.Add(null);
 
             //Assert
             repositoryMock.Verify(x => x.Add(It.IsAny<Book>()), Times.Never);
@@ -42,12 +42,12 @@ namespace BookCatalogueTests
         public void GetBookTest_PassValidId_ShouldCallForRepositoryGetBook()
         {
             //Arrange
-            var repositoryMock = new Mock<IBookRepository>();
+            var repositoryMock = new Mock<IRepository>();
             BookService bookService = new BookService(repositoryMock.Object);
             int id = 1;
 
             //Act
-            bookService.GetBook(id);
+            bookService.Get(id);
 
             //Assert
             repositoryMock.Verify(x => x.GetBook(It.IsAny<int>()), Times.Once);
@@ -57,12 +57,12 @@ namespace BookCatalogueTests
         public void GetBookTest_PassInvalidId_ShouldReturnNull()
         {
             //Arrange
-            var repositoryMock = new Mock<IBookRepository>();
+            var repositoryMock = new Mock<IRepository>();
             BookService bookService = new BookService(repositoryMock.Object);
             int id = 0;
 
             //Act
-            Book actual = bookService.GetBook(id);
+            Book actual = bookService.Get(id);
 
             //Assert
             repositoryMock.Verify(x => x.GetBook(It.IsAny<int>()), Times.Never);
@@ -73,11 +73,11 @@ namespace BookCatalogueTests
         public void GetBooksTest_ShouldCallRepositoryGetBooksMethod()
         {
             //Arrange
-            var repositoryMock = new Mock<IBookRepository>();
+            var repositoryMock = new Mock<IRepository>();
             BookService bookService = new BookService(repositoryMock.Object);
 
             //Act
-            IEnumerable<Book> actual = bookService.GetBooks();
+            IEnumerable<Book> actual = bookService.GetAll();
 
             //Assert
             repositoryMock.Verify(x => x.GetBooks(), Times.Once);
@@ -87,7 +87,7 @@ namespace BookCatalogueTests
         public void RemoveTest_PassValidId_ShouldCallRepositoryRemoveMethod()
         {
             //Arrange
-            var repositoryMock = new Mock<IBookRepository>();
+            var repositoryMock = new Mock<IRepository>();
             BookService bookService = new BookService(repositoryMock.Object);
             int id = 1;
 
@@ -102,7 +102,7 @@ namespace BookCatalogueTests
         public void RemoveTest_PassInvalidId_ShouldNotCallRepositoryRemoveMethod()
         {
             //Arrange
-            var repositoryMock = new Mock<IBookRepository>();
+            var repositoryMock = new Mock<IRepository>();
             BookService bookService = new BookService(repositoryMock.Object);
             int id = 0;
 
@@ -117,7 +117,7 @@ namespace BookCatalogueTests
         public void UpdateBookTest_PassValidBook_ShouldUpdateBookInRepository()
         {
             // Arrange
-            var repositoryMock = new Mock<IBookRepository>();
+            var repositoryMock = new Mock<IRepository>();
             BookService bookService = new BookService(repositoryMock.Object);
             var bookMock = new Mock<Book>();
 
@@ -132,7 +132,7 @@ namespace BookCatalogueTests
         public void UpdateBookTest_PassNull_ShouldNotUpdateBookInRepository()
         {
             // Arrange
-            var repositoryMock = new Mock<IBookRepository>();
+            var repositoryMock = new Mock<IRepository>();
             BookService bookService = new BookService(repositoryMock.Object);
 
             // Act

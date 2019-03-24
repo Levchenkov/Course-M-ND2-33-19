@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Book.cs" />
     <Compile Include="BookService.cs" />
+    <Compile Include="IService.cs" />
     <Compile Include="JsonDataContext.cs" />
     <Compile Include="IBookRepository.cs" />
     <Compile Include="JsonBookRepository.cs" />

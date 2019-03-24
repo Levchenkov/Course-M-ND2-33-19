@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace BookCatalogue
 {
-    public class JsonBookRepository : IBookRepository
+    public class JsonBookRepository : IRepository<Book>
     {
         private static readonly string cataloguePath = "books.json";
         private bool booksLoaded = false;
@@ -52,7 +52,7 @@ namespace BookCatalogue
             return Books.Count + 1;
         }
 
-        public Book GetBook(int id)
+        public Book Get(int id)
         {
             if(id <= 0)
             {
@@ -64,7 +64,7 @@ namespace BookCatalogue
             }
         }
 
-        public List<Book> GetBooks()
+        public IEnumerable<Book> GetAll()
         {
             return Books;
         }
@@ -97,8 +97,8 @@ namespace BookCatalogue
                 {
                     Book temp = books.FirstOrDefault(b => b.Id == book.Id);
                     temp.Author = book.Author;
-                    temp.Name = book.Name;
-                    temp.YearOfIssue = book.YearOfIssue;
+                    temp.Title = book.Title;
+                    temp.DateOfissue = book.DateOfissue;
                     context.Save(books);
                 }
             }

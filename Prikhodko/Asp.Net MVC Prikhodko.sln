@@ -7,9 +7,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day1", "Day1", "{D7DADB14-3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalogue", "BookCatalogue\BookCatalogue.csproj", "{2728AF8F-1825-4FAC-8ACA-3EBBAEF08AA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalogueTests", "BookCatalogueTests\BookCatalogueTests.csproj", "{47D6D8B3-B464-4250-B13D-C72C460C3643}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookCatalogueTests", "BookCatalogueTests\BookCatalogueTests.csproj", "{47D6D8B3-B464-4250-B13D-C72C460C3643}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalogueConsole", "BookCatalogueConsole\BookCatalogueConsole.csproj", "{8C41D1EB-768A-401D-8299-8B238335FC4A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Task2", "Task2", "{62D15980-E33C-4A47-8799-64D810627630}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCataloguePL", "BookEditWebpage\BookCataloguePL.csproj", "{D29EE2ED-CA76-4140-9F31-13765B0AEBC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +33,10 @@ Global
 		{8C41D1EB-768A-401D-8299-8B238335FC4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C41D1EB-768A-401D-8299-8B238335FC4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C41D1EB-768A-401D-8299-8B238335FC4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D29EE2ED-CA76-4140-9F31-13765B0AEBC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D29EE2ED-CA76-4140-9F31-13765B0AEBC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D29EE2ED-CA76-4140-9F31-13765B0AEBC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D29EE2ED-CA76-4140-9F31-13765B0AEBC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +45,7 @@ Global
 		{2728AF8F-1825-4FAC-8ACA-3EBBAEF08AA2} = {D7DADB14-390B-42D0-9270-0B37FC47FB06}
 		{47D6D8B3-B464-4250-B13D-C72C460C3643} = {D7DADB14-390B-42D0-9270-0B37FC47FB06}
 		{8C41D1EB-768A-401D-8299-8B238335FC4A} = {D7DADB14-390B-42D0-9270-0B37FC47FB06}
+		{D29EE2ED-CA76-4140-9F31-13765B0AEBC1} = {62D15980-E33C-4A47-8799-64D810627630}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F8DAFB7C-011E-42FA-90A8-FB0BBD16F64C}
