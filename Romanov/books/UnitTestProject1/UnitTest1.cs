@@ -9,6 +9,24 @@ namespace UnitTestProject1
     public class UnitTest1
     {
         [TestMethod]
+        public void Compare_Should_Return_false2()
+        {
+            var mock = new Mock<IBookCatalogPossibility<Book>>();
+            mock.Setup(x => x.Compare(It.IsAny<int>(), It.IsAny<int>())).Returns(true);
+            var act = mock.Object;
+            bool b2 = true;
+            Assert.AreEqual(b2, act.Compare(1,23));
+        }
+        [TestMethod]
+        public void TestGet2()
+        {
+            var mock = new Mock<IBookCatalogPossibility<Book>>();
+            mock.Setup(x => x.GetT(It.IsAny<int>())).Returns(new Book());
+            var act = mock.Object;
+            var testGet = act.GetT(3);
+            Assert.IsNotNull(testGet);
+        }
+        [TestMethod]
         public void Compare_Should_Return_false()
         {
             Catalog catalog = new Catalog() { };
