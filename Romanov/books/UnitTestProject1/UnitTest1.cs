@@ -9,7 +9,16 @@ namespace UnitTestProject1
     public class UnitTest1
     {
         [TestMethod]
-        public void Compare_Should_Return_false2()
+        public void DellAll_Should_Return_True()
+        {
+            var mock = new Mock<IBookCatalogPossibility<Book>>();
+            mock.Setup(x => x.DelAll()).Returns(() => true);
+            var act = mock.Object;
+            bool b2 = true;
+            Assert.AreEqual(b2, act.DelAll());
+        }
+        [TestMethod]
+        public void Compare_Should_Return_True_()
         {
             var mock = new Mock<IBookCatalogPossibility<Book>>();
             mock.Setup(x => x.Compare(It.IsAny<int>(), It.IsAny<int>())).Returns(true);
@@ -18,13 +27,23 @@ namespace UnitTestProject1
             Assert.AreEqual(b2, act.Compare(1,23));
         }
         [TestMethod]
-        public void TestGet2()
+        public void Get_Should_Be_Is_Not_Null()
         {
             var mock = new Mock<IBookCatalogPossibility<Book>>();
             mock.Setup(x => x.GetT(It.IsAny<int>())).Returns(new Book());
             var act = mock.Object;
             var testGet = act.GetT(3);
             Assert.IsNotNull(testGet);
+        }
+        [TestMethod]
+        public void Add_Should_Be_Return_Count()
+        {
+            var mock = new Mock<IBookCatalogPossibility<Book>>();
+            mock.Setup(x => x.Add(It.IsAny<Book>())).Returns(1);
+            var act = mock.Object;
+            int testAdd = act.Add(new Book());
+            int t = 1;
+            Assert.AreEqual(t, testAdd);
         }
         [TestMethod]
         public void Compare_Should_Return_false()
@@ -35,15 +54,7 @@ namespace UnitTestProject1
             bool b = false;
             Assert.AreEqual(b, catalog.Compare(0, 1));
         }
-        [TestMethod]
-        public void Get_shouldBe_return_smth()
-        {
-            Catalog catalog = new Catalog() { };
-            catalog.Add(new Book() { Id = 1, Title = "One" });
-            catalog.Add(new Book() { Id = 2, Title = "two" });
-            var indexForGet = 0;
-            Assert.IsNotNull(catalog.GetT(indexForGet));
-        }
+
         [TestMethod]
         public void TestAdd()
         {
@@ -69,21 +80,5 @@ namespace UnitTestProject1
             // Assert
             Assert.AreEqual(1,act.Books.Count);
         }
-        [TestMethod]
-        public void TestGEt()
-        {
-            // Arrange
-            var mock = new Mock<Catalog>();
-            var act = mock.Object;
-            var testBook = new Book() { Id = 1, Title = "test" };
-            act.Add(new Book());
-            act.Add(new Book());
-            act.Add(new Book());
-            // Act
-            var t = act.GetT(0);
-            // Assert
-            Assert.IsNotNull(t);
-        }
-        
     }
 }

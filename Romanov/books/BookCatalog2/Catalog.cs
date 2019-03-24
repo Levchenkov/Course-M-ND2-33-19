@@ -9,11 +9,12 @@ namespace BookCatalog2
 {
     public interface IBookCatalogPossibility<T> where T: class
     {
-        void Add(T book);
+        int Add(T book);
         void Del(int index);
         T GetT(int index);
         void Edit(T book, int index);
         bool Compare(int indexBookLeft, int indexBookRight);
+        bool DelAll();
     }
 
     public class Book
@@ -26,7 +27,12 @@ namespace BookCatalog2
     {
         public List<Book> Books { get; set; }
 
-        public void Add(Book book) => Books.Add(book);
+        public int Add(Book book)
+        {
+            Books.Add(book);
+            return Books.Count;
+        }
+
         public void Del(int index) => Books.RemoveAt(index);
         public void Edit(Book book, int index) => Books[index] = book;
         public Book GetT(int index) => Books[index];
@@ -37,6 +43,19 @@ namespace BookCatalog2
             var bookSecond = JsonConvert.SerializeObject(Books[bookRight]);
 
             return bookFirst == bookSecond;
+        }
+
+        public bool DelAll()
+        {
+            Books.RemoveRange(0, Books.Count);
+            if (Books.Count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public Catalog() => Books = new List<Book>();
