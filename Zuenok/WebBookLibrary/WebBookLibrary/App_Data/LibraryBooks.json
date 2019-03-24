@@ -1,0 +1,13 @@
+[
+  {
+    "Id": 1,
+    "Title": "-the title",
+    "Description": "... description",
+    "Author": "-author",
+    "Created": "\/Date(1553329400913+0300)\/",
+    "Genre": 2,
+    "IsPaper": true,
+    "Languages": null,
+    "Delivery": false
+  }
+]

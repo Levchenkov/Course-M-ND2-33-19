@@ -49,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -130,6 +131,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LibraryModels\Book.cs" />
+    <Compile Include="Models\LibraryModels\BookRepository.cs" />
+    <Compile Include="Models\LibraryModels\BookViewModel.cs" />
+    <Compile Include="Models\LibraryModels\DeliveryRequired.cs" />
+    <Compile Include="Models\LibraryModels\Genre.cs" />
+    <Compile Include="Models\LibraryModels\IFileHandler.cs" />
+    <Compile Include="Models\LibraryModels\IRepository.cs" />
+    <Compile Include="Models\LibraryModels\JsonFileHandler.cs" />
+    <Compile Include="Models\LibraryModels\Language.cs" />
+    <Compile Include="Models\LibraryModels\LanguageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +156,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App_Data\LibraryBooks.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -171,11 +183,10 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_BookLayout.cshtml" />
+    <Content Include="Views\Home\__Index.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
