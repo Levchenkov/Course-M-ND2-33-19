@@ -1,1 +1,1 @@
-[{"Id":0,"Title":"123123","Description":"123123123","Author":null,"Created":null,"Genre":"Drama","IsPaper":false,"Languages":null,"DeliveryRequired":true}]
+[{"Id":0,"Title":"Book 1","Description":"Test description","Author":null,"Created":"2019-03-25T00:00:00","Genre":"Fantasy","IsPaper":true,"Languages":[1,3],"DeliveryRequired":true},{"Id":1,"Title":"Test 1","Description":null,"Author":"Author Test","Created":"2019-02-01T00:00:00","Genre":"Drama","IsPaper":true,"Languages":[1,3],"DeliveryRequired":true}]

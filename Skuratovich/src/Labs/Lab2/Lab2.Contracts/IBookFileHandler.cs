@@ -2,8 +2,5 @@
 
 namespace Lab2.Contracts
 {
-    public interface IBookFileHandler : IFileHandler<Book>
-    {
-
-    }
+    public interface IBookFileHandler : IFileHandler<Book> { }
 }

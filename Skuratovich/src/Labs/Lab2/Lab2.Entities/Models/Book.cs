@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -8,9 +9,6 @@ namespace Lab2.Entities.Models
     [JsonObject(MemberSerialization.OptIn)]
     public class Book : IEntity
     {
-        //var FictionGroup = new SelectListGroup { Name = "Fiction" };
-        //var NonFiction = new SelectListGroup { Name = "Non-fiction" };
-
         [JsonProperty]
         public int Id { get; set; }
 
@@ -29,7 +27,6 @@ namespace Lab2.Entities.Models
 
         [JsonProperty]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Created { get; set; }
 
         [JsonProperty]
