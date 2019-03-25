@@ -33,18 +33,25 @@ namespace Lab2.Repository
             return data;
         }
 
-        public void Update(T entity)
-        {
-            //TODO: Check this
-            Delete(entity);
-            Create(entity);
-        }
-
         public void Save() => fileHandler.Save(data.ToList());
 
         public T FirstOrDefault(Func<T, bool> predicate)
         {
             return data.FirstOrDefault(predicate);
+        }
+
+        public int Max(Func<T, int> predicat)
+        {
+            if (data.Count == 0)
+            {
+                return -1;
+            }
+            return data.Max(predicat);
+        }
+
+        public void Update(T entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

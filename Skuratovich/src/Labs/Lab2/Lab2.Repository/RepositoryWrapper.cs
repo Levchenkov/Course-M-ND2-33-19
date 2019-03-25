@@ -4,24 +4,24 @@ namespace Lab2.Repository
 {
     public class RepositoryWrapper : IRepositoryWrapper
     {
-        public JsonFileHandler _bookFileHandler;
-        private IBookRepository _book;
+        public JsonFileHandler bookFileHandler;
+        private IBookRepository book;
 
         public RepositoryWrapper(JsonFileHandler bookFileHandler)
         {
-            _bookFileHandler = bookFileHandler;
+            this.bookFileHandler = bookFileHandler;
         }
 
         public IBookRepository Book
         {
             get
             {
-                if (_book == null)
+                if (book == null)
                 {
-                    _book = new BookRepository(_bookFileHandler);
+                    book = new BookRepository(bookFileHandler);
                 }
 
-                return _book;
+                return book;
             }
         }
     }

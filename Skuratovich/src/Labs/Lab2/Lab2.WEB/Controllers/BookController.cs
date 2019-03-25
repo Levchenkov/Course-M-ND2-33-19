@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Lab2.Contracts;
+using Lab2.Entities;
 using Lab2.Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,17 +13,17 @@ namespace Lab2.WEB.Controllers
 {
     public class BookController : Controller
     {
-        private IRepositoryWrapper _repository;
+        private IRepositoryWrapper repository;
 
         public BookController(IRepositoryWrapper repository)
         {
-            _repository = repository;
+            this.repository = repository;
         }
 
         // GET: Book
         public IActionResult Index()
         {
-            return View(_repository.Book.GetAllBooks().ToList());
+            return View(repository.Book.GetAllBooks().ToList());
         }
 
         // GET: Book/Details/5
@@ -32,7 +33,7 @@ namespace Lab2.WEB.Controllers
             {
                 return BadRequest();
             }
-            Book book = _repository.Book.GetBookById(id);
+            Book book = repository.Book.GetBookById(id);
 
             if (book == null)
             {
@@ -44,17 +45,18 @@ namespace Lab2.WEB.Controllers
         // GET: Book/Create
         public ActionResult Create()
         {
-            return View();
+            var book = new Book();
+            return View(book);
         }
 
         // POST: Book/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([FromBody] Book book)
+        public ActionResult Create([Bind("Id,Title,Description,Genre,Languages")] Book book)
         {
             if (ModelState.IsValid)
             {
-                _repository.Book.CreateBook(book);
+                repository.Book.CreateBook(book);
 
                 return RedirectToAction("Index");
             }
@@ -70,12 +72,13 @@ namespace Lab2.WEB.Controllers
                 return BadRequest();
             }
 
-            Book book = _repository.Book.GetBookById(id);
+            Book book = repository.Book.GetBookById(id);
 
             if (book == null)
             {
                 return NotFound();
             }
+
             return View(book);
         }
 
@@ -84,7 +87,7 @@ namespace Lab2.WEB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int? id, [Bind("Id,Title")] Book book)
+        public ActionResult Edit(int? id, [Bind("Id,Title,Description,Created,Genre,IsPaper,Languages,DeliveryRequired")] Book book)
         {
             if (id != book.Id)
             {
@@ -93,22 +96,23 @@ namespace Lab2.WEB.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _repository.Book.UpdateBook(book);
-                    //await _context.SaveChangesAsync();
-                }
-                catch (Exception ex)
-                {
-                    //if (!MovieExists(movie.ID))
-                    //{
-                    //    return NotFound();
-                    //}
-                    //else
-                    //{
-                    //    throw;
-                    //}
-                }
+                repository.Book.UpdateBook(book);
+                //try
+                //{
+                //    _repository.Book.UpdateBook(book);
+                //    //await _context.SaveChangesAsync();
+                //}
+                //catch (Exception ex)
+                //{
+                //    //if (!MovieExists(movie.ID))
+                //    //{
+                //    //    return NotFound();
+                //    //}
+                //    //else
+                //    //{
+                //    //    throw;
+                //    //}
+                //}
                 return RedirectToAction("Index");
             }
             return View(book);
@@ -121,7 +125,7 @@ namespace Lab2.WEB.Controllers
             {
                 return BadRequest();
             }
-            Book book = _repository.Book.GetBookById(id);
+            Book book = repository.Book.GetBookById(id);
 
             if (book == null)
             {
@@ -135,8 +139,8 @@ namespace Lab2.WEB.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Book book = _repository.Book.GetBookById(id);
-            _repository.Book.DeleteBook(book);
+            Book book = repository.Book.GetBookById(id);
+            repository.Book.DeleteBook(book);
 
             return RedirectToAction("Index");
         }

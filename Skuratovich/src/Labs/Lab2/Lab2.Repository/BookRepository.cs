@@ -11,6 +11,11 @@ namespace Lab2.Repository
 
         public void CreateBook(Book book)
         {
+            if (book.Id == 0)
+            {
+                var maxId = Max(x => x.Id);
+                book.Id = maxId + 1;
+            }
             Create(book);
             Save();
         }
@@ -33,21 +38,19 @@ namespace Lab2.Repository
             {
                 return result;
             }
-
             throw new Exception("Element not found");
         }
 
         public void UpdateBook(Book book)
         {
-            var result = GetBookById(book.Id);
-
-            if (result != null)
+            var result = FirstOrDefault(x => x.Id ==  book.Id);
+            if (result == null)
             {
-                Delete(result);
-                Create(book);
-                Save();
+                throw new Exception("Element not found");        
             }
-            throw new Exception("Element not found");
+            Delete(result);
+            Create(book);
+            Save();
         }
     }
 }

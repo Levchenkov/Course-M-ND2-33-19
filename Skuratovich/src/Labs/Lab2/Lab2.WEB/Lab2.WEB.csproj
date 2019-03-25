@@ -21,7 +21,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Books.json" />
-    <Content Remove="Views\Book\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Books.json" />

@@ -6,6 +6,7 @@ namespace Lab2.Contracts
     public interface IRepositoryBase<T>
     {
         T FirstOrDefault(Func<T, bool> predicate);
+        int Max(Func<T, int> predicate);
         IEnumerable<T> GetAll();
         void Create(T entity);
         void Update(T entity);

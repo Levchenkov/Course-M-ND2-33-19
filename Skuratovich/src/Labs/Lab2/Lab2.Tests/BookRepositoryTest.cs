@@ -104,10 +104,9 @@ namespace Lab2.Tests
         {
             // Arrange
             var fileHandlerMock = new Mock<IBookFileHandler>();
-            var book = new Book() { Id = 4, Title = "Book 4" };
-            fileHandlerMock.Setup(x => x.Load()).Returns(new List<Book> { book });
+            fileHandlerMock.Setup(x => x.Load()).Returns(new List<Book> { new Book() { Id = 4, Title = "Book 4" } });
             var subject = new BookRepository(fileHandlerMock.Object);
-            book.Title = "New book title 4";
+            var book = new Book() { Id = 4, Title = "New book title 4" };
 
             // Act
             subject.UpdateBook(book);
@@ -181,6 +180,27 @@ namespace Lab2.Tests
             // Act
             subject.DeleteBook(new Book() { Id = 13 });
             // Assert
+        }
+
+        [TestMethod]
+        public void Max_BookId_AreEqual_5()
+        {
+            // Arrange
+            var fileHandlerMock = new Mock<IBookFileHandler>();
+            fileHandlerMock.Setup(x => x.Load()).Returns(new List<Book> {});
+
+            var subject = new BookRepository(fileHandlerMock.Object);
+
+            subject.Create(new Book() { Id = 1, Title = "Book 1"});
+            subject.Create(new Book() { Id = 4, Title = "Book 3" });
+            subject.Create(new Book() { Id = 2, Title = "Book 2" });
+            subject.Create(new Book() { Id = 5, Title = "Book 5" });
+            subject.Create(new Book() { Id = 3, Title = "Book 3" });
+
+            // Act
+            var result = subject.Max(x => x.Id);
+            // Assert
+            Assert.AreEqual(5, result);
         }
 
         //[TestMethod]
