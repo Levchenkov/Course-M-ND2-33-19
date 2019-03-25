@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2.WEB", "Lab2.WEB\Lab2.WEB.csproj", "{17546A28-A26E-4BFD-915A-03E0A136B3BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2.DAL", "Lab2.DAL\Lab2.DAL.csproj", "{7AAEE125-A79C-43D1-923C-67C3096F586E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2.Tests", "Lab2.Tests\Lab2.Tests.csproj", "{195B1152-0CDF-4681-8DE2-3729E9FCD1C7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2.Entities", "Entities\Lab2.Entities.csproj", "{C4ADCC22-DD77-4599-8074-DE87AA2F4A6A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2.Contracts", "Lab2.Contracts\Lab2.Contracts.csproj", "{6EFC9305-5D55-42A3-B576-506762CE95C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2.Repository", "Lab2.Repository\Lab2.Repository.csproj", "{8D868BDE-1D8B-4078-A79A-FB3D85348E04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2.Entities", "Lab2.Entities\Lab2.Entities.csproj", "{D32235E3-B83B-4E28-AA0F-AC4269AE243D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,18 +21,10 @@ Global
 		{17546A28-A26E-4BFD-915A-03E0A136B3BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17546A28-A26E-4BFD-915A-03E0A136B3BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17546A28-A26E-4BFD-915A-03E0A136B3BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7AAEE125-A79C-43D1-923C-67C3096F586E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7AAEE125-A79C-43D1-923C-67C3096F586E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7AAEE125-A79C-43D1-923C-67C3096F586E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7AAEE125-A79C-43D1-923C-67C3096F586E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{195B1152-0CDF-4681-8DE2-3729E9FCD1C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{195B1152-0CDF-4681-8DE2-3729E9FCD1C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{195B1152-0CDF-4681-8DE2-3729E9FCD1C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{195B1152-0CDF-4681-8DE2-3729E9FCD1C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C4ADCC22-DD77-4599-8074-DE87AA2F4A6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4ADCC22-DD77-4599-8074-DE87AA2F4A6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4ADCC22-DD77-4599-8074-DE87AA2F4A6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4ADCC22-DD77-4599-8074-DE87AA2F4A6A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6EFC9305-5D55-42A3-B576-506762CE95C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6EFC9305-5D55-42A3-B576-506762CE95C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EFC9305-5D55-42A3-B576-506762CE95C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -43,5 +33,9 @@ Global
 		{8D868BDE-1D8B-4078-A79A-FB3D85348E04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D868BDE-1D8B-4078-A79A-FB3D85348E04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D868BDE-1D8B-4078-A79A-FB3D85348E04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D32235E3-B83B-4E28-AA0F-AC4269AE243D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D32235E3-B83B-4E28-AA0F-AC4269AE243D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D32235E3-B83B-4E28-AA0F-AC4269AE243D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D32235E3-B83B-4E28-AA0F-AC4269AE243D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
