@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using WebBookLibrary.Models.LibraryModels;
 
@@ -54,7 +53,7 @@ namespace WebBookLibrary.Controllers
         {
             var book =
                 bookRepository.GetBooks().FirstOrDefault(x => x.Id == id);
-            if (book == null) throw new Exception("Book not found.");
+            if (book == null) HttpNotFound();
 
             bookRepository.Delete(id);
             bookRepository.SaveChanges();
