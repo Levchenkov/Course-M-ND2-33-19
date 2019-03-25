@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Web.Mvc;
 using WebBookLibrary.Models.LibraryModels;
 
@@ -14,32 +12,41 @@ namespace WebBookLibrary.Controllers
 
         public ActionResult Index()
         {
-            //ViewBag.Books = bookRepository.GetBooks();
-            var books = new List<Book>();
-            foreach (var book in bookRepository.GetBooks()) books.Add(book);
+            ViewBag.Books = bookRepository.GetBooks();
+            var books = bookRepository.GetBooks().ToList();
 
-            return View(books.Select(x => new BookViewModel(x)));
+            return View(books);
         }
 
+        [HttpGet]
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Add(Book book)
+        {
+            bookRepository.Add(book);
+            bookRepository.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            var book =
-                bookRepository.GetBooks().FirstOrDefault(x => x.Id == id);
+            ViewBag.Book = bookRepository.Get(id);
 
-            if (book == null) throw new Exception("Book not found.");
-
-            return View(book);
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include =
-                                     "Id,Title,Description,Author,Created,Genre,IsPaper,Languages,DeliveryRequired")]
-                                 Book book)
+        public ActionResult Edit(Book book)
         {
-            if (!ModelState.IsValid) return View(book);
-
-            if (true) return RedirectToAction("Index");
+            bookRepository.Edit(book);
+            bookRepository.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -47,12 +54,11 @@ namespace WebBookLibrary.Controllers
         {
             var book =
                 bookRepository.GetBooks().FirstOrDefault(x => x.Id == id);
-
             if (book == null) throw new Exception("Book not found.");
 
-
             bookRepository.Delete(id);
-            return this.RedirectToAction("Index");
+            bookRepository.SaveChanges();
+            return RedirectToAction("Index");
         }
 
 

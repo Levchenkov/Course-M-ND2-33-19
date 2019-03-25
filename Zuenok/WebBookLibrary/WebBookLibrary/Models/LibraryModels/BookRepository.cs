@@ -8,26 +8,26 @@ namespace WebBookLibrary.Models.LibraryModels
     {
         private readonly IFileHandler fileHandler;
 
-        private IList<Book> Books { get; set; }
-
         public BookRepository(IFileHandler fileHandler)
         {
             this.fileHandler = fileHandler;
             Books = fileHandler.Load().ToList();
         }
 
+        private IList<Book> Books { get; }
+
         public Book Get(int id)
         {
             var result = Books.FirstOrDefault(x => x.Id == id);
-            if (result != null)
-            {
-                return result;
-            }
+            if (result != null) return result;
 
             throw new Exception("Element not found.");
         }
 
-        public List<Book> GetBooks() => Books as List<Book>;
+        public IEnumerable<Book> GetBooks()
+        {
+            return Books;
+        }
 
         public void Add(Book entity)
         {
@@ -36,8 +36,9 @@ namespace WebBookLibrary.Models.LibraryModels
 
         public void Edit(Book entity)
         {
-            Delete(entity.Id);
-            Add(entity);
+            var changeEntity = Books.First(x => x.Id == entity.Id);
+            var index = Books.IndexOf(changeEntity);
+            if (index > -1) Books[index] = entity;
         }
 
         public void Delete(int id)

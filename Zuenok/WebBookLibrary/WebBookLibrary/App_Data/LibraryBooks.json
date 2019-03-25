@@ -1,13 +1,1 @@
-[
-  {
-    "Id": 0,
-    "Title": "-the title",
-    "Description": "... description",
-    "Author": "-author",
-    "Created": "\/Date(1553329400913+0300)\/",
-    "Genre": 2,
-    "IsPaper": true,
-    "Languages": null,
-    "Delivery": false
-  }
-]
+[{"Author":"Bob","Created":"\/Date(1551042000000+0300)\/","DeliveryRequired":true,"Description":"123","Genre":2,"Id":54,"IsPaper":true,"Languages":[16],"Title":"The Red-headed League"},{"Author":"ggggggggggggggg","Created":"\/Date(1552597200000+0300)\/","DeliveryRequired":true,"Description":"bbbbbbbbbbbbbbbbbbb","Genre":8,"Id":8,"IsPaper":true,"Languages":[2,4,6,8],"Title":"www"}]

@@ -1,17 +1,18 @@
-﻿@model IEnumerable<WebBookLibrary.Models.LibraryModels.BookViewModel>
-
-@{
+﻿@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron bg-color-light">
-    <h2>Welcome to the Library!</h2>
-</div>
 
+    <h2 style="color:rgb(217, 232, 156)">Welcome to the Library!</h2>
+
+
+<p class="btn bg-color-dark">
+    @Html.ActionLink("Create new book", "Add")
+</p>
 
 <div class="row text-color-light">
-    <div class="col-md-9">
-        <table class="table">
+    <div class="col-md-2">
+        <table class="table table-hover">
             <tr>
                 <th>Id</th>
                 <th>Title</th>
@@ -22,41 +23,24 @@
                 <th>Is Paper</th>
                 <th>Languages</th>
                 <th>Delivery</th>
+                <th></th>
             </tr>
 
-            @foreach (var item in Model)
+            @foreach (var item in ViewBag.Books)
             {
                 <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Title</td>
+                    <td>@item.Description</td>
+                    <td>@item.Author</td>
+                    <td>@item.Created.ToString("yyy")</td>
+                    <td>@item.Genre</td>
+                    <td>@item.IsPaper</td>
+                    <td>@string.Join("/", item.Languages)</td>
+                    <td>@item.DeliveryRequired</td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Author)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Created)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Genre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsPaper)
-                    </td>
-                    <td>
-                        @string.Join(", ", item.Languages.Select(x => x.Dialect))
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DeliveryRequired)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                        @Html.ActionLink("Delete", "Delete", new {id = item.Id})
                     </td>
                 </tr>
             }

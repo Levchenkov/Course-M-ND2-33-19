@@ -10,6 +10,6 @@ namespace WebBookLibrary.Models.LibraryModels
         void Edit(T entity);
         void Delete(int id);
         void SaveChanges();
-        List<Book> GetBooks();
+        IEnumerable<Book> GetBooks();
     }
 }
