@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Lab2.Contracts;
-using Lab2.Entities;
 using Lab2.Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -52,7 +48,7 @@ namespace Lab2.WEB.Controllers
         // POST: Book/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind("Id,Title,Description,Genre,Languages")] Book book)
+        public ActionResult Create([Bind("Id,Title,Description,Author,Created,Genre,IsPaper,Languages,DeliveryRequired")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +83,7 @@ namespace Lab2.WEB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int? id, [Bind("Id,Title,Description,Created,Genre,IsPaper,Languages,DeliveryRequired")] Book book)
+        public ActionResult Edit(int? id, [Bind("Id,Title,Description,Author,Created,Genre,IsPaper,Languages,DeliveryRequired")] Book book)
         {
             if (id != book.Id)
             {
@@ -97,6 +93,7 @@ namespace Lab2.WEB.Controllers
             if (ModelState.IsValid)
             {
                 repository.Book.UpdateBook(book);
+                //TODO: read about logger
                 //try
                 //{
                 //    _repository.Book.UpdateBook(book);
