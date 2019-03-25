@@ -10,7 +10,7 @@ namespace lab2.Controllers
     
     public class HomeController : Controller
     {
-        public ActionResult Edit()
+        public ActionResult Book()
         {
             JsonFile jfile = new JsonFile();
             Catalog catalog = jfile.Load();
