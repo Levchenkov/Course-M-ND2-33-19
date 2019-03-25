@@ -7,57 +7,92 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm())
-{
+<form asp-controller="Book" asp-action="Create" method="post" class="form-horizontal">
     @Html.AntiForgeryToken()
-
-<div class="form-horizontal">
     <h4>Book</h4>
     <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <input asp-for="Id" type="hidden" />
+
     <div class="form-group">
-        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label asp-for="Title" class="control-label col-md-2"></label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label asp-for="Description" class="control-label col-md-2"></label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Genre, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label asp-for="Author" class="control-label col-md-2"></label>
         <div class="col-md-10">
-            <select asp-for="Genre" asp-items="Model.Genres"></select>
+            <input asp-for="Author" class="form-control" />
+            <span asp-validation-for="Author" class="text-danger"></span>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Languages, htmlAttributes: new { @class = "control-label col-md-2" })
+        <label asp-for="Created" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="Created" class="form-control"/>
+            <span asp-validation-for="Created" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Genre" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <select asp-for="Genre" asp-items="Model.Genres" class="form-control">
+                <option>--none--</option>
+            </select>
+            <span asp-validation-for="Genre" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IsPaper" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="IsPaper" />
+            <span asp-validation-for="IsPaper" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Languages" class="control-label col-md-2"></label>
         <div class="col-md-10">
             <select asp-for="Languages"
-                    asp-items="Html.GetEnumSelectList<LanguageEnum>()"></select>
+                    asp-items="Html.GetEnumSelectList<LanguageEnum>()" 
+                    class="form-control"></select>
         </div>
     </div>
 
-
+    <div class="form-group">
+        <label asp-for="DeliveryRequired" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <input asp-for="DeliveryRequired" type="radio" value="true" />Yes
+            <input asp-for="DeliveryRequired" type="radio" value="false" />No
+            <span asp-validation-for="DeliveryRequired" class="text-danger"></span>
+        </div>
+    </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
-</div>
-}
+
+</form>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

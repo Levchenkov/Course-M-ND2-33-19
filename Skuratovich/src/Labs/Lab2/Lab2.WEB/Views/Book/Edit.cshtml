@@ -12,21 +12,21 @@
     <hr />
     <div asp-validation-summary="All" class="text-danger"></div>
 
-    <input asp-for="Id" type="hidden"/>
+    <input asp-for="Id" type="hidden" />
 
     <div class="form-group">
         <label asp-for="Title" class="control-label col-md-2"></label>
         <div class="col-md-10">
             <input asp-for="Title" class="form-control" />
-            <span asp-validation-for="Title" class = "text-danger"></span>
+            <span asp-validation-for="Title" class="text-danger"></span>
         </div>
     </div>
 
     <div class="form-group">
         <label asp-for="Description" class="control-label col-md-2"></label>
         <div class="col-md-10">
-            <textarea asp-for="Description" class="form-control" ></textarea>
-            <span asp-validation-for="Description" class = "text-danger"></span>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
     </div>
 
@@ -34,7 +34,7 @@
         <label asp-for="Author" class="control-label col-md-2"></label>
         <div class="col-md-10">
             <input asp-for="Author" class="form-control" />
-            <span asp-validation-for="Author" class = "text-danger"></span>
+            <span asp-validation-for="Author" class="text-danger"></span>
         </div>
     </div>
 
@@ -42,7 +42,7 @@
         <label asp-for="Created" class="control-label col-md-2"></label>
         <div class="col-md-10">
             <input asp-for="Created" />
-            <span asp-validation-for="Created" class = "text-danger"></span>
+            <span asp-validation-for="Created" class="text-danger"></span>
         </div>
     </div>
 
@@ -50,7 +50,7 @@
         <label asp-for="Genre" class="control-label col-md-2"></label>
         <div class="col-md-10">
             <select asp-for="Genre" asp-items="Model.Genres" class="form-control"></select>
-            <span asp-validation-for="Genre" class = "text-danger"></span>
+            <span asp-validation-for="Genre" class="text-danger"></span>
         </div>
     </div>
 
@@ -58,16 +58,24 @@
         <label asp-for="IsPaper" class="control-label col-md-2"></label>
         <div class="col-md-10">
             <input asp-for="IsPaper" />
-            <span asp-validation-for="IsPaper" class = "text-danger"></span>
+            <span asp-validation-for="IsPaper" class="text-danger"></span>
         </div>
     </div>
 
-        <div class="form-group">
+    <div class="form-group">
+        <label asp-for="Languages" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <select asp-for="Languages"
+                    asp-items="Html.GetEnumSelectList<LanguageEnum>()"></select>
+        </div>
+    </div>
+
+    <div class="form-group">
         <label asp-for="DeliveryRequired" class="control-label col-md-2"></label>
         <div class="col-md-10">
             <input asp-for="DeliveryRequired" type="radio" value="true" />Yes
             <input asp-for="DeliveryRequired" type="radio" value="false" />No
-            <span asp-validation-for="DeliveryRequired" class = "text-danger"></span>
+            <span asp-validation-for="DeliveryRequired" class="text-danger"></span>
         </div>
     </div>
 
@@ -76,12 +84,11 @@
             <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
-  
+
 </form>
 
-
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
