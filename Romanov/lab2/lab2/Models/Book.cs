@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Newtonsoft.Json;
 
 namespace lab2.Models
 {
-    public enum DeliviryRequired
+    public enum HowToDelivery
     {
-        curier,
-        pickup
+        pickup,
+        curier
     }
     public enum LanguagesOfBooks
     {
@@ -38,6 +40,6 @@ namespace lab2.Models
         public GenreOfBooks Genre { get; set; }
         public bool IsPapper { get; set; }
         public LanguagesOfBooks Languages { get; set; }
-        public DeliviryRequired Delivery { get; set; }
+        public HowToDelivery Delivery { get; set; }
     }
 }
