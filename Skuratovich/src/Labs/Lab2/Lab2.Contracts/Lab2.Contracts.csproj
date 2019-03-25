@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Entities\Lab2.Entities.csproj" />
+    <Compile Remove="IFileHandlerWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="IFileHandlerWrapper.cs" />
+    <ProjectReference Include="..\Lab2.Entities\Lab2.Entities.csproj" />
   </ItemGroup>
 </Project>
