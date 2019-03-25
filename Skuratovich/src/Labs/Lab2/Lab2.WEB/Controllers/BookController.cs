@@ -84,33 +84,33 @@ namespace Lab2.WEB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int? id, [FromBody] Book book)
+        public ActionResult Edit(int? id, [Bind("Id,Title")] Book book)
         {
+            if (id != book.Id)
+            {
+                return NotFound();
+            }
 
-            //if (book.IsObjectNull())
-            //{
-            //    return BadRequest("Owner object is null");
-            //}
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest("Invalid model object");
-            //}
-
-            //var file_book = _repository.Book.GetBookById(id);
-            //if (file_book.IsEmptyObject())
-            //{
-            //    return NotFound();
-            //}
-
-            //_repository.Book.UpdateBook(file_book, book);
-
-
-            //if (ModelState.IsValid)
-            //{
-            //    _repository.Book.UpdateBook(book);
-            //    return RedirectToAction("Index");
-            //}
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _repository.Book.UpdateBook(book);
+                    //await _context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    //if (!MovieExists(movie.ID))
+                    //{
+                    //    return NotFound();
+                    //}
+                    //else
+                    //{
+                    //    throw;
+                    //}
+                }
+                return RedirectToAction("Index");
+            }
             return View(book);
         }
 

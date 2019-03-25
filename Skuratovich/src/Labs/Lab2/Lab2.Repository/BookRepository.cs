@@ -39,8 +39,15 @@ namespace Lab2.Repository
 
         public void UpdateBook(Book book)
         {
-            Update(book);
-            Save();
+            var result = GetBookById(book.Id);
+
+            if (result != null)
+            {
+                Delete(result);
+                Create(book);
+                Save();
+            }
+            throw new Exception("Element not found");
         }
     }
 }
