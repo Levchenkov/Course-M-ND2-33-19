@@ -36,22 +36,22 @@ namespace lab2.Controllers
             return RedirectToAction("Index",new { id = Catalog.Books.Count-1 });
         }
 
-        public ActionResult Del(int id)
+        public ActionResult Del()
         {
             InitializationBooks();
             int bookCounts = Catalog.Books.Count - 1;
             ViewBag.BookCounts = bookCounts;
             
+            
             return View();
         }
         [HttpPost]
-        public ActionResult Del(Book book)
+        public ActionResult Del(int id)
         {
             InitializationBooks();
-            var d = Catalog.Books.FirstOrDefault(x => x.BookId == book.BookId);
-            Catalog.Del(d.BookId);
+            Catalog.Del(id);
             jfile.Save(Catalog);
-            return RedirectToAction("Del");
+            return Content("Success");
         }
     }
 }
