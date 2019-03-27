@@ -8,9 +8,9 @@ namespace BookCatalog
     {
         private List<Book> listBooks { get; set; }
         private JsonFormat jsonFormatter;
-        public BookRepository()
+        public BookRepository(JsonFormat jsonFormatter)
         {
-            jsonFormatter = new JsonFormat();
+            this.jsonFormatter = jsonFormatter;
             if (File.Exists(@"D:\book.json"))
             {
                 listBooks = jsonFormatter.Deserialize(listBooks);

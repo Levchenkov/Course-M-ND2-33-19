@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Json;
 
 namespace BookCatalog
 {
-    class JsonFormat
+   public class JsonFormat
     {
         DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(List<Book>));
         public void Serialize(List<Book> listBooks)

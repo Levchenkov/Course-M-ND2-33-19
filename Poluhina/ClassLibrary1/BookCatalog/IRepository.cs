@@ -1,6 +1,6 @@
 ﻿namespace BookCatalog
 {
-    interface IRepository<T> where T : class
+   public interface IRepository<T> where T : class
     {
         void Show();
         void Add(T element);

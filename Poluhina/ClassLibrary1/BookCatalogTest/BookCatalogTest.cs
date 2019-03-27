@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Collections.Generic;
 
 namespace BookCatalog.Tests
 {
@@ -10,7 +11,7 @@ namespace BookCatalog.Tests
         public void Add_CalledAtLeastOnce_True()
         {
             // Arrange
-            var mock = new Mock<BookRepository>();
+            var mock = new Mock<IRepository<Book>>();
             mock.Setup(a => a.Add(It.IsAny<Book>())).Verifiable();
             var actual = mock.Object;
             // Act
@@ -22,7 +23,7 @@ namespace BookCatalog.Tests
         public void Change_CalledAtLeastOnce_True()
         {
             // Arrange
-            var mock = new Mock<BookRepository>();
+            var mock = new Mock<IRepository<Book>>();
             mock.Setup(a => a.Change(It.IsAny<int>(), It.IsAny<Book>())).Verifiable();
             var actual = mock.Object;
             // Act
@@ -34,7 +35,7 @@ namespace BookCatalog.Tests
         public void Remove_CalledAtLeastOnce_True()
         {
             // Arrange
-            var mock = new Mock<BookRepository>();
+            var mock = new Mock<IRepository<Book>>();
             mock.Setup(a => a.Remove(It.IsAny<int>())).Verifiable();
             var actual = mock.Object;
             // Act
@@ -47,7 +48,7 @@ namespace BookCatalog.Tests
         public void GetCount_ListBookCount_4()
         {
             // Arrange
-            var mock = new Mock<BookRepository>();
+            var mock = new Mock<IRepository<Book>>();
             mock.Setup(a => a.GetCount()).Returns(() => 4);
             var actual = mock.Object;
             // Act
