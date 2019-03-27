@@ -8,7 +8,7 @@ namespace lab2.Models
     public class Catalog : IBookCatalogPossibility<Book>
     {
         public List<Book> Books { get; set; }
-        
+
         public int Add(Book book)
         {
             Books.Add(book);

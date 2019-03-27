@@ -8,11 +8,7 @@ using Newtonsoft.Json;
 
 namespace lab2.Models
 {
-    public enum HowToDelivery
-    {
-        pickup,
-        curier
-    }
+    
     public enum LanguagesOfBooks
     {
         russian,
@@ -40,6 +36,6 @@ namespace lab2.Models
         public GenreOfBooks Genre { get; set; }
         public bool IsPapper { get; set; }
         public LanguagesOfBooks Languages { get; set; }
-        public HowToDelivery Delivery { get; set; }
+        public string Delivery { get; set; }
     }
 }
