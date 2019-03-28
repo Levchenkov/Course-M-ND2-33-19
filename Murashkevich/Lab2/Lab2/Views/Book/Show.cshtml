@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Show</h2>
+
+<p>
+    <a href="/Book/Create">Add new book</a>
+</p>
+@foreach (var b in ViewBag.Books)
+{
+    <dl>
+        <dt>Id:</dt>
+        <dd>@b.Id</dd>
+        <dt>Title:</dt>
+        <dd>@b.Title</dd>
+        <dt>Author:</dt>
+        <dd>@b.Author</dd>
+        <dt>DeliveryRequired:</dt>
+        <dd>@b.DeliveryRequired</dd>
+        <dt>Genre:</dt>
+        <dd>@b.Genre.ToString()</dd>
+        <dt>Is Paper:</dt>
+        <dd>@b.IsPaper</dd>
+        <dt>Languages:</dt>
+        <dd>
+            @foreach (var lang in b.Languages)
+            {
+                <pre>@lang</pre>
+
+            }</dd>
+        <dt>Delivery Required:</dt>
+        <dd>@b.DeliveryRequired</dd>
+        <dt>Created:</dt>
+        <dd>@b.Created.ToShortDateString()</dd>
+    </dl>
+    <p>
+        <a href="/Book/Edit/@b.Id">Edit book</a>
+    </p>
+    <hr/>
+}
+
