@@ -6,10 +6,43 @@
 
 @using (Html.BeginForm("Add", "Home", FormMethod.Post))
 {
-<div class="form-group">
-
-    @Html.EditorForModel()
-</div>
-<input type="submit" value="Add" />
+    <div class="form-group">
+        @Html.LabelFor(m => m.BookId)
+        @Html.EditorFor(m => m.BookId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title)
+        @Html.EditorFor(m => m.Title)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextAreaFor(m => m.Description)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Author)
+        @Html.EditorFor(m => m.Author)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Created)
+        @Html.EditorFor(m => m.Created, "date")
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Genre)
+        @Html.EnumDropDownListFor(m => m.Genre)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.IsPaper)
+        @Html.CheckBoxFor(m => m.IsPaper)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Languages)
+        @Html.ListBoxFor(m => m.Languages, new MultiSelectList(new string[] { "russian", "german", "italian" }))
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Delivery)
+        Yes: @Html.RadioButtonFor(m => m.Delivery, true)
+        No: @Html.RadioButtonFor(m => m.Delivery, false)
+    </div>
+    <input type="submit" value="Add" />
 }
 

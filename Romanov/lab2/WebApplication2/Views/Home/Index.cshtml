@@ -7,10 +7,16 @@
 
 @foreach (var book in ViewBag.Books)
 {<hr />
-    <ul>
-        <li><b>Book Id:</b>   @book.BookId </li>
-        <li><b>Book Title:</b>  @book.Title </li>
-
-    </ul>
+ <ul>
+     <li><b>Book Id:</b>   @book.BookId </li>
+     <li><b>Book Title:</b>  @book.Title </li>
+     <li><b>Book Description:</b>  @book.Description </li>
+     <li><b>Book Author:</b>  @book.Author </li>
+     <li><b>Book Created:</b>  @book.Created </li>
+     <li><b>Book Genre:</b>  @book.Genre </li>
+     <li><b>Book IsPaper:</b>  @book.IsPaper </li>
+     <li><b>Book Languages:</b>  @book.Languages </li>
+     <li><b>Book Delivery:</b>  @book.Delivery </li>
+ </ul>
     
 }
