@@ -1,0 +1,19 @@
+﻿@model WebApplication2.Models.Book
+
+@{
+    ViewBag.Title = "Delete book";
+}
+
+<h2>Delete Book From Catalog by BookId</h2>
+
+@using (Html.BeginForm("Del", "Home", FormMethod.Post))
+{
+<div class="form-group">
+    @Html.LabelFor(m => m.BookId)
+    @Html.EditorFor(m => m.BookId)
+</div>
+<input type="submit" value="Del" />
+
+}
+
+

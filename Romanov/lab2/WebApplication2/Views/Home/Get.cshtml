@@ -1,0 +1,16 @@
+﻿@model WebApplication2.Models.Book
+
+@{
+    ViewData["Title"] = "Add Book";
+}
+
+<h2>Get Book From Repository</h2>
+
+@using (Html.BeginForm("Get", "Home", FormMethod.Post))
+{
+<div class="form-group">
+    @Html.LabelFor(m => m.BookId)
+    @Html.EditorFor(m => m.BookId)
+</div>
+        <input type="submit" value="Get" />
+}
