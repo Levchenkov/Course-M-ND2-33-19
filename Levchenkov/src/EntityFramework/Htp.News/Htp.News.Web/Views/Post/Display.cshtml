@@ -1,0 +1,39 @@
+﻿@model Htp.News.Domain.Contracts.ViewModels.PostViewModel
+
+@{
+    ViewBag.Title = "Display";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Display</h2>
+
+<div>
+    <h4>PostViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthorId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AuthorId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthorUserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AuthorUserName)
+        </dd>
+
+    </dl>
+</div>
