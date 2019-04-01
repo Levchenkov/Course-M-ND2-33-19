@@ -1,5 +1,5 @@
 ﻿@model WebApplication2.Models.Book
-@{ 
+@{
     ViewData["Title"] = "Json Book Catalog";
 }
 
@@ -7,23 +7,24 @@
 
 @foreach (var book in ViewBag.Books)
 {<hr />
- <ul class="list-group">
-     <li class="list-group-item disabled"><b>Book Id:</b>   @book.BookId </li>
-     <li class="list-group-item"><b>Book Title:</b>  @book.Title </li>
-     <li class="list-group-item"><b>Book Description:</b>  @book.Description </li>
-     <li class="list-group-item"><b>Book Author:</b>  @book.Author </li>
-     <li class="list-group-item"><b>Book Created:</b>  @book.Created </li>
-     <li class="list-group-item"><b>Book Genre:</b>  @book.Genre </li>
-     <li class="list-group-item"><b>Book IsPaper:</b>  @book.IsPaper </li>
-     <li class="list-group-item"><b>Book Language:</b> 
-     @foreach (var item in @book.Languages)
-     {
-                                 <ul>
-                                     <li>@item</li>
-                                 </ul>
-     }
-      </li>
-     <li class="list-group-item"><b>Book Delivery:</b>  @book.Delivery </li>
- </ul>
-    
+    <ul class="list-group">
+        <li class="list-group-item disabled"><b>Book Id:</b>   @book.BookId </li>
+        <li class="list-group-item"><b>Book Title:</b>  @book.Title </li>
+        <li class="list-group-item"><b>Book Description:</b>  @book.Description </li>
+        <li class="list-group-item"><b>Book Author:</b>  @book.Author </li>
+        <li class="list-group-item"><b>Book Created:</b>  @book.Created </li>
+        <li class="list-group-item"><b>Book Genre:</b>  @book.Genre </li>
+        <li class="list-group-item"><b>Book IsPaper:</b>  @book.IsPaper </li>
+        <li class="list-group-item">
+            <b>Book Language:</b>
+            @foreach (var item in @book.Languages)
+            {
+                <ul>
+                    <li>@item</li>
+                </ul>
+            }
+        </li>
+        <li class="list-group-item"><b>Book Delivery:</b>  @book.Delivery </li>
+    </ul>
+
 }
