@@ -4,15 +4,25 @@
     ViewBag.Title = "Delete book";
 }
 
-<h2>Delete Book From Catalog by BookId</h2>
+<h2>Delete Book From Repository by BookId</h2>
 
 @using (Html.BeginForm("Del", "Home", FormMethod.Post))
 {
-<div class="form-group">
-    @Html.LabelFor(m => m.BookId)
-    @Html.EditorFor(m => m.BookId)
-</div>
-<input type="submit" value="Del" />
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(m => m.BookId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.BookId, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Del" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
 
 }
 
