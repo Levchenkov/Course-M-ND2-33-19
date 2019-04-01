@@ -5,6 +5,13 @@ using System.Web;
 
 namespace WebApplication2.Models
 {
+    
+    public enum Languages
+    {
+        russian,
+        english,
+        german
+    }
     public enum Genre
     {
         fantastic,
@@ -20,7 +27,7 @@ namespace WebApplication2.Models
         public DateTime Created { get; set; }
         public Genre Genre { get; set; }
         public bool IsPaper { get; set; }
-        public string[] Languages { get; set; }
+        public Languages Languages { get; set; }
         public bool Delivery { get; set; }
     }
 }
