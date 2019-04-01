@@ -1,48 +1,85 @@
 ﻿@model WebApplication2.Models.Book
 @{
+    /**/
+
     ViewData["Title"] = "Add Book";
 }
 <h2>Add Book To Repository</h2>
 
 @using (Html.BeginForm("Add", "Home", FormMethod.Post))
 {
-    <div class="form-group">
-        @Html.LabelFor(m => m.BookId)
-        @Html.EditorFor(m => m.BookId)
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(m => m.BookId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.BookId, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.Title, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(m => m.Description, htmlAttributes: new { @class = "form-control" } )
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Author, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.Author, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Created, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.Created, "date", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Genre, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(m => m.Genre,  htmlAttributes: new { @class = "form-control" } )
+            </div>
+        </div>
+
+        <div class="form-group ">
+            @Html.LabelFor(m => m.IsPaper, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(m => m.IsPaper, htmlAttributes: new { @class = "checkbox" } )
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Languages, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ListBoxFor(m => m.Languages, new MultiSelectList(new string[] { "russian", "german", "italian" }),  htmlAttributes: new { @class = "form-control" } )
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Delivery, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                Yes: @Html.RadioButtonFor(m => m.Delivery, true)
+                No: @Html.RadioButtonFor(m => m.Delivery, false)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add" class="btn btn-default" />
+            </div>
+        </div>
+
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Title)
-        @Html.EditorFor(m => m.Title)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Description)
-        @Html.TextAreaFor(m => m.Description)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Author)
-        @Html.EditorFor(m => m.Author)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Created)
-        @Html.EditorFor(m => m.Created, "date")
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Genre)
-        @Html.EnumDropDownListFor(m => m.Genre)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.IsPaper)
-        @Html.CheckBoxFor(m => m.IsPaper)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Languages)
-        @Html.ListBoxFor(m => m.Languages, new MultiSelectList(new string[] { "russian", "german", "italian" }))
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Delivery)
-        Yes: @Html.RadioButtonFor(m => m.Delivery, true)
-        No: @Html.RadioButtonFor(m => m.Delivery, false)
-    </div>
-    <input type="submit" value="Add" />
 }
 
