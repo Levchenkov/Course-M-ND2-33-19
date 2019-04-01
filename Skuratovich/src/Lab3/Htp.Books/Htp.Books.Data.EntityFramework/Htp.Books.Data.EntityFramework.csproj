@@ -7,9 +7,13 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Htp.Books.Data.Contracts\Htp.Books.Data.Contracts.csproj" />
+    <ProjectReference Include="..\Htp.Books.Common.Contracts\Htp.Books.Common.Contracts.csproj" />
+    <ProjectReference Include="..\Htp.Books.Common.Implementation\Htp.Books.Common.Implementation.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>

@@ -2,9 +2,9 @@
 
 namespace Htp.Books.Data.Contracts.Entities
 {
-    public class Language : IEntity<int>
+    public class Language : Entity<int>
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public string Title { get; set; }
         public ICollection<BookLanguage> BookLanguages { get; set; }
     }

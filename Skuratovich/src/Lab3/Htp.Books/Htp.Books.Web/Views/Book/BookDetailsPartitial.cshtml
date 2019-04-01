@@ -1,0 +1,75 @@
+﻿@model Htp.Books.Domain.Contracts.ViewModels.BookViewModel
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GenreTitle)
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.GenreTitle)*@
+            @Html.DisplayFor(model => model.GenreId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPaper)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPaper)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Languages)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Languages)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryRequired)
+        </dt>
+
+        <dd>
+            <label asp-for="DeliveryRequired" >@Model.DeliveryRequired</label>
+            @*<input asp-for="DeliveryRequired" type="radio" value="true" disabled="disabled"/>Yes
+            <input asp-for="DeliveryRequired" type="radio" value="false" disabled="disabled"/>No*@
+        </dd>
+
+    </dl>
+</div>

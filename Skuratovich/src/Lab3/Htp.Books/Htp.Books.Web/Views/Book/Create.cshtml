@@ -1,0 +1,28 @@
+﻿@model Htp.Books.Domain.Contracts.ViewModels.BookViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+<form asp-controller="Book" asp-action="Create" method="post" class="form-horizontal">
+
+    <partial name="BookPartitial.cshtml" />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

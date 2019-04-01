@@ -1,10 +1,17 @@
-﻿namespace Htp.Books.Data.Contracts
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+
+namespace Htp.Books.Data.Contracts
 {
-    public interface IRepository<in TKey, TEntity>
+    public interface IRepository<TKey, TEntity>
     {
+        IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> expression);
         TEntity Get(TKey id);
         void Add(TEntity entity);
         void Update(TEntity entity);
-        void Deleta(TEntity entity);
+        void Delete(TEntity entity);
+        void Save();
     }
 }

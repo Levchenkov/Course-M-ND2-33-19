@@ -1,4 +1,8 @@
-﻿using Htp.Books.Data.Contracts.Entities;
+﻿using System;
+using System.Linq;
+using Htp.Books.Data.Contracts;
+using Htp.Books.Data.Contracts.Entities;
+using Htp.Books.Common.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace Htp.Books.Data.EntityFramework
@@ -11,10 +15,20 @@ namespace Htp.Books.Data.EntityFramework
         //
         // dotnet ef database update
 
-        //TODO: Check ctor ApplicationDbContext
-        public ApplicationDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+        public IHistoryLogHandler<Book> historyLogHandler;
+
+
+        ////TODO: Check ctor ApplicationDbContext
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> dbContextOptions) : base(dbContextOptions)
         {
         }
+
+        ////TODO: Check ctor ApplicationDbContext
+        public ApplicationDbContext(IHistoryLogHandler<Book> historyLogHandler)
+        {
+            this.historyLogHandler = historyLogHandler;
+        }
+
 
         public DbSet<Book> Books { get; set; }
 
@@ -30,7 +44,12 @@ namespace Htp.Books.Data.EntityFramework
         {
             optionsBuilder.UseSqlServer(
             @"Server = localhost, 1433; Database = BookCatalog;"
-                + "User = SA; Password = $zDkJDCmx8CNcJh");
+            + "User = SA; Password = $zDkJDCmx8CNcJh");
+
+            //"Server=(localdb)\\mssqllocaldb;Database=Htp.News;Trusted_Connection=True;MultipleActiveResultSets=true"
+            //"Server = localhost, 1433; Database = BookCatalog; User = SA; Password = $zDkJDCmx8CNcJh"
+
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -47,9 +66,15 @@ namespace Htp.Books.Data.EntityFramework
             var bookConfiguration = modelBuilder.Entity<Book>();
             bookConfiguration.HasKey(x => x.Id);
             bookConfiguration.Property(x => x.Title).IsRequired();
-            bookConfiguration.Property(x => x.RowVersion).IsRowVersion();
-            bookConfiguration.Property(x => x.RowVersion).IsRowVersion();
-            bookConfiguration.HasOne(x => x.Genre).WithMany(x => x.Books).IsRequired();
+            bookConfiguration.Property(x => x.Description).IsRequired();
+            bookConfiguration.Property(x => x.Author).IsRequired();
+            bookConfiguration.Property(x => x.Created).IsRequired();
+            bookConfiguration.Property(x => x.IsPaper).IsRequired();
+            bookConfiguration.Property(x => x.DeliveryRequired).IsRequired();
+            bookConfiguration.Property(x => x.RowVersion).IsRowVersion().IsRequired();
+            //bookConfiguration.HasOne(x => x.Genre).WithMany(x => x.Books).HasForeignKey(x => x.Genre).IsRequired();
+            bookConfiguration.HasOne(x => x.Genre).WithMany(x => x.Books);
+            bookConfiguration.HasOne(x => x.Genre).WithMany(x => x.Books).HasForeignKey(x => x.GenreId);
 
             var genreConfiguration = modelBuilder.Entity<Genre>();
             genreConfiguration.HasKey(x => x.Id);
@@ -59,6 +84,34 @@ namespace Htp.Books.Data.EntityFramework
             historyLogConfiguration.HasKey(x => x.Id);
             historyLogConfiguration.Property(x => x.EntityId).IsRequired();
             historyLogConfiguration.Property(x => x.EntityType).IsRequired();
+        }
+
+        public override int SaveChanges()
+        {
+            this.ChangeTracker.DetectChanges();
+
+            var modified = this.ChangeTracker.Entries<Book>()
+                        .Where(t => t.State == EntityState.Modified)
+                        .Select(t => t.Entity)
+                        .ToList();
+
+            modified.ForEach(e =>
+            {
+                var currentBook = historyLogHandler.Serialize((Book)this.Entry(e).CurrentValues.ToObject());
+                var originalBook = historyLogHandler.Serialize((Book)this.Entry(e).OriginalValues.ToObject());
+
+                var historyLog = new HistoryLog()
+                {
+                    Origin = originalBook,
+                    Actually = currentBook,
+                    EntityId = e.Id.ToString(),
+                    EntityType = e.GetType().ToString(),
+                    UpdateTime = DateTime.UtcNow,
+                };
+                Set<HistoryLog>().Add(historyLog);
+            });
+
+            return base.SaveChanges();
         }
     }
 }
