@@ -5,7 +5,6 @@ using System.Web;
 
 namespace WebApplication2.Models
 {
-    
     public enum Languages
     {
         russian,

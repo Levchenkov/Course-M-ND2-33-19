@@ -1,1 +1,1 @@
-{"RepositoryId":0,"Books":[{"BookId":0,"Title":"First Title book Example","Description":"asdfasdfasdf","Author":"asdfasdfas","Created":"2019-04-07T00:00:00","Genre":1,"IsPaper":true,"Languages":1,"Delivery":true},{"BookId":2,"Title":"23123","Description":"123123","Author":"123123","Created":"2019-04-14T00:00:00","Genre":1,"IsPaper":true,"Languages":0,"Delivery":false}]}
+{"RepositoryId":0,"Books":[{"BookId":1,"Title":"First","Description":"First","Author":"Romanov","Created":"2019-04-13T00:00:00","Genre":2,"IsPaper":true,"Languages":1,"Delivery":true}]}
