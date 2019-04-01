@@ -1,9 +1,7 @@
-﻿@using BookCatalogue
-@model BookCataloguePL.Models.BookViewModel
+﻿@model Prikhodko.BookCatalogue.Service.Contracts.Models.BookViewModel
 
 @{
     ViewBag.Title = "Create";
-    var availableLanguages = new List<Languages>();
 }
 
 <h2>Create</h2>
@@ -21,7 +19,7 @@
             @Html.LabelFor(book => book.Title, "Enter title here:", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(book => book.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(book => book.Title, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -36,8 +34,14 @@
         <div class="form-group">
             @Html.LabelFor(book => book.Author, "Author's name:", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(book => book.Author, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(book => book.Author, "", new { @class = "text-danger" })
+                <span>
+                    @Html.EditorFor(book => book.Author.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(book => book.Author.FirstName, "", new { @class = "text-danger" })
+                </span>
+                <span>
+                    @Html.EditorFor(book => book.Author.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(book => book.Author.LastName, "", new { @class = "text-danger" })
+                </span>
             </div>
         </div>
 
@@ -70,14 +74,14 @@
         </div>
 
         <div class="form-group">
-                @Html.LabelFor(model => model.AvailableLanguages, "What languages is book available in?", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.ListBoxFor(book => book.AvailableLanguages, new MultiSelectList(Model.AvailableLanguages))
-                        @Html.ValidationMessageFor(model => model.AvailableLanguages, "", new { @class = "text-danger" })
-                    </div>
+            @Html.LabelFor(book => book.AvailableLanguages, "What languages is book available in?", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.ListBoxFor(book => book.AvailableLanguages, new MultiSelectList(ViewBag.Languages))
+                    @Html.ValidationMessageFor(book => book.AvailableLanguages, "", new { @class = "text-danger" })
                 </div>
             </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(book => book.DeliveryOption, "How should we deliver the book?", htmlAttributes: new { @class = "control-label col-md-2" })

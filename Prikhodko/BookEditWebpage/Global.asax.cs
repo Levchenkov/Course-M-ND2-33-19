@@ -5,8 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Prikhodko.BookCatalogue.PL.App_Start;
 
-namespace BookEditWebpage
+namespace Prikhodko.BookCatalogue.PL
 {
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -16,6 +17,8 @@ namespace BookEditWebpage
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutofacConfig.ConfigureContainer();
+            AutoMapperConfig.Configure();
         }
     }
 }

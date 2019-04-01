@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace BookEditWebpage
+namespace Prikhodko.BookCatalogue.PL.App_Start
 {
     public class BundleConfig
     {

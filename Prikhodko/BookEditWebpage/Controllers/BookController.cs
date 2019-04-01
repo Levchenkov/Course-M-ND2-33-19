@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BookCataloguePL.Models;
+using Prikhodko.BookCatalogue.Service.Contracts.Models;
+using Prikhodko.BookCatalogue.Service.Contracts.Interfaces;
 using AutoMapper;
-using BookCatalogue;
 
-namespace BookCataloguePL.Controllers
+namespace Prikhodko.BookCatalogue.PL.Controllers
 {
     public class BookController : Controller
     {
+        private readonly IBookService bookService;
+        private readonly ILanguageService languageService;
+        
+        public BookController(IBookService bookService, ILanguageService languageService)
+        {
+            this.bookService = bookService;
+            this.languageService = languageService;
+        }
         // GET: Add
         public ActionResult Index()
         {
@@ -27,6 +35,7 @@ namespace BookCataloguePL.Controllers
         public ActionResult Create()
         {
             var model = new BookViewModel();
+            ViewBag.Languages = languageService.GetAllCodes(); 
             return View(model);
         }
 
@@ -34,11 +43,12 @@ namespace BookCataloguePL.Controllers
         [HttpPost]
         public ActionResult Create(BookViewModel input)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<BookViewModel, Book>());
-            var book = Mapper.Map<BookViewModel, Book>(input);
-            IService<Book> service = new BookService(new JsonBookRepository());
-            service.Add(book);
-            return RedirectToAction("../Home/Index");
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+            bookService.Add(input);
+            return RedirectToAction("Create");
         }
         
         // GET: Add/Edit/5
