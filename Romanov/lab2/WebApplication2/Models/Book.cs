@@ -5,12 +5,6 @@ using System.Web;
 
 namespace WebApplication2.Models
 {
-    public enum Languages
-    {
-        russian,
-        english,
-        german
-    }
     public enum Genre
     {
         fantastic,
