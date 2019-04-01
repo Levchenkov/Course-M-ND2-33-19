@@ -15,7 +15,14 @@
      <li class="list-group-item"><b>Book Created:</b>  @book.Created </li>
      <li class="list-group-item"><b>Book Genre:</b>  @book.Genre </li>
      <li class="list-group-item"><b>Book IsPaper:</b>  @book.IsPaper </li>
-     <li class="list-group-item"><b>Book Language:</b> @book.Languages </li>
+     <li class="list-group-item"><b>Book Language:</b> 
+     @foreach (var item in @book.Languages)
+     {
+                                 <ul>
+                                     <li>@item</li>
+                                 </ul>
+     }
+      </li>
      <li class="list-group-item"><b>Book Delivery:</b>  @book.Delivery </li>
  </ul>
     

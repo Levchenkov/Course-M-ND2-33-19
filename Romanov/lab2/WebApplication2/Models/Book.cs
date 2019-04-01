@@ -26,7 +26,7 @@ namespace WebApplication2.Models
         public DateTime Created { get; set; }
         public Genre Genre { get; set; }
         public bool IsPaper { get; set; }
-        public Languages Languages { get; set; }
+        public string[] Languages { get; set; }
         public bool Delivery { get; set; }
     }
 }
