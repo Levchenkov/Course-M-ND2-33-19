@@ -1,6 +1,6 @@
 ﻿namespace Htp.Books.Data.Contracts.Entities
 {
-    public class BookLanguage
+    public class BookLanguage : Entity<int>
     {
         public int BookId { get; set; }
         public Book Book { get; set; }

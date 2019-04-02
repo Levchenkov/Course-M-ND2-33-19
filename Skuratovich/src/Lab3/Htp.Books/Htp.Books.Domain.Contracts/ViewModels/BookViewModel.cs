@@ -16,12 +16,12 @@ namespace Htp.Books.Domain.Contracts.ViewModels
         public string Author { get; set; }
         public DateTime Created { get; set; }
         [Required]
+        [Display(Name = "Genre")]
         public int GenreId { get; set; }
-        [Display(Name = "Genre title")]
-        public string GenreTitle { get; set; }
         [Display(Name = "Is paper")]
         public bool IsPaper { get; set; }
-        //public ICollection<BookLanguage> BookLanguages { get; set; }
+        [Display(Name = "Languages")]
+        public ICollection<int> LanguageIds { get; set; }
         [Display(Name = "Delivery required")]
         public bool DeliveryRequired { get; set; }
         public byte[] RowVersion { get; set; }
@@ -29,6 +29,8 @@ namespace Htp.Books.Domain.Contracts.ViewModels
         [Display(Name = "History log")]
         public string HistoryLog { get; set; }
 
-        public List<SelectListItem> Genres { get; set;  }
+        //public List<SelectListItem> Genres { get; set;  }
+        //public List<SelectListItem> Languages { get; set; }
+
     }
 }

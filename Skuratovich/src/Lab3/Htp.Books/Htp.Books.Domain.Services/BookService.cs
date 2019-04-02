@@ -34,33 +34,19 @@ namespace Htp.Books.Domain.Services
             return result;
         }
 
-        public void Add(BookViewModel bookViewModel)
-        {
-            var result = mapper.Map<Book>(bookViewModel);
-            var genre = unitOfWork.Get<int, Genre>(result.GenreId);
-            result.Genre = genre;
-
-            using (var transaction = unitOfWork.BeginTransaction())
-            {
-                try
-                {
-                    unitOfWork.Add<int, Book>(result);
-                    //unitOfWork.SaveChanges();
-                    transaction.Commit();
-                }
-                catch (Exception)
-                {
-                    transaction.Rollback();
-                }
-            }
-        }
-
         public BookViewModel Get(int id)
         {
             Book book = unitOfWork.Get<int, Book>(id);
             Genre genre = unitOfWork.Get<int, Genre>(book.GenreId);
             book.Genre = genre;
             var result = mapper.Map<BookViewModel>(book);
+
+            var languages = unitOfWork.FindByCondition<int, BookLanguage>(x => x.BookId == book.Id);
+            result.LanguageIds = new List<int>();
+            foreach (var language in languages)
+            {
+                result.LanguageIds.Add(language.LanguageId); 
+            }
 
             IEnumerable<HistoryLog> historyLogs = unitOfWork.FindByCondition<int, HistoryLog>(x => x.EntityId == book.Id.ToString() && x.EntityType == book.GetType().ToString());
 
@@ -75,15 +61,43 @@ namespace Htp.Books.Domain.Services
             return result;
         }
 
-        public void Edit(BookViewModel bookViewModel)
+        public void Add(BookViewModel bookViewModel)
         {
-            Book book = unitOfWork.Get<int, Book>(bookViewModel.Id);
-            mapper.Map(bookViewModel, book);
+            var result = mapper.Map<Book>(bookViewModel);
+            var genre = unitOfWork.Get<int, Genre>(result.GenreId);
+            result.Genre = genre;
 
             using (var transaction = unitOfWork.BeginTransaction())
             {
                 try
                 {
+                    unitOfWork.Add<int, Book>(result);
+                    unitOfWork.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
+            }
+        }
+
+        public void Edit(BookViewModel bookViewModel)
+        {
+            Book book = unitOfWork.Get<int, Book>(bookViewModel.Id);
+            mapper.Map(bookViewModel, book);
+            book.BookLanguages = new List<BookLanguage>();
+            using (var transaction = unitOfWork.BeginTransaction())
+            {
+                try
+                {
+                    foreach (int languageId in bookViewModel.LanguageIds)
+                    {
+                        var bookLanguage = new BookLanguage() { BookId = book.Id, LanguageId = languageId };
+                        book.BookLanguages.Add(bookLanguage);
+                        unitOfWork.Add<int, BookLanguage>(bookLanguage);
+                    }
+                    unitOfWork.Update<int, Book>(book);
                     unitOfWork.SaveChanges();
                     transaction.Commit();
                 }
@@ -109,16 +123,15 @@ namespace Htp.Books.Domain.Services
             return result;
         }
 
-        public void Delete(BookViewModel bookViewModel)
+        public void Delete(int Id)
         {
-            Book book = unitOfWork.Get<int, Book>(bookViewModel.Id);
-            mapper.Map(bookViewModel, book);
-
+            Book book = unitOfWork.Get<int, Book>(Id);
             using (var transaction = unitOfWork.BeginTransaction())
             {
                 try
                 {
                     unitOfWork.Delete<int, Book>(book);
+                    unitOfWork.SaveChanges();
                     transaction.Commit();
                 }
                 catch (Exception)
@@ -134,9 +147,18 @@ namespace Htp.Books.Domain.Services
             foreach (var ganre in unitOfWork.GetAll<int, Genre>())
             {
                 genres.Add(new SelectListItem() { Value = ganre.Id.ToString(), Text = ganre.Title });
-
             }
             return genres;
+        }
+
+        public List<SelectListItem> GetLanguages()
+        {
+            var languages = new List<SelectListItem>();
+            foreach (var languagere in unitOfWork.GetAll<int, Language>())
+            {
+                languages.Add(new SelectListItem() { Value = languagere.Id.ToString(), Text = languagere.Title });
+            }
+            return languages;
         }
     }
 }

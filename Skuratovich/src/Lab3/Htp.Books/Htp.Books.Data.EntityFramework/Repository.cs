@@ -28,7 +28,7 @@ namespace Htp.Books.Data.EntityFramework
 
         public void Delete(TEntity entity)
         {
-            throw new System.NotImplementedException();
+            dbContext.Set<TEntity>().Remove(entity);
         }
 
         public TEntity Get(TKey id)
@@ -45,27 +45,12 @@ namespace Htp.Books.Data.EntityFramework
 
         public void Update(TEntity entity)
         {
-            ////dbContext.Set<TEntity>().Attach(entity);
             //dbContext.Entry(entity).State = EntityState.Modified;
-            ////dbContext.Entry(entity).OriginalValues.SetValues(dbContext.Set<TEntity>().Find(entity.Id));
-            ////dbContext.SaveChanges();
-
-            // 2
-            //dbContext.Set<TEntity>().Attach(entity);
-            //dbContext.Entry(entity).State = EntityState.Modified;
-            //dbContext.SaveChanges();
-
-            //var dbSet = dbContext.Set<TEntity>();
-            //dbSet.Update(entity);
-
-            dbContext.Entry(entity).State = EntityState.Modified;
-
-
+            dbContext.Set<TEntity>().Update(entity);
         }
 
         public void Save()
         {
-            //ApplicationDbContext.SaveChanges(dbContext);
             dbContext.SaveChanges();
         }
 

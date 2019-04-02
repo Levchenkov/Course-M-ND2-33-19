@@ -7,7 +7,7 @@ namespace Htp.Books.Data.Contracts.Entities
     {
         public virtual string Title { get; set; }
         public virtual string Description { get; set; }
-        public string Author { get; set; }
+        public virtual string Author { get; set; }
         public virtual DateTime Created { get; set; }
         public virtual int GenreId { get; set; }
         public virtual Genre Genre { get; set; }

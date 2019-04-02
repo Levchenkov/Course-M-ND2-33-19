@@ -37,12 +37,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GenreTitle)
+            @Html.DisplayNameFor(model => model.GenreId)
         </dt>
 
         <dd>
-            @*@Html.DisplayFor(model => model.GenreTitle)*@
-            @Html.DisplayFor(model => model.GenreId)
+            <div class="col-md-10">
+                <select asp-for="GenreId"
+                        asp-items="ViewBag.Genres"
+                        class="form-control"></select>
+            </div>
         </dd>
 
         <dt>
@@ -53,13 +56,18 @@
             @Html.DisplayFor(model => model.IsPaper)
         </dd>
 
-        @*<dt>
-            @Html.DisplayNameFor(model => model.Languages)
+        <dt>
+            @Html.DisplayNameFor(model => model.LanguageIds)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Languages)
-        </dd>*@
+            @Html.DisplayFor(model => model.LanguageIds)
+            <div class="col-md-10">
+                <select asp-for="LanguageIds"
+                        asp-items="ViewBag.Languages"
+                        class="form-control"></select>
+            </div>
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.DeliveryRequired)

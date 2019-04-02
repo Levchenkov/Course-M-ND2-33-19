@@ -42,23 +42,27 @@ namespace Htp.Books.Web.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Genres = bookService.GetGenres();
+            ViewBag.Languages = bookService.GetLanguages();
+
             return View(bookViewModel);
         }
 
         //// GET: Book/Create
         public IActionResult Create()
         {
-            var bookViewModel = new BookViewModel
-            {
-                Genres = bookService.GetGenres()
-            };
+            var bookViewModel = new BookViewModel();
+
+            ViewBag.Genres = bookService.GetGenres();
+            ViewBag.Languages = bookService.GetLanguages();
+
             return View(bookViewModel);
         }
 
         // POST: Book/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(int? id, [Bind("Id,Title,Description,Author,Created,GenreId,IsPaper,RowVersion,DeliveryRequired,Genres")] BookViewModel bookViewModel)
+        public IActionResult Create(int? id, [Bind("Id,Title,Description,Author,Created,GenreId,IsPaper,LanguageIds,DeliveryRequired,RowVersion,LongRowVersion")] BookViewModel bookViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +86,7 @@ namespace Htp.Books.Web.Controllers
             {
                 return NotFound();
             }
-            bookViewModel.Genres = bookService.GetGenres();
+            PopPopulateLists();
             return View(bookViewModel);
         }
 
@@ -91,7 +95,7 @@ namespace Htp.Books.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int? id, [Bind("Id,Title,Description,Author,Created,GenreId,IsPaper,RowVersion,DeliveryRequired,Genres")] BookViewModel bookViewModel)
+        public IActionResult Edit(int? id, [Bind("Id,Title,Description,Author,Created,GenreId,IsPaper,LanguageIds,DeliveryRequired,RowVersion,LongRowVersion")] BookViewModel bookViewModel)
         {
             if (id.GetValueOrDefault() != bookViewModel.Id)
             {
@@ -121,6 +125,7 @@ namespace Htp.Books.Web.Controllers
                 //}
                 return RedirectToAction("Index");
             }
+            PopPopulateLists();
             return View(bookViewModel);
         }
 
@@ -131,6 +136,7 @@ namespace Htp.Books.Web.Controllers
             {
                 return BadRequest();
             }
+            PopPopulateLists();
             return View(bookService.GetHistoryLogs(id.GetValueOrDefault()).ToList());
         }
 
@@ -146,7 +152,6 @@ namespace Htp.Books.Web.Controllers
             {
                 return NotFound();
             }
-            bookViewModel.Genres = bookService.GetGenres();
             return View(bookViewModel);
         }
 
@@ -154,17 +159,20 @@ namespace Htp.Books.Web.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         //public ActionResult DeleteConfirmed(int? id)
-        public IActionResult DeleteConfirmed(int? id, [Bind("Id,Title,Description,Author,Created,GenreId,IsPaper,RowVersion,DeliveryRequired,Genres")] BookViewModel bookViewModel)
+        public IActionResult DeleteConfirmed(int? id, [Bind("Id,Title,Description,Author,Created,GenreId,IsPaper,LanguageIds,DeliveryRequired,RowVersion,LongRowVersion")] BookViewModel bookViewModel)
         {
             if (id.GetValueOrDefault() != bookViewModel.Id)
             {
                 return NotFound();
             }
-            if (ModelState.IsValid)
-            {
-                bookService.Delete(bookViewModel);
-            }
+            bookService.Delete(bookViewModel.Id);
             return RedirectToAction("Index");
+        }
+
+        private void PopPopulateLists()
+        {
+            ViewBag.Genres = bookService.GetGenres();
+            ViewBag.Languages = bookService.GetLanguages();
         }
 
         //// GET: Book/Test/5

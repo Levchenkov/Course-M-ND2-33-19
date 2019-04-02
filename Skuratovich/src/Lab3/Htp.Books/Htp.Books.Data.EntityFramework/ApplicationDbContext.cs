@@ -58,6 +58,7 @@ namespace Htp.Books.Data.EntityFramework
             bookLanguageConfiguration.HasKey(x => new { x.BookId, x.LanguageId });
             bookLanguageConfiguration.HasOne(x => x.Book).WithMany(x => x.BookLanguages).HasForeignKey(x => x.BookId);
             bookLanguageConfiguration.HasOne(x => x.Language).WithMany(x => x.BookLanguages).HasForeignKey(x => x.LanguageId);
+            bookLanguageConfiguration.Ignore(x => x.Id);
 
             var languageConfiguration = modelBuilder.Entity<Language>();
             languageConfiguration.HasKey(x => x.Id);
@@ -72,6 +73,8 @@ namespace Htp.Books.Data.EntityFramework
             bookConfiguration.Property(x => x.IsPaper).IsRequired();
             bookConfiguration.Property(x => x.DeliveryRequired).IsRequired();
             bookConfiguration.Property(x => x.RowVersion).IsRowVersion().IsRequired();
+            bookConfiguration.Ignore(x => x.LongRowVersion);
+
             //bookConfiguration.HasOne(x => x.Genre).WithMany(x => x.Books).HasForeignKey(x => x.Genre).IsRequired();
             bookConfiguration.HasOne(x => x.Genre).WithMany(x => x.Books);
             bookConfiguration.HasOne(x => x.Genre).WithMany(x => x.Books).HasForeignKey(x => x.GenreId);
