@@ -42,9 +42,9 @@ namespace Htp.Books.Data.EntityFramework
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(
-            @"Server = localhost, 1433; Database = BookCatalog;"
-            + "User = SA; Password = $zDkJDCmx8CNcJh");
+            //optionsBuilder.UseSqlServer(
+            //@"Server = localhost, 1433; Database = BookCatalog;"
+            //+ "User = SA; Password = $zDkJDCmx8CNcJh");
 
             //"Server=(localdb)\\mssqllocaldb;Database=Htp.News;Trusted_Connection=True;MultipleActiveResultSets=true"
             //"Server = localhost, 1433; Database = BookCatalog; User = SA; Password = $zDkJDCmx8CNcJh"
