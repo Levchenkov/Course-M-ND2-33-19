@@ -1,0 +1,35 @@
+[
+  {
+    "Id": 1,
+    "Title": "book1",
+    "Description": "ex1",
+    "Author": "-1-",
+    "Created": "\/Date(1546376400000+0300)\/",
+    "Genre": 32,
+    "IsPaper": true,
+    "Languages": [ 2, 4 ],
+    "DeliveryRequired": true
+  },
+  {
+    "Id": 3,
+    "Title": "book2",
+    "Description": "ex2",
+    "Author": "-2-",
+    "Created": "\/Date(1547672400000+0300)\/",
+    "Genre": 8,
+    "IsPaper": true,
+    "Languages": [ 4, 8 ],
+    "DeliveryRequired": false
+  },
+  {
+    "Id": 54,
+    "Title": "book3",
+    "Description": "ex3",
+    "Author": "-3-",
+    "Created": "\/Date(1551042000000+0300)\/",
+    "Genre": 4,
+    "IsPaper": true,
+    "Languages": [ 4,16 ],
+    "DeliveryRequired": true
+  }
+]
