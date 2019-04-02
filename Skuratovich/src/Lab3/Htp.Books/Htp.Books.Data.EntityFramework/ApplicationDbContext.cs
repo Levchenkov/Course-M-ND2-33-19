@@ -19,15 +19,15 @@ namespace Htp.Books.Data.EntityFramework
 
 
         ////TODO: Check ctor ApplicationDbContext
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> dbContextOptions) : base(dbContextOptions)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> dbContextOptions, IHistoryLogHandler<Book> historyLogHandler) : base(dbContextOptions)
         {
         }
 
-        ////TODO: Check ctor ApplicationDbContext
-        public ApplicationDbContext(IHistoryLogHandler<Book> historyLogHandler)
-        {
-            this.historyLogHandler = historyLogHandler;
-        }
+        //////TODO: Check ctor ApplicationDbContext
+        //public ApplicationDbContext(IHistoryLogHandler<Book> historyLogHandler)
+        //{
+        //    this.historyLogHandler = historyLogHandler;
+        //}
 
 
         public DbSet<Book> Books { get; set; }

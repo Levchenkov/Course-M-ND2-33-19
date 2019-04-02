@@ -18,12 +18,26 @@ namespace Htp.Books.Infrastructure
                 .As<IUnitOfWork>()
                 .InstancePerLifetimeScope();
 
+            //builder.RegisterType<ApplicationDbContext>()
+            //.AsSelf()
+            //.InstancePerLifetimeScope();
+
+
+            var dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(ConnectionString).Options;
+
+
+            //var dbContextOptions = SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), ConnectionString).Options;
+
+            builder.RegisterType<ApplicationDbContext>()
+                .As<ApplicationDbContext>()
+                .WithParameter("dbContextOptions", dbContextOptions)
+                .InstancePerLifetimeScope();
+
             //var dbContextOptionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(ConnectionString);
 
             //var dbContextOptions = new DbContextOptions<ApplicationDbContext>();
 
             //
-            //var dbContextOptions = SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), ConnectionString).Options;
 
             //builder.RegisterType<ApplicationDbContext>()
 
@@ -33,13 +47,11 @@ namespace Htp.Books.Infrastructure
             //.InstancePerLifetimeScope();
 
             //builder.RegisterType<DbContextOptionsBuilder<ApplicationDbContext>>()
-                //.AsSelf()
-                //.InstancePerLifetimeScope();
+            //.AsSelf()
+            //.InstancePerLifetimeScope();
 
 
-            builder.RegisterType<ApplicationDbContext>()
-                .AsSelf()
-                .InstancePerLifetimeScope();
+
 
             //// Register Entity Framework
             //var dbContextOptionsBuilder = new DbContextOptionsBuilder<SalesDbContext>().UseSqlServer("MyConnectionString");
