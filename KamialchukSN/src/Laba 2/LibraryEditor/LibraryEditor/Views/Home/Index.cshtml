@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h3>Book repository</h3>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <td>Id</td>
+        <td>Author</td>
+        <td>Title</td>
+        <td>Description</td>
+        <td>Created</td>
+        <td>Ganre</td>
+        <td>IsPaper</td>
+        <td>Languages</td>
+        <td>DeliveryRequired</td>
+        <td>@Html.ActionLink("Add", "Add")</td>
+    </tr>
+
+    @foreach (var b in ViewBag.Books)
+    {
+        <tr>
+            <td>@b.Id</td>
+            <td>@b.Author</td>
+            <td>@b.Title</td>
+            <td>@b.Description</td>
+            <td>@b.Created.ToString("dd.MM.yyy")</td>
+            <td>@b.Ganre</td>
+            <td>@b.IsPaper</td>
+            <td>@String.Join("/", b.Languages)</td>
+            <td>@b.DeliveryRequired</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = b.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = b.Id })
+            </td>
+        </tr>
+    }
+</table>
