@@ -72,19 +72,23 @@ namespace Htp.Books.Domain.Services
                 try
                 {
                     result.BookLanguages = new List<BookLanguage>();
-                    foreach (int languageId in bookViewModel.LanguageIds)
+                    if (bookViewModel.LanguageIds != null)
                     {
-                        var bookLanguage = new BookLanguage() { BookId = result.Id, LanguageId = languageId };
-                        result.BookLanguages.Add(bookLanguage);
-                        unitOfWork.Add<int, BookLanguage>(bookLanguage);
+                        foreach (int languageId in bookViewModel.LanguageIds)
+                        {
+                            var bookLanguage = new BookLanguage() { BookId = result.Id, LanguageId = languageId };
+                            result.BookLanguages.Add(bookLanguage);
+                            unitOfWork.Add<int, BookLanguage>(bookLanguage);
+                        }
                     }
                     unitOfWork.Add<int, Book>(result);
                     unitOfWork.SaveChanges();
                     transaction.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     transaction.Rollback();
+                    throw ex;
                 }
             }
         }
@@ -105,19 +109,23 @@ namespace Htp.Books.Domain.Services
                         unitOfWork.Delete<int, BookLanguage>(bookLanguage);
                     }
                     book.BookLanguages = new List<BookLanguage>();
-                    foreach (int languageId in bookViewModel.LanguageIds)
+                    if (bookViewModel.LanguageIds != null)
                     {
-                        var bookLanguage = new BookLanguage() { BookId = book.Id, LanguageId = languageId };
-                        book.BookLanguages.Add(bookLanguage);
-                        unitOfWork.Add<int, BookLanguage>(bookLanguage);
+                        foreach (int languageId in bookViewModel.LanguageIds)
+                        {
+                            var bookLanguage = new BookLanguage() { BookId = book.Id, LanguageId = languageId };
+                            book.BookLanguages.Add(bookLanguage);
+                            unitOfWork.Add<int, BookLanguage>(bookLanguage);
+                        }
                     }
                     unitOfWork.Update<int, Book>(book);
                     unitOfWork.SaveChanges();
                     transaction.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     transaction.Rollback();
+                    throw ex;
                 }
             }
         }
@@ -130,19 +138,26 @@ namespace Htp.Books.Domain.Services
 
             foreach (var historyLog in result)
             {
-                historyLog.CurrentBook = mapper.Map<Book, BookViewModel>(historyLogHandler.Deserialize(historyLog.Actually));
-                var languages = unitOfWork.FindByCondition<int, BookLanguage>(x => x.BookId == historyLog.CurrentBook.Id);
+                var currentBook = historyLogHandler.Deserialize(historyLog.Actually);
+                historyLog.CurrentBook = mapper.Map<Book, BookViewModel>(currentBook);
                 historyLog.CurrentBook.LanguageIds = new List<int>();
-                foreach (var language in languages)
+                if (currentBook.BookLanguages != null)
                 {
-                    historyLog.CurrentBook.LanguageIds.Add(language.LanguageId);
+                    foreach (var language in currentBook.BookLanguages)
+                    {
+                        historyLog.CurrentBook.LanguageIds.Add(language.LanguageId);
+                    }
                 }
 
-                historyLog.OriginBook = mapper.Map<Book, BookViewModel>(historyLogHandler.Deserialize(historyLog.Origin));languages = unitOfWork.FindByCondition<int, BookLanguage>(x => x.BookId == historyLog.OriginBook.Id);
+                var originBook = historyLogHandler.Deserialize(historyLog.Origin);
+                historyLog.OriginBook = mapper.Map<Book, BookViewModel>(historyLogHandler.Deserialize(historyLog.Origin));
                 historyLog.OriginBook.LanguageIds = new List<int>();
-                foreach (var language in languages)
+                if (originBook.BookLanguages != null)
                 {
-                    historyLog.OriginBook.LanguageIds.Add(language.LanguageId);
+                    foreach (var language in originBook.BookLanguages)
+                    {
+                        historyLog.OriginBook.LanguageIds.Add(language.LanguageId);
+                    }
                 }
             }
             return result;
@@ -159,9 +174,10 @@ namespace Htp.Books.Domain.Services
                     unitOfWork.SaveChanges();
                     transaction.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     transaction.Rollback();
+                    throw ex;
                 }
             }
         }

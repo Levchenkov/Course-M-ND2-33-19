@@ -44,7 +44,8 @@
             <div class="col-md-10">
                 <select asp-for="GenreId"
                         asp-items="ViewBag.Genres"
-                        class="form-control"></select>
+                        class="form-control"
+                        disabled="disabled"></select>
             </div>
         </dd>
 
@@ -61,11 +62,11 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LanguageIds)
             <div class="col-md-10">
                 <select asp-for="LanguageIds"
                         asp-items="ViewBag.Languages"
-                        class="form-control"></select>
+                        class="form-control"
+                        disabled="disabled"></select>
             </div>
         </dd>
 
@@ -75,8 +76,6 @@
 
         <dd>
             <label asp-for="DeliveryRequired" >@Model.DeliveryRequired</label>
-            @*<input asp-for="DeliveryRequired" type="radio" value="true" disabled="disabled"/>Yes
-            <input asp-for="DeliveryRequired" type="radio" value="false" disabled="disabled"/>No*@
         </dd>
 
     </dl>

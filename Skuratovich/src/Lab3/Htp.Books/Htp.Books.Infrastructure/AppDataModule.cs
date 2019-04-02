@@ -22,6 +22,7 @@ namespace Htp.Books.Infrastructure
 
             //var dbContextOptions = new DbContextOptions<ApplicationDbContext>();
 
+            //
             //var dbContextOptions = SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), ConnectionString).Options;
 
             //builder.RegisterType<ApplicationDbContext>()

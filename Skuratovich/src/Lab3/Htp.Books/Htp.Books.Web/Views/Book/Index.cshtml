@@ -21,33 +21,34 @@
             @Html.DisplayNameFor(model => model.Author)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.GenreTitle)
-        </th>*@
+                @Html.DisplayNameFor(model => model.GenreTitle)
+            </th>*@
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.GenreTitle)
-        </td>*@
-        <td>
-            @*@Html.ActionLink("Test", "Test", new { id = item.Id }) |*@
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.GenreTitle)
+                </td>*@
+            <td>
+                @*@Html.ActionLink("Test", "Test", new { id = item.Id }) |*@
+                @Html.ActionLink("History Log", "HistoryLog", new { id = item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
     }
 
 </table>
