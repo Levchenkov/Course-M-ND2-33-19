@@ -19,17 +19,6 @@ namespace Prikhodko.BookCatalogue.PL.Controllers
             this.bookService = bookService;
             this.languageService = languageService;
         }
-        // GET: Add
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: Add/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         // GET: Add/Create
         public ActionResult Create()
@@ -47,30 +36,36 @@ namespace Prikhodko.BookCatalogue.PL.Controllers
             {
                 throw new ArgumentNullException(nameof(input));
             }
+            if(input.AvailableLanguages == null)
+            {
+                input.AvailableLanguages = new List<string>();
+            }
             bookService.Add(input);
-            return RedirectToAction("Create");
+            return RedirectToAction("ShowCollection");
         }
         
+
         // GET: Add/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var model = bookService.Get(id);
+            ViewBag.Languages = languageService.GetAllCodes();
+            return View(model);
         }
 
-        // POST: Add/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(BookViewModel input)
         {
-            try
+            if (input == null)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                throw new ArgumentNullException(nameof(input));
             }
-            catch
+            if (input.AvailableLanguages == null)
             {
-                return View();
+                input.AvailableLanguages = new List<string>();
             }
+            bookService.Update(input);
+            return RedirectToAction("ShowCollection");
         }
 
         // GET: Add/Delete/5
@@ -78,21 +73,11 @@ namespace Prikhodko.BookCatalogue.PL.Controllers
         {
             return View();
         }
-
-        // POST: Add/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        
+        public ActionResult ShowCollection()
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            var model = bookService.GetAll();
+            return View(model);
         }
     }
 }

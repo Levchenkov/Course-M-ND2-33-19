@@ -15,7 +15,7 @@ namespace Prikhodko.BookCatalogue.Config.MappingProfiles
         public void MapBookToBookViewModel()
         {
             CreateMap<Book, BookViewModel>()
-                .ForMember(dest => dest.Id, c => c.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Id, c => c.MapFrom(src => src.BookId))
                 .ForMember(dest => dest.Title, c => c.MapFrom(src => src.Title))
                 .ForMember(dest => dest.Description, c => c.MapFrom(src => src.Description))
                 .ForMember(dest => dest.Author, c => c.MapFrom(src => src.Author))
@@ -31,7 +31,7 @@ namespace Prikhodko.BookCatalogue.Config.MappingProfiles
         public void MapBookViewModelToBook()
         {
             CreateMap<BookViewModel, Book>()
-                .ForMember(dest => dest.Id, c => c.MapFrom(src => src.Id))
+                .ForMember(dest => dest.BookId, c => c.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Title, c => c.MapFrom(src => src.Title))
                 .ForMember(dest => dest.Description, c => c.MapFrom(src => src.Description))
                 .ForMember(dest => dest.Author, c => c.MapFrom(src => src.Author))

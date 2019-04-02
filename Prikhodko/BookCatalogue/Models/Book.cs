@@ -21,7 +21,7 @@ namespace Prikhodko.BookCatalogue.Data.Contracts.Models
 
     public class Book
     {
-        public virtual int Id { get; set; }
+        public virtual int BookId { get; set; }
         public virtual string Title { get; set; }
         public virtual string Description { get; set; }
         public virtual Author Author { get; set; }
@@ -33,7 +33,7 @@ namespace Prikhodko.BookCatalogue.Data.Contracts.Models
 
         public override string ToString()
         {
-            return $"ID: {Id}; Name: \"{Title}\"; by {Author} ({DateOfIssue})";
+            return $"ID: {BookId}; Name: \"{Title}\"; by {Author} ({DateOfIssue})";
         }
     }
 }
