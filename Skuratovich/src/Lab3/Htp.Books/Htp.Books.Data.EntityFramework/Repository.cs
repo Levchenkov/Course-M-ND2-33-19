@@ -45,7 +45,7 @@ namespace Htp.Books.Data.EntityFramework
 
         public void Update(TEntity entity)
         {
-            //dbContext.Entry(entity).State = EntityState.Modified;
+            dbContext.Entry(entity).State = EntityState.Modified;
             dbContext.Set<TEntity>().Update(entity);
         }
 

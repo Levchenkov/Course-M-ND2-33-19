@@ -71,6 +71,13 @@ namespace Htp.Books.Domain.Services
             {
                 try
                 {
+                    result.BookLanguages = new List<BookLanguage>();
+                    foreach (int languageId in bookViewModel.LanguageIds)
+                    {
+                        var bookLanguage = new BookLanguage() { BookId = result.Id, LanguageId = languageId };
+                        result.BookLanguages.Add(bookLanguage);
+                        unitOfWork.Add<int, BookLanguage>(bookLanguage);
+                    }
                     unitOfWork.Add<int, Book>(result);
                     unitOfWork.SaveChanges();
                     transaction.Commit();
@@ -86,11 +93,18 @@ namespace Htp.Books.Domain.Services
         {
             Book book = unitOfWork.Get<int, Book>(bookViewModel.Id);
             mapper.Map(bookViewModel, book);
-            book.BookLanguages = new List<BookLanguage>();
+
             using (var transaction = unitOfWork.BeginTransaction())
             {
                 try
                 {
+                    var bookLanguages = unitOfWork.FindByCondition<int, BookLanguage>(x => x.BookId == book.Id);
+
+                    foreach (var bookLanguage in bookLanguages)
+                    {
+                        unitOfWork.Delete<int, BookLanguage>(bookLanguage);
+                    }
+                    book.BookLanguages = new List<BookLanguage>();
                     foreach (int languageId in bookViewModel.LanguageIds)
                     {
                         var bookLanguage = new BookLanguage() { BookId = book.Id, LanguageId = languageId };
@@ -117,9 +131,20 @@ namespace Htp.Books.Domain.Services
             foreach (var historyLog in result)
             {
                 historyLog.CurrentBook = mapper.Map<Book, BookViewModel>(historyLogHandler.Deserialize(historyLog.Actually));
-                historyLog.OriginBook = mapper.Map<Book, BookViewModel>(historyLogHandler.Deserialize(historyLog.Origin));
-            }
+                var languages = unitOfWork.FindByCondition<int, BookLanguage>(x => x.BookId == historyLog.CurrentBook.Id);
+                historyLog.CurrentBook.LanguageIds = new List<int>();
+                foreach (var language in languages)
+                {
+                    historyLog.CurrentBook.LanguageIds.Add(language.LanguageId);
+                }
 
+                historyLog.OriginBook = mapper.Map<Book, BookViewModel>(historyLogHandler.Deserialize(historyLog.Origin));languages = unitOfWork.FindByCondition<int, BookLanguage>(x => x.BookId == historyLog.OriginBook.Id);
+                historyLog.OriginBook.LanguageIds = new List<int>();
+                foreach (var language in languages)
+                {
+                    historyLog.OriginBook.LanguageIds.Add(language.LanguageId);
+                }
+            }
             return result;
         }
 
