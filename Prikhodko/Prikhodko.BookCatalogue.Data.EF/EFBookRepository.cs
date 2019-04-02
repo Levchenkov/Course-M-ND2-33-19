@@ -13,7 +13,7 @@ namespace Prikhodko.BookCatalogue.Data.EF
         {
             this.dbContext = dbContext;
         }
-
+        
         public void Add(Book book)
         {
             if (book == null)
@@ -26,10 +26,10 @@ namespace Prikhodko.BookCatalogue.Data.EF
                 dbContext.SaveChanges();
             }
         }
-
+        
         public Book Get(int id)
         {
-            if (id <= 0)
+            if(id <= 0)
             {
                 return null;
             }
@@ -61,31 +61,16 @@ namespace Prikhodko.BookCatalogue.Data.EF
             }
         }
 
-        public void Update(Book item)
+        public void Update(Book book)
         {
-            if (item == null || item.BookId <= 0)
+            if(book == null || book.Id <= 0)
             {
                 return;
             }
             else
             {
-                var book = Get(item.BookId);
-                book.Title = item.Title;
-                book.Description = item.Description;
-                book.Author.FirstName = item.Author.FirstName;
-                book.Author.LastName = item.Author.LastName;
-                book.DateOfIssue = item.DateOfIssue;
-                book.Genre = item.Genre;
-                book.IsPaper = item.IsPaper;
-                book.DeliveryOption = item.DeliveryOption;
-                foreach (Language language in item.AvailableLanguages)
-                {
-                    if (!book.AvailableLanguages.Contains(language))
-                    {
-                        book.AvailableLanguages.Add(language);
-                    }
-                }
-                var a = dbContext.Entry(book).State;
+                Remove(book.Id);
+                Add(book);
             }
         }
     }

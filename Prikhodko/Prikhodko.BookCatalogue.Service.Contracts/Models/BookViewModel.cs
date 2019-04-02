@@ -27,8 +27,8 @@ namespace Prikhodko.BookCatalogue.Service.Contracts.Models
         public Genre Genre { get; set; }
         public bool IsPaper { get; set; }
         public DeliveryOptions DeliveryOption { get; set; }
-        public ICollection<DeliveryOptions> AvailableDeliveryOptions { get; set; }
-        public ICollection<string> AvailableLanguages { get; set; }
+        public List<DeliveryOptions> AvailableDeliveryOptions { get; set; }
+        public List<string> AvailableLanguages { get; set; }
 
         public BookViewModel()
         {

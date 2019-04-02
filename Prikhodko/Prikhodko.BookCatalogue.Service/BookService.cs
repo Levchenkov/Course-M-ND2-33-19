@@ -23,38 +23,32 @@ namespace Prikhodko.BookCatalogue.Service
 
         public void Add(BookViewModel item)
         {
-            if (item == null)
+            if(item == null)
             {
                 return;
             }
             else
             {
                 Book book = Mapper.Map<Book>(item);
-                book.AvailableLanguages = AddLanguages(item);
-                repository.Add(book);
-                unitOfWork.SaveChanges();
-            }
-        }
-
-        private ICollection<Language> AddLanguages(BookViewModel item)
-        {
-
-            var allLanguages = languageService.GetAll();
-            var languages = new List<Language>();
-            foreach (var languageCode in item.AvailableLanguages)
-            {
-                var language = allLanguages?.First(x => x.Code == languageCode);
-                if (language != null)
+                var allLanguages = languageService.GetAll();
+                var languages = new List<Language>();
+                foreach (var languageCode in item.AvailableLanguages)
                 {
-                    languages.Add(language);
+                    var language = allLanguages?.First(x => x.Code == languageCode);
+                    if (language != null)
+                    {
+                        languages.Add(language);
+                    }
                 }
+                book.AvailableLanguages = languages;
+                repository.Add(book);
+               unitOfWork.SaveChanges();
             }
-            return languages;
         }
 
         public BookViewModel Get(int id)
         {
-            if (id <= 0)
+            if(id <= 0)
             {
                 return null;
             }
@@ -70,7 +64,7 @@ namespace Prikhodko.BookCatalogue.Service
         {
             var books = repository.GetAll();
             var result = new List<BookViewModel>();
-            foreach (var book in books)
+            foreach(var book in books)
             {
                 result.Add(Mapper.Map(book, new BookViewModel()));
             }
@@ -99,7 +93,6 @@ namespace Prikhodko.BookCatalogue.Service
             else
             {
                 Book book = Mapper.Map<Book>(item);
-                book.AvailableLanguages = AddLanguages(item);
                 repository.Update(book);
                 unitOfWork.SaveChanges();
             }
