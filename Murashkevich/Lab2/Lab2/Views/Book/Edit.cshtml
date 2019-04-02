@@ -1,0 +1,51 @@
+﻿@model BookList.Book
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form method="post">
+    <fieldset>
+        <p>Please enter the title of the book:</p>
+        @Html.TextBoxFor(x => x.Title, new { required = "" })
+        <br />
+        <br />
+        <p>Please enter the author:</p>
+        @Html.TextBoxFor(x => x.Author, new { required = "" })
+        <br />
+        <br />
+        <p>Please enter Description:</p>
+        @Html.TextArea("Description", "", 5, 50, null)
+        <br />
+        <br />
+        <p>Please select a genre</p>
+        @Html.DropDownList("Genre", new SelectList(new string[]
+        {"Classic", "Business", "Detective", "Fantasy", "Humor", "Science", "Directories"}
+            , new int[] {1, 2, 3, 4, 5, 6, 7}), "Genre", new {required = ""})
+        <br />
+        <br />
+        <p>Paper version available:</p>
+        @Html.CheckBox("IsPaper", true)
+        <br />
+        <br />
+        <p>Languages</p>
+        Russian <input type="checkbox" required="" name="Languages[]" value="1" />
+        English <input type="checkbox" name="Languages[]" value="2" />
+        Deutsch <input type="checkbox" name="Languages[]" value="3" />
+        <br />
+        <br />
+        <p>Do I need delivery</p>
+        Yes
+        @Html.RadioButton("DeliveryRequired", "true")
+        No
+        @Html.RadioButton("DeliveryRequired", "false")
+        <br />
+        <br />
+        <input type="date" name="Created" value="DateTime.Parse(Created)" required="" />
+        Please select a data
+        <br />
+        <br />
+        <input type="submit" value="Submit Entry" />
+    </fieldset>
+</form>
