@@ -15,20 +15,24 @@ namespace Htp.Books.Infrastructure
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<UnitOfWork>()
-            .As<IUnitOfWork>()
-            .InstancePerLifetimeScope();
+                .As<IUnitOfWork>()
+                .InstancePerLifetimeScope();
 
             //var dbContextOptionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(ConnectionString);
 
             //var dbContextOptions = new DbContextOptions<ApplicationDbContext>();
-    
+
             //var dbContextOptions = SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), ConnectionString).Options;
 
             //builder.RegisterType<ApplicationDbContext>()
 
-                ////.AsSelf()
-                //.As<ApplicationDbContext>()
-                //.WithParameter("options", dbContextOptionsBuilder.Options)
+            ////.AsSelf()
+            //.As<ApplicationDbContext>()
+            //.WithParameter("options", dbContextOptionsBuilder.Options)
+            //.InstancePerLifetimeScope();
+
+            //builder.RegisterType<DbContextOptionsBuilder<ApplicationDbContext>>()
+                //.AsSelf()
                 //.InstancePerLifetimeScope();
 
 
@@ -53,11 +57,13 @@ namespace Htp.Books.Infrastructure
             //    //return new MyContext(opt.Options);
             //});
 
-            builder.RegisterGeneric(typeof(Repository<,>)).As(typeof(IRepository<,>)).InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(Repository<,>))
+                .As(typeof(IRepository<,>))
+                .InstancePerLifetimeScope();
 
             builder.RegisterGeneric(typeof(JsonHistoryLogHandler<>))
-            .As(typeof(IHistoryLogHandler<>))
-            .InstancePerLifetimeScope();
+                .As(typeof(IHistoryLogHandler<>))
+                .InstancePerLifetimeScope();
         }
     }
 }

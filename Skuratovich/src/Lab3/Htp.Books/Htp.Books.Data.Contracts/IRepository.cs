@@ -13,5 +13,7 @@ namespace Htp.Books.Data.Contracts
         void Update(TEntity entity);
         void Delete(TEntity entity);
         void Save();
+
+        void Test(TEntity entity);
     }
 }

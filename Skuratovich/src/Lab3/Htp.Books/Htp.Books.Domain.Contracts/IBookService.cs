@@ -9,6 +9,8 @@ namespace Htp.Books.Domain.Contracts
     {
         IEnumerable<HistoryLogViewModel> GetHistoryLogs(int id);
 
+        void Test(BookViewModel bookViewModel);
+
         IEnumerable<BookViewModel> GetAll();
         BookViewModel Get(int id);
         void Add(BookViewModel bookViewModel);

@@ -16,9 +16,9 @@ namespace Htp.Books.Web.Controllers
         }
 
         // 
-        // GET: /HelloWorld/Welcome/
+        // GET: /Book/TestAction/
 
-        public string Test()
+        public string TestAction()
         {
             return "This is the Test action method...";
          
@@ -115,6 +115,66 @@ namespace Htp.Books.Web.Controllers
                 try
                 {
                     bookService.Edit(bookViewModel);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                //repository.Book.UpdateBook(book);
+                ////TODO: read about logger
+                //try
+                //{
+                //    _repository.Book.UpdateBook(book);
+                //    //await _context.SaveChangesAsync();
+                //}
+                //catch (Exception ex)
+                //{
+                //    //if (!MovieExists(movie.ID))
+                //    //{
+                //    //    return NotFound();
+                //    //}
+                //    //else
+                //    //{
+                //    //    throw;
+                //    //}
+                //}
+                return RedirectToAction("Index");
+            }
+            return View(bookViewModel);
+        }
+
+        // GET: Book/Test/5
+        public ActionResult Test(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            BookViewModel bookViewModel = bookService.Get(id.GetValueOrDefault());
+            if (bookViewModel == null)
+            {
+                return NotFound();
+            }
+            bookViewModel.Genres = bookService.GetGenres();
+            return View(bookViewModel);
+        }
+
+        // POST: Book/Test/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        //public ActionResult Edit(int? id, [Bind("Id,Title,Description,Author,Created,Genre,IsPaper,Languages,DeliveryRequired")] Book book)
+        public ActionResult Test(int? id, [Bind("Id,Title,Description,Author,Created,GenreId,IsPaper,RowVersion,DeliveryRequired,Genres")] BookViewModel bookViewModel)
+        {
+            if (id.GetValueOrDefault() != bookViewModel.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    bookService.Test(bookViewModel);
                 }
                 catch (Exception ex)
                 {

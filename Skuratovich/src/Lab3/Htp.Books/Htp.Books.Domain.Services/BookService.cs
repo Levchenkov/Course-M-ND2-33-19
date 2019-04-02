@@ -115,5 +115,37 @@ namespace Htp.Books.Domain.Services
             }
             return genres;
         }
+
+        public void Test(BookViewModel bookViewModel)
+        {
+            // Work, but don't track (
+            //var result = mapper.Map<Book>(bookViewModel);
+            //unitOfWork.Repository<int, Book>().Update(result);
+            //unitOfWork.Repository<int, Book>().Save();
+
+            Book book = unitOfWork.Repository<int, Book>().Get(bookViewModel.Id);
+            book = mapper.Map<Book>(bookViewModel);
+            unitOfWork.Repository<int, Book>().Test(book);
+            //unitOfWork.Repository<int, Book>().Save();
+
+
+            ////Book book = unitOfWork.Repository<int, Book>().Get(bookViewModel.Id);
+
+            //// TODO: compare RowTimestamp
+
+            //var result = mapper.Map<Book>(bookViewModel);
+            ////var genre = unitOfWork.Repository<int, Genre>().Get(bookViewModel.GenreId);
+            ////result.Genre = genre;
+            //unitOfWork.Repository<int, Book>().Update(result);
+            //unitOfWork.Repository<int, Book>().Save();
+            //WriteLog(result);
+
+
+            // 3
+            //Book book = unitOfWork.Repository<int, Book>().Get(bookViewModel.Id);
+            //book = mapper.Map<Book>(bookViewModel);
+            //unitOfWork.Repository<int, Book>().Update(book);
+            //unitOfWork.Repository<int, Book>().Save();
+        }
     }
 }

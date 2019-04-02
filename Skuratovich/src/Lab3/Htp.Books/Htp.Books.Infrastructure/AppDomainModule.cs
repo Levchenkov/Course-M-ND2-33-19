@@ -8,7 +8,7 @@ namespace Htp.Books.Infrastructure
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<BookService>().As<IBookService>();
+            builder.RegisterType<BookService>().As<IBookService>().InstancePerLifetimeScope();
         }
     }
 }

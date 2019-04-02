@@ -73,5 +73,14 @@ namespace Htp.Books.Data.EntityFramework
         {
             return dbContext.Set<TEntity>().Where(expression);
         }
+
+        public void Test(TEntity entity)
+        {
+            var dbSet = dbContext.Set<Book>();
+            var book = dbSet.Find(entity.Id);
+            book.Description = "Test - test";
+            dbContext.SaveChanges(); 
+            //dbContext.Entry(entity).State = EntityState.Modified;
+        }
     }
 }
