@@ -7,14 +7,15 @@ namespace Htp.Books.Domain.Contracts
     //TODO: create common interfece for Servicies?
     public interface IBookService
     {
-        IEnumerable<HistoryLogViewModel> GetHistoryLogs(int id);
-
-        void Test(BookViewModel bookViewModel);
-
         IEnumerable<BookViewModel> GetAll();
         BookViewModel Get(int id);
         void Add(BookViewModel bookViewModel);
         void Edit(BookViewModel bookViewModel);
+        void Delete(BookViewModel bookViewModel);
+
+        //void Test(BookViewModel bookViewModel);
+
+        IEnumerable<HistoryLogViewModel> GetHistoryLogs(int id);
         List<SelectListItem> GetGenres();
     }
 }

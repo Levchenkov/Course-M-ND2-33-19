@@ -11,7 +11,7 @@ namespace Htp.Books.Domain.Contracts.ViewModels
         [Required]
         public string Title { get; set; }
         [Required]
-        public virtual string Description { get; set; }
+        public string Description { get; set; }
         [Required]
         public string Author { get; set; }
         public DateTime Created { get; set; }
@@ -25,6 +25,7 @@ namespace Htp.Books.Domain.Contracts.ViewModels
         [Display(Name = "Delivery required")]
         public bool DeliveryRequired { get; set; }
         public byte[] RowVersion { get; set; }
+        public long LongRowVersion { get; set; }
         [Display(Name = "History log")]
         public string HistoryLog { get; set; }
 

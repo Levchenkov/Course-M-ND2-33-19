@@ -1,18 +1,20 @@
-﻿using Htp.Books.Data.Contracts.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Htp.Books.Data.Contracts
 {
     public interface IUnitOfWork
     {
-        IRepository<TKey, TEntity> Repository<TKey, TEntity>() where TEntity : Entity<TKey>;
+        IEnumerable<TEntity> GetAll<TKey, TEntity>();
+        IEnumerable<TEntity> FindByCondition<TKey, TEntity>(Expression<Func<TEntity, bool>> expression);
+
+        TEntity Get<Tkey, TEntity>(Tkey id);
+        void Add<TKey, TEntity>(TEntity entity);
+        void Update<TKey, TEntity>(TEntity entity);
+        void Delete<Tkey, TEntity>(TEntity entity);
 
         void SaveChanges();
-        //ITransaction BeginTransaction();
-
-        TEntity Get<TEntity>(int id) where TEntity : Entity<int>;
-        void Add<TEntity>(TEntity entity) where TEntity : Entity<int>;
-        void Remove<TEntity>(int id) where TEntity : Entity<int>;
-
-
+        ITransaction BeginTransaction();
     }
 }

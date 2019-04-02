@@ -17,11 +17,11 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.Created)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.Genre)
+            @Html.DisplayNameFor(model => model.GenreTitle)
         </th>*@
         <th></th>
     </tr>
@@ -35,14 +35,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Created)
-        </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Genre)
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.GenreTitle)
         </td>*@
         <td>
-            @Html.ActionLink("Test", "Test", new { id = item.Id }) |
+            @*@Html.ActionLink("Test", "Test", new { id = item.Id }) |*@
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.Id })

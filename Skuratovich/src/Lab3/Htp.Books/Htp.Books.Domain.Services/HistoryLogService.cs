@@ -27,7 +27,7 @@ namespace Htp.Books.Domain.Services
 
         public IEnumerable<HistoryLogViewModel> GetAll()
         {
-            IEnumerable<HistoryLog> historyLogs = unitOfWork.Repository<int, HistoryLog>().GetAll();
+            IEnumerable<HistoryLog> historyLogs = unitOfWork.GetAll<int, HistoryLog>();
 
             var result = mapper.Map<IEnumerable<HistoryLog>, IEnumerable<HistoryLogViewModel>>(historyLogs);
          

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using Htp.Books.Common.Contracts;
 using Htp.Books.Data.Contracts;
@@ -26,54 +27,41 @@ namespace Htp.Books.Domain.Services
             this.historyLogHandler = historyLogHandler;
         }
 
+        public IEnumerable<BookViewModel> GetAll()
+        {
+            IEnumerable<Book> books = unitOfWork.GetAll<int, Book>();
+            var result = mapper.Map<IEnumerable<BookViewModel>>(books);
+            return result;
+        }
+
         public void Add(BookViewModel bookViewModel)
         {
             var result = mapper.Map<Book>(bookViewModel);
-
-            var genre = unitOfWork.Repository<int, Genre>().Get(result.Genre.Id);
+            var genre = unitOfWork.Get<int, Genre>(result.GenreId);
             result.Genre = genre;
-            unitOfWork.Repository<int, Book>().Add(result);
-            unitOfWork.Repository<int, Book>().Save();
-        }
-
-        public void Edit(BookViewModel bookViewModel)
-        {
-            ////Book book = unitOfWork.Repository<int, Book>().Get(bookViewModel.Id);
-
-            //// TODO: compare RowTimestamp
-
-            //var result = mapper.Map<Book>(bookViewModel);
-            ////var genre = unitOfWork.Repository<int, Genre>().Get(bookViewModel.GenreId);
-            ////result.Genre = genre;
-            //unitOfWork.Repository<int, Book>().Update(result);
-            //unitOfWork.Repository<int, Book>().Save();
-            //WriteLog(result);
-
-            // 2
-            var result = mapper.Map<Book>(bookViewModel);
-            unitOfWork.Repository<int, Book>().Update(result);
-            unitOfWork.Repository<int, Book>().Save();
-
-            // 3
-            //Book book = unitOfWork.Repository<int, Book>().Get(bookViewModel.Id);
-            //book = mapper.Map<Book>(bookViewModel);
-            //unitOfWork.Repository<int, Book>().Update(book);
-            //unitOfWork.Repository<int, Book>().Save();
+            unitOfWork.Add<int, Book>(result);
+            try
+            {
+                unitOfWork.SaveChanges();
+            }
+            catch
+            { 
+            }
         }
 
         public BookViewModel Get(int id)
         {
-            Book book = unitOfWork.Repository<int, Book>().Get(id);
-            Genre genre = unitOfWork.Repository<int, Genre>().Get(book.GenreId);
+            Book book = unitOfWork.Get<int, Book>(id);
+            Genre genre = unitOfWork.Get<int, Genre>(book.GenreId);
+            book.Genre = genre;
             var result = mapper.Map<BookViewModel>(book);
-            result.GenreTitle = genre.Title;
 
-            IEnumerable<HistoryLog> historyLogs = unitOfWork.Repository<int, HistoryLog>().FindByCondition(x => x.EntityId == book.Id.ToString() && x.EntityType == book.GetType().ToString());
+            IEnumerable<HistoryLog> historyLogs = unitOfWork.FindByCondition<int, HistoryLog>(x => x.EntityId == book.Id.ToString() && x.EntityType == book.GetType().ToString());
 
             var count = 0;
-            foreach(var historyLog in historyLogs)
+            foreach (var historyLog in historyLogs)
             {
-                count++; 
+                count++;
             }
 
             result.HistoryLog = $"{count} version(s)";
@@ -81,20 +69,25 @@ namespace Htp.Books.Domain.Services
             return result;
         }
 
-        public IEnumerable<BookViewModel> GetAll()
+        public void Edit(BookViewModel bookViewModel)
         {
-            IEnumerable<Book> books = unitOfWork.Repository<int, Book>().GetAll();
+            Book book = unitOfWork.Get<int, Book>(bookViewModel.Id);
+            mapper.Map(bookViewModel, book);
 
-            var result = mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(books);
-    
-            return result;
+            try
+            {
+                unitOfWork.SaveChanges();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public IEnumerable<HistoryLogViewModel> GetHistoryLogs(int id)
         {
-            IEnumerable<HistoryLog> historyLogs = unitOfWork.Repository<int, HistoryLog>().FindByCondition(x => x.EntityId == id.ToString() && x.EntityType == typeof(Book).ToString());
+            IEnumerable<HistoryLog> historyLogs = unitOfWork.FindByCondition<int, HistoryLog>(x => x.EntityId == id.ToString() && x.EntityType == typeof(Book).ToString());
 
-            var result = mapper.Map<IEnumerable<HistoryLog>, IEnumerable<HistoryLogViewModel>>(historyLogs);
+            var result = mapper.Map<IEnumerable<HistoryLogViewModel>>(historyLogs);
 
             foreach (var historyLog in result)
             {
@@ -105,47 +98,29 @@ namespace Htp.Books.Domain.Services
             return result;
         }
 
+        public void Delete(BookViewModel bookViewModel)
+        {
+            Book book = unitOfWork.Get<int, Book>(bookViewModel.Id);
+            mapper.Map(bookViewModel, book);
+
+            try
+            {
+                unitOfWork.Delete<int, Book>(book);
+            }
+            catch (Exception)
+            {
+            }
+        }
+
         public List<SelectListItem> GetGenres()
         {
             var genres = new List<SelectListItem>();
-            foreach (var ganre in unitOfWork.Repository<int, Genre>().GetAll())
+            foreach (var ganre in unitOfWork.GetAll<int, Genre>())
             {
                 genres.Add(new SelectListItem() { Value = ganre.Id.ToString(), Text = ganre.Title });
 
             }
             return genres;
-        }
-
-        public void Test(BookViewModel bookViewModel)
-        {
-            // Work, but don't track (
-            //var result = mapper.Map<Book>(bookViewModel);
-            //unitOfWork.Repository<int, Book>().Update(result);
-            //unitOfWork.Repository<int, Book>().Save();
-
-            Book book = unitOfWork.Repository<int, Book>().Get(bookViewModel.Id);
-            book = mapper.Map<Book>(bookViewModel);
-            unitOfWork.Repository<int, Book>().Test(book);
-            //unitOfWork.Repository<int, Book>().Save();
-
-
-            ////Book book = unitOfWork.Repository<int, Book>().Get(bookViewModel.Id);
-
-            //// TODO: compare RowTimestamp
-
-            //var result = mapper.Map<Book>(bookViewModel);
-            ////var genre = unitOfWork.Repository<int, Genre>().Get(bookViewModel.GenreId);
-            ////result.Genre = genre;
-            //unitOfWork.Repository<int, Book>().Update(result);
-            //unitOfWork.Repository<int, Book>().Save();
-            //WriteLog(result);
-
-
-            // 3
-            //Book book = unitOfWork.Repository<int, Book>().Get(bookViewModel.Id);
-            //book = mapper.Map<Book>(bookViewModel);
-            //unitOfWork.Repository<int, Book>().Update(book);
-            //unitOfWork.Repository<int, Book>().Save();
         }
     }
 }

@@ -22,9 +22,11 @@ namespace Htp.Books.Infrastructure.MappingProfiles
                 .ForMember(dest => dest.Author, c => c.MapFrom(src => src.Author))
                 .ForMember(dest => dest.Created, c => c.MapFrom(src => src.Created))
                 .ForMember(dest => dest.GenreId, c => c.MapFrom(src => src.GenreId))
+                .ForMember(dest => dest.GenreTitle, c => c.MapFrom(src => src.Genre.Title))
                 .ForMember(dest => dest.IsPaper, c => c.MapFrom(src => src.IsPaper))
                 .ForMember(dest => dest.DeliveryRequired, c => c.MapFrom(src => src.DeliveryRequired))
                 .ForMember(dest => dest.RowVersion, c => c.MapFrom(src => src.RowVersion))
+                .ForMember(dest => dest.LongRowVersion, c => c.MapFrom(src => src.LongRowVersion))
                 .ForAllOtherMembers( c => c.Ignore());
         }
 
@@ -40,6 +42,7 @@ namespace Htp.Books.Infrastructure.MappingProfiles
                 .ForMember(dest => dest.IsPaper, c => c.MapFrom(src => src.IsPaper))
                 .ForMember(dest => dest.DeliveryRequired, c => c.MapFrom(src => src.DeliveryRequired))
                 .ForMember(dest => dest.RowVersion, c => c.MapFrom(src => src.RowVersion))
+                .ForMember(dest => dest.LongRowVersion, c => c.MapFrom(src => src.LongRowVersion))
                 .ForAllOtherMembers(c => c.Ignore());
         }
     }
