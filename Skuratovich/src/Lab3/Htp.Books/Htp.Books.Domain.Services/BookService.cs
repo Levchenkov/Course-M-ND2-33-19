@@ -39,13 +39,19 @@ namespace Htp.Books.Domain.Services
             var result = mapper.Map<Book>(bookViewModel);
             var genre = unitOfWork.Get<int, Genre>(result.GenreId);
             result.Genre = genre;
-            unitOfWork.Add<int, Book>(result);
-            try
+
+            using (var transaction = unitOfWork.BeginTransaction())
             {
-                unitOfWork.SaveChanges();
-            }
-            catch
-            { 
+                try
+                {
+                    unitOfWork.Add<int, Book>(result);
+                    //unitOfWork.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
             }
         }
 
@@ -74,12 +80,17 @@ namespace Htp.Books.Domain.Services
             Book book = unitOfWork.Get<int, Book>(bookViewModel.Id);
             mapper.Map(bookViewModel, book);
 
-            try
+            using (var transaction = unitOfWork.BeginTransaction())
             {
-                unitOfWork.SaveChanges();
-            }
-            catch (Exception)
-            {
+                try
+                {
+                    unitOfWork.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
             }
         }
 
@@ -103,12 +114,17 @@ namespace Htp.Books.Domain.Services
             Book book = unitOfWork.Get<int, Book>(bookViewModel.Id);
             mapper.Map(bookViewModel, book);
 
-            try
+            using (var transaction = unitOfWork.BeginTransaction())
             {
-                unitOfWork.Delete<int, Book>(book);
-            }
-            catch (Exception)
-            {
+                try
+                {
+                    unitOfWork.Delete<int, Book>(book);
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
             }
         }
 
