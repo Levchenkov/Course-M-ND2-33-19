@@ -1,0 +1,11 @@
+﻿@model BookEditing.Models.Book
+
+@using (Html.BeginForm("Add", "Home", FormMethod.Post))
+{
+    @Html.LabelFor(model => model.Id, "Id")
+    <br />
+    @Html.EditorFor(model => model.Id)
+    <br /><br />
+    @Html.Partial("_PartialBook");
+    <input class="btn-primary" type="submit" value="Add" />
+}
