@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
+using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using Htp.News.Data.Contracts.Entities;
 using Newtonsoft.Json;
@@ -31,18 +32,8 @@ namespace Htp.News.Data.EntityFramework
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            var postConfiguration = modelBuilder.Entity<Post>();
-
-            postConfiguration.Ignore(x => x.LongVersion);
-            //postConfiguration.Property(x => x.Version).IsRowVersion();
-            postConfiguration.HasKey(x => x.Id);
-            postConfiguration.Property(x => x.Title).IsRequired();
-
-            postConfiguration.HasRequired(x => x.Author).WithMany(x => x.Posts);
-            postConfiguration.HasMany(x => x.Tags).WithMany(x => x.Posts);
-
-            var userConfiguration = modelBuilder.Entity<User>();
-            userConfiguration.HasRequired(x => x.Profile);
+            modelBuilder.Configurations.Add(new PostTypeConfiguration());
+            modelBuilder.Configurations.Add(new UserTypeConfiguration());
             
             modelBuilder.ComplexType<Address>();
 
@@ -79,6 +70,28 @@ namespace Htp.News.Data.EntityFramework
             }
 
             return base.SaveChanges();
+        }
+    }
+
+    public class UserTypeConfiguration : EntityTypeConfiguration<User>
+    {
+        public UserTypeConfiguration()
+        {
+            HasRequired(x => x.Profile);
+        }
+    }
+
+    public class PostTypeConfiguration : EntityTypeConfiguration<Post>
+    {
+        public PostTypeConfiguration()
+        {
+
+            Ignore(x => x.LongVersion);
+            HasKey(x => x.Id);
+            Property(x => x.Title).IsRequired();
+
+            HasRequired(x => x.Author).WithMany(x => x.Posts);
+            HasMany(x => x.Tags).WithMany(x => x.Posts);
         }
     }
 
