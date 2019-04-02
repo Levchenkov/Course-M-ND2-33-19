@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Prikhodko.BookCatalogue.PL.Controllers
+namespace BookEditWebpage.Controllers
 {
     public class HomeController : Controller
     {
