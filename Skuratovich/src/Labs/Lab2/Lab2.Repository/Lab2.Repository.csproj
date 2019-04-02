@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lab2.Contracts\Lab2.Contracts.csproj" />
+    <ProjectReference Include="..\Lab2.Entities\Lab2.Entities.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="bootstrap" Version="4.3.1" />
+  </ItemGroup>
+</Project>

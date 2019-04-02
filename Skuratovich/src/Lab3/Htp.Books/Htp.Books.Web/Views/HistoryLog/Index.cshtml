@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Htp.Books.Domain.Contracts.ViewModels.HistoryLogViewModel>
+
+@{
+    ViewBag.Title = "History Log";
+}
+
+<h2>History Logs</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EntityId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EntityType)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EntityId)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.EntityType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Genre)
+        </td>*@
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>*@
+    </tr>
+    }
+
+</table>

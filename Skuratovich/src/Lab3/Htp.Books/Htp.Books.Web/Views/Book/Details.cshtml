@@ -1,0 +1,25 @@
+﻿@model Htp.Books.Domain.Contracts.ViewModels.BookViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<partial name="BookDetailsPartitial.cshtml" />
+
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.HistoryLog)
+    </dt>
+    <dd>
+        @*@Html.DisplayFor(model => model.HistoryLog)*@
+        @Html.ActionLink(Model.HistoryLog, "HistoryLog", new { id = Model.Id })
+    </dd>
+</dl>
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

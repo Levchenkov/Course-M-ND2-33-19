@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.2" />
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Htp.Books.Domain.Contracts\Htp.Books.Domain.Contracts.csproj" />
+    <ProjectReference Include="..\Htp.Books.Domain.Services\Htp.Books.Domain.Services.csproj" />
+    <ProjectReference Include="..\Htp.Books.Data.EntityFramework\Htp.Books.Data.EntityFramework.csproj" />
+    <ProjectReference Include="..\Htp.Books.Data.Contracts\Htp.Books.Data.Contracts.csproj" />
+    <ProjectReference Include="..\Htp.Books.Common.Contracts\Htp.Books.Common.Contracts.csproj" />
+    <ProjectReference Include="..\Htp.Books.Common.Implementation\Htp.Books.Common.Implementation.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MappingProfiles\" />
+  </ItemGroup>
+</Project>
