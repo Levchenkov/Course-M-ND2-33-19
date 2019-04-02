@@ -1,4 +1,5 @@
-﻿using Htp.News.Data.Contracts;
+﻿using System.Data.Entity;
+using Htp.News.Data.Contracts;
 
 namespace Htp.News.Data.EntityFramework
 {
@@ -33,6 +34,11 @@ namespace Htp.News.Data.EntityFramework
             var dbSet = dbContext.Set<T>();
             var entity = dbSet.Find(id);
             dbSet.Remove(entity);
+        }
+
+        public void SaveChanges()
+        {
+            dbContext.SaveChanges();
         }
     }
 }
