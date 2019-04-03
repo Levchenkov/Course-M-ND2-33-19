@@ -25,7 +25,7 @@ namespace Prikhodko.BookCatalogue.Data.EF
                 try
                 {
                     applicationDbContext.ChangeTracker.DetectChanges();
-                    var entries = applicationDbContext.ChangeTracker.Entries().Where(e => e.State == System.Data.Entity.EntityState.Modified).ToList();
+                    var entries = applicationDbContext.ChangeTracker.Entries()./*Where(e => e.State == System.Data.Entity.EntityState.Modified).*/Where(e => e.Entity.GetType().IsSubclassOf(typeof(Book))).ToList();
                     //var bookEntries = applicationDbContext.ChangeTracker.Entries().Where(e => e.GetType().IsAssignableFrom(typeof(Book))).ToList();
                     foreach (var entry in entries)
                     {
@@ -36,7 +36,8 @@ namespace Prikhodko.BookCatalogue.Data.EF
                             {
                                 ChangedProperty = changedValue.Key,
                                 NewValue = changedValue.Value.ToString(),
-                                TimeOfChange = DateTime.Now
+                                TimeOfChange = DateTime.Now,
+                                Book = (Book)entry.Entity
                             };
                             applicationDbContext.BookChanges.Add(bookChange);
                         }

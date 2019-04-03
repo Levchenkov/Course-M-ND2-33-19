@@ -30,6 +30,8 @@ namespace Prikhodko.BookCatalogue.Data.Contracts.Models
         public virtual bool IsPaper { get; set; }
         public virtual DeliveryOptions DeliveryOption { get; set; }
         public virtual ICollection<Language> AvailableLanguages { get; set; }
+        public virtual ICollection<BookChange> BookChanges { get; set; }
+
 
         public override string ToString()
         {

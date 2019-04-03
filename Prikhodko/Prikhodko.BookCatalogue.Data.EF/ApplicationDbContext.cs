@@ -55,9 +55,10 @@ namespace Prikhodko.BookCatalogue.Data.EF
             booksConfiguration.Property(x => x.IsPaper).IsRequired();
             booksConfiguration.Property(x => x.DeliveryOption).IsRequired();
             booksConfiguration.HasMany(x => x.AvailableLanguages).WithMany(x => x.Books);
-
+            booksConfiguration.HasMany(x => x.BookChanges).WithRequired(x => x.Book);
+            
             var authorConfiguration = modelBuilder.Entity<Author>();
-            authorConfiguration.HasKey(x => x.Id);
+            authorConfiguration.HasKey(x => x.AuthorId);
             authorConfiguration.Property(x => x.FirstName).IsRequired();
             authorConfiguration.Property(x => x.LastName).IsOptional();
             authorConfiguration.HasMany(x => x.Books).WithRequired(x => x.Author);
@@ -68,10 +69,11 @@ namespace Prikhodko.BookCatalogue.Data.EF
             languageConfiguration.HasMany(x => x.Books).WithMany(x => x.AvailableLanguages);
 
             var bookChangeConfiguration = modelBuilder.Entity<BookChange>();
-            bookChangeConfiguration.HasKey(x => x.Id);
+            bookChangeConfiguration.HasKey(x => x.BookChangeId);
             bookChangeConfiguration.Property(x => x.ChangedProperty).IsRequired();
             bookChangeConfiguration.Property(x => x.NewValue).IsRequired();
             bookChangeConfiguration.Property(x => x.TimeOfChange).IsRequired();
+            bookChangeConfiguration.HasRequired(x => x.Book).WithMany(x => x.BookChanges);
         }
 
     }
