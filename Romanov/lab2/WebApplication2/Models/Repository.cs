@@ -11,7 +11,6 @@ namespace WebApplication2.Models
     public class Repository : IRepositoryService
     {
         public Repository() => Books = new List<Book>();
-
         public int RepositoryId { get; set; }
         public List<Book> Books { get; set; }
         
