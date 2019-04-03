@@ -51,9 +51,19 @@ namespace WebApplication2.Controllers
             Book book = repository.GetBook(id);
             return View(book);
         }
-        public ActionResult Edit()
+        
+        public ActionResult Edit(int id)
         {
-            return View();
+            repository = db.LoadFromJsonDbFile();
+            Book book = repository.GetBook(id);
+            return View(book);
+        }
+        [HttpPost]
+        public ActionResult Edit(Book book)
+        {
+            repository = db.LoadFromJsonDbFile();
+            //repository.Update(book);
+            return View(book);
         }
     }
 }

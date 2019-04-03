@@ -12,5 +12,6 @@ namespace WebApplication2.Models
         void DeleteBook(int id);
         Book GetBook(int id);
         
+        Book Update(Book book)
     }
 }
