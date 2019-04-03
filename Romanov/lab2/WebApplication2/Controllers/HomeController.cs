@@ -62,8 +62,9 @@ namespace WebApplication2.Controllers
         public ActionResult Edit(Book book)
         {
             repository = db.LoadFromJsonDbFile();
-            //repository.Update(book);
-            return View(book);
+            repository.Update(book);
+            db.SaveChangesToJsonDb(repository);
+            return RedirectToAction("Index");
         }
     }
 }

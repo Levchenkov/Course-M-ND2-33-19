@@ -10,62 +10,66 @@
 @using (Html.BeginForm("Edit", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
     <div class="form-horizontal">
-        <h4>Book</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.BookId)
+        <div class="form-group">
+                @Html.HiddenFor(m => m.BookId)
+        </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                @Html.EditorFor(m => m.Title, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(m => m.Description, htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Author, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.Author, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+                @Html.EditorFor(m => m.Author, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-2" })
+           
+                @Html.HiddenFor(m => m.Created)
+                
+            
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Genre, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Created, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Created, "", new { @class = "text-danger" })
+                @Html.EnumDropDownListFor(m => m.Genre, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group ">
+            @Html.LabelFor(m => m.IsPaper, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(m => m.IsPaper, htmlAttributes: new { @class = "checkbox " })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IsPaper, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.Languages, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsPaper)
-                    @Html.ValidationMessageFor(model => model.IsPaper, "", new { @class = "text-danger" })
-                </div>
+                @Html.ListBoxFor(m => m.Languages, new MultiSelectList(new string[] { "russian", "english", "german" }), htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Languages)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Delivery, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(m => m.Delivery, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Delivery)
-                    @Html.ValidationMessageFor(model => model.Delivery, "", new { @class = "text-danger" })
-                </div>
+                Yes: @Html.RadioButtonFor(m => m.Delivery, true)
+                No: @Html.RadioButtonFor(m => m.Delivery, false)
             </div>
         </div>
 
@@ -74,6 +78,7 @@
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
+
     </div>
 }
 

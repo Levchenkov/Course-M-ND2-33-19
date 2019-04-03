@@ -16,17 +16,12 @@ namespace WebApplication2.Models
         public List<Book> Books { get; set; }
         
         public void AddBook(Book book) => Books.Add(book);
-
-        public void DeleteBook(int id) => Books.RemoveAll(c => c.BookId == id);
-
+        public void DeleteBook(int id) => Books.Remove(Books.Find(b => b.BookId == id));
         public Book GetBook(int id) => Books.FirstOrDefault(c => c.BookId == id);
-
-        public Book Update(Book book)
+        public void Update(Book book)
         {
-            var book2 = Books.First(x => x.BookId == book.BookId);
-            var id = Books.IndexOf(book2);
-            if (id != -1)
-             return   Books[id] = book;
+            var id = Books.IndexOf(Books.First(x => x.BookId == book.BookId));
+            Books[id] = book;
         }
     }
 }
