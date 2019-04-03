@@ -10,15 +10,15 @@ namespace Htp.News.Infrastructure
     {
         public static ContainerBuilder AddDataDependencies(this ContainerBuilder builder)
         {
-            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
-            builder.RegisterType<ApplicationDbContext>().AsSelf();
-            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+            builder.RegisterType<ApplicationDbContext>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
             return builder;
         }
 
         public static ContainerBuilder AddDomainDependencies(this ContainerBuilder builder)
         {
-            builder.RegisterType<PostService>().As<IPostService>();
+            builder.RegisterType<PostService>().As<IPostService>().InstancePerLifetimeScope();
             return builder;
         }
     }

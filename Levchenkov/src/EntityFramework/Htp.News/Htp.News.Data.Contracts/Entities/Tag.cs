@@ -8,6 +8,6 @@ namespace Htp.News.Data.Contracts.Entities
 
         public string Title { get; set; }
 
-        public ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

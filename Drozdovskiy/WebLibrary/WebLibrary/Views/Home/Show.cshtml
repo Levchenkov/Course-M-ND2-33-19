@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Book repository</h3>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <td>Id</td>
+        <td>Author</td>
+        <td>Title</td>
+        <td>Description</td>
+        <td>Created</td>
+        <td>Genre</td>
+        <td>IsPaper</td>
+        <td>Languages</td>
+        <td>DeliveryRequired</td>
+    </tr>
+
+    @foreach (var b in Model)
+    {
+        <tr>
+            <td>@b.Id</td>
+            <td>@b.Author</td>
+            <td>@b.Title</td>
+            <td>@b.Description</td>
+            <td>@b.Created.ToString("dd.MM.yyy")</td>
+            <td>@b.Genre</td>
+            <td>@b.IsPaper</td>
+            <td>@String.Join("/", b.Languages)</td>
+            <td>@b.DeliveryRequired</td>
+            <td>@Html.ActionLink("Remove", "Remove", new { id = b.Id })</td>
+        </tr>
+    }
+</table>
