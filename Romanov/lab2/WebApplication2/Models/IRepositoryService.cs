@@ -9,8 +9,8 @@ namespace WebApplication2.Models
     interface IRepositoryService
     {
         void AddBook(Book book);
-        void DelBook(int id);
-        Book GetBookById(int id);
-        int GetBookId(Book book);
+        void DeleteBook(int id);
+        Book GetBook(int id);
+        
     }
 }

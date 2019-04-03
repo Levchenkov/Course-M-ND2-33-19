@@ -14,6 +14,7 @@
             @Html.LabelFor(m => m.BookId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(m => m.BookId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m=>m.BookId)
             </div>
         </div>
 
@@ -63,6 +64,7 @@
             @Html.LabelFor(m => m.Languages, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.ListBoxFor(m => m.Languages, new MultiSelectList(new string[] { "russian", "english", "german" }), htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(m=>m.Languages)
             </div>
         </div>
 

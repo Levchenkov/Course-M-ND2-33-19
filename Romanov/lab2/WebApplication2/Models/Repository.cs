@@ -17,11 +17,9 @@ namespace WebApplication2.Models
         
         public void AddBook(Book book) => Books.Add(book);
 
-        public void DelBook(int id) => Books.Remove(GetBookById(id));
+        public void DeleteBook(int id) => Books.RemoveAll(c => c.BookId == id);
 
-        public Book GetBookById(int id) => Books.FirstOrDefault(c => c.BookId == id);
+        public Book GetBook(int id) => Books.FirstOrDefault(c => c.BookId == id);
 
-        public int GetBookId(Book book) => book.BookId;
-        
     }
 }

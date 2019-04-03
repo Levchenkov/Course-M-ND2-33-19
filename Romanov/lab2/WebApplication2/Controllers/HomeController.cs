@@ -10,47 +10,47 @@ namespace WebApplication2.Controllers
     public class HomeController : Controller
     {
         Repository repository = new Repository();
-        JsonDb Db = new JsonDb();
+        JsonDb db = new JsonDb();
 
         public ActionResult Index()
         {
-            repository = Db.LoadFromJsonDbFile();
+            repository = db.LoadFromJsonDbFile();
             ViewBag.Books = repository.Books;
             return View();
         }
-        
+
         public ActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        public  ActionResult Add(Book book)
+        public ActionResult Add(Book book)
         {
-            repository = Db.LoadFromJsonDbFile();
-            repository.AddBook(book);
-            Db.SaveChangesToJsonDb(repository);
-            return RedirectToAction("Show", new { id = repository.GetBookId(book) });
-        }
 
-        public ActionResult Del()
-        {
+            if (ModelState.IsValid)
+            {
+                repository = db.LoadFromJsonDbFile();
+                repository.AddBook(book);
+                db.SaveChangesToJsonDb(repository);
+                return RedirectToAction("Show", new { id = book.BookId });
+            }
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Del(Book book)
+        public ActionResult Del(int id)
         {
-            repository = Db.LoadFromJsonDbFile();
-            repository.DelBook(book.BookId);
-            Db.SaveChangesToJsonDb(repository);
+            repository = db.LoadFromJsonDbFile();
+            repository.DeleteBook(id);
+            db.SaveChangesToJsonDb(repository);
             return RedirectToAction("Index");
         }
-        
+
+
         public ActionResult Show(int id)
         {
-            repository = Db.LoadFromJsonDbFile();
-            Book book = repository.GetBookById(id);
+            repository = db.LoadFromJsonDbFile();
+            Book book = repository.GetBook(id);
             return View(book);
         }
 
@@ -60,12 +60,11 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost]
-        public  ActionResult Get(Book book)
+        public ActionResult Get(Book book)
         {
-            repository = Db.LoadFromJsonDbFile();
-            int BookId = repository.GetBookId(book);
-            return RedirectToAction("Show", new { id = BookId });
+            repository = db.LoadFromJsonDbFile();
+            return RedirectToAction("Show", new { id = book.BookId });
         }
-        
+
     }
 }
