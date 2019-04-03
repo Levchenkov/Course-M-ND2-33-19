@@ -3,32 +3,6 @@ using System.Collections.Generic;
 
 namespace BookCatalogue
 {
-    public enum Genre
-    {
-        Detective,
-        Horror,
-        Romantic,
-        Adventure,
-        Historic
-    }
-
-    public enum Languages
-    {
-        English,
-        Russian,
-        German,
-        Italian,
-        Chinese,
-        French
-    }
-
-    public enum DeliveryOptions
-    {
-        Takeaway,
-        Post,
-        Courier
-    }
-
     public class Book
     {
         public int Id { get; set; }
