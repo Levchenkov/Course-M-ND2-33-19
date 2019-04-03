@@ -166,7 +166,6 @@
     <Content Include="Views\Home\Add.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Del.cshtml" />
-    <Content Include="Views\Home\Get.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

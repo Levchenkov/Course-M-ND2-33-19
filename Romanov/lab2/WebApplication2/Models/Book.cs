@@ -19,6 +19,7 @@ namespace WebApplication2.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public string Author { get; set; }
+        [Required]
         public DateTime Created { get; set; }
         public Genre Genre { get; set; }
         public bool IsPaper { get; set; }

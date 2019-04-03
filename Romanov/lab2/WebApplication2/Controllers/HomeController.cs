@@ -27,7 +27,6 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult Add(Book book)
         {
-
             if (ModelState.IsValid)
             {
                 repository = db.LoadFromJsonDbFile();
@@ -46,25 +45,11 @@ namespace WebApplication2.Controllers
             return RedirectToAction("Index");
         }
 
-
         public ActionResult Show(int id)
         {
             repository = db.LoadFromJsonDbFile();
             Book book = repository.GetBook(id);
             return View(book);
         }
-
-        public ActionResult Get()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Get(Book book)
-        {
-            repository = db.LoadFromJsonDbFile();
-            return RedirectToAction("Show", new { id = book.BookId });
-        }
-
     }
 }
