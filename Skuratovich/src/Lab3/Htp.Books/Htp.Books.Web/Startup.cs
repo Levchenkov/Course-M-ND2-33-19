@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
@@ -57,10 +58,18 @@ namespace Htp.Books.Web
             var containerBuilder = new ContainerBuilder();
 
             //containerBuilder.RegisterModule<AppDataModule>();
-            //containerBuilder.RegisterType<AppDataModule>().WithParameter("ConnectionString", Configuration.GetConnectionString("BookDatabase"));
-            containerBuilder.RegisterModule(new AppDataModule() { ConnectionString = Configuration.GetConnectionString("BookDatabase") });
+
+            // SQL
+            var connectionString = Configuration.GetConnectionString("BookDatabaseSQL");
+
+            // Local
+            //string wanted_path = Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            //var connectionString = ($"Filename={wanted_path}/{Configuration.GetConnectionString("BookDatabaseLocal")}");
+
+            containerBuilder.RegisterModule(new AppDataModule() { ConnectionString = connectionString });
             containerBuilder.RegisterModule<AppDomainModule>();
             containerBuilder.RegisterModule<AutoMapperModule>();
+            containerBuilder.RegisterModule<CommonModule>();
 
             containerBuilder.Populate(services);
             var container = containerBuilder.Build();

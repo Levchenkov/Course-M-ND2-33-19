@@ -79,6 +79,33 @@ namespace Htp.Books.Data.EntityFramework.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Title = "Anthology"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Title = "Crime"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Title = "Fantasy"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Title = "Drama"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Title = "Horror"
+                        });
                 });
 
             modelBuilder.Entity("Htp.Books.Data.Contracts.Entities.HistoryLog", b =>
@@ -116,6 +143,23 @@ namespace Htp.Books.Data.EntityFramework.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Title = "English"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Title = "German"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Title = "Russian"
+                        });
                 });
 
             modelBuilder.Entity("Htp.Books.Data.Contracts.Entities.Book", b =>

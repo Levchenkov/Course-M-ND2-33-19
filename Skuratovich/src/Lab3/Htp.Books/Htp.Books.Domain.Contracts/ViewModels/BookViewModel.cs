@@ -29,8 +29,7 @@ namespace Htp.Books.Domain.Contracts.ViewModels
         [Display(Name = "History log")]
         public string HistoryLog { get; set; }
 
-        //public List<SelectListItem> Genres { get; set;  }
-        //public List<SelectListItem> Languages { get; set; }
-
+        public List<SelectListItem> Genres { get; set;  }
+        public List<SelectListItem> Languages { get; set; }
     }
 }

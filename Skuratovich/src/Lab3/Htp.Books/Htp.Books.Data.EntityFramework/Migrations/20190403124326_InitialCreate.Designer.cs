@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Htp.Books.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190331114649_ChangeGenre")]
-    partial class ChangeGenre
+    [Migration("20190403124326_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,7 +37,7 @@ namespace Htp.Books.Data.EntityFramework.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
-                    b.Property<int?>("GenreId");
+                    b.Property<int>("GenreId");
 
                     b.Property<bool>("IsPaper");
 
@@ -81,6 +81,33 @@ namespace Htp.Books.Data.EntityFramework.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Title = "Anthology"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Title = "Crime"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Title = "Fantasy"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Title = "Drama"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Title = "Horror"
+                        });
                 });
 
             modelBuilder.Entity("Htp.Books.Data.Contracts.Entities.HistoryLog", b =>
@@ -99,6 +126,8 @@ namespace Htp.Books.Data.EntityFramework.Migrations
 
                     b.Property<string>("Origin");
 
+                    b.Property<DateTime>("UpdateTime");
+
                     b.HasKey("Id");
 
                     b.ToTable("HistoryLogs");
@@ -116,13 +145,31 @@ namespace Htp.Books.Data.EntityFramework.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Title = "English"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Title = "German"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Title = "Russian"
+                        });
                 });
 
             modelBuilder.Entity("Htp.Books.Data.Contracts.Entities.Book", b =>
                 {
                     b.HasOne("Htp.Books.Data.Contracts.Entities.Genre", "Genre")
                         .WithMany("Books")
-                        .HasForeignKey("GenreId");
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Htp.Books.Data.Contracts.Entities.BookLanguage", b =>

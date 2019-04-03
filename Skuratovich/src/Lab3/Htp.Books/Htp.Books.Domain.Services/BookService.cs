@@ -48,13 +48,9 @@ namespace Htp.Books.Domain.Services
                 result.LanguageIds.Add(language.LanguageId); 
             }
 
-            IEnumerable<HistoryLog> historyLogs = unitOfWork.FindByCondition<int, HistoryLog>(x => x.EntityId == book.Id.ToString() && x.EntityType == book.GetType().ToString());
+            List<HistoryLog> historyLogs = (List<HistoryLog>)unitOfWork.FindByCondition<int, HistoryLog>(x => x.EntityId == book.Id.ToString() && x.EntityType == book.GetType().ToString());
 
-            var count = 0;
-            foreach (var historyLog in historyLogs)
-            {
-                count++;
-            }
+            var count = historyLogs.Count;
 
             result.HistoryLog = $"{count} version(s)";
 
@@ -98,25 +94,50 @@ namespace Htp.Books.Domain.Services
             Book book = unitOfWork.Get<int, Book>(bookViewModel.Id);
             mapper.Map(bookViewModel, book);
 
+            book.Genre = unitOfWork.Get<int, Genre>(bookViewModel.GenreId);
+
             using (var transaction = unitOfWork.BeginTransaction())
             {
                 try
                 {
-                    var bookLanguages = unitOfWork.FindByCondition<int, BookLanguage>(x => x.BookId == book.Id);
-
-                    foreach (var bookLanguage in bookLanguages)
+                    if (book.LongRowVersion != bookViewModel.LongRowVersion)
                     {
-                        unitOfWork.Delete<int, BookLanguage>(bookLanguage);
+                        throw new Exception("DbUpdateConcurrencyException");
                     }
-                    book.BookLanguages = new List<BookLanguage>();
-                    if (bookViewModel.LanguageIds != null)
+
+                    var languages = unitOfWork.GetAll<int, Language>();
+                    List<BookLanguage> bookLanguages = (List<BookLanguage>)unitOfWork.FindByCondition<int, BookLanguage>(x => x.BookId == book.Id);
+
+                    if (bookViewModel.LanguageIds == null)
                     {
-                        foreach (int languageId in bookViewModel.LanguageIds)
+                        foreach (var bookLanguage in bookLanguages)
                         {
-                            var bookLanguage = new BookLanguage() { BookId = book.Id, LanguageId = languageId };
-                            book.BookLanguages.Add(bookLanguage);
-                            unitOfWork.Add<int, BookLanguage>(bookLanguage);
+                            unitOfWork.Delete<int, BookLanguage>(bookLanguage);
                         }
+                    }
+                    else
+                    {
+                        foreach (var language in languages)
+                        {
+                            if (bookViewModel.LanguageIds.Contains(language.Id))
+                            {
+                                if (bookLanguages.Exists(x => x.LanguageId == language.Id))
+                                {
+                                    unitOfWork.Update<int, BookLanguage>(bookLanguages.Find(x => x.LanguageId == language.Id));
+                                }
+                                else
+                                {
+                                    unitOfWork.Add<int, BookLanguage>(new BookLanguage() { BookId = book.Id, LanguageId = language.Id });
+                                }
+                            }
+                            else
+                            {
+                                if (bookLanguages.Exists(x => x.LanguageId == language.Id))
+                                {
+                                    unitOfWork.Delete<int, BookLanguage>(bookLanguages.Find(x => x.LanguageId == language.Id));
+                                }
+                            }
+                        } 
                     }
                     unitOfWork.Update<int, Book>(book);
                     unitOfWork.SaveChanges();
@@ -136,6 +157,9 @@ namespace Htp.Books.Domain.Services
 
             var result = mapper.Map<IEnumerable<HistoryLogViewModel>>(historyLogs);
 
+            var genres = GetGenres();
+            var languages = GetLanguages();
+
             foreach (var historyLog in result)
             {
                 var currentBook = historyLogHandler.Deserialize(historyLog.Actually);
@@ -148,6 +172,8 @@ namespace Htp.Books.Domain.Services
                         historyLog.CurrentBook.LanguageIds.Add(language.LanguageId);
                     }
                 }
+                historyLog.CurrentBook.Genres = genres;
+                historyLog.CurrentBook.Languages = languages;
 
                 var originBook = historyLogHandler.Deserialize(historyLog.Origin);
                 historyLog.OriginBook = mapper.Map<Book, BookViewModel>(historyLogHandler.Deserialize(historyLog.Origin));
@@ -159,6 +185,8 @@ namespace Htp.Books.Domain.Services
                         historyLog.OriginBook.LanguageIds.Add(language.LanguageId);
                     }
                 }
+                historyLog.OriginBook.Genres = genres;
+                historyLog.OriginBook.Languages = languages;
             }
             return result;
         }

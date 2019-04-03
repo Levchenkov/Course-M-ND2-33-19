@@ -56,7 +56,7 @@ namespace Htp.Books.Data.EntityFramework
 
         public IEnumerable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> expression)
         {
-            return dbContext.Set<TEntity>().Where(expression);
+            return dbContext.Set<TEntity>().Where(expression).ToList();
         }
 
         public void Test(TEntity entity)

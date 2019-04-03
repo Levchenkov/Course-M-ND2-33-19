@@ -4,10 +4,13 @@ using Htp.Books.Data.Contracts;
 using Htp.Books.Data.Contracts.Entities;
 using Htp.Books.Common.Contracts;
 using Microsoft.EntityFrameworkCore;
+using Htp.Books.Data.EntityFramework.EntityConfigurations;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Htp.Books.Data.EntityFramework
 {
-    public class ApplicationDbContext : DbContext 
+    public class ApplicationDbContext : DbContext
     {
         // cd Projects/Course-M-ND2-33-19/Skuratovich/src/Lab3/Htp.Books/Htp.Books.Data.EntityFramework/
         //
@@ -15,20 +18,17 @@ namespace Htp.Books.Data.EntityFramework
         //
         // dotnet ef database update
 
-        public IHistoryLogHandler<Book> historyLogHandler;
+        private IHistoryLogHandler<Book> historyLogHandler;
 
-
-        ////TODO: Check ctor ApplicationDbContext
+        //TODO: Check ctor ApplicationDbContext
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> dbContextOptions, IHistoryLogHandler<Book> historyLogHandler) : base(dbContextOptions)
         {
+            this.historyLogHandler = historyLogHandler;
         }
 
-        //////TODO: Check ctor ApplicationDbContext
-        //public ApplicationDbContext(IHistoryLogHandler<Book> historyLogHandler)
-        //{
-        //    this.historyLogHandler = historyLogHandler;
-        //}
-
+        public ApplicationDbContext()
+        {
+        }
 
         public DbSet<Book> Books { get; set; }
 
@@ -42,6 +42,9 @@ namespace Htp.Books.Data.EntityFramework
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //string wanted_path = Path.GetDirectoryName(Directory.GetCurrentDirectory());
+            //optionsBuilder.UseSqlite($"Filename={wanted_path}/BookCatalog.db");
+
             //optionsBuilder.UseSqlServer(
             //@"Server = localhost, 1433; Database = BookCatalog;"
             //+ "User = SA; Password = $zDkJDCmx8CNcJh");
@@ -54,59 +57,58 @@ namespace Htp.Books.Data.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var bookLanguageConfiguration = modelBuilder.Entity<BookLanguage>();
-            bookLanguageConfiguration.HasKey(x => new { x.BookId, x.LanguageId });
-            bookLanguageConfiguration.HasOne(x => x.Book).WithMany(x => x.BookLanguages).HasForeignKey(x => x.BookId);
-            bookLanguageConfiguration.HasOne(x => x.Language).WithMany(x => x.BookLanguages).HasForeignKey(x => x.LanguageId);
-            bookLanguageConfiguration.Ignore(x => x.Id);
+            base.OnModelCreating(modelBuilder);
 
-            var languageConfiguration = modelBuilder.Entity<Language>();
-            languageConfiguration.HasKey(x => x.Id);
-            languageConfiguration.Property(x => x.Title).IsRequired();
-
-            var bookConfiguration = modelBuilder.Entity<Book>();
-            bookConfiguration.HasKey(x => x.Id);
-            bookConfiguration.Property(x => x.Title).IsRequired();
-            bookConfiguration.Property(x => x.Description).IsRequired();
-            bookConfiguration.Property(x => x.Author).IsRequired();
-            bookConfiguration.Property(x => x.Created).IsRequired();
-            bookConfiguration.Property(x => x.IsPaper).IsRequired();
-            bookConfiguration.Property(x => x.DeliveryRequired).IsRequired();
-            bookConfiguration.Property(x => x.RowVersion).IsRowVersion().IsRequired();
-            bookConfiguration.Ignore(x => x.LongRowVersion);
-
-            //bookConfiguration.HasOne(x => x.Genre).WithMany(x => x.Books).HasForeignKey(x => x.Genre).IsRequired();
-            bookConfiguration.HasOne(x => x.Genre).WithMany(x => x.Books);
-            bookConfiguration.HasOne(x => x.Genre).WithMany(x => x.Books).HasForeignKey(x => x.GenreId);
-
-            var genreConfiguration = modelBuilder.Entity<Genre>();
-            genreConfiguration.HasKey(x => x.Id);
-            genreConfiguration.Property(x => x.Title).IsRequired();
-
-            var historyLogConfiguration = modelBuilder.Entity<HistoryLog>();
-            historyLogConfiguration.HasKey(x => x.Id);
-            historyLogConfiguration.Property(x => x.EntityId).IsRequired();
-            historyLogConfiguration.Property(x => x.EntityType).IsRequired();
+            modelBuilder.ApplyConfiguration(new BookLanguageEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new LanguageEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new BookEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new GenreEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new HistoryLogEntityConfiguration());
         }
 
         public override int SaveChanges()
         {
             this.ChangeTracker.DetectChanges();
 
-            var modified = this.ChangeTracker.Entries<Book>()
+            var modifiedBooks = this.ChangeTracker.Entries<Book>()
                         .Where(t => t.State == EntityState.Modified)
                         .Select(t => t.Entity)
                         .ToList();
 
-            modified.ForEach(e =>
+            modifiedBooks.ForEach(e =>
             {
-                var currentBook = historyLogHandler.Serialize((Book)this.Entry(e).CurrentValues.ToObject());
-                var originalBook = historyLogHandler.Serialize((Book)this.Entry(e).OriginalValues.ToObject());
+                var currentBook = (Book)this.Entry(e).CurrentValues.ToObject();
+                var originalBook = (Book)this.Entry(e).OriginalValues.ToObject();
+
+                var currentLanguages = this.ChangeTracker.Entries<BookLanguage>()
+                           .Where(t => ((t.State == EntityState.Added) || (t.State == EntityState.Modified)) && t.Entity.BookId == currentBook.Id)
+                           .Select(t => t.Entity)
+                           .ToList();
+
+                currentBook.BookLanguages = new List<BookLanguage>();
+                currentLanguages.ForEach(bl =>
+                {
+                    currentBook.BookLanguages.Add((BookLanguage)this.Entry(bl).CurrentValues.ToObject());
+                });
+
+                var originalLanguages = this.ChangeTracker.Entries<BookLanguage>()
+                   .Where(t => ((t.State == EntityState.Deleted) || (t.State == EntityState.Modified)) && t.Entity.BookId == currentBook.Id)
+                   .Select(t => t.Entity)
+                   .ToList();
+
+                originalBook.BookLanguages = new List<BookLanguage>();
+                originalLanguages.ForEach(bl =>
+                {
+                   originalBook.BookLanguages.Add((BookLanguage)this.Entry(bl).OriginalValues.ToObject());
+                });
+
+                var currentBookJson = historyLogHandler.Serialize(currentBook);
+                var originalBookJson = historyLogHandler.Serialize(originalBook);
 
                 var historyLog = new HistoryLog()
                 {
-                    Origin = originalBook,
-                    Actually = currentBook,
+                    Origin = originalBookJson,
+                    Actually = currentBookJson,
                     EntityId = e.Id.ToString(),
                     EntityType = e.GetType().ToString(),
                     UpdateTime = DateTime.UtcNow,

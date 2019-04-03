@@ -43,7 +43,7 @@
         <dd>
             <div class="col-md-10">
                 <select asp-for="GenreId"
-                        asp-items="ViewBag.Genres"
+                        asp-items="Model.Genres"
                         class="form-control"
                         disabled="disabled"></select>
             </div>
@@ -64,7 +64,7 @@
         <dd>
             <div class="col-md-10">
                 <select asp-for="LanguageIds"
-                        asp-items="ViewBag.Languages"
+                        asp-items="Model.Languages"
                         class="form-control"
                         disabled="disabled"></select>
             </div>

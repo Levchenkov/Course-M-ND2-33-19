@@ -1,9 +1,6 @@
 ﻿using Autofac;
-using AutoMapper.Configuration;
 using Htp.Books.Data.Contracts;
 using Htp.Books.Data.EntityFramework;
-using Htp.Books.Common.Contracts;
-using Htp.Books.Common.Implementation;
 using Microsoft.EntityFrameworkCore;
 
 namespace Htp.Books.Infrastructure
@@ -22,61 +19,24 @@ namespace Htp.Books.Infrastructure
             //.AsSelf()
             //.InstancePerLifetimeScope();
 
-
+            // SQL
             var dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(ConnectionString).Options;
-
-
-            //var dbContextOptions = SqlServerDbContextOptionsExtensions.UseSqlServer(new DbContextOptionsBuilder(), ConnectionString).Options;
+            // Local
+            //var dbContextOptions = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlite(ConnectionString).Options;
 
             builder.RegisterType<ApplicationDbContext>()
                 .As<ApplicationDbContext>()
                 .WithParameter("dbContextOptions", dbContextOptions)
                 .InstancePerLifetimeScope();
 
-            //var dbContextOptionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlServer(ConnectionString);
-
-            //var dbContextOptions = new DbContextOptions<ApplicationDbContext>();
-
-            //
-
-            //builder.RegisterType<ApplicationDbContext>()
-
-            ////.AsSelf()
-            //.As<ApplicationDbContext>()
-            //.WithParameter("options", dbContextOptionsBuilder.Options)
-            //.InstancePerLifetimeScope();
-
-            //builder.RegisterType<DbContextOptionsBuilder<ApplicationDbContext>>()
-            //.AsSelf()
-            //.InstancePerLifetimeScope();
-
-
-
-
-            //// Register Entity Framework
-            //var dbContextOptionsBuilder = new DbContextOptionsBuilder<SalesDbContext>().UseSqlServer("MyConnectionString");
-
-            //builder.RegisterType<SalesDbContext>()
-            //.WithParameter("options", dbContextOptionsBuilder.Options)
-            //.InstancePerLifetimeScope();
-
-
-            //builder.Register<ApplicationDbContext>(c =>
-            //{
-            //    var config = c.Resolve<IConfiguration>();
-            //    var opt = new DbContextOptionsBuilder<ApplicationDbContext>();
-            //    opt.UseSqlServer(config.GetSection("ConnectionStrings:MyConnection:ConnectionString").Value);
-
-            //    //return new MyContext(opt.Options);
-            //});
-
             builder.RegisterGeneric(typeof(Repository<,>))
                 .As(typeof(IRepository<,>))
                 .InstancePerLifetimeScope();
 
-            builder.RegisterGeneric(typeof(JsonHistoryLogHandler<>))
-                .As(typeof(IHistoryLogHandler<>))
-                .InstancePerLifetimeScope();
+            //builder.RegisterType<BookRepository>()
+                //.As<IBookRepository>()
+                //.InstancePerLifetimeScope();
         }
     }
 }
+

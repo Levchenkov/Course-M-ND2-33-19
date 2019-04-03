@@ -42,8 +42,8 @@ namespace Htp.Books.Web.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Genres = bookService.GetGenres();
-            ViewBag.Languages = bookService.GetLanguages();
+
+            PopPopulateLists(bookViewModel);
 
             return View(bookViewModel);
         }
@@ -53,8 +53,7 @@ namespace Htp.Books.Web.Controllers
         {
             var bookViewModel = new BookViewModel();
 
-            ViewBag.Genres = bookService.GetGenres();
-            ViewBag.Languages = bookService.GetLanguages();
+            PopPopulateLists(bookViewModel);
 
             return View(bookViewModel);
         }
@@ -86,7 +85,7 @@ namespace Htp.Books.Web.Controllers
             {
                 return NotFound();
             }
-            PopPopulateLists();
+            PopPopulateLists(bookViewModel);
             return View(bookViewModel);
         }
 
@@ -125,7 +124,7 @@ namespace Htp.Books.Web.Controllers
                 //}
                 return RedirectToAction("Index");
             }
-            PopPopulateLists();
+            PopPopulateLists(bookViewModel);
             return View(bookViewModel);
         }
 
@@ -136,7 +135,9 @@ namespace Htp.Books.Web.Controllers
             {
                 return BadRequest();
             }
-            PopPopulateLists();
+            //PopPopulateLists();
+            //ViewBag.Genres = bookService.GetGenres();
+            //ViewBag.Languages = bookService.GetLanguages();
             return View(bookService.GetHistoryLogs(id.GetValueOrDefault()).ToList());
         }
 
@@ -169,10 +170,10 @@ namespace Htp.Books.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        private void PopPopulateLists()
+        private void PopPopulateLists(BookViewModel bookViewModel)
         {
-            ViewBag.Genres = bookService.GetGenres();
-            ViewBag.Languages = bookService.GetLanguages();
+            bookViewModel.Genres = bookService.GetGenres();
+            bookViewModel.Languages = bookService.GetLanguages();
         }
 
         //// GET: Book/Test/5

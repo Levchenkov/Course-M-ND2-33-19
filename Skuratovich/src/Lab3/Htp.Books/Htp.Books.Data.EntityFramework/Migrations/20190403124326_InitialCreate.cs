@@ -30,7 +30,8 @@ namespace Htp.Books.Data.EntityFramework.Migrations
                     Origin = table.Column<string>(nullable: true),
                     Actually = table.Column<string>(nullable: true),
                     EntityId = table.Column<string>(nullable: false),
-                    EntityType = table.Column<string>(nullable: false)
+                    EntityType = table.Column<string>(nullable: false),
+                    UpdateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -98,6 +99,28 @@ namespace Htp.Books.Data.EntityFramework.Migrations
                         principalTable: "Languages",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Genres",
+                columns: new[] { "Id", "Title" },
+                values: new object[,]
+                {
+                    { 1, "Anthology" },
+                    { 2, "Crime" },
+                    { 3, "Fantasy" },
+                    { 4, "Drama" },
+                    { 5, "Horror" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Languages",
+                columns: new[] { "Id", "Title" },
+                values: new object[,]
+                {
+                    { 1, "English" },
+                    { 2, "German" },
+                    { 3, "Russian" }
                 });
 
             migrationBuilder.CreateIndex(
