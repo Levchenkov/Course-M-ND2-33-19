@@ -51,5 +51,9 @@ namespace WebApplication2.Controllers
             Book book = repository.GetBook(id);
             return View(book);
         }
+        public ActionResult Edit()
+        {
+            return View();
+        }
     }
 }
