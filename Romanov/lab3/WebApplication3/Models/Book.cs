@@ -15,12 +15,12 @@ namespace WebApplication3.Models
     public class Book
     {
         [Required]
-        public int ID { get; set; }
+        public int BookID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Author { get; set; }
         [Required]
-        public DateTime Created { get; set; }
+        public DateTime? Created { get; set; }
         public Genre Genre { get; set; }
         public bool IsPaper { get; set; }
         [Required]
