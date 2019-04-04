@@ -1,31 +1,33 @@
-﻿@{
+﻿@model WebApplication3.Models.Book
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<h2>Count of books @ViewBag.Books.Count</h2>
+@foreach (var book in ViewBag.Books)
+{<hr />
+    <ul class="list-group">
+        <li class="list-group-item disabled"><b>Book Id:</b>   @book.BookId </li>
+        <li class="list-group-item"><b>Book Title:</b>  @book.Title</li>
+        <li class="list-group-item"><b>Book Description:</b>  @book.Description </li>
+        <li class="list-group-item"><b>Book Author:</b>  @book.Author </li>
+        <li class="list-group-item"><b>Book Created:</b>  @book.Created </li>
+        <li class="list-group-item"><b>Book Genre:</b>  @book.Genre </li>
+        <li class="list-group-item"><b>Book IsPaper:</b>  @book.IsPaper </li>
+        <li class="list-group-item">
+            <b>Book Language:</b>
+            @foreach (var item in @book.Languages)
+            {
+                <ul>
+                    <li>@item</li>
+                </ul>
+            }
+        </li>
+        <li class="list-group-item"><b>Book Delivery:</b>  @book.Delivery </li>
+    </ul>
+    <div class="btn-group">
+        @Html.ActionLink("Delete", "Del", "Home", new { id = book.BookId }, htmlAttributes: new { @class = "btn btn-primary " })
+        @Html.ActionLink("Edit", "Edit", "Home", new { id = book.BookId }, htmlAttributes: new { @class = "btn btn-primary" })
+    </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+}
