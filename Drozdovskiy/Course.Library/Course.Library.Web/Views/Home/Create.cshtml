@@ -32,7 +32,7 @@
             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" value="2019-04-05">
         @Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <input type="date" name="Created" class="form-control" />
@@ -65,11 +65,10 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Languages, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.ListBoxFor(model => model.tempLanguages, new MultiSelectList(ViewBag.Languages), new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.tempLanguages, "", new { @class = "text-danger" })
+            @Html.ListBoxFor(model => model.tempLanguages, new MultiSelectList(ViewBag.Languages,new string[]{"Russian","English"}), new {@class = "form-control"})
+            @Html.ValidationMessageFor(model => model.tempLanguages, "", new {@class = "text-danger"})
         </div>
     </div>
-
 
     <div class="form-group">
         @Html.LabelFor(model => model.DeliveryRequired, htmlAttributes: new { @class = "control-label col-md-2" })

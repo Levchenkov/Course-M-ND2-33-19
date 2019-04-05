@@ -44,7 +44,7 @@ namespace Course.Library.Web.Controllers
                 viewModel.Languages.ElementAt(i).Title = viewModel.tempLanguages.ElementAt(i);
             }
             bookService.Save(viewModel);
-            return RedirectToAction("Edit", new { id = viewModel.Id });
+            return RedirectToAction("Index");
         }
 
         public ActionResult About()
