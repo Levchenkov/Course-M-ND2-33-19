@@ -79,12 +79,5 @@ namespace Course.Library.Web.Controllers
             bookService.Save(viewModel);
             return RedirectToAction("Index");
         }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }
