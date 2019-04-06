@@ -329,5 +329,5 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 Bandarin/ConsoleApp3/ConsoleApp3.sln
-Skuratovich/src/Lab4/Htp.BooksAPI/internal_logs/internallog.txt
-Skuratovich/src/Lab4/Htp.BooksAPI/logs/2019-04-06_logfile.txt
+Skuratovich/src/Lab4/Htp.BooksAPI/internal_logs/
+Skuratovich/src/Lab4/Htp.BooksAPI/logs/

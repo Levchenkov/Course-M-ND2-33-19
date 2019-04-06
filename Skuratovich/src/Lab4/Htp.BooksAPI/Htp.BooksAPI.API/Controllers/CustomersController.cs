@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Htp.BooksAPI.Common.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Htp.BooksAPI.API.Controllers
 {
@@ -10,18 +10,20 @@ namespace Htp.BooksAPI.API.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private readonly ILoggerManager logger;
+        private readonly ILogger<CustomersController> logger;
 
-        public CustomersController(ILoggerManager logger)
+        public CustomersController(ILogger<CustomersController> logger)
         {
             this.logger = logger;
         }
+
+        // dotnet new mvc -o moviemvc --auth Individual
 
         // GET api/values
         [HttpGet, Authorize]
         public IEnumerable<string> Get()
         {
-            logger.LogInfo($"Return all customers.");
+            logger.LogInformation($"Return all customers.");
             return new string[] { "John Doe", "Jane Doe" };
         }
     }

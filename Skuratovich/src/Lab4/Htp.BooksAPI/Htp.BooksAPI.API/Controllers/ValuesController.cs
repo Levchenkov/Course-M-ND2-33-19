@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Htp.BooksAPI.Common.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Htp.BooksAPI.API.Controllers
 {
@@ -11,9 +11,9 @@ namespace Htp.BooksAPI.API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly ILoggerManager logger;
+        private readonly ILogger<ValuesController> logger;
 
-        public ValuesController(ILoggerManager logger)
+        public ValuesController(ILogger<ValuesController> logger)
         {
             this.logger = logger;
         }
@@ -22,10 +22,7 @@ namespace Htp.BooksAPI.API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            //logger.LogInfo("Here is info message from our values controller.");
-            //logger.LogDebug("Here is debug message from our values controller.");
-            //logger.LogWarn("Here is warn message from our values controller.");
-            //logger.LogError("Here is error message from our values controller.");
+            logger.LogInformation(LoggingEvents.ListItems, "List values");
             return new string[] { "value1", "value2" };
         }
 

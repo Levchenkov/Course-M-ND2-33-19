@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text;
-using Htp.BooksAPI.Common.Contracts;
-using Htp.BooksAPI.Common.Implementation;
+﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -27,11 +24,6 @@ namespace Htp.BooksAPI.API.Extensions
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@BooksAPI"))
                     };
                 });
-        }
-
-        public static void ConfigureLoggerService(this IServiceCollection services)
-        {
-            services.AddSingleton<ILoggerManager, LoggerManager>();
         }
     }
 }
