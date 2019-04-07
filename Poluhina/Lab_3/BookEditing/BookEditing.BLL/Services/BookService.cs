@@ -50,7 +50,7 @@ namespace BookEditing.BLL.Services
         {
             //Book bookCreate = UnitOfWork.Books.Get(bookDTO.Id);
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();           
-            var bookDAL = Mapper.Map<BookDTO, Book>(book);
+            var bookDAL = mapper.Map<BookDTO, Book>(book);
             UnitOfWork.Books.Change(bookDAL);
             UnitOfWork.Save();
         }

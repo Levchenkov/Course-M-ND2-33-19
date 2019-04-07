@@ -53,14 +53,16 @@ namespace BookEditing.Controllers
             var book = bookService.Get(id);
             if (book == null)
                 return HttpNotFound();
-            return View(book);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, BookViewModel>()).CreateMapper();
+            var bookView = mapper.Map<BookDTO, BookViewModel>(book);
+            return View(bookView);
         }
 
         [HttpPost]
         public ActionResult Edit(BookViewModel book)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookViewModel, BookDTO>()).CreateMapper();
-            var bookDAL = Mapper.Map<BookViewModel, BookDTO>(book);
+            var bookDAL = mapper.Map<BookViewModel, BookDTO>(book);
             bookService.Change(bookDAL);
             return RedirectToAction("Index");
         }
