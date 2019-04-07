@@ -10,7 +10,7 @@ namespace WebApplication3.DAL
 {
     public class BookContext : DbContext
     {
-        public BookContext(): base("BookContext")
+        public BookContext(): base("name = BookDatabase")
         {
 
         }

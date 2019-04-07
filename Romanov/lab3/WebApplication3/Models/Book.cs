@@ -21,7 +21,7 @@ namespace WebApplication3.Models
         public string Author { get; set; }
         [Required]
         public DateTime? Created { get; set; }
-        public Genre Genre { get; set; }
+        public Genre? Genre { get; set; }
         public bool IsPaper { get; set; }
         [Required]
         public String[] Languages { get; set; }
