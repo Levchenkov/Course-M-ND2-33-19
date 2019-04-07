@@ -14,9 +14,9 @@ namespace BookEditing.DAL.Entities
         public bool IsPaper { get; set; }
         public bool DeliveryRequred { get; set; }
         public List<Language> Languages { get; set; }
-        public Book()
-        {
-            Languages = new List<Language>();
-        }
+        //public Book()
+        //{
+        //    Languages = new List<Language>();
+        //}
     }
 }

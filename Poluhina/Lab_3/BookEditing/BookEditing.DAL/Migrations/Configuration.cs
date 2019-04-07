@@ -25,7 +25,7 @@ namespace BookEditing.DAL.Migrations
                 Created = new DateTime(1992, 2, 24),
                 Genre = "novel",
                 IsPaper = true,
-                DeliveryRequred = true
+                DeliveryRequred = true,
             };
             var book2 = new Book
             {
@@ -35,7 +35,7 @@ namespace BookEditing.DAL.Migrations
                 Created = new DateTime(1966, 5, 27),
                 Genre = "novel",
                 IsPaper = true,
-                DeliveryRequred = true
+                DeliveryRequred = true,
             };
             db.SaveChanges();
             Language language1 = new Language { Name = "Russian" };

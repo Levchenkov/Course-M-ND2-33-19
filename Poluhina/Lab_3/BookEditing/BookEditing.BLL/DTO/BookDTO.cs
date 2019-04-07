@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookEditing.DAL.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,7 @@ namespace BookEditing.BLL.DTO
         public string Genre { get; set; }
         public bool IsPaper { get; set; }
         public bool DeliveryRequred { get; set; }
+
+        public List<LanguageDTO> Languages { get; set; }
     }
 }

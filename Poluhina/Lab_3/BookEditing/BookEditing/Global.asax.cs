@@ -18,7 +18,7 @@ namespace BookEditing
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            NinjectModule bookModule = new BookModule();
+            NinjectModule bookModule = new NinjectRegistrations();
             var kernel = new StandardKernel(bookModule);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookEditing.BLL.DTO
 {
-    class LanguageDTO
+   public class LanguageDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

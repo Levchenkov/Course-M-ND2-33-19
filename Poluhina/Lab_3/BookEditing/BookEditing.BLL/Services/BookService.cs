@@ -19,12 +19,6 @@ namespace BookEditing.BLL.Services
         {
             this.UnitOfWork = UnitOfWork;
         }
-        //public MultiSelectList list()
-        //{
-        //    var languages = db.Languages.Include(p => p.Books).ToList();
-        //    var selectList = new MultiSelectList(languages, "Id", "Name");
-        //    return selectList;
-        //}
         public IEnumerable<BookDTO> GetList()
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookDTO>()).CreateMapper();
@@ -32,6 +26,7 @@ namespace BookEditing.BLL.Services
         }
         public void Add(BookDTO newBook)
         {
+            var languagesForDataLayer =  newBook.Languages.Select(x => new Language() { Id = x.Id, Name = x.Name }).ToList();
             var book = new Book
             {
                 Author = newBook.Author,
@@ -41,7 +36,8 @@ namespace BookEditing.BLL.Services
                 Genre = newBook.Genre,
                 IsPaper = newBook.IsPaper,
                 Title = newBook.Title,
-                Id = newBook.Id
+                Id = newBook.Id,
+                Languages = languagesForDataLayer
             };
             UnitOfWork.Books.Add(book);
             UnitOfWork.Save();

@@ -24,12 +24,11 @@
 <br /><br />
 @Html.LabelFor(model => model.IsPaper, "IsPaper ")
 @Html.CheckBoxFor(m => m.IsPaper)
-@*<br />
+<br />
 @Html.LabelFor(model => model.Languages, "Languages")
 <br />
-@Html.ListBoxFor(model => model.Languages, ViewBag.Select as MultiSelectList)
-@Html.ListBoxFor(model => model.Languages, new MultiSelectList(@Model.Languages, "Id", "Name"))*@
-
+@*@Html.ListBoxFor(model => model.Languages, new MultiSelectList(new List<BookEditing.Models.LanguageViewModel>(), "Id", "Name"));*@
+@Html.ListBoxFor(model => model.LanguagesIDs, new MultiSelectList(Model.Languages, "Value", "Text"))
 <br /><br />
 @Html.LabelFor(model => model.DeliveryRequred, "DeliveryRequred")
 <div>

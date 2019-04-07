@@ -4,6 +4,7 @@ using BookEditing.BLL.Interfaces;
 using BookEditing.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace BookEditing.Controllers
 {
@@ -18,14 +19,36 @@ namespace BookEditing.Controllers
         public ActionResult Index()
         {
             var booksDTO = bookService.GetList();
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, BookViewModel>()).CreateMapper();
+            //var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, BookViewModel>()).CreateMapper();
+            var mapper = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<BookDTO, BookViewModel>();
+                cfg.CreateMap<LanguageDTO, SelectListItem>()
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id.ToString()))
+                .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
+            }).CreateMapper();
+
             var books = mapper.Map<IEnumerable<BookDTO>, List<BookViewModel>>(booksDTO);
+
             return View(books);
         }
 
         [HttpPost]
         public ActionResult Add(BookViewModel book)
         {
+            if (book.LanguagesIDs != null && book.LanguagesIDs.Length != 0)
+            {
+                foreach (var languageId in book.LanguagesIDs)
+                {
+                    var lang = book.Languages.Where(x => x.Value.Equals(languageId.ToString())).FirstOrDefault();
+                    if (lang != null)
+                    {
+                        lang.Selected = true;
+                    }
+                }
+            }
+
+            var selectedLanguages = book.Languages.Where(x => x.Selected).Select(x => new LanguageDTO() { Id = int.Parse(x.Value), Name = x.Text }).ToList();
             var bookDto = new BookDTO
             {
                 Author = book.Author,
@@ -35,7 +58,8 @@ namespace BookEditing.Controllers
                 Genre = book.Genre,
                 IsPaper = book.IsPaper,
                 Title = book.Title,
-                Id = book.Id
+                Id = book.Id,
+                Languages = selectedLanguages
             };
             bookService.Add(bookDto);
             return RedirectToAction("Index");
@@ -44,7 +68,7 @@ namespace BookEditing.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            bookService.Remove(id);         
+            bookService.Remove(id);
             return RedirectToAction("Index");
         }
         [HttpGet]

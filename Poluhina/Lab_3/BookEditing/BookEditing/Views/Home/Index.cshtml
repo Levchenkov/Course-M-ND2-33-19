@@ -1,4 +1,5 @@
-﻿@model  IEnumerable<BookEditing.Models.BookViewModel>
+﻿@using BookEditing.Models;
+@model  IEnumerable<BookEditing.Models.BookViewModel>
 @{
     Layout = null;
 }
@@ -20,7 +21,10 @@
 
 <body>
     <div class="row">
-        <div class="col-md-3">@{Html.RenderPartial("_AddBook", new BookEditing.Models.BookViewModel());}</div>
+        <div class="col-md-3">
+            @{Html.RenderPartial("_AddBook", new BookViewModel());}
+            @*@{Html.RenderPartial("_AddBook", new BookViewModel() { Languages = new List<SelectListItem>(new SelectListItem { Text = "Russian", Value = "1" }) })}*@
+        </div>
         <div class="col-md-9">
             <h3>Book information</h3>
             <table>
@@ -54,26 +58,26 @@
                         {
                             <td><p>No</p></td>
                         }
-                        @*<td>
+                        <td>
                             <p>
                                 @foreach (var b in book.Languages)
                                 {
-                                <p> @b.Name</p>
+                                <p> @b.Text</p>
                             }
                                 </p>
-                            </td>*@
-                            @if (book.DeliveryRequred == true)
-                            {
-                                <td><p>Yes</p></td>
-                            }
-                            else
-                            {
-                                <td><p>No</p></td>
-                            }
-                            <td class="bg-danger"><p>@Html.ActionLink("Delete", "Delete", new { id = book.Id })</p></td>
-                            <td class="bg-warning"><p>@Html.ActionLink("Edit", "Edit", new { id = book.Id })</td>
-                        </tr>
-                    }
+                            </td>
+                        @if (book.DeliveryRequred == true)
+                        {
+                            <td><p>Yes</p></td>
+                        }
+                        else
+                        {
+                            <td><p>No</p></td>
+                        }
+                        <td class="bg-danger"><p>@Html.ActionLink("Delete", "Delete", new { id = book.Id })</p></td>
+                        <td class="bg-warning"><p>@Html.ActionLink("Edit", "Edit", new { id = book.Id })</td>
+                    </tr>
+                }
             </table>
         </div>
     </div>

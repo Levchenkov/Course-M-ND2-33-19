@@ -7,8 +7,7 @@ using BookEditing.DAL.Repositories;
 
 namespace BookEditing.Util
 {
-    //NinjectRegistrations
-    public class BookModule : NinjectModule
+    public class NinjectRegistrations : NinjectModule
     {
         public override void Load()
         {

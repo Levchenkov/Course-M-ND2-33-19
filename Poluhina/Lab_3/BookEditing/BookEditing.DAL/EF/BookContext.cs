@@ -44,9 +44,9 @@ namespace BookEditing.DAL.EF
                         ActualValue = JsonConvert.SerializeObject(entity.Entity, settings)
                     };
                     listOfChanges.Add(log);                  
-                }                
-            }
-            File.WriteAllText(@"d:\file.json", JsonConvert.SerializeObject(listOfChanges));
+                }
+                File.WriteAllText(@"d:\file.json", JsonConvert.SerializeObject(listOfChanges));
+            }           
             var result = base.SaveChanges();
             return result;
         }
