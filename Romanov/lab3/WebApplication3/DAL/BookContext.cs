@@ -10,10 +10,6 @@ namespace WebApplication3.DAL
 {
     public class BookContext : DbContext
     {
-        public BookContext(): base("name = BookDatabase")
-        {
-
-        }
         public DbSet<Book> Books { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

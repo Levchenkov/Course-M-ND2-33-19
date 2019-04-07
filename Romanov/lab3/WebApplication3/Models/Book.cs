@@ -12,6 +12,12 @@ namespace WebApplication3.Models
         Novel,
         Poem
     }
+    public enum Lanuages
+    {
+        English,
+        Russian,
+        German
+    }
     public class Book
     {
         [Required]
@@ -23,8 +29,7 @@ namespace WebApplication3.Models
         public DateTime? Created { get; set; }
         public Genre? Genre { get; set; }
         public bool IsPaper { get; set; }
-        [Required]
-        public String[] Languages { get; set; }
-        public bool DeliveryRequired { get; set; }
+        public Lanuages? Languages { get; set; }
+        public bool? DeliveryRequired { get; set; }
     }
 }

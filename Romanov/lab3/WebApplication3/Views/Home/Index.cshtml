@@ -7,27 +7,19 @@
 @foreach (var book in ViewBag.Books)
 {<hr />
     <ul class="list-group">
-        <li class="list-group-item disabled"><b>Book Id:</b>   @book.BookId </li>
+        <li class="list-group-item disabled"><b>Book Id:</b>   @book.BookID </li>
         <li class="list-group-item"><b>Book Title:</b>  @book.Title</li>
         <li class="list-group-item"><b>Book Description:</b>  @book.Description </li>
         <li class="list-group-item"><b>Book Author:</b>  @book.Author </li>
         <li class="list-group-item"><b>Book Created:</b>  @book.Created </li>
         <li class="list-group-item"><b>Book Genre:</b>  @book.Genre </li>
         <li class="list-group-item"><b>Book IsPaper:</b>  @book.IsPaper </li>
-        <li class="list-group-item">
-            <b>Book Language:</b>
-            @foreach (var item in @book.Languages)
-            {
-                <ul>
-                    <li>@item</li>
-                </ul>
-            }
-        </li>
-        <li class="list-group-item"><b>Book Delivery:</b>  @book.Delivery </li>
+        <li class="list-group-item"><b>Book Language:</b>  @book.Languages </li>
+        <li class="list-group-item"><b>Book Delivery:</b>  @book.DeliveryRequired </li>
     </ul>
     <div class="btn-group">
-        @Html.ActionLink("Delete", "Del", "Home", new { id = book.BookId }, htmlAttributes: new { @class = "btn btn-primary " })
-        @Html.ActionLink("Edit", "Edit", "Home", new { id = book.BookId }, htmlAttributes: new { @class = "btn btn-primary" })
+        @Html.ActionLink("Delete", "Del", "Home", new { id = book.BookID }, htmlAttributes: new { @class = "btn btn-primary " })
+        @Html.ActionLink("Edit", "Edit", "Home", new { id = book.BookID }, htmlAttributes: new { @class = "btn btn-primary" })
     </div>
 
 }
