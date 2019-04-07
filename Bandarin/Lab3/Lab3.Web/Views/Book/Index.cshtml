@@ -1,0 +1,98 @@
+﻿@model Lab3.BLL.Contracts.ViewModels.BookViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>BookViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GenreID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenreID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GenreName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenreName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPaper)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPaper)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LongVersion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LongVersion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    
+</p>
