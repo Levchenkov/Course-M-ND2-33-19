@@ -30,26 +30,26 @@ namespace BookEditing.BLL.Services
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookDTO>()).CreateMapper();
             return mapper.Map<IEnumerable<Book>, List<BookDTO>>(UnitOfWork.Books.GetList());         
         }
-        public void Add(BookDTO bookDTO)
+        public void Add(BookDTO newBook)
         {
-            Book bookCreate = UnitOfWork.Books.Get(bookDTO.Id);
-            Book book = new Book
+            var book = new Book
             {
-                Author = bookCreate.Author,
-                Created = bookCreate.Created,
-                DeliveryRequred = bookCreate.DeliveryRequred,
-                Description = bookCreate.Description,
-                Genre = bookCreate.Genre,
-                IsPaper = bookCreate.IsPaper,
-                Title = bookCreate.Title,
-                Id = bookCreate.Id
+                Author = newBook.Author,
+                Created = newBook.Created,
+                DeliveryRequred = newBook.DeliveryRequred,
+                Description = newBook.Description,
+                Genre = newBook.Genre,
+                IsPaper = newBook.IsPaper,
+                Title = newBook.Title,
+                Id = newBook.Id
             };
             UnitOfWork.Books.Add(book);
             UnitOfWork.Save();
         }
         public void Change(BookDTO book)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
+            //Book bookCreate = UnitOfWork.Books.Get(bookDTO.Id);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();           
             var bookDAL = Mapper.Map<BookDTO, Book>(book);
             UnitOfWork.Books.Change(bookDAL);
             UnitOfWork.Save();

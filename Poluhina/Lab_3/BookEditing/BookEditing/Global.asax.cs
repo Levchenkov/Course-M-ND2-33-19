@@ -1,5 +1,4 @@
-﻿using BookEditing.BLL.Infrastucture;
-using BookEditing.Util;
+﻿using BookEditing.Util;
 using Ninject;
 using Ninject.Modules;
 using Ninject.Web.Mvc;
@@ -20,8 +19,7 @@ namespace BookEditing
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             NinjectModule bookModule = new BookModule();
-            NinjectModule serviceModule = new NinjectRegistrations();
-            var kernel = new StandardKernel(bookModule, serviceModule);
+            var kernel = new StandardKernel(bookModule);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }
     }

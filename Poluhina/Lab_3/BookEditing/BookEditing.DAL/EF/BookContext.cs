@@ -47,7 +47,8 @@ namespace BookEditing.DAL.EF
                 }                
             }
             File.WriteAllText(@"d:\file.json", JsonConvert.SerializeObject(listOfChanges));
-            return base.SaveChanges();
+            var result = base.SaveChanges();
+            return result;
         }
     }
 
