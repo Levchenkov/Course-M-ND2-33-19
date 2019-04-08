@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prikhodko.BookCatalogue.Data.Contracts", "BookCatalogue\Prikhodko.BookCatalogue.Data.Contracts.csproj", "{2728AF8F-1825-4FAC-8ACA-3EBBAEF08AA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prikhodko.BookCatalogue.PL", "BookEditWebpage\Prikhodko.BookCatalogue.PL.csproj", "{D29EE2ED-CA76-4140-9F31-13765B0AEBC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prikhodko.BookCatalogue.PL", "Prikhodko.BookCatalogue.PL\Prikhodko.BookCatalogue.PL.csproj", "{D29EE2ED-CA76-4140-9F31-13765B0AEBC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prikhodko.BookCatalogue.Config", "BookCatalogue.Config\Prikhodko.BookCatalogue.Config.csproj", "{C731B316-017A-4E70-9D55-85B2CE6A0A8D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prikhodko.BookCatalogue.Config", "Prikhodko.BookCatalogue.Config\Prikhodko.BookCatalogue.Config.csproj", "{C731B316-017A-4E70-9D55-85B2CE6A0A8D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prikhodko.BookCatalogue.Data.EF", "Prikhodko.BookCatalogue.Data.EF\Prikhodko.BookCatalogue.Data.EF.csproj", "{89A377ED-7D8E-4EF4-9CEB-D1847A014157}"
 EndProject

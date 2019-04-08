@@ -6,9 +6,14 @@ using System.Web.Mvc;
 using Prikhodko.BookCatalogue.Service.Contracts.Models;
 using Prikhodko.BookCatalogue.Service.Contracts.Interfaces;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Prikhodko.BookCatalogue.PL.Filters.AuthentificationFilters;
 
 namespace Prikhodko.BookCatalogue.PL.Controllers
 {
+    [Authenticate]
     public class BookController : Controller
     {
         private readonly IBookService bookService;
@@ -20,7 +25,6 @@ namespace Prikhodko.BookCatalogue.PL.Controllers
             this.languageService = languageService;
         }
 
-        // GET: Add/Create
         public ActionResult Create()
         {
             var model = new BookViewModel();
