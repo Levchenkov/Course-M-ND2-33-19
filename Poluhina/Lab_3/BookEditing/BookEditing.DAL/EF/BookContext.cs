@@ -19,9 +19,9 @@ namespace BookEditing.DAL.EF
         {
             modelBuilder.Configurations.Add(new BookTypeConfiguration());
 
-            modelBuilder.Entity<Book>()
-           .HasMany(p => p.Languages)
-           .WithMany(c => c.Books);
+           // modelBuilder.Entity<Book>()
+           //.HasMany(p => p.Languages)
+           //.WithMany(c => c.Books);
         }
         public override int SaveChanges()
         {

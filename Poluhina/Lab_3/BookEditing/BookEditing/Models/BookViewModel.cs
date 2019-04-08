@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace BookEditing.Models
@@ -16,7 +14,6 @@ namespace BookEditing.Models
         public string Genre { get; set; }
         public bool IsPaper { get; set; }
         public bool DeliveryRequred { get; set; }
-
         public List<SelectListItem> Languages { get; set; }
         public int[] LanguagesIDs { get; set; }
 
@@ -28,7 +25,7 @@ namespace BookEditing.Models
             new SelectListItem { Text = "Deutsch" , Value = "1"},
             new SelectListItem { Text = "English" , Value = "2"},
             new SelectListItem { Text = "Spanish" , Value = "3"},
-        };
+            };
         }
     }
 }

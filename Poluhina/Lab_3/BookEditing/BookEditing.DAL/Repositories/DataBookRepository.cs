@@ -47,7 +47,9 @@ namespace BookEditing.DAL.Repositories
         }
         public Book Get(int id)
         {
-            return db.Books.Find(id);
+            var books = db.Books.Include(p => p.Languages).ToList();
+            var book = books.Where(x => x.Id == id).FirstOrDefault();
+            return book;
         }
 
         //protected void Dispose(bool disposing)

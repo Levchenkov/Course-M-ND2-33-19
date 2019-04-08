@@ -9,7 +9,5 @@ namespace BookEditing.DAL.Interfaces
         void Change(T item);
         void Remove(int id);
         T Get(int id);
-
-        //MultiSelectList list();
     }
 }

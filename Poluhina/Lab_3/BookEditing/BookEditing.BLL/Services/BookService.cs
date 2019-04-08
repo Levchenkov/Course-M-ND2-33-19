@@ -3,15 +3,12 @@ using BookEditing.BLL.DTO;
 using BookEditing.BLL.Interfaces;
 using BookEditing.DAL.Entities;
 using BookEditing.DAL.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookEditing.BLL.Services
 {
-   public class BookService : IBookService<BookDTO>
+    public class BookService : IBookService<BookDTO>
     {
         IUnitOfWork UnitOfWork { get; set; }
 
@@ -27,6 +24,16 @@ namespace BookEditing.BLL.Services
         public void Add(BookDTO newBook)
         {
             var languagesForDataLayer =  newBook.Languages.Select(x => new Language() { Id = x.Id, Name = x.Name }).ToList();
+            //var languagesForDataLayer = new List<Language>();
+            //foreach (var l in newBook.Languages)
+            //{
+            //    var lang = new Language()
+            //    {
+            //        Id = l.Id,
+            //        Name = l.Name
+            //    };
+            //    languagesForDataLayer.Add(lang);
+            //}
             var book = new Book
             {
                 Author = newBook.Author,
@@ -44,7 +51,6 @@ namespace BookEditing.BLL.Services
         }
         public void Change(BookDTO book)
         {
-            //Book bookCreate = UnitOfWork.Books.Get(bookDTO.Id);
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();           
             var bookDAL = mapper.Map<BookDTO, Book>(book);
             UnitOfWork.Books.Change(bookDAL);
@@ -52,13 +58,13 @@ namespace BookEditing.BLL.Services
         }
         public void Remove(int id)
         {
-
             UnitOfWork.Books.Remove(id);
             UnitOfWork.Save();
         }
         public BookDTO Get(int id)
         {
             var book = UnitOfWork.Books.Get(id);
+            var languagesOfDataLayer = book.Languages.Select(x => new LanguageDTO() { Id = x.Id, Name = x.Name }).ToList();
             return new BookDTO
             {
                 Author = book.Author,
@@ -68,7 +74,8 @@ namespace BookEditing.BLL.Services
                 Genre = book.Genre,
                 IsPaper = book.IsPaper,
                 Title = book.Title,
-                Id = book.Id
+                Id = book.Id,
+                Languages= languagesOfDataLayer
             };
         }
 

@@ -1,13 +1,9 @@
-﻿using BookEditing.DAL.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookEditing.BLL.DTO
 {
-   public class BookDTO
+    public class BookDTO
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -17,7 +13,6 @@ namespace BookEditing.BLL.DTO
         public string Genre { get; set; }
         public bool IsPaper { get; set; }
         public bool DeliveryRequred { get; set; }
-
         public List<LanguageDTO> Languages { get; set; }
     }
 }

@@ -7,9 +7,9 @@ namespace BookEditing.DAL.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public List<Book> Books { get; set; }
-        public Language()
-        {
-            Books = new List<Book>();
-        }
+        //public Language()
+        //{
+        //    Books = new List<Book>();
+        //}
     }
 }
