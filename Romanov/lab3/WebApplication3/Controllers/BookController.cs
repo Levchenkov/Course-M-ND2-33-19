@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication3.DAL;
@@ -66,6 +69,7 @@ namespace WebApplication3.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "BookID,Title,Description,Author,Created,Genre,IsPaper,Languages,DeliveryRequired")] Book book)
         {
+            db.Database.Log = Console.Write;
             if (ModelState.IsValid)
             {
                 db.Entry(book).State = EntityState.Modified;
