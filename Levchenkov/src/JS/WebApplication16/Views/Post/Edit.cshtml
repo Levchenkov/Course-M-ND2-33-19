@@ -1,0 +1,38 @@
+﻿@using WebApplication16.Models
+@model WebApplication16.Models.Post
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Edit</h2>
+
+@using (Ajax.BeginForm("EditAjaxPartial", new AjaxOptions { InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "partialContainer" }))
+{
+    @Html.AntiForgeryToken()
+
+<div id="partialContainer">
+    @Html.EditorForModel()
+</div>
+
+    <div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="saveButton" type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/dest/all")
+    
+    @*<script>
+        App.Post.Edit.Initialize($('#saveButton'), $('#Title'), '@Url.Action("EditAjax")');
+    </script>*@
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
