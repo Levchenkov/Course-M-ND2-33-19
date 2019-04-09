@@ -1,10 +1,9 @@
-﻿using System;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
-using Htp.BooksAPI.Data.Contracts.Entities;
 using Htp.BooksAPI.Domain.Contracts;
 using Htp.BooksAPI.Domain.Contracts.ViewModels;
+using Htp.BooksAPI.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Htp.BooksAPI.Server.Controllers
@@ -13,12 +12,10 @@ namespace Htp.BooksAPI.Server.Controllers
     public class BookController : Controller
     {
         private readonly IBookService bookService;
-        private readonly UserManager<AppUser> userManager;
-
-        public BookController(IBookService bookService, UserManager<AppUser> userManager)
+     
+        public BookController(IBookService bookService)
         {
             this.bookService = bookService;
-            this.userManager = userManager;
         }
 
         // 
@@ -53,22 +50,6 @@ namespace Htp.BooksAPI.Server.Controllers
             return View(bookViewModel);
         }
 
-        //// GET: Book/Details/5
-        //public IActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return BadRequest();
-        //    }
-        //    BookViewModel bookViewModel = bookService.GetAsync(id.GetValueOrDefault());
-        //    if (bookViewModel == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(bookViewModel);
-        //}
-
         //// GET: Book/Create
         public IActionResult Create()
         {
@@ -84,7 +65,7 @@ namespace Htp.BooksAPI.Server.Controllers
         {
             if (ModelState.IsValid)
             {
-                bookViewModel.CreatedByUserID = userManager.GetUserId(User);
+                bookViewModel.CreatedByUserID = User.GetUserId();
                 bookService.Add(bookViewModel);
 
                 return RedirectToAction("Index");
@@ -122,8 +103,9 @@ namespace Htp.BooksAPI.Server.Controllers
 
             if (ModelState.IsValid)
             {
-                bookViewModel.UpdatedByUserID = userManager.GetUserId(User);
+                bookViewModel.UpdatedByUserID = User.GetUserId();
                 bookService.EditAsync(bookViewModel);
+
                 //repository.Book.UpdateBook(book);
                 ////TODO: read about logger
                 //try
