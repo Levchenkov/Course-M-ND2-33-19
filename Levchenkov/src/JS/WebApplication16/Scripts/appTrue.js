@@ -1,3 +1,18 @@
-﻿//var App = App || {};
-//App.True = App.True || {};
-//App.True.my = true;
+﻿var Post = (function () {
+
+    var title = null;
+
+    function Post() {
+        this.publicField = null;
+    }
+
+    Post.prototype.SetTitle = function(value) {
+        title = value;
+    };
+
+    Post.prototype.GetTitle = function() {
+        return title;
+    };
+
+    return Post;
+})();
