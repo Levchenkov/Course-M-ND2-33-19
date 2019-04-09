@@ -1,0 +1,71 @@
+﻿@model Lab4.BLL.Contract.BookViewModel
+
+@{
+    ViewBag.Title = "Display";
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Display</h2>
+
+<div>
+    <h4>BookViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedUserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedUserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedUserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedUserName)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCreated)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Updated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Updated)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    
+    @Html.ActionLink("Back to List", "Index")
+</p>
