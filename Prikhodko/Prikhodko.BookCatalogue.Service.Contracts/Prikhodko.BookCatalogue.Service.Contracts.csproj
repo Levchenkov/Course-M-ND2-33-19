@@ -45,6 +45,7 @@
     <Compile Include="Interfaces\ILanguageService.cs" />
     <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Models\BookViewModel.cs" />
+    <Compile Include="Models\LanguageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

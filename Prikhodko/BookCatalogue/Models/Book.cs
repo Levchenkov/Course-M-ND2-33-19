@@ -3,22 +3,6 @@ using System.Collections.Generic;
 
 namespace Prikhodko.BookCatalogue.Data.Contracts.Models
 {
-    public enum Genre
-    {
-        Detective,
-        Horror,
-        Romantic,
-        Adventure,
-        Historic
-    }
-    
-    public enum DeliveryOptions
-    {
-        Takeaway,
-        Post,
-        Courier
-    }
-
     public class Book
     {
         public virtual int BookId { get; set; }

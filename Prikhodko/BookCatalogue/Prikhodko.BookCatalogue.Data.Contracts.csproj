@@ -54,6 +54,8 @@
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Models\BookChange.cs" />
+    <Compile Include="Models\DeliveryOptions.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

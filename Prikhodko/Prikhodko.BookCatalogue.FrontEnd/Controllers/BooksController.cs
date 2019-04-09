@@ -1,38 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Prikhodko.BookCatalogue.Service.Contracts.Models;
-using Prikhodko.BookCatalogue.Service.Contracts.Interfaces;
-using AutoMapper;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using Prikhodko.BookCatalogue.PL.Filters.AuthentificationFilters;
+using Prikhodko.BookCatalogue.FrontEnd.Filters.AuthentificationFilters;
+using Prikhodko.BookCatalogue.FrontEnd.Models;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
+using Prikhodko.BookCatalogue.FrontEnd.Services.Contracts;
 
-namespace Prikhodko.BookCatalogue.PL.Controllers
+namespace Prikhodko.BookCatalogue.FrontEnd.Controllers
 {
     [Authenticate]
-    public class BookController : Controller
+    public class BooksController : Controller
     {
+        private readonly HttpClient httpClient = new HttpClient();
+        private readonly string externalResourceLink = "http://localhost:50597/";
         private readonly IBookService bookService;
-        private readonly ILanguageService languageService;
-        
-        public BookController(IBookService bookService, ILanguageService languageService)
+
+
+        public BooksController(IBookService bookService)
         {
             this.bookService = bookService;
-            this.languageService = languageService;
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             var model = new BookViewModel();
-            ViewBag.Languages = languageService.GetAllCodes(); 
+            ViewBag.Languages = GetLanguageViewModels();
             return View(model);
         }
 
-        // POST: Add/Create
         [HttpPost]
         public ActionResult Create(BookViewModel input)
         {
@@ -44,16 +42,15 @@ namespace Prikhodko.BookCatalogue.PL.Controllers
             {
                 input.AvailableLanguages = new List<string>();
             }
-            bookService.Add(input);
+            var post = new StringContent(JsonConvert.SerializeObject(input));
+            httpClient.PostAsync($"{externalResourceLink}Book", post);
             return RedirectToAction("ShowCollection");
         }
         
-
-        // GET: Add/Edit/5
         public ActionResult Edit(int id)
         {
             var model = bookService.Get(id);
-            ViewBag.Languages = languageService.GetAllCodes();
+            ViewBag.Languages = GetLanguageViewModels();
             return View(model);
         }
 
@@ -72,16 +69,23 @@ namespace Prikhodko.BookCatalogue.PL.Controllers
             return RedirectToAction("ShowCollection");
         }
 
-        // GET: Add/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
         
-        public ActionResult ShowCollection()
+        [HttpGet]
+        public async Task<ActionResult> ShowCollection()
         {
-            var model = bookService.GetAll();
+            var model = await httpClient.GetAsync($"{externalResourceLink}Book");
             return View(model);
+        }
+
+        private IEnumerable<LanguageViewModel> GetLanguageViewModels()
+        {
+            var languagesHttp = httpClient.GetAsync($"{externalResourceLink}Language").ConfigureAwait(false).GetAwaiter().GetResult();
+            var languageViewModels = JsonConvert.DeserializeObject<List<LanguageViewModel>>(languagesHttp.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult());
+            return languageViewModels;
         }
     }
 }

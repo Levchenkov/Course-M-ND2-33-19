@@ -17,30 +17,64 @@ namespace Prikhodko.BookCatalogue.Data.EF
             this.dbContext = dbContext;
         }
 
-        public void Add(Language item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Language Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Language item)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<Language> GetAll()
         {
             var result = dbContext.Languages.ToList();
             return result;
+        }
+
+        public Language Get(int id)
+        {
+            if (id <= 0)
+            {
+                return null;
+            }
+            else
+            {
+                var result = dbContext.Languages.Find(id);
+                return result;
+            }
+        }
+
+        public void Add(Language item)
+        {
+            if (item == null)
+            {
+                return;
+            }
+            else
+            {
+                dbContext.Languages.Add(item);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void Update(Language item)
+        {
+            if (item == null || item.LanguageId <= 0)
+            {
+                return;
+            }
+            else
+            {
+                var language = Get(item.LanguageId);
+                language.Name = item.Name;
+                language.Code = item.Code;
+                var a = dbContext.Entry(language).State;
+            }
+        }
+        
+        public void Remove(int id)
+        {
+            if (id <= 0)
+            {
+                return;
+            }
+            else
+            {
+                var result = dbContext.Languages.Find(id);
+                dbContext.Languages.Remove(result);
+            }
         }
     }
 }

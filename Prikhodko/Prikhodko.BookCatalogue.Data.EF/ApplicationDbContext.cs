@@ -35,7 +35,16 @@ namespace Prikhodko.BookCatalogue.Data.EF
             foreach(var propertyName in propertyNames)
             {
                 var currentValue = currentValues.GetValue<object>(propertyName);
-                if (currentValue.ToString() != originalValues.GetValue<object>(propertyName).ToString())
+                var originalValue = originalValues.GetValue<object>(propertyName);
+                if (currentValue == null && originalValue == null)
+                {
+                    continue;
+                }
+                if ((currentValue == null && originalValue != null) || (currentValue != null && originalValue == null))
+                {
+                    changedValues[propertyName] = currentValue;
+                }
+                else if(currentValue.ToString() != originalValue.ToString())
                 {
                     changedValues[propertyName] = currentValue;
                 }

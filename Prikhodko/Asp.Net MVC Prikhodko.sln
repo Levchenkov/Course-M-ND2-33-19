@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prikhodko.BookCatalogue.Ser
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FBEF3F4F-57B6-461F-809A-4F903D3417A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prikhodko.BookCatalogue.FrontEnd", "Prikhodko.BookCatalogue.FrontEnd\Prikhodko.BookCatalogue.FrontEnd.csproj", "{85A23C04-179A-47F4-ABBF-8CC0F82638D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{6789E26B-594D-4558-A96A-BC5B1505A0D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6789E26B-594D-4558-A96A-BC5B1505A0D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6789E26B-594D-4558-A96A-BC5B1505A0D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85A23C04-179A-47F4-ABBF-8CC0F82638D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85A23C04-179A-47F4-ABBF-8CC0F82638D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85A23C04-179A-47F4-ABBF-8CC0F82638D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85A23C04-179A-47F4-ABBF-8CC0F82638D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

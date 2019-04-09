@@ -14,17 +14,11 @@ namespace Prikhodko.BookCatalogue.Data.EF
             this.dbContext = dbContext;
         }
 
-        public void Add(Book book)
+        public IEnumerable<Book> GetAll()
         {
-            if (book == null)
-            {
-                return;
-            }
-            else
-            {
-                dbContext.Books.Add(book);
-                dbContext.SaveChanges();
-            }
+            var dbSet = dbContext.Set<Book>();
+            var result = dbSet.ToList();
+            return result;
         }
 
         public Book Get(int id)
@@ -40,24 +34,16 @@ namespace Prikhodko.BookCatalogue.Data.EF
             }
         }
 
-        public IEnumerable<Book> GetAll()
+        public void Add(Book book)
         {
-            var dbSet = dbContext.Set<Book>();
-            var result = dbSet.ToList();
-            return result;
-        }
-
-        public void Remove(int id)
-        {
-            if (id <= 0)
+            if (book == null)
             {
                 return;
             }
             else
             {
-                var dbSet = dbContext.Set<Book>();
-                var result = dbSet.Find(id);
-                dbSet.Remove(result);
+                dbContext.Books.Add(book);
+                dbContext.SaveChanges();
             }
         }
 
@@ -86,6 +72,19 @@ namespace Prikhodko.BookCatalogue.Data.EF
                     }
                 }
                 var a = dbContext.Entry(book).State;
+            }
+        }
+
+        public void Remove(int id)
+        {
+            if (id <= 0)
+            {
+                return;
+            }
+            else
+            {
+                var result = dbContext.Books.Find(id);
+                dbContext.Books.Remove(result);
             }
         }
     }

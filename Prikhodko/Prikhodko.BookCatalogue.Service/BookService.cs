@@ -38,15 +38,14 @@ namespace Prikhodko.BookCatalogue.Service
 
         private ICollection<Language> AddLanguages(BookViewModel item)
         {
-
             var allLanguages = languageService.GetAll();
             var languages = new List<Language>();
             foreach (var languageCode in item.AvailableLanguages)
             {
-                var language = allLanguages?.First(x => x.Code == languageCode);
-                if (language != null)
+                var languageViewModel = allLanguages?.FirstOrDefault(x => x.Code == languageCode);
+                if (languageViewModel != null)
                 {
-                    languages.Add(language);
+                    languages.Add(Mapper.Map<Language>(languageViewModel));
                 }
             }
             return languages;

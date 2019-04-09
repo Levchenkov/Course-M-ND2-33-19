@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Prikhodko.BookCatalogue.Service.Contracts.Interfaces;
+using Prikhodko.BookCatalogue.Service.Contracts.Models;
 using Prikhodko.BookCatalogue.Data.Contracts.Models;
 using Prikhodko.BookCatalogue.Data.Contracts.Interfaces;
 
@@ -20,19 +22,21 @@ namespace Prikhodko.BookCatalogue.Service
             this.repository = repository;
         }
 
-        public void Add(Language item)
+        public IEnumerable<LanguageViewModel> GetAll()
         {
-            throw new NotImplementedException();
+            var languages = repository.GetAll();
+            var result = new List<LanguageViewModel>();
+            foreach (var language in languages)
+            {
+                result.Add(Mapper.Map<LanguageViewModel>(language));
+            }
+            return result;
         }
 
-        public Language Get(int id)
+        public LanguageViewModel Get(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Language> GetAll()
-        {
-            var result = repository.GetAll();
+            var language = repository.Get(id);
+            var result = Mapper.Map<LanguageViewModel>(language);
             return result;
         }
 
@@ -42,14 +46,46 @@ namespace Prikhodko.BookCatalogue.Service
             return result;
         }
 
-        public void Remove(int id)
+        public void Add(LanguageViewModel item)
         {
-            throw new NotImplementedException();
+            if (item == null)
+            {
+                return;
+            }
+            else
+            {
+                Language language = Mapper.Map<Language>(item);
+                repository.Add(language);
+                unitOfWork.SaveChanges();
+            }
         }
 
-        public void Update(Language item)
+        public void Update(LanguageViewModel item)
         {
-            throw new NotImplementedException();
+            if (item == null)
+            {
+                return;
+            }
+            else
+            {
+                Language language = Mapper.Map<Language>(item);
+                repository.Update(language);
+                unitOfWork.SaveChanges();
+            }
         }
+
+        public void Remove(int id)
+        {
+            if (id <= 0)
+            {
+                return;
+            }
+            else
+            {
+                repository.Remove(id);
+                unitOfWork.SaveChanges();
+            }
+        }
+
     }
 }
