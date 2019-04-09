@@ -1,13 +1,8 @@
-﻿using BookEditing.BLL.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BookEditing.BLL.Interfaces
 {
-   public interface IBookService<T> where T : class
+    public interface IBookService<T> where T : class
     {
         IEnumerable<T> GetList();
         void Add(T item);

@@ -15,7 +15,6 @@ namespace BookEditing.Controllers
         {
             bookService = repository;
         }
-
         public ActionResult Index()
         {
             var booksDTO = bookService.GetList();
@@ -88,7 +87,6 @@ namespace BookEditing.Controllers
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id.ToString()))
                 .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.Name));
             }).CreateMapper();
-            //var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, BookViewModel>()).CreateMapper();
             var bookView = mapper.Map<BookDTO, BookViewModel>(book);
             return View(bookView);
         }

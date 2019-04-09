@@ -10,7 +10,7 @@ namespace BookEditing.BLL.Services
 {
     public class BookService : IBookService<BookDTO>
     {
-        IUnitOfWork UnitOfWork { get; set; }
+       private IUnitOfWork UnitOfWork { get; set; }
 
         public BookService(IUnitOfWork UnitOfWork)
         {
@@ -19,21 +19,11 @@ namespace BookEditing.BLL.Services
         public IEnumerable<BookDTO> GetList()
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookDTO>()).CreateMapper();
-            return mapper.Map<IEnumerable<Book>, List<BookDTO>>(UnitOfWork.Books.GetList());         
+            return mapper.Map<IEnumerable<Book>, List<BookDTO>>(UnitOfWork.Books.GetList());
         }
         public void Add(BookDTO newBook)
         {
-            var languagesForDataLayer =  newBook.Languages.Select(x => new Language() { Id = x.Id, Name = x.Name }).ToList();
-            //var languagesForDataLayer = new List<Language>();
-            //foreach (var l in newBook.Languages)
-            //{
-            //    var lang = new Language()
-            //    {
-            //        Id = l.Id,
-            //        Name = l.Name
-            //    };
-            //    languagesForDataLayer.Add(lang);
-            //}
+            var languagesForDataLayer = newBook.Languages.Select(x => new Language() { Id = x.Id, Name = x.Name }).ToList();
             var book = new Book
             {
                 Author = newBook.Author,
@@ -51,7 +41,7 @@ namespace BookEditing.BLL.Services
         }
         public void Change(BookDTO book)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();           
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
             var bookDAL = mapper.Map<BookDTO, Book>(book);
             UnitOfWork.Books.Change(bookDAL);
             UnitOfWork.Save();
@@ -75,10 +65,9 @@ namespace BookEditing.BLL.Services
                 IsPaper = book.IsPaper,
                 Title = book.Title,
                 Id = book.Id,
-                Languages= languagesOfDataLayer
+                Languages = languagesOfDataLayer
             };
         }
-
         public void Dispose()
         {
             UnitOfWork.Dispose();

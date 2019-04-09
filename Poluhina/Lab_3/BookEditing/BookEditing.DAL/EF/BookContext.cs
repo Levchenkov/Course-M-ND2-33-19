@@ -18,10 +18,6 @@ namespace BookEditing.DAL.EF
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new BookTypeConfiguration());
-
-           // modelBuilder.Entity<Book>()
-           //.HasMany(p => p.Languages)
-           //.WithMany(c => c.Books);
         }
         public override int SaveChanges()
         {
@@ -30,10 +26,10 @@ namespace BookEditing.DAL.EF
             foreach (var entity in entitiesModified)
             {
                 var entityType = ObjectContext.GetObjectType(entity.Entity.GetType());
-                if (entityType==typeof(Book))
+                if (entityType == typeof(Book))
                 {
                     var bookId = ((Book)entity.Entity).Id;
-                    var original= Set(entityType).AsNoTracking().Cast<Book>().First(x => x.Id == bookId);
+                    var original = Set(entityType).AsNoTracking().Cast<Book>().First(x => x.Id == bookId);
                     var settings = new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
 
                     var log = new СhangeHistory
@@ -43,16 +39,16 @@ namespace BookEditing.DAL.EF
                         OriginalValue = JsonConvert.SerializeObject(original, settings),
                         ActualValue = JsonConvert.SerializeObject(entity.Entity, settings)
                     };
-                    listOfChanges.Add(log);                  
+                    listOfChanges.Add(log);
                 }
                 File.WriteAllText(@"d:\file.json", JsonConvert.SerializeObject(listOfChanges));
-            }           
+            }
             var result = base.SaveChanges();
             return result;
         }
     }
 
-    public class BookTypeConfiguration: EntityTypeConfiguration<Book>
+    public class BookTypeConfiguration : EntityTypeConfiguration<Book>
     {
         public BookTypeConfiguration()
         {

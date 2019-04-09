@@ -2,14 +2,10 @@
 using BookEditing.DAL.Entities;
 using BookEditing.DAL.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookEditing.DAL.Repositories
 {
-   public  class EFUnitOfWork : IUnitOfWork
+    public class EFUnitOfWork : IUnitOfWork
     {
         private BookContext db;
         private DataBookRepository bookRepository;

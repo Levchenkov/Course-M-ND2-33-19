@@ -1,7 +1,6 @@
 ﻿using BookEditing.DAL.EF;
 using BookEditing.DAL.Entities;
 using BookEditing.DAL.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -11,19 +10,11 @@ namespace BookEditing.DAL.Repositories
     public class DataBookRepository : IDataRepository<Book>/*, IDisposable*/
     {
         private BookContext db;
-
-
         public DataBookRepository(BookContext db)
         {
            this.db = db;
            
         }
-        //public MultiSelectList list()
-        //{
-        //    var languages = db.Languages.Include(p => p.Books).ToList();
-        //    var selectList = new MultiSelectList(languages, "Id", "Name");
-        //    return selectList;
-        //}
         public IEnumerable<Book> GetList()
         {
             
@@ -51,26 +42,5 @@ namespace BookEditing.DAL.Repositories
             var book = books.Where(x => x.Id == id).FirstOrDefault();
             return book;
         }
-
-        //protected void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        if (db != null)
-        //        {
-        //            db.Dispose();
-        //            db = null;
-        //        }
-        //    }
-        //}
-        //public void Dispose()
-        //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
-        //}
-        //~DataBookRepository()
-        //{
-        //    Dispose(false);
-        //}
     }
 }
