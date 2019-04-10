@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Htp.Library.Domain.Contracts.ViewModels.BookViewModel>
+
+@{
+    ViewBag.Title = "Display";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Book library</h2>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.Author)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.Title)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.Description)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.Created)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.Genre)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.Language)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.IsPaper)
+        </td>
+        <td>
+            @Html.DisplayNameFor(model => model.DeliveryRequired)
+        </td>
+        <td>
+            @Html.ActionLink("Add", "Add")
+        </td>
+    </tr>
+
+    @foreach (var book in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelBook => book.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelBook => book.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelBook => book.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelBook => book.Created)
+            </td>
+            <td>
+                @Html.DisplayFor(modelBook => book.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelBook => book.Language)
+            </td>
+            <td>
+                @Html.DisplayFor(modelBook => book.IsPaper)
+            </td>
+            <td>
+                @Html.DisplayFor(modelBook => book.DeliveryRequired)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = book.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = book.Id })
+            </td>
+        </tr>
+    }
+</table>
