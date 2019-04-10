@@ -48,21 +48,19 @@ namespace BookCatalog
         }
         public virtual void Change(int id, Book newBook)
         {
-            //var book = listBooks?.Find(x => x.Id == id);
-            //if (book != null)
-            //{
-                var index = listBooks.FindIndex(x => x.Id == id);
-                listBooks[index] = null;
-                listBooks[index] = newBook;
-            //}
-           
+            var index = listBooks.FindIndex(x => x.Id == id);
+            listBooks[index] = null;
+            listBooks[index] = newBook;
         }
         public virtual void Remove(int id)
         {
             var book = listBooks?.Find(x => x.Id == id);
             if (book != null)
                 listBooks.Remove(book);
-
+            else
+            {
+                throw new Exception();
+            }
         }
         public virtual int GetCount()
         {

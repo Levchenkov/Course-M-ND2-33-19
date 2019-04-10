@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Collections.Generic;
 
 namespace BookCatalog.Tests
@@ -73,7 +72,7 @@ namespace BookCatalog.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.Exception),AllowDerivedTypes =true)]
+        [ExpectedException(typeof(System.Exception), AllowDerivedTypes = true)]
         public void RemoveBook_Exception()
         {
             // Arrange
