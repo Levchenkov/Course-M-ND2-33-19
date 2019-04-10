@@ -18,6 +18,7 @@ namespace Htp.BooksAPI.Data.EntityFramework
 
         public ApplicationDbContext()
         {
+            
         }
 
         // cd Projects/Course-M-ND2-33-19/Skuratovich/src/Lab4/Htp.BooksAPI/Htp.Books.Data.EntityFramework/
