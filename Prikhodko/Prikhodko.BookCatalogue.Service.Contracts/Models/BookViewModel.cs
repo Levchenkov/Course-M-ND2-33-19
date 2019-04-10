@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Prikhodko.BookCatalogue.Data.Contracts.Models;
+using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Prikhodko.BookCatalogue.Service.Contracts.Models
 {
+    [Serializable]
     public class BookViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string AuthorFirstName { get; set; }
-        public string AuthorLastName { get; set; }
+        public AuthorViewModel Author { get; set; }
         private DateTime? dateOfIssue = null;
-        private BookViewModel input;
 
         public DateTime? DateOfIssue
         {

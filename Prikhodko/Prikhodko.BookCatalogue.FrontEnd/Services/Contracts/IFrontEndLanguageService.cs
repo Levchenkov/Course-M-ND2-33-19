@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Prikhodko.BookCatalogue.FrontEnd.Models;
 
 namespace Prikhodko.BookCatalogue.FrontEnd.Services.Contracts
 {
-    public interface IService<T> where T : class
+    public interface IFrontEndLanguageService : IFrontEndService<LanguageViewModel>
     {
-        void Add(T item);
-        void Update(T item);
-        void Remove(int id);
-        T Get(int id);
-        IEnumerable<T> GetAll();
     }
 }

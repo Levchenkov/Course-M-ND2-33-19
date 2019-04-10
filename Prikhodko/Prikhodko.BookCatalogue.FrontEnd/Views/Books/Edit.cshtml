@@ -1,4 +1,4 @@
-﻿@model Prikhodko.BookCatalogue.Service.Contracts.Models.BookViewModel
+﻿@model Prikhodko.BookCatalogue.FrontEnd.Models.BookViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -7,7 +7,7 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm("Edit", "Book"))
+@using (Html.BeginForm("Edit", "Books"))
 {
     @Html.AntiForgeryToken()
     

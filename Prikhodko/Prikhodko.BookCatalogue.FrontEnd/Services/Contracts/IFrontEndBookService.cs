@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Prikhodko.BookCatalogue.FrontEnd.Models;
 
+
 namespace Prikhodko.BookCatalogue.FrontEnd.Services.Contracts
 {
-    public interface ILanguageService : IService<LanguageViewModel>
+    public interface IFrontEndBookService : IFrontEndService<BookViewModel>
     {
-        IEnumerable<string> GetAllCodes();
+
     }
 }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
-namespace Prikhodko.BookCatalogue.FrontEnd.Models
+namespace Prikhodko.BookCatalogue.Service.Contracts.Models
 {
     public class AuthorViewModel
     {

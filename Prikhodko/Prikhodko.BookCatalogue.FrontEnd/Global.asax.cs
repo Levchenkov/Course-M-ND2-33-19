@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Prikhodko.BookCatalogue.FrontEnd.App_Start;
 
 namespace Prikhodko.BookCatalogue.FrontEnd
 {
@@ -15,6 +16,7 @@ namespace Prikhodko.BookCatalogue.FrontEnd
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            AutofacConfig.ConfigureContainer();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }

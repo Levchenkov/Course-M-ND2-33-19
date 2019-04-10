@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Web.Mvc;
 using Prikhodko.BookCatalogue.FrontEnd.Filters.AuthentificationFilters;
 using Prikhodko.BookCatalogue.FrontEnd.Models;
-using System.Net.Http;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Xml.Schema;
 using Prikhodko.BookCatalogue.FrontEnd.Services.Contracts;
 
 namespace Prikhodko.BookCatalogue.FrontEnd.Controllers
@@ -13,26 +14,34 @@ namespace Prikhodko.BookCatalogue.FrontEnd.Controllers
     [Authenticate]
     public class BooksController : Controller
     {
-        private readonly HttpClient httpClient = new HttpClient();
-        private readonly string externalResourceLink = "http://localhost:50597/";
-        private readonly IBookService bookService;
+        private readonly IFrontEndBookService frontEndBookService;
+        private readonly IFrontEndLanguageService frontEndLanguageService;
 
 
-        public BooksController(IBookService bookService)
+        public BooksController(IFrontEndBookService frontEndBookService, IFrontEndLanguageService frontEndLanguageService)
         {
-            this.bookService = bookService;
+            this.frontEndBookService = frontEndBookService;
+            this.frontEndLanguageService = frontEndLanguageService;
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public async Task<ActionResult> ShowCollection()
+        {
+            var model = await frontEndBookService.GetAll();
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Create()
         {
             var model = new BookViewModel();
-            ViewBag.Languages = GetLanguageViewModels();
+            var languages = await GetLanguageViewModels();
+            ViewBag.Languages = languages.Select(x => x.Code);
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Create(BookViewModel input)
+        public async Task<ActionResult> Create(BookViewModel input)
         {
             if (input == null)
             {
@@ -42,20 +51,23 @@ namespace Prikhodko.BookCatalogue.FrontEnd.Controllers
             {
                 input.AvailableLanguages = new List<string>();
             }
-            var post = new StringContent(JsonConvert.SerializeObject(input));
-            httpClient.PostAsync($"{externalResourceLink}Book", post);
-            return RedirectToAction("ShowCollection");
+            if (await frontEndBookService.Add(input))
+            {
+                return RedirectToAction("ShowCollection");
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadGateway);
         }
         
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            var model = bookService.Get(id);
-            ViewBag.Languages = GetLanguageViewModels();
+            var model = await frontEndBookService.Get(id);
+            ViewBag.Languages = (await GetLanguageViewModels()).Select(x => x.Code);
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Edit(BookViewModel input)
+        public async Task<ActionResult> Edit(BookViewModel input)
         {
             if (input == null)
             {
@@ -65,26 +77,29 @@ namespace Prikhodko.BookCatalogue.FrontEnd.Controllers
             {
                 input.AvailableLanguages = new List<string>();
             }
-            bookService.Update(input);
-            return RedirectToAction("ShowCollection");
+            var operationSuccessful = await frontEndBookService.Update(input);
+            if (operationSuccessful)
+            {
+                return RedirectToAction("ShowCollection");
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadGateway);
         }
 
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
-        }
-        
-        [HttpGet]
-        public async Task<ActionResult> ShowCollection()
-        {
-            var model = await httpClient.GetAsync($"{externalResourceLink}Book");
-            return View(model);
+            if (await frontEndBookService.Remove(id))
+            {
+                return RedirectToAction("ShowCollection");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadGateway);
+            }
         }
 
-        private IEnumerable<LanguageViewModel> GetLanguageViewModels()
+        private async Task<IEnumerable<LanguageViewModel>> GetLanguageViewModels()
         {
-            var languagesHttp = httpClient.GetAsync($"{externalResourceLink}Language").ConfigureAwait(false).GetAwaiter().GetResult();
-            var languageViewModels = JsonConvert.DeserializeObject<List<LanguageViewModel>>(languagesHttp.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult());
+            var languageViewModels = await frontEndLanguageService.GetAll();
             return languageViewModels;
         }
     }

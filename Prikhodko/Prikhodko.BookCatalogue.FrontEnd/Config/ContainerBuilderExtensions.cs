@@ -8,7 +8,8 @@ namespace Prikhodko.BookCatalogue.FrontEnd.Config
     {
         public static ContainerBuilder AddServiceDependencies(this ContainerBuilder builder)
         {
-            builder.RegisterType<BookService>().As<IBookService>();
+            builder.RegisterType<FrontEndBookService>().As<IFrontEndBookService>();
+            builder.RegisterType<FrontEndLanguageService>().As<IFrontEndLanguageService>();
             return builder;
         }
     }

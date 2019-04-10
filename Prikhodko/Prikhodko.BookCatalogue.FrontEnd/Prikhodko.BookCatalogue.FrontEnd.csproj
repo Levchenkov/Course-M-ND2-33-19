@@ -68,6 +68,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -211,10 +212,11 @@
     <Compile Include="Models\LanguageViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\BookService.cs" />
-    <Compile Include="Services\Contracts\IBookService.cs" />
-    <Compile Include="Services\Contracts\ILanguageService.cs" />
-    <Compile Include="Services\Contracts\IService.cs" />
+    <Compile Include="Services\FrontEndBookService.cs" />
+    <Compile Include="Services\Contracts\IFrontEndBookService.cs" />
+    <Compile Include="Services\Contracts\IFrontEndLanguageService.cs" />
+    <Compile Include="Services\Contracts\IFrontEndService.cs" />
+    <Compile Include="Services\FrontEndLanguageService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -273,9 +275,9 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Book\Create.cshtml" />
-    <Content Include="Views\Book\Edit.cshtml" />
-    <Content Include="Views\Book\ShowCollection.cshtml" />
+    <Content Include="Views\Books\Create.cshtml" />
+    <Content Include="Views\Books\Edit.cshtml" />
+    <Content Include="Views\Books\ShowCollection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

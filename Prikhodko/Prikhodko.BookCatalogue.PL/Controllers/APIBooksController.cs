@@ -1,27 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Web;
+using System.Net.Http;
 using System.Web.Mvc;
 using Prikhodko.BookCatalogue.Service.Contracts.Models;
 using Prikhodko.BookCatalogue.Service.Contracts.Interfaces;
-using AutoMapper;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using Prikhodko.BookCatalogue.PL.Filters.AuthentificationFilters;
-using WebGrease.Css.Ast.Selectors;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Prikhodko.BookCatalogue.PL.Controllers
 {
     //[Authenticate]
     [RoutePrefix("books")]
-    public class BooksController : Controller
+    public class APIBooksController : Controller
     {
         private readonly IBookService bookService;
         
-        public BooksController(IBookService bookService, ILanguageService languageService)
+        public APIBooksController(IBookService bookService, ILanguageService languageService)
         {
             this.bookService = bookService;
         }
@@ -44,17 +39,17 @@ namespace Prikhodko.BookCatalogue.PL.Controllers
 
         [Route]
         [HttpPost]
-        public ActionResult Add(BookViewModel input)
+        public ActionResult Add(BookViewModel bookViewModel)
         {
-            if (input == null)
+            if (bookViewModel == null)
             {
-                throw new ArgumentNullException(nameof(input));
+                throw new ArgumentNullException(nameof(bookViewModel));
             }
-            if(input.AvailableLanguages == null)
+            if(bookViewModel.AvailableLanguages == null)
             {
-                input.AvailableLanguages = new List<string>();
+                bookViewModel.AvailableLanguages = new List<string>();
             }
-            bookService.Add(input);
+            bookService.Add(bookViewModel);
             return new HttpStatusCodeResult(HttpStatusCode.Created);
         }
         
@@ -67,7 +62,7 @@ namespace Prikhodko.BookCatalogue.PL.Controllers
                 throw new ArgumentNullException(nameof(input));
             }
 
-            if(id < 0 || input.Id < 0 || input.Title == null || string.IsNullOrEmpty(input.AuthorFirstName) || input.DateOfIssue == null)
+            if(id < 0 || input.Id < 0 || input.Title == null || string.IsNullOrEmpty(input.Author.FirstName) || input.DateOfIssue == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -81,7 +76,7 @@ namespace Prikhodko.BookCatalogue.PL.Controllers
 
             if (model == null)
             {
-                Add(input);
+                //Add(input);
                 return new HttpStatusCodeResult(HttpStatusCode.Created);
             }
 

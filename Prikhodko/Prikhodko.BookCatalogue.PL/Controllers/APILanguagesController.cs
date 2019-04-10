@@ -7,11 +7,11 @@ using Prikhodko.BookCatalogue.Service.Contracts.Interfaces;
 namespace Prikhodko.BookCatalogue.PL.Controllers
 {
     [RoutePrefix("languages")]
-    public class LanguagesController : Controller
+    public class APILanguagesController : Controller
     {
         private readonly ILanguageService languageService;
 
-        public LanguagesController(ILanguageService languageService)
+        public APILanguagesController(ILanguageService languageService)
         {
             this.languageService = languageService;
         }
