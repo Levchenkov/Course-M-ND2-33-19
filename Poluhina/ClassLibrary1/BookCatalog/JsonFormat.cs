@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Json;
 
 namespace BookCatalog
 {
-   public class JsonFormat
+   public class JsonFormat:IJsonFormat
     {
         DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(List<Book>));
         public void Serialize(List<Book> listBooks)
@@ -14,13 +14,12 @@ namespace BookCatalog
                 jsonFormatter.WriteObject(fs, listBooks);
             }
         }
-        public List<Book> Deserialize(List<Book> listBooks)
+        public List<Book> Deserialize()
         {
             using (FileStream fs = new FileStream(@"D:\book.json", FileMode.Open))
             {
-                listBooks = (List<Book>)jsonFormatter.ReadObject(fs);
+                return (List<Book>)jsonFormatter.ReadObject(fs);
             }
-            return listBooks;
         }
     }
 }

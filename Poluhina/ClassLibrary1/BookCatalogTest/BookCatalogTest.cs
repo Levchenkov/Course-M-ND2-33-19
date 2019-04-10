@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Collections.Generic;
 
 namespace BookCatalog.Tests
@@ -8,53 +9,79 @@ namespace BookCatalog.Tests
     public class BookRepositoryTest
     {
         [TestMethod]
-        public void Add_CalledAtLeastOnce_True()
+        public void Called_At_Least_Once_True()
         {
             // Arrange
-            var mock = new Mock<IRepository<Book>>();
-            mock.Setup(a => a.Add(It.IsAny<Book>())).Verifiable();
-            var actual = mock.Object;
-            // Act
-            actual.Add(new Book());
+            var mock = new Mock<IJsonFormat>();
+            mock.Setup(x => x.Serialize(It.IsAny<List<Book>>()));
+            mock.Setup(x => x.Deserialize()).Returns(new List<Book>());
+            var repository = new BookRepository(mock.Object);
             // Assert
             mock.Verify();
         }
         [TestMethod]
-        public void Change_CalledAtLeastOnce_True()
+        public void GetCount_ListBookCount_1()
         {
             // Arrange
-            var mock = new Mock<IRepository<Book>>();
-            mock.Setup(a => a.Change(It.IsAny<int>(), It.IsAny<Book>())).Verifiable();
-            var actual = mock.Object;
-            // Act
-            actual.Change(4, new Book());
+            var mock = new Mock<IJsonFormat>();
+            mock.Setup(x => x.Deserialize()).Returns(new List<Book>() { new Book { Id = 1, Author = "Name" } });
+            var repository = new BookRepository(mock.Object);
+            //Act
+            var result = repository.GetCount();
             // Assert
-            mock.Verify();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result);
         }
         [TestMethod]
-        public void Remove_CalledAtLeastOnce_True()
+        public void AddBook_NotNull_True()
         {
             // Arrange
-            var mock = new Mock<IRepository<Book>>();
-            mock.Setup(a => a.Remove(It.IsAny<int>())).Verifiable();
-            var actual = mock.Object;
-            // Act
-            actual.Remove(4);
+            var mock = new Mock<IJsonFormat>();
+            mock.Setup(x => x.Deserialize()).Returns(new List<Book>());
+            var repository = new BookRepository(mock.Object);
+            //Act
+            repository.Add(new Book { Id = 1, Author = "Name" });
+            var result = repository.GetCount();
             // Assert
-            mock.Verify();
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result);
         }
         [TestMethod]
 
-        public void GetCount_ListBookCount_4()
+        public void ChangeBook_ShouldBe_True()
+        {
+            var listBook = new List<Book>() { new Book { Id = 1, Author = "Name" } };
+            // Arrange
+            var mock = new Mock<IJsonFormat>();
+            mock.Setup(x => x.Deserialize()).Returns(listBook);
+            var repository = new BookRepository(mock.Object);
+            //Act
+            repository.Change(1, new Book { Id = 1, Author = "Name_2" });
+            // Assert
+            Assert.AreEqual("Name_2", listBook[0].Author);
+        }
+
+        [TestMethod]
+        public void RemoveBook_NoException()
         {
             // Arrange
-            var mock = new Mock<IRepository<Book>>();
-            mock.Setup(a => a.GetCount()).Returns(() => 4);
-            var actual = mock.Object;
-            // Act
-            int count = actual.GetCount();
-            // Assert
-            Assert.AreEqual(4, count);
+            var mock = new Mock<IJsonFormat>();
+            mock.Setup(x => x.Deserialize()).Returns(new List<Book>() { new Book { Id = 1, Author = "Name" } });
+            var repository = new BookRepository(mock.Object);
+            //Act
+            repository.Remove(1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(System.Exception),AllowDerivedTypes =true)]
+        public void RemoveBook_Exception()
+        {
+            // Arrange
+            var mock = new Mock<IJsonFormat>();
+            mock.Setup(x => x.Deserialize()).Returns(new List<Book>() { new Book { Id = 1, Author = "Name" } });
+            var repository = new BookRepository(mock.Object);
+            //Act
+            repository.Remove(7);
         }
     }
 }
