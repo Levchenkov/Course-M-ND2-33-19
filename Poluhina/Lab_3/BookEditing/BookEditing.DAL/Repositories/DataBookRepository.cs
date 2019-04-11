@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace BookEditing.DAL.Repositories
 {
-    public class DataBookRepository : IDataRepository<Book>/*, IDisposable*/
+    public class DataBookRepository : IDataRepository<Book>
     {
         private BookContext db;
         public DataBookRepository(BookContext db)
@@ -17,8 +17,9 @@ namespace BookEditing.DAL.Repositories
         }
         public IEnumerable<Book> GetList()
         {
-            
+
             var books = db.Books.Include(p => p.Languages).ToList();
+            
             return books;
         }
         public void Add(Book book)
@@ -39,8 +40,15 @@ namespace BookEditing.DAL.Repositories
         public Book Get(int id)
         {
             var books = db.Books.Include(p => p.Languages).ToList();
+            //var books = db.Books.ToList();
             var book = books.Where(x => x.Id == id).FirstOrDefault();
             return book;
+        }
+
+        public List<Language> GetLanguages()
+        {
+            var langs = db.Languages.ToList();
+            return langs;
         }
     }
 }

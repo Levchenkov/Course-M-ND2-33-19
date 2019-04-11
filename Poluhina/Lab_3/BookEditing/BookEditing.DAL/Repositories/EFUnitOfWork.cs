@@ -42,7 +42,6 @@ namespace BookEditing.DAL.Repositories
                 this.disposed = true;
             }
         }
-
         public void Dispose()
         {
             Dispose(true);

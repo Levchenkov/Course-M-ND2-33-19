@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BookEditing.BLL.DTO;
+using BookEditing.BLL.Interfaces;
+using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -19,13 +22,17 @@ namespace BookEditing.Models
 
         public BookViewModel()
         {
-            this.Languages = new List<SelectListItem>()
-            {
-            new SelectListItem { Text = "Russian" , Value = "0"},
-            new SelectListItem { Text = "Deutsch" , Value = "1"},
-            new SelectListItem { Text = "English" , Value = "2"},
-            new SelectListItem { Text = "Spanish" , Value = "3"},
-            };
+            //this.Languages = new List<SelectListItem>()
+            //{
+            //new SelectListItem { Text = "Russian" , Value = "0"},
+            //new SelectListItem { Text = "Deutsch" , Value = "1"},
+            //new SelectListItem { Text = "English" , Value = "2"},
+            //new SelectListItem { Text = "Spanish" , Value = "3"},
+            //};
+            var repository= DependencyResolver.Current.GetService<IBookService<BookDTO>>();
+            var bLanguages = repository.GetLanguageDTO();
+            var langs = bLanguages.Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString() }).ToList();
+            this.Languages = langs;
         }
     }
 }

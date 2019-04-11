@@ -124,16 +124,6 @@ namespace BookEditing.Controllers
                 Id = book.Id,
                 Languages = selectedLanguages
             };
-
-            //var mapper = new MapperConfiguration(cfg =>
-            //{
-            //    cfg.CreateMap<BookViewModel, BookDTO>();
-            //    cfg.CreateMap<SelectListItem, LanguageDTO>()
-            //    .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Text.ToString()))
-            //    .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Value));
-            //}).CreateMapper();
-            ////var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, BookViewModel>()).CreateMapper();
-            //var bookDTO = mapper.Map<BookViewModel, BookDTO>(book);
             bookService.Change(bookDto);
             return RedirectToAction("Index");
         }

@@ -10,7 +10,7 @@ namespace BookEditing.BLL.Services
 {
     public class BookService : IBookService<BookDTO>
     {
-       private IUnitOfWork UnitOfWork { get; set; }
+        private IUnitOfWork UnitOfWork { get; set; }
 
         public BookService(IUnitOfWork UnitOfWork)
         {
@@ -71,6 +71,13 @@ namespace BookEditing.BLL.Services
         public void Dispose()
         {
             UnitOfWork.Dispose();
+        }
+
+        public List<LanguageDTO> GetLanguageDTO()
+        {
+            var dataLanguages = UnitOfWork.Books.GetLanguages();
+            var result = dataLanguages.Select(x => new LanguageDTO() { Id = x.Id, Name = x.Name }).ToList();
+            return result;
         }
     }
 }

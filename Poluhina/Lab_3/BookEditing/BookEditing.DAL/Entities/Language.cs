@@ -6,6 +6,6 @@ namespace BookEditing.DAL.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Book> Books { get; set; }
+        public virtual List<Book> Books { get; set; }
     }
 }

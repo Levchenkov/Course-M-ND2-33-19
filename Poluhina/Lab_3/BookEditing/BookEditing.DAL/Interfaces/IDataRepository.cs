@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BookEditing.DAL.Entities;
+using System.Collections.Generic;
 
 namespace BookEditing.DAL.Interfaces
 { 
@@ -9,5 +10,6 @@ namespace BookEditing.DAL.Interfaces
         void Change(T item);
         void Remove(int id);
         T Get(int id);
+        List<Language> GetLanguages();
     }
 }

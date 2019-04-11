@@ -13,6 +13,6 @@ namespace BookEditing.BLL.DTO
         public string Genre { get; set; }
         public bool IsPaper { get; set; }
         public bool DeliveryRequred { get; set; }
-        public List<LanguageDTO> Languages { get; set; }
+        public virtual List<LanguageDTO> Languages { get; set; }
     }
 }

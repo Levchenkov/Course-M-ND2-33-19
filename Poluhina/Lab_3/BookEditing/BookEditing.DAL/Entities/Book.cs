@@ -13,6 +13,6 @@ namespace BookEditing.DAL.Entities
         public string Genre { get; set; }
         public bool IsPaper { get; set; }
         public bool DeliveryRequred { get; set; }
-        public List<Language> Languages { get; set; }
+        public virtual List<Language> Languages { get; set; }
     }
 }

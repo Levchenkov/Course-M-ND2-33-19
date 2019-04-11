@@ -6,6 +6,6 @@ namespace BookEditing.BLL.DTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<BookDTO> Books { get; set; }
+        public virtual List<BookDTO> Books { get; set; }
     }
 }

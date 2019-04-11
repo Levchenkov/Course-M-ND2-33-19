@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BookEditing.BLL.DTO;
+using System.Collections.Generic;
 
 namespace BookEditing.BLL.Interfaces
 {
@@ -9,5 +10,6 @@ namespace BookEditing.BLL.Interfaces
         void Change(T item);
         void Remove(int id);
         T Get(int id);
+        List<LanguageDTO> GetLanguageDTO();
     }
 }

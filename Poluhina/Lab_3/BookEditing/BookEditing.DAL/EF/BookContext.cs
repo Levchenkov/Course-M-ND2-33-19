@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
-using System.Data.Entity.ModelConfiguration;
 using System.IO;
 using System.Linq;
 
@@ -17,7 +16,12 @@ namespace BookEditing.DAL.EF
         public BookContext() : base("BookContext") { }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new BookTypeConfiguration());
+
+            modelBuilder.Entity<Book>().HasMany(c => c.Languages)
+          .WithMany(s => s.Books)
+          .Map(t => t.MapLeftKey("BookId")
+          .MapRightKey("LanguagetId")
+          .ToTable("BookLanguages"));
         }
         public override int SaveChanges()
         {
@@ -45,16 +49,6 @@ namespace BookEditing.DAL.EF
             }
             var result = base.SaveChanges();
             return result;
-        }
-    }
-
-    public class BookTypeConfiguration : EntityTypeConfiguration<Book>
-    {
-        public BookTypeConfiguration()
-        {
-            Property(x => x.Author).IsRequired();
-            Property(x => x.Title).IsRequired();
-            HasMany(p => p.Languages).WithMany(c => c.Books);
         }
     }
     public class СhangeHistory
