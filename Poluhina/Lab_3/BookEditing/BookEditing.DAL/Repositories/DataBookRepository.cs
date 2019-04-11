@@ -12,12 +12,10 @@ namespace BookEditing.DAL.Repositories
         private BookContext db;
         public DataBookRepository(BookContext db)
         {
-           this.db = db;
-           
+           this.db = db;           
         }
         public IEnumerable<Book> GetList()
         {
-
             var books = db.Books.Include(p => p.Languages).ToList();
             
             return books;
@@ -40,7 +38,6 @@ namespace BookEditing.DAL.Repositories
         public Book Get(int id)
         {
             var books = db.Books.Include(p => p.Languages).ToList();
-            //var books = db.Books.ToList();
             var book = books.Where(x => x.Id == id).FirstOrDefault();
             return book;
         }
