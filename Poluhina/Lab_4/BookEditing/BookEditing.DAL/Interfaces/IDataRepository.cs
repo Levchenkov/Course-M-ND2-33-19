@@ -1,5 +1,4 @@
-﻿using BookEditing.DAL.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BookEditing.DAL.Interfaces
 { 

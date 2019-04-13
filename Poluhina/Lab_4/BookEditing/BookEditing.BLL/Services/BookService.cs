@@ -25,20 +25,6 @@ namespace BookEditing.BLL.Services
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
             var book=mapper.Map<BookDTO, Book>(newBook);
-
-            //var languagesForDataLayer = newBook.Languages.Select(x => new Language() { Id = x.Id, Name = x.Name }).ToList();
-            //var book = new Book
-            //{
-            //    Author = newBook.Author,
-            //    Created = newBook.Created,
-            //    DeliveryRequred = newBook.DeliveryRequred,
-            //    Description = newBook.Description,
-            //    Genre = newBook.Genre,
-            //    IsPaper = newBook.IsPaper,
-            //    Title = newBook.Title,
-            //    Id = newBook.Id,
-            //    Languages = languagesForDataLayer
-            //};
             UnitOfWork.Books.Add(book);
             UnitOfWork.Save();
         }
@@ -59,19 +45,6 @@ namespace BookEditing.BLL.Services
             var book = UnitOfWork.Books.Get(id);
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookDTO>()).CreateMapper();
             var bookDAL = mapper.Map<Book, BookDTO>(book);
-            //var languagesOfDataLayer = book.Languages.Select(x => new LanguageDTO() { Id = x.Id, Name = x.Name }).ToList();
-            //return new BookDTO
-            //{
-            //    Author = book.Author,
-            //    Created = book.Created,
-            //    DeliveryRequred = book.DeliveryRequred,
-            //    Description = book.Description,
-            //    Genre = book.Genre,
-            //    IsPaper = book.IsPaper,
-            //    Title = book.Title,
-            //    Id = book.Id,
-            //    Languages = languagesOfDataLayer
-            //};
             return bookDAL;
         }
         public void Dispose()

@@ -4,7 +4,6 @@ using BookEditing.BLL.Interfaces;
 using BookEditing.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using System.Linq;
 
 namespace BookEditing.Controllers
 {
@@ -33,18 +32,6 @@ namespace BookEditing.Controllers
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookViewModel, BookDTO>()).CreateMapper();
             var bookView = mapper.Map<BookViewModel, BookDTO>(book);
-            //var bookDto = new BookDTO
-            //{
-            //    Author = book.Author,
-            //    Created = book.Created,
-            //    DeliveryRequred = book.DeliveryRequred,
-            //    Description = book.Description,
-            //    Genre = book.Genre,
-            //    IsPaper = book.IsPaper,
-            //    Title = book.Title,
-            //    Id = book.Id,
-            //    Languages = selectedLanguages
-            //};
             bookService.Add(bookView);
             return RedirectToAction("Index");
         }
@@ -74,18 +61,6 @@ namespace BookEditing.Controllers
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookViewModel, BookDTO>()).CreateMapper();
             var bookDAL = mapper.Map<BookViewModel, BookDTO>(book);
-            //var bookDto = new BookDTO
-            //{
-            //    Author = book.Author,
-            //    Created = book.Created,
-            //    DeliveryRequred = book.DeliveryRequred,
-            //    Description = book.Description,
-            //    Genre = book.Genre,
-            //    IsPaper = book.IsPaper,
-            //    Title = book.Title,
-            //    Id = book.Id,
-            //    Languages = selectedLanguages
-            //};
             bookService.Change(bookDAL);
             return RedirectToAction("Index");
         }

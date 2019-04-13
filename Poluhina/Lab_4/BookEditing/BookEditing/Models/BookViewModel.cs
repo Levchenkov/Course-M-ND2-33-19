@@ -1,9 +1,4 @@
-﻿using BookEditing.BLL.DTO;
-using BookEditing.BLL.Interfaces;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System;
 
 namespace BookEditing.Models
 {
