@@ -20,6 +20,7 @@
 </head>
 
 <body>
+    <p>@Html.ActionLink("Register", "Register", "Account")</p>
     <div class="row">
         <div class="col-md-3">
             @{Html.RenderPartial("_AddBook", new BookViewModel());}
@@ -40,15 +41,15 @@
                 </tr>
                 @foreach (var book in Model)
                 {
-                <tr>
-                    <td><p>@book.Id</p></td>
-                    <td><p>@book.Title</p></td>
-                    <td><p>@book.Description</p></td>
-                    <td><p>@book.CreatedBy</p></td>
-                    <td><p>@book.Created</p></td>
-                    <td><p>@book.UpdatedBy</p></td>
-                    <td><p>@book.Updated</p></td>
-                   
+                    <tr>
+                        <td><p>@book.Id</p></td>
+                        <td><p>@book.Title</p></td>
+                        <td><p>@book.Description</p></td>
+                        <td><p>@book.CreatedBy</p></td>
+                        <td><p>@book.Created</p></td>
+                        <td><p>@book.UpdatedBy</p></td>
+                        <td><p>@book.Updated</p></td>
+
                         <td class="bg-danger"><p>@Html.ActionLink("Delete", "Delete", new { id = book.Id })</p></td>
                         <td class="bg-warning"><p>@Html.ActionLink("Edit", "Edit", new { id = book.Id })</td>
                     </tr>
