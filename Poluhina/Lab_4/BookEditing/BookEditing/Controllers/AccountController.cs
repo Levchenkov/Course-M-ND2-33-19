@@ -29,7 +29,7 @@ namespace BookEditing.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Email = model.Email};
+                var user = new User { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -86,10 +86,33 @@ namespace BookEditing.Controllers
             ViewBag.returnUrl = url;
             return View(model);
         }
-        public ActionResult Logout()
+        //удаляет аутентификационные куки
+        public ActionResult LogSignOut()
         {
             AuthenticationManager.SignOut();
             return RedirectToAction("LoginEnter");
+        }
+
+        [HttpGet]
+        public ActionResult Delete()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public async Task<ActionResult> UserDelete()
+        {
+            var user = await UserManager.FindByEmailAsync(User.Identity.Name);
+            if (user != null)
+            {
+                var result = await UserManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("LogSignOut", "Account");
+                }
+            }
+            return RedirectToAction("Register", "Account");
         }
     }
 }
