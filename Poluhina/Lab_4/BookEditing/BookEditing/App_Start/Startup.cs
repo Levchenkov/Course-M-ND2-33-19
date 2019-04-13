@@ -27,4 +27,3 @@ namespace BookEditing.App_Start
         }
     }
 }
-}
