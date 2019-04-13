@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Htp.BooksAPI.Domain.Contracts.ViewModels;
 using Htp.BooksAPI.Domain.Contracts;
+using Htp.BooksAPI.Infrastructure;
 
 namespace Htp.BooksAPI.Client.Pages.Books
 {
@@ -33,6 +34,8 @@ namespace Htp.BooksAPI.Client.Pages.Books
             {
                 return Page();
             }
+
+            BookViewModel.CreatedByUserID = User.GetUserId();
 
             await bookService.AddAsync(BookViewModel);
 

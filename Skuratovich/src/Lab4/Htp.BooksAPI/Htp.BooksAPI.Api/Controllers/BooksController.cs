@@ -50,8 +50,6 @@ namespace Htp.BooksAPI.Api.Controllers
         [ProducesResponseType(201)]
         public async Task<ActionResult<BookViewModel>> PostBook([FromBody] BookViewModel bookViewModel)
         {
-            //bookViewModel.CreatedByUserID = User.GetUserId();
-
             bookViewModel = await bookService.AddAsync(bookViewModel);
 
             return CreatedAtAction(nameof(GetBook), new { id = bookViewModel.Id }, bookViewModel);
@@ -72,8 +70,6 @@ namespace Htp.BooksAPI.Api.Controllers
             {
                 return BadRequest();
             }
-
-            //bookViewModel.UpdatedByUserID = User.GetUserId();
 
             await bookService.EditAsync(bookViewModel);
 

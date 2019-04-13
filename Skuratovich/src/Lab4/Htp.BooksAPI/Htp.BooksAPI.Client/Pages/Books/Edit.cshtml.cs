@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Htp.BooksAPI.Domain.Contracts.ViewModels;
 using Htp.BooksAPI.Domain.Contracts;
+using Htp.BooksAPI.Infrastructure;
 
 namespace Htp.BooksAPI.Client.Pages.Books
 {
@@ -45,6 +46,8 @@ namespace Htp.BooksAPI.Client.Pages.Books
             {
                 return Page();
             }
+
+            BookViewModel.UpdatedByUserID = User.GetUserId();
 
             await bookService.EditAsync(BookViewModel);
 
