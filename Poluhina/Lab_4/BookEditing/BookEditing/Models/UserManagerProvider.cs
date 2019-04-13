@@ -18,8 +18,8 @@ namespace BookEditing.Models
         public static UserManagerProvider Create(IdentityFactoryOptions<UserManagerProvider> options,
                                            IOwinContext context)
         {
-            UserContext db = context.Get<UserContext>();
-            UserManagerProvider manager = new UserManagerProvider(new UserStore<User>(db));
+            var db = context.Get<UserContext>();
+            var manager = new UserManagerProvider(new UserStore<User>(db));
             return manager;
         }
     }

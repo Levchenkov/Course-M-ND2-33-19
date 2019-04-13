@@ -1,6 +1,9 @@
 ﻿using BookEditing.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -26,11 +29,11 @@ namespace BookEditing.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { UserName = model.Email, Email = model.Email};
-                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+                var user = new User { UserName = model.Email, Email = model.Email};
+                var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Login", "Account");
+                    return RedirectToAction("LoginEnter", "Account");
                 }
                 else
                 {
@@ -41,6 +44,52 @@ namespace BookEditing.Controllers
                 }
             }
             return View(model);
+        }
+
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+        public ActionResult LoginEnter(string url)
+        {
+            ViewBag.url = url;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LoginEnter(Login model, string url)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindAsync(model.Email, model.Password);
+                if (user == null)
+                {
+                    ModelState.AddModelError("", "wrong login or password.");
+                }
+                else
+                {
+                    var claim = await UserManager.CreateIdentityAsync(user,
+                                            DefaultAuthenticationTypes.ApplicationCookie);
+                    AuthenticationManager.SignOut();
+                    AuthenticationManager.SignIn(new AuthenticationProperties
+                    {
+                        IsPersistent = true
+                    }, claim);
+                    if (String.IsNullOrEmpty(url))
+                        return RedirectToAction("Index", "Home");
+                    return Redirect(url);
+                }
+            }
+            ViewBag.returnUrl = url;
+            return View(model);
+        }
+        public ActionResult Logout()
+        {
+            AuthenticationManager.SignOut();
+            return RedirectToAction("LoginEnter");
         }
     }
 }
