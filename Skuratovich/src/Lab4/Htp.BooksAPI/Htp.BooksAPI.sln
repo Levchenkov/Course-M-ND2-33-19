@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Htp.BooksAPI.Web", "Htp.Boo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Htp.BooksAPI.Client", "Htp.BooksAPI.Client\Htp.BooksAPI.Client.csproj", "{97B30A57-88A4-4347-A369-19AFC1DEC236}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Htp.BooksAPI.Api", "Htp.BooksAPI.Api\Htp.BooksAPI.Api.csproj", "{CE5D9971-34A1-49D7-99D4-05BCD6362972}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,5 +51,14 @@ Global
 		{97B30A57-88A4-4347-A369-19AFC1DEC236}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97B30A57-88A4-4347-A369-19AFC1DEC236}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97B30A57-88A4-4347-A369-19AFC1DEC236}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE5D9971-34A1-49D7-99D4-05BCD6362972}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE5D9971-34A1-49D7-99D4-05BCD6362972}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE5D9971-34A1-49D7-99D4-05BCD6362972}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE5D9971-34A1-49D7-99D4-05BCD6362972}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
 	EndGlobalSection
 EndGlobal

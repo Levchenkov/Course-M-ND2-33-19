@@ -9,5 +9,6 @@ namespace Htp.BooksAPI.Data.Contracts.Entities
         public string LastName { get; set; }
         public virtual ICollection<Book> CreatedBooks { get; set; }
         public virtual ICollection<Book> UpdatedBooks { get; set; }
+        public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
     }
 }

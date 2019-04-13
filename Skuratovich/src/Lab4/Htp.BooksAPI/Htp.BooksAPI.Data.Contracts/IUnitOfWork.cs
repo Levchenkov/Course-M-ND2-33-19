@@ -14,8 +14,11 @@ namespace Htp.BooksAPI.Data.Contracts
         //void Add<TKey, TEntity>(TEntity entity);
         //void Update<TKey, TEntity>(TEntity entity);
         //void Delete<Tkey, TEntity>(TEntity entity);
+        
 
         IBookRepository BookRepository { get; }
+
+        IAppUserRepository AppUserRepository { get; }
 
         IRepository<T> Repository<T>() where T : class;
 

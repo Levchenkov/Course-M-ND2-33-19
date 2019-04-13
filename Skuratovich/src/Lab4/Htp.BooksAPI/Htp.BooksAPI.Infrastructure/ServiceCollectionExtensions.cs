@@ -6,8 +6,6 @@ using Htp.BooksAPI.Data.EntityFramework;
 using Htp.BooksAPI.Domain.Contracts;
 using Htp.BooksAPI.Domain.Services;
 using Htp.BooksAPI.Infrastructure.MappingProfiles;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -46,6 +44,7 @@ namespace Htp.BooksAPI.Infrastructure
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new BookMappingProfile());
+                mc.AddProfile(new UserMappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
@@ -55,6 +54,7 @@ namespace Htp.BooksAPI.Infrastructure
         public static void AppDomainModule(this IServiceCollection services)
         {
             services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IUserService, UserService>();
         }
     }
 }

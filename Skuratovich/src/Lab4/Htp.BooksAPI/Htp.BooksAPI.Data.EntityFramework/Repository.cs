@@ -62,5 +62,11 @@ namespace Htp.BooksAPI.Data.EntityFramework
         {
             return DbContext.Set<TEntity>().Where(expression).ToList();
         }
+
+        public Task<TEntity> FindAsync(params object[] keyValues)
+        {
+            return DbContext.Set<TEntity>().FindAsync(keyValues);
+        }
+
     }
 }

@@ -12,6 +12,7 @@ namespace Htp.BooksAPI.Data.EntityFramework.EntityConfigurations
             builder.Property(x => x.LastName);
             builder.HasMany(x => x.CreatedBooks).WithOne(x => x.CreatedBy);
             builder.HasMany(x => x.UpdatedBooks).WithOne(x => x.UpdatedBy);
+            builder.HasMany(x => x.Claims).WithOne().HasForeignKey(uc => uc.UserId).IsRequired();
         }
     }
 }

@@ -18,4 +18,12 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Htp.BooksAPI.Domain.Contracts\Htp.BooksAPI.Domain.Contracts.csproj" />
+    <ProjectReference Include="..\Htp.BooksAPI.Infrastructure\Htp.BooksAPI.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Services\IBookService.cs" />
+    <Compile Remove="Services\UserService.cs" />
+  </ItemGroup>
 </Project>

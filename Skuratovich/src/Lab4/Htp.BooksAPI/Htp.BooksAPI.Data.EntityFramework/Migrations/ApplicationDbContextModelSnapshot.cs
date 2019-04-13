@@ -227,7 +227,7 @@ namespace Htp.BooksAPI.Data.EntityFramework.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.HasOne("Htp.BooksAPI.Data.Contracts.Entities.AppUser")
-                        .WithMany()
+                        .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

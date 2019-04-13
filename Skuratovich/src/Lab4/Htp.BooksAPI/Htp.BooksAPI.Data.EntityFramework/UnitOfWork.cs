@@ -13,6 +13,8 @@ namespace Htp.BooksAPI.Data.EntityFramework
 
         private IBookRepository bookRepository;
 
+        private IAppUserRepository appUserRepository;
+
         private readonly Dictionary<Type, object> _repositories = new Dictionary<Type, object>();
 
         public Dictionary<Type, object> Repositories
@@ -36,6 +38,19 @@ namespace Htp.BooksAPI.Data.EntityFramework
                 }
 
                 return bookRepository;
+            }
+        }
+
+        public IAppUserRepository AppUserRepository
+        {
+            get
+            {
+                if (appUserRepository == null)
+                {
+                    appUserRepository = new AppUserRepository(dbContext);
+                }
+
+                return appUserRepository;
             }
         }
 

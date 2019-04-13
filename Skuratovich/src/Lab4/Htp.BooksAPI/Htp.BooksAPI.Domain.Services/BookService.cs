@@ -68,8 +68,9 @@ namespace Htp.BooksAPI.Domain.Services
             }
         }
 
+
         public async Task<bool> EditAsync(BookViewModel bookViewModel)
-        {   
+        {
             using (var transaction = unitOfWork.BeginTransaction())
             {
                 try
@@ -102,7 +103,7 @@ namespace Htp.BooksAPI.Domain.Services
             }
         }
 
-        public async void DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             using (var transaction = unitOfWork.BeginTransaction())
             {
@@ -116,11 +117,49 @@ namespace Htp.BooksAPI.Domain.Services
                     unitOfWork.BookRepository.Delete(book);
                     var x = await unitOfWork.SaveChangesAsync();
                     transaction.Commit();
+                    return true;
                 }
                 catch (Exception ex)
                 {
                     transaction.Rollback();
                     throw ex;
+                    return false;
+                }
+            }
+        }
+
+        public Task<IEnumerable<BookViewModel>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<BookViewModel> AddAsync(BookViewModel bookViewModel)
+        {
+            var result = mapper.Map<Book>(bookViewModel);
+
+            var CreatedBy = unitOfWork.Repository<AppUser>().Get(bookViewModel.CreatedByUserID);
+            result.CreatedBy = CreatedBy;
+            result.UpdatedBy = null;
+
+            using (var transaction = unitOfWork.BeginTransaction())
+            {
+                try
+                {
+                    //bookRepository.Add(result);
+                    //bookRepository.Save();
+                    unitOfWork.BookRepository.Add(result);
+                    await unitOfWork.SaveChangesAsync();
+                    transaction.Commit();
+
+                    bookViewModel = mapper.Map<BookViewModel>(result);
+
+                    return bookViewModel;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw ex;
+                    return bookViewModel;
                 }
             }
         }

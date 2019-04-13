@@ -1,7 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
-using System.Security.Principal;
 
 namespace Htp.BooksAPI.Domain.Contracts.ViewModels
 {
@@ -28,9 +26,5 @@ namespace Htp.BooksAPI.Domain.Contracts.ViewModels
 
         [Display(Name = "Updated by")]
         public string UpdatedByUserName { get; set; }
-
-        //public userID CurrentUser { get; set; }
-
-        //public ClaimsPrincipal ClaimsPrincipal { get; set; }
     }
 }

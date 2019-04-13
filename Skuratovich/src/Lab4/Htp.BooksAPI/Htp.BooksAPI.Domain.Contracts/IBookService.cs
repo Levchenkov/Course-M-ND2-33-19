@@ -7,9 +7,12 @@ namespace Htp.BooksAPI.Domain.Contracts
     public interface IBookService
     {
         IEnumerable<BookViewModel> GetAll();
+        Task<IEnumerable<BookViewModel>> GetAllAsync();
         Task<BookViewModel> GetAsync(int id);
         void Add(BookViewModel bookViewModel);
+
+        Task<BookViewModel> AddAsync(BookViewModel bookViewModel);
         Task<bool> EditAsync(BookViewModel bookViewModel);
-        void DeleteAsync(int id);
+        Task<bool> DeleteAsync(int id);
     }
 }

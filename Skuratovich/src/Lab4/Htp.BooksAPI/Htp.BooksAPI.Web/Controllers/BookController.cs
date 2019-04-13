@@ -30,7 +30,7 @@ namespace Htp.BooksAPI.Server.Controllers
         // GET: Book
         public IActionResult Index()
         {
-            return View(bookService.GetAll());
+            return View(bookService.GetAllAsync());
             //return null;
         }
 
