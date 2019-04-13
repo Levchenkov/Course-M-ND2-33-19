@@ -1,0 +1,29 @@
+﻿@model BookEditing.Models.BookViewModel
+@*@Html.HiddenFor(model => model.Id)*@
+@Html.LabelFor(model => model.Title, "Title")
+<br />
+@Html.EditorFor(model => model.Title)
+<br /><br />
+@Html.LabelFor(model => model.Description, "Description")
+<br />
+@Html.TextAreaFor(model => model.Description)
+<br /><br />
+@Html.LabelFor(model => model.CreatedBy, "CreatedBy")
+<br />
+@Html.EditorFor(model => model.CreatedBy)
+<br /><br />
+@Html.LabelFor(model => model.Created, "Created")
+<br />
+@Html.TextBoxFor(model => model.Created, new { @class = "form-control datepicker", placeholder = "Enter Drop-off date here..." })
+@Html.ValidationMessageFor(model => model.Created)
+
+<br /><br />
+@Html.LabelFor(model => model.UpdatedBy, "UpdatedBy")
+<br />
+@Html.EditorFor(model => model.UpdatedBy)
+<br /><br />
+@Html.LabelFor(model => model.Updated, "Updated ")
+<br />
+@Html.EditorFor(model => model.Updated)
+<br /><br />
+
