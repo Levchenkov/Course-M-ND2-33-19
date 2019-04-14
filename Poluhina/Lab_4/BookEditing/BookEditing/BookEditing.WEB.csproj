@@ -191,11 +191,25 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904131337241_InitialCreate.cs" />
+    <Compile Include="Migrations\201904131337241_InitialCreate.Designer.cs">
+      <DependentUpon>201904131337241_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904140753284_DataMigration.cs" />
+    <Compile Include="Migrations\201904140753284_DataMigration.Designer.cs">
+      <DependentUpon>201904140753284_DataMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BookViewModel.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Roles\CreateRoleModel.cs" />
+    <Compile Include="Models\Roles\EditRoleModel.cs" />
+    <Compile Include="Models\Roles\Role.cs" />
+    <Compile Include="Models\Roles\RoleManagerProvider.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserContext.cs" />
     <Compile Include="Models\UserManagerProvider.cs" />
@@ -338,6 +352,9 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\LoginEnter.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Roles\Create.cshtml" />
+    <Content Include="Views\Roles\EditRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -365,6 +382,14 @@
       <Project>{32E4C6C8-70B0-4B96-B0CE-208CD6EC44DD}</Project>
       <Name>BookEditing.DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201904131337241_InitialCreate.resx">
+      <DependentUpon>201904131337241_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904140753284_DataMigration.resx">
+      <DependentUpon>201904140753284_DataMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
