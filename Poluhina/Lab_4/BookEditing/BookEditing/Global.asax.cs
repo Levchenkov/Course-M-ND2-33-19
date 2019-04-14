@@ -1,7 +1,9 @@
-﻿using BookEditing.Util;
+﻿using BookEditing.Models;
+using BookEditing.Util;
 using Ninject;
 using Ninject.Modules;
 using Ninject.Web.Mvc;
+using System.Data.Entity;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -12,6 +14,7 @@ namespace BookEditing
     {
         protected void Application_Start()
         {
+            Database.SetInitializer<UserContext>(new Initializer());
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

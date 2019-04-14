@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace BookEditing.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class RolesController : Controller
     {
         private RoleManagerProvider RoleManager

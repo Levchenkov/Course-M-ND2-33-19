@@ -205,6 +205,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BookViewModel.cs" />
+    <Compile Include="Models\Initializer.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Roles\CreateRoleModel.cs" />
     <Compile Include="Models\Roles\EditRoleModel.cs" />

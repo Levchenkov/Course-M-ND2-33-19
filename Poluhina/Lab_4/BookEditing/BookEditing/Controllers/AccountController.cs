@@ -25,6 +25,7 @@ namespace BookEditing.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(UserRegister model)
         {
             if (ModelState.IsValid)
@@ -33,6 +34,8 @@ namespace BookEditing.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await UserManager.AddToRoleAsync(user.Id, "user");
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     return RedirectToAction("LoginEnter", "Account");
                 }
                 else
