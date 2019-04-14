@@ -169,6 +169,10 @@
     <Compile Include="Migrations\201904141411478_edit prop.Designer.cs">
       <DependentUpon>201904141411478_edit prop.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904141557453_start.cs" />
+    <Compile Include="Migrations\201904141557453_start.Designer.cs">
+      <DependentUpon>201904141557453_start.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
@@ -278,6 +282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904141411478_edit prop.resx">
       <DependentUpon>201904141411478_edit prop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904141557453_start.resx">
+      <DependentUpon>201904141557453_start.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
