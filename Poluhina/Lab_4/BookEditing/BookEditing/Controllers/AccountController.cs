@@ -94,14 +94,7 @@ namespace BookEditing.Controllers
         }
 
         [HttpGet]
-        public ActionResult Delete()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ActionName("Delete")]
-        public async Task<ActionResult> UserDelete()
+        public async Task<ActionResult> Delete()
         {
             var user = await UserManager.FindByEmailAsync(User.Identity.Name);
             if (user != null)
