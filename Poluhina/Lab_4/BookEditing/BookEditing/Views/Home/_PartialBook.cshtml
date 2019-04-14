@@ -8,16 +8,16 @@
 <br />
 @Html.TextAreaFor(model => model.Description)
 <br /><br />
-@Html.LabelFor(model => model.CreatedBy, "CreatedBy")
+@*@Html.LabelFor(model => model.CreatedBy, "CreatedBy")
 <br />
 @Html.EditorFor(model => model.CreatedBy)
-<br /><br />
-@Html.LabelFor(model => model.Created, "Created")
+<br /><br />*@
+@*@Html.LabelFor(model => model.Created, "Created")
 <br />
 @Html.TextBoxFor(model => model.Created, new { @class = "form-control datepicker", placeholder = "Enter Drop-off date here..." })
-@Html.ValidationMessageFor(model => model.Created)
+@Html.ValidationMessageFor(model => model.Created)*@
 
-<br /><br />
+@*<br /><br />
 @Html.LabelFor(model => model.UpdatedBy, "UpdatedBy")
 <br />
 @Html.EditorFor(model => model.UpdatedBy)
@@ -25,5 +25,5 @@
 @Html.LabelFor(model => model.Updated, "Updated ")
 <br />
 @Html.EditorFor(model => model.Updated)
-<br /><br />
+<br /><br />*@
 
