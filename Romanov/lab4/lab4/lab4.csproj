@@ -161,17 +161,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904131617324_init DB.cs" />
-    <Compile Include="Migrations\201904131617324_init DB.Designer.cs">
-      <DependentUpon>201904131617324_init DB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904141411478_edit prop.cs" />
-    <Compile Include="Migrations\201904141411478_edit prop.Designer.cs">
-      <DependentUpon>201904141411478_edit prop.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904141557453_start.cs" />
-    <Compile Include="Migrations\201904141557453_start.Designer.cs">
-      <DependentUpon>201904141557453_start.cs</DependentUpon>
+    <Compile Include="Migrations\201904141938411_first start.cs" />
+    <Compile Include="Migrations\201904141938411_first start.Designer.cs">
+      <DependentUpon>201904141938411_first start.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
@@ -277,14 +269,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201904131617324_init DB.resx">
-      <DependentUpon>201904131617324_init DB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904141411478_edit prop.resx">
-      <DependentUpon>201904141411478_edit prop.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904141557453_start.resx">
-      <DependentUpon>201904141557453_start.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904141938411_first start.resx">
+      <DependentUpon>201904141938411_first start.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

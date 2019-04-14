@@ -3,7 +3,7 @@ namespace lab4.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initDB : DbMigration
+    public partial class firststart : DbMigration
     {
         public override void Up()
         {
@@ -15,16 +15,11 @@ namespace lab4.Migrations
                         Title = c.String(),
                         Description = c.String(),
                         Created = c.DateTime(nullable: false),
-                        CreatedById = c.Int(nullable: false),
-                        UpdatedById = c.Int(nullable: false),
-                        CreatedByApplicationUser_Id = c.String(maxLength: 128),
-                        UpdatedByApplicationUser_Id = c.String(maxLength: 128),
+                        ApplicationUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.CreatedByApplicationUser_Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UpdatedByApplicationUser_Id)
-                .Index(t => t.CreatedByApplicationUser_Id)
-                .Index(t => t.UpdatedByApplicationUser_Id);
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id)
+                .Index(t => t.ApplicationUser_Id);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -100,19 +95,17 @@ namespace lab4.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Books", "UpdatedByApplicationUser_Id", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Books", "CreatedByApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Books", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Books", new[] { "UpdatedByApplicationUser_Id" });
-            DropIndex("dbo.Books", new[] { "CreatedByApplicationUser_Id" });
+            DropIndex("dbo.Books", new[] { "ApplicationUser_Id" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");

@@ -7,13 +7,13 @@ namespace lab4.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class start : IMigrationMetadata
+    public sealed partial class firststart : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(start));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(firststart));
         
         string IMigrationMetadata.Id
         {
-            get { return "201904141557453_start"; }
+            get { return "201904141938411_first start"; }
         }
         
         string IMigrationMetadata.Source
