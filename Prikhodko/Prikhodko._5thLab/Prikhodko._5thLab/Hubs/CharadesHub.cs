@@ -10,6 +10,7 @@ namespace Prikhodko._5thLab.Hubs
     public class CharadesHub : Hub
     {
         private static Dictionary<string, string> members = new Dictionary<string, string>();
+        private static bool _gameStarted;
 
         public async Task SendMessage(string message)
         {
@@ -40,13 +41,28 @@ namespace Prikhodko._5thLab.Hubs
             await Clients.Others.SendAsync("Notify", $"{members[Context.ConnectionId]} entered the room");
             if (members.Count > 1)
             {
-                //InitCharades();
+                if (!_gameStarted)
+                {
+                    await InitCharades();
+                }
             }
         }
 
-        //public async Task InitCharades()
-        //{
-        //    await Clients.All.SendAsync
-        //}
+        public async Task UpdateCanvas(int x, int y, bool dragging)
+        {
+            await Clients.All.SendAsync("AddClick", x, y, dragging);
+            await Clients.All.SendAsync("Draw");
+        }
+
+        public async Task ClearCanvas()
+        {
+            await Clients.All.SendAsync("ClearCanvas");
+        }
+
+        public async Task InitCharades()
+        {
+            await Clients.Caller.SendAsync("InitCharades");
+            _gameStarted = true;
+        }
     }
 }
