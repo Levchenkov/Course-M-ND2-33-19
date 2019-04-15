@@ -12,6 +12,8 @@ namespace lab4.Models
         public string Description { get; set; }
         public DateTime Created { get; set; } 
         public string ApplicationUser { get; set; }
+        public string UpdatedBy { get; set; }
+        public DateTime UpdatedTime { get; set; }
 
         public Book()
         {

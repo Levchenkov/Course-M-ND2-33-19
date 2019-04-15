@@ -156,6 +156,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookController.cs" />
+    <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="DAL\ApplicationContext.cs" />
@@ -166,6 +167,14 @@
     <Compile Include="Migrations\201904150753567_restart again.Designer.cs">
       <DependentUpon>201904150753567_restart again.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904151403143_updated prop.cs" />
+    <Compile Include="Migrations\201904151403143_updated prop.Designer.cs">
+      <DependentUpon>201904151403143_updated prop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904151450298_new prop for user.cs" />
+    <Compile Include="Migrations\201904151450298_new prop for user.Designer.cs">
+      <DependentUpon>201904151450298_new prop for user.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\ApplicationRoleManager.cs" />
@@ -173,6 +182,7 @@
     <Compile Include="Models\ApplicationUserManager.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\ViewModels\CreateBookViewModel.cs" />
+    <Compile Include="Models\ViewModels\EditBookViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -257,6 +267,7 @@
     <Content Include="Views\Role\RoleAdd.cshtml" />
     <Content Include="Views\Book\Create.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
+    <Content Include="Views\Book\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -276,6 +287,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201904150753567_restart again.resx">
       <DependentUpon>201904150753567_restart again.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904151403143_updated prop.resx">
+      <DependentUpon>201904151403143_updated prop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904151450298_new prop for user.resx">
+      <DependentUpon>201904151450298_new prop for user.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

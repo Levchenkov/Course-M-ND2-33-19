@@ -8,6 +8,7 @@ namespace lab4.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public virtual ICollection<Book> ChangedBooks { get; set; }
         public virtual ICollection<Book> Books { get; set; }
         public ApplicationUser()
         {

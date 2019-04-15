@@ -23,6 +23,12 @@
         <th>
             @Html.DisplayNameFor(model => model.ApplicationUser)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </th>
         <th></th>
     </tr>
 
@@ -40,7 +46,12 @@
     <td>
         @Html.DisplayFor(modelItem => item.ApplicationUser)
     </td>
-
+    <td>
+        @Html.DisplayFor(modelItem => item.UpdatedTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UpdatedBy)
+    </td>
 </tr>
 }
 

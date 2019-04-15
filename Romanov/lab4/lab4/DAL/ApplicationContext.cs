@@ -19,5 +19,6 @@ namespace lab4.DAL
         {
             return new ApplicationContext();
         }
+
     }
 }
