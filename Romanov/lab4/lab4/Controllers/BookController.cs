@@ -27,11 +27,18 @@ namespace lab4.Controllers
         [HttpPost]
         public ActionResult Create(Book book)
         {
-            //book.ApplicationUser = new ApplicationUser();
-            book.ApplicationUser = User.Identity.GetUserName();
-            db.Books.Add(book);
-            db.SaveChanges();
-            return View(book);
+            if (ModelState.IsValid)
+            {
+                //book.ApplicationUser = new ApplicationUser();
+                book.ApplicationUser = User.Identity.GetUserName();
+                db.Books.Add(book);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Book");
+            }
+            else
+            {
+                return View(book);
+            }
         }
     }
 }
