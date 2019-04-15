@@ -11,7 +11,7 @@ namespace lab4.Models
         public virtual ICollection<Book> Books { get; set; }
         public ApplicationUser()
         {
-            Books = new List<Book>();
+            
         }
     }
 }

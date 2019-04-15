@@ -11,7 +11,7 @@ namespace lab4.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Created { get; set; } 
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUser { get; set; }
 
         public Book()
         {

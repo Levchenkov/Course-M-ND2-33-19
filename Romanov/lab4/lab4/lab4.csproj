@@ -156,16 +156,15 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookController.cs" />
-    <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="DAL\ApplicationContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904141938411_first start.cs" />
-    <Compile Include="Migrations\201904141938411_first start.Designer.cs">
-      <DependentUpon>201904141938411_first start.cs</DependentUpon>
+    <Compile Include="Migrations\201904150753567_restart again.cs" />
+    <Compile Include="Migrations\201904150753567_restart again.Designer.cs">
+      <DependentUpon>201904150753567_restart again.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
@@ -257,6 +256,7 @@
     <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\Role\RoleAdd.cshtml" />
     <Content Include="Views\Book\Create.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -274,8 +274,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201904141938411_first start.resx">
-      <DependentUpon>201904141938411_first start.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904150753567_restart again.resx">
+      <DependentUpon>201904150753567_restart again.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

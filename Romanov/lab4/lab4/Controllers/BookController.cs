@@ -11,26 +11,27 @@ using Microsoft.AspNet.Identity;
 
 namespace lab4.Controllers
 {
-   
+    [Authorize]
     public class BookController : Controller
     {
         private ApplicationContext db = new ApplicationContext();
-        private ApplicationUserManager UserManager
+        
+        public ActionResult Index()
         {
-            get
-            {
-                return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
+            return View(db.Books.ToList());
         }
         public ActionResult Create()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Book model)
+        public ActionResult Create(Book book)
         {
-            model.ApplicationUser = User.Identity.GetUserId();
-            return View();
+            //book.ApplicationUser = new ApplicationUser();
+            book.ApplicationUser = User.Identity.GetUserName();
+            db.Books.Add(book);
+            db.SaveChanges();
+            return View(book);
         }
     }
 }
