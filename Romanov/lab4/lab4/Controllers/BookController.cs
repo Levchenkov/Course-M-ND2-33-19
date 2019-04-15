@@ -56,5 +56,13 @@ namespace lab4.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", "Book");
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
