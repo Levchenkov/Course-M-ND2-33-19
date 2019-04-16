@@ -3,7 +3,7 @@
 var connection = new signalR.HubConnectionBuilder().withUrl("/charadesHub", {}).build();
 
 //Disable send button until connection is established
-document.getElementById("sendButton").disabled = false;
+document.getElementById("sendButton").disabled = true;
 
 connection.on("ReceiveMessage", function (user, message) {
     var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -24,10 +24,24 @@ connection.on("AskName", function () {
     event.preventDefault();
 });
 
+connection.on("NotifyGameStarted",
+	function() {
+        alert("The drawer will now draw something. Guess what it is!");
+    });
+
+connection.on("NameWinner",
+	function(name, answer) {
+        alert(name + " Won! Correct answer: " + answer + ". Refresh the page to begin new game");
+	});
+
 connection.on("Notify", function (message) {
     var li = document.createElement("li");
     li.textContent = message.bold();
     document.getElementById("messagesList").appendChild(li);
+});
+
+connection.on("DrawerDisconnected", function () {
+	alert("Drawer disconnected. Please restart the page");
 });
 
 connection.start().then(function () {
@@ -91,8 +105,14 @@ connection.on("ClearCanvas",
     });
 
 
-connection.on("InitCharades", function () {
-    $('#canvas').mousedown(function (e) {
+connection.on("EnableDrawing", function () {
+
+	connection.on("ProvideCharade",
+		function(charade) {
+            alert("draw the word:" + charade + "!");
+		});
+
+	$('#canvas').mousedown(function (e) {
         paint = true;
         connection.invoke("UpdateCanvas", e.pageX - this.offsetLeft, e.pageY - this.offsetTop, false);
     });
@@ -114,4 +134,7 @@ connection.on("InitCharades", function () {
     $('#clearCanvas').click(function () {
         connection.invoke("ClearCanvas");
     });
+
+    document.getElementById("sendButton").disabled = true;
+    document.getElementById("messageInput").disabled = true;
 });
