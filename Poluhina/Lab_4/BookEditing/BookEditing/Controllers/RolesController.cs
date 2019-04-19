@@ -1,20 +1,13 @@
 ﻿using BookEditing.Models;
 using BookEditing.Models.Roles;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace BookEditing.Controllers
 {
-    
     public class RolesController : Controller
     {
         private RoleManagerProvider RoleManager
@@ -26,12 +19,12 @@ namespace BookEditing.Controllers
         }
         [HttpGet]
         [Authorize(Roles = "admin")]
-        public  ActionResult Index()
+        public ActionResult Index()
         {
-           var ListRoles = RoleManager.Roles.ToList();
+            var ListRoles = RoleManager.Roles.ToList();
             return View(ListRoles);
         }
-       
+
         //[HttpGet]
         //public ActionResult Create()
         //{
@@ -110,7 +103,7 @@ namespace BookEditing.Controllers
                                                     .GetUserManager<UserManagerProvider>();
             var user = userManager.FindByEmail(User.Identity.Name);
             if (user != null)
-               userManager.RemoveFromRoles(user.Id,"user");
+                userManager.RemoveFromRoles(user.Id, "user");
             return RedirectToAction("Index");
         }
     }

@@ -12,12 +12,12 @@ namespace BookEditing.DAL.Repositories
         private BookContext db;
         public DataBookRepository(BookContext db)
         {
-           this.db = db;           
+            this.db = db;
         }
         public IEnumerable<Book> GetList()
         {
             var books = db.Books.ToList();
-            
+
             return books;
         }
         public void Add(Book book)

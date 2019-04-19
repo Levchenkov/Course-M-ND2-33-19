@@ -24,7 +24,7 @@ namespace BookEditing.BLL.Services
         public void Add(BookDTO newBook)
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
-            var book=mapper.Map<BookDTO, Book>(newBook);
+            var book = mapper.Map<BookDTO, Book>(newBook);
             UnitOfWork.Books.Add(book);
             UnitOfWork.Save();
         }

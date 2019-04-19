@@ -34,8 +34,7 @@ namespace BookEditing.Controllers
             book.CreatedBy = System.Web.HttpContext.Current.User.Identity.Name;
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookViewModel, BookDTO>()).CreateMapper();
             var bookView = mapper.Map<BookViewModel, BookDTO>(book);
-
-            bookService.Add(bookView);          
+            bookService.Add(bookView);
             return RedirectToAction("Index");
         }
 
@@ -48,7 +47,7 @@ namespace BookEditing.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-           
+
             var book = bookService.Get(id);
             if (book == null)
                 return HttpNotFound();
@@ -64,7 +63,7 @@ namespace BookEditing.Controllers
         public ActionResult Edit(BookViewModel book)
         {
             book.Created = System.DateTime.Now;
-            book.UpdatedBy=System.Web.HttpContext.Current.User.Identity.Name;
+            book.UpdatedBy = System.Web.HttpContext.Current.User.Identity.Name;
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookViewModel, BookDTO>()).CreateMapper();
             var bookDAL = mapper.Map<BookViewModel, BookDTO>(book);
             bookService.Change(bookDAL);
