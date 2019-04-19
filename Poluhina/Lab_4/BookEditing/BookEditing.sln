@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookEditing.DAL", "BookEdit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookEditing.BLL", "BookEditing.BLL\BookEditing.BLL.csproj", "{A24D2FBB-5FAF-49FB-A0E8-B7A73F4D453F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookEditing.WebAPI", "BookEditing.WebAPI\BookEditing.WebAPI.csproj", "{86F2271F-390C-4C84-9037-DF838CA41FED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A24D2FBB-5FAF-49FB-A0E8-B7A73F4D453F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A24D2FBB-5FAF-49FB-A0E8-B7A73F4D453F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A24D2FBB-5FAF-49FB-A0E8-B7A73F4D453F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86F2271F-390C-4C84-9037-DF838CA41FED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86F2271F-390C-4C84-9037-DF838CA41FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86F2271F-390C-4C84-9037-DF838CA41FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86F2271F-390C-4C84-9037-DF838CA41FED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,51 +5,51 @@ using BookEditing.DAL.Entities;
 using BookEditing.DAL.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 
 namespace BookEditing.BLL.Services
 {
     public class BookService : IBookService<BookDTO>
     {
-        private IUnitOfWork UnitOfWork { get; set; }
+        private HttpClient client;
+        public BookService()
+        {
+            var client = new HttpClient();
+        }
+        public void Add(BookDTO item)
+        {
+           
+            
 
-        public BookService(IUnitOfWork UnitOfWork)
-        {
-            this.UnitOfWork = UnitOfWork;
+            throw new System.NotImplementedException();
         }
-        public IEnumerable<BookDTO> GetList()
+
+        public void Change(BookDTO item)
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookDTO>()).CreateMapper();
-            return mapper.Map<IEnumerable<Book>, List<BookDTO>>(UnitOfWork.Books.GetList());
+            //вызвать метод api
         }
-        public void Add(BookDTO newBook)
-        {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
-            var book = mapper.Map<BookDTO, Book>(newBook);
-            UnitOfWork.Books.Add(book);
-            UnitOfWork.Save();
-        }
-        public void Change(BookDTO book)
-        {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, Book>()).CreateMapper();
-            var bookDAL = mapper.Map<BookDTO, Book>(book);
-            UnitOfWork.Books.Change(bookDAL);
-            UnitOfWork.Save();
-        }
-        public void Remove(int id)
-        {
-            UnitOfWork.Books.Remove(id);
-            UnitOfWork.Save();
-        }
+
         public BookDTO Get(int id)
         {
-            var book = UnitOfWork.Books.Get(id);
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookDTO>()).CreateMapper();
-            var bookDAL = mapper.Map<Book, BookDTO>(book);
-            return bookDAL;
+            throw new System.NotImplementedException();
+            //вызвать метод api
         }
-        public void Dispose()
+
+        public IEnumerable<BookDTO> GetList()
         {
-            UnitOfWork.Dispose();
+            throw new System.NotImplementedException();
+
+            var responce = client.GetAsync("http://localhost:32230/api/values")
+                 .ConfigureAwait(false)
+                 .GetAwaiter()
+                 .GetResult();
+            var stringContext = responce.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+            //десериализовать!!!!
+        }
+
+        public void Remove(int id)
+        {
+            //вызвать метод api
         }
     }
 }

@@ -203,6 +203,10 @@
     <Compile Include="Migrations\201904140753284_DataMigration.Designer.cs">
       <DependentUpon>201904140753284_DataMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904192336353_MigrateDB.cs" />
+    <Compile Include="Migrations\201904192336353_MigrateDB.Designer.cs">
+      <DependentUpon>201904192336353_MigrateDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BookViewModel.cs" />
     <Compile Include="Models\Initializer.cs" />
@@ -356,6 +360,7 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\Create.cshtml" />
     <Content Include="Views\Roles\EditRole.cshtml" />
+    <Content Include="Views\Home\Example.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -390,6 +395,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904140753284_DataMigration.resx">
       <DependentUpon>201904140753284_DataMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904192336353_MigrateDB.resx">
+      <DependentUpon>201904192336353_MigrateDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
