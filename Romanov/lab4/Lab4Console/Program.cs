@@ -70,28 +70,32 @@ namespace Lab4Console
 
         static async Task Main(string[] args)
         {
-            Console.WriteLine("1. Show all books");
-            Console.WriteLine("2. Show book using Id");
-            Console.WriteLine("3. Create book");
-            Console.WriteLine("4. Delete book");
-            string input = Console.ReadLine();
-            switch (input)
+            while (true)
             {
-                case "1":
-                    await GetAsync();
-                    break;
-                case "2":
-                    await GetItemAsync();
-                    break;
-                case "3":
-                    await PostAsync();
-                    break;
-                case "4":
-                    await DeleteAsync();
-                    break;
+                Console.WriteLine("1. Show all books");
+                Console.WriteLine("2. Show book using Id");
+                Console.WriteLine("3. Create book");
+                Console.WriteLine("4. Delete book");
+                string input = Console.ReadLine();
+                switch (input)
+                {
+                    case "1":
+                        await GetAsync();
+                        break;
+                    case "2":
+                        await GetItemAsync();
+                        break;
+                    case "3":
+                        await PostAsync();
+                        break;
+                    case "4":
+                        await DeleteAsync();
+                        break;
+                }
+
+                Console.ReadLine();
             }
             
-            Console.ReadLine();
         }
     }
 }
