@@ -12,6 +12,7 @@ using lab4.DAL;
 using lab4.Models;
 using lab4.Models.DTO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace lab4.Controllers
 {
@@ -91,12 +92,17 @@ namespace lab4.Controllers
 
         // POST: api/Books
         
-        public void PostBook(BookDTO book)
+        public void PostBook(JObject input)
         {
-            var newBook = new Book();
-            newBook.Id = book.Id;
-            newBook.Title = book.Title;
-            newBook.Description = book.Description;
+            var inputStringBook = JsonConvert.SerializeObject(input);
+            BookDTO dto = JsonConvert.DeserializeObject<BookDTO>(inputStringBook);
+            var newBook = new Book()
+            {
+                Title = dto.Title,
+                Description = dto.Description,
+                UpdatedTime = DateTime.Now
+                
+            };
 
             db.Books.Add(newBook);
             db.SaveChanges();

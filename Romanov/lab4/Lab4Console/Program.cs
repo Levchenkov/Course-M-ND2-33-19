@@ -14,7 +14,7 @@ namespace Lab4Console
         {
             public int Id { get; set; }
             public string Title { get; set; }
-            public string Descrition { get; set; }
+            public string Description { get; set; }
             public BookApi()
             {
 
@@ -48,7 +48,7 @@ namespace Lab4Console
 
             var postBook = new BookApi();
             postBook.Title = "t";
-            postBook.Descrition = "d";
+            postBook.Description = "d";
 
             var jsonPostBook = JsonConvert.SerializeObject(postBook);
             var strForOut = new StringContent(jsonPostBook, Encoding.UTF8, "application/json");
