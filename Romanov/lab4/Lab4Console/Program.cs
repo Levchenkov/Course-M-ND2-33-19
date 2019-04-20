@@ -41,14 +41,14 @@ namespace Lab4Console
         {
             var client = new HttpClient();
 
-            //Console.WriteLine("Input title:");
-            //var postBookTitle = Console.ReadLine();
-            //Console.WriteLine("Input description:");
-            //var postBookDescription = Console.ReadLine();
+            Console.WriteLine("Input title:");
+            var postBookTitle = Console.ReadLine();
+            Console.WriteLine("Input description:");
+            var postBookDescription = Console.ReadLine();
 
             var postBook = new BookApi();
-            postBook.Title = "t";
-            postBook.Description = "d";
+            postBook.Title = postBookTitle;
+            postBook.Description = postBookDescription;
 
             var jsonPostBook = JsonConvert.SerializeObject(postBook);
             var strForOut = new StringContent(jsonPostBook, Encoding.UTF8, "application/json");
@@ -58,11 +58,22 @@ namespace Lab4Console
             Console.WriteLine(stringContent);
         }
 
+        public static async Task DeleteAsync()
+        {
+            var client = new HttpClient();
+            Console.WriteLine("Input ID:");
+            var inputId = Convert.ToInt32(Console.ReadLine());
+            var response = await client.DeleteAsync($"http://localhost:51113/api/books/{inputId}");
+            var stringContent = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(stringContent);
+        }
+
         static async Task Main(string[] args)
         {
             Console.WriteLine("1. Show all books");
             Console.WriteLine("2. Show book using Id");
             Console.WriteLine("3. Create book");
+            Console.WriteLine("4. Delete book");
             string input = Console.ReadLine();
             switch (input)
             {
@@ -74,6 +85,9 @@ namespace Lab4Console
                     break;
                 case "3":
                     await PostAsync();
+                    break;
+                case "4":
+                    await DeleteAsync();
                     break;
             }
             

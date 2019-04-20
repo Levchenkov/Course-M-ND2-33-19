@@ -101,13 +101,10 @@ namespace lab4.Controllers
                 Title = dto.Title,
                 Description = dto.Description,
                 UpdatedTime = DateTime.Now
-                
             };
 
             db.Books.Add(newBook);
             db.SaveChanges();
-
-            
         }
 
         // DELETE: api/Books/5
