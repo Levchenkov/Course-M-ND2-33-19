@@ -90,22 +90,18 @@ namespace lab4.Controllers
         }
 
         // POST: api/Books
-
-        [ResponseType(typeof(BookDTO))]
-        public void PostBook(dynamic book)
+        
+        public void PostBook(BookDTO book)
         {
-            var input = JsonConvert.SerializeObject(book);
-            BookDTO b = JsonConvert.DeserializeObject<BookDTO>(input);
+            var newBook = new Book();
+            newBook.Id = book.Id;
+            newBook.Title = book.Title;
+            newBook.Description = book.Description;
 
-            var dto = new BookDTO()
-            {
-                Id = b.Id,
-                Title = b.Title,
-                Description = b.Description
-            };
-
-            db.Books.Add(book);
+            db.Books.Add(newBook);
             db.SaveChanges();
+
+            
         }
 
         // DELETE: api/Books/5
