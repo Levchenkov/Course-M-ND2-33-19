@@ -211,8 +211,6 @@
     <Compile Include="Models\BookViewModel.cs" />
     <Compile Include="Models\Initializer.cs" />
     <Compile Include="Models\Login.cs" />
-    <Compile Include="Models\Roles\CreateRoleModel.cs" />
-    <Compile Include="Models\Roles\EditRoleModel.cs" />
     <Compile Include="Models\Roles\Role.cs" />
     <Compile Include="Models\Roles\RoleManagerProvider.cs" />
     <Compile Include="Models\User.cs" />
@@ -356,10 +354,7 @@
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\LoginEnter.cshtml" />
-    <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
-    <Content Include="Views\Roles\Create.cshtml" />
-    <Content Include="Views\Roles\EditRole.cshtml" />
     <Content Include="Views\Home\Example.cshtml" />
   </ItemGroup>
   <ItemGroup>

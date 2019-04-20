@@ -35,7 +35,6 @@ namespace BookEditing.Controllers
                 if (result.Succeeded)
                 {
                     await UserManager.AddToRoleAsync(user.Id, "user");
-                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     return RedirectToAction("LoginEnter", "Account");
                 }
                 else
@@ -89,7 +88,6 @@ namespace BookEditing.Controllers
             ViewBag.returnUrl = url;
             return View(model);
         }
-        //удаляет аутентификационные куки
         public ActionResult LogSignOut()
         {
             AuthenticationManager.SignOut();

@@ -45,7 +45,6 @@ namespace BookEditing.WebAPI.Services
         {
             UnitOfWork.Dispose();
         }
-
         public IEnumerable<BookApiModel> GetList()
         {
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookApiModel>()).CreateMapper();

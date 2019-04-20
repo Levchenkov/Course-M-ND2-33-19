@@ -1,12 +1,6 @@
-﻿using BookEditing.DAL.Entities;
-using BookEditing.WebAPI.Models;
+﻿using BookEditing.WebAPI.Models;
 using BookEditing.WebAPI.Services;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Mvc;
 
@@ -44,17 +38,16 @@ namespace BookEditing.WebAPI.Controllers
         // PUT api/values/5
         public void Put(int id, [FromBody]BookApiModel book)
         {
-            if (id==book.Id)
+            if (id == book.Id)
             {
                 var bookApiModel = bookService.Get(id);
                 bookService.Change(book);
-            }          
+            }
         }
 
         // DELETE api/values/5
         public void Delete(int id)
         {
-            
             bookService.Remove(id);
         }
     }
