@@ -105,6 +105,10 @@
       <Project>{32e4c6c8-70b0-4b96-b0ce-208cd6ec44dd}</Project>
       <Name>BookEditing.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BookEditing.WebAPI\BookEditing.WebAPI.csproj">
+      <Project>{86F2271F-390C-4C84-9037-DF838CA41FED}</Project>
+      <Name>BookEditing.WebAPI</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

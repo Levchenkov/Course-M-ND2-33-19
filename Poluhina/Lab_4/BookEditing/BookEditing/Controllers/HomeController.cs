@@ -35,8 +35,8 @@ namespace BookEditing.Controllers
             book.Created = System.DateTime.Now;
             book.CreatedBy = System.Web.HttpContext.Current.User.Identity.Name;
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookViewModel, BookDTO>()).CreateMapper();
-            var bookView = mapper.Map<BookViewModel, BookDTO>(book);
-            bookService.Add(bookView);
+            var bookDTO = mapper.Map<BookViewModel, BookDTO>(book);
+            bookService.Add(bookDTO);
             return RedirectToAction("Index");
         }
 

@@ -3,10 +3,15 @@ using BookEditing.BLL.DTO;
 using BookEditing.BLL.Interfaces;
 using BookEditing.DAL.Entities;
 using BookEditing.DAL.Interfaces;
+using BookEditing.WebAPI.Models;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace BookEditing.BLL.Services
 {
@@ -17,28 +22,45 @@ namespace BookEditing.BLL.Services
         {
             client = new HttpClient();
         }
-        public void Add(BookDTO item)
+        [HttpPost]
+        public void Add(BookDTO book)
         {
-           
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, BookApiModel>()).CreateMapper();
+            var bookApiModel = mapper.Map<BookDTO, BookApiModel>(book);
+            var ser = JsonConvert.SerializeObject(bookApiModel);
+            var content = new StringContent(ser, Encoding.UTF8, "application/json");
+            var responce = client.PostAsync("http://localhost:32230/api/values", content).
+                ConfigureAwait(false).
+                GetAwaiter().
+                GetResult();
             
-
-            throw new System.NotImplementedException();
         }
-
-        public void Change(BookDTO item)
+        public void Change(BookDTO book)
         {
-            //вызвать метод api
+            int id = book.Id;
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, BookApiModel>()).CreateMapper();
+            var bookApiModel = mapper.Map<BookDTO, BookApiModel>(book);
+            //var id = Convert.ToInt32(Console.ReadLine());
+            var putStrContent = new StringContent(JsonConvert.SerializeObject(bookApiModel), Encoding.UTF8, "application/json");
+            var responce = client.PutAsync($"http://localhost:32230/api/values/{id}", putStrContent)
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult();
         }
 
         public BookDTO Get(int id)
         {
-            throw new System.NotImplementedException();
-            //вызвать метод api
+            var responce = client.GetAsync("http://localhost:32230/api/values/{id}")
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult();
+            var stringContext = responce.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+            var bookDTO = JsonConvert.DeserializeObject<BookDTO>(stringContext);
+            return bookDTO;
         }
 
         public IEnumerable<BookDTO> GetList()
         {
-            client = new HttpClient();
             var responce = client.GetAsync("http://localhost:32230/api/values")
                  .ConfigureAwait(false)
                  .GetAwaiter()
@@ -46,12 +68,14 @@ namespace BookEditing.BLL.Services
             var stringContext = responce.Content.ReadAsStringAsync().ConfigureAwait(false).GetAwaiter().GetResult();
             var bookDTOList =JsonConvert.DeserializeObject<List<BookDTO>>(stringContext);
             return bookDTOList;
-            //десериализовать!!!!
         }
 
         public void Remove(int id)
         {
-            //вызвать метод api
+            client.DeleteAsync($"http://localhost:32230/api/values/{id}")
+                .ConfigureAwait(false)
+                .GetAwaiter()
+                .GetResult();
         }
     }
 }
