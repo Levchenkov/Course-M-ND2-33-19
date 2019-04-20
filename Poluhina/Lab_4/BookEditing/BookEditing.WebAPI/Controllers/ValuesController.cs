@@ -23,19 +23,22 @@ namespace BookEditing.WebAPI.Controllers
         // GET api/values
         public IEnumerable<BookApiModel> Get()
         {
-            var bookList=bookService.GetList();
-            return bookList;
+            var bookApiModelList=bookService.GetList();
+            return bookApiModelList;
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public BookApiModel Get(int id)
         {
-            return "value";
+            var bookApiModel = bookService.Get(id);
+            return bookApiModel;
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public void Post(BookApiModel book)
         {
+            bookService.Add(book);
+            //закончить
         }
 
         // PUT api/values/5
@@ -46,6 +49,7 @@ namespace BookEditing.WebAPI.Controllers
         // DELETE api/values/5
         public void Delete(int id)
         {
+            bookService.Remove(id);
         }
     }
 }

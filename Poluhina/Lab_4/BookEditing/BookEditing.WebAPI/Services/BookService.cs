@@ -38,8 +38,8 @@ namespace BookEditing.WebAPI.Services
         {
             var book = UnitOfWork.Books.Get(id);
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Book, BookApiModel>()).CreateMapper();
-            var bookDAL = mapper.Map<Book, BookApiModel>(book);
-            return bookDAL;
+            var bookApiModel = mapper.Map<Book, BookApiModel>(book);
+            return bookApiModel;
         }
         public void Dispose()
         {

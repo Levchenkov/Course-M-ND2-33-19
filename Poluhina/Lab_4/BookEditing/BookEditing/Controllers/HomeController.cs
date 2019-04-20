@@ -15,7 +15,7 @@ namespace BookEditing.Controllers
         {
             bookService = repository;
         }
-
+        [HttpGet]
         public ActionResult Index()
         {
             var booksDTO = bookService.GetList();
