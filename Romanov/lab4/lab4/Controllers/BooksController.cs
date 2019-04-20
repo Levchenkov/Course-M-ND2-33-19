@@ -10,6 +10,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using lab4.DAL;
 using lab4.Models;
+using lab4.Models.DTO;
+using Newtonsoft.Json;
 
 namespace lab4.Controllers
 {
@@ -18,22 +20,38 @@ namespace lab4.Controllers
         private ApplicationContext db = new ApplicationContext();
 
         // GET: api/Books
-        public IQueryable<Book> GetBooks()
+        public IQueryable<BookDTO> GetBooks()
         {
-            return db.Books;
+            var books = from b in db.Books
+                        select new BookDTO()
+                        {
+                            Id = b.Id,
+                            Title = b.Title,
+                            Description = b.Description
+                        };
+
+            return books;
         }
 
         // GET: api/Books/5
-        [ResponseType(typeof(Book))]
+        [ResponseType(typeof(BookDetailDTO))]
         public IHttpActionResult GetBook(int id)
         {
-            Book book = db.Books.Find(id);
-            if (book == null)
+            var book = db.Books.Find(id);
+            var dto = new BookDetailDTO()
+            {
+                Id = book.Id,
+                Title = book.Title,
+                Description = book.Description,
+                Created = book.Created,
+                CreatedBY = book.ApplicationUser
+            };
+            if (dto == null)
             {
                 return NotFound();
             }
 
-            return Ok(book);
+            return Ok(dto);
         }
 
         // PUT: api/Books/5
@@ -72,18 +90,22 @@ namespace lab4.Controllers
         }
 
         // POST: api/Books
-        [ResponseType(typeof(Book))]
-        public IHttpActionResult PostBook(Book book)
+
+        [ResponseType(typeof(BookDTO))]
+        public void PostBook(dynamic book)
         {
-            if (!ModelState.IsValid)
+            var input = JsonConvert.SerializeObject(book);
+            BookDTO b = JsonConvert.DeserializeObject<BookDTO>(input);
+
+            var dto = new BookDTO()
             {
-                return BadRequest(ModelState);
-            }
+                Id = b.Id,
+                Title = b.Title,
+                Description = b.Description
+            };
 
             db.Books.Add(book);
             db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = book.Id }, book);
         }
 
         // DELETE: api/Books/5

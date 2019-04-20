@@ -191,6 +191,8 @@
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationUserManager.cs" />
     <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\DTO\BookDetailDTO.cs" />
+    <Compile Include="Models\DTO\BookDTO.cs" />
     <Compile Include="Models\ViewModels\CreateBookViewModel.cs" />
     <Compile Include="Models\ViewModels\EditBookViewModel.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />

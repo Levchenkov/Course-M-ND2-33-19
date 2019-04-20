@@ -15,6 +15,10 @@ namespace Lab4Console
             public int Id { get; set; }
             public string Title { get; set; }
             public string Descrition { get; set; }
+            public BookApi()
+            {
+
+            }
         }
         public static async Task GetAsync()
         {
@@ -37,28 +41,28 @@ namespace Lab4Console
         {
             var client = new HttpClient();
 
-            Console.WriteLine("Input title:");
-            var postBookTitle = Console.ReadLine();
-            Console.WriteLine("Input description:");
-            var postBookDescription = Console.ReadLine();
+            //Console.WriteLine("Input title:");
+            //var postBookTitle = Console.ReadLine();
+            //Console.WriteLine("Input description:");
+            //var postBookDescription = Console.ReadLine();
 
-            var postBook = new BookApi()
-            {
-                Title = postBookTitle,
-                Descrition = postBookDescription
-            };
+            var postBook = new BookApi();
+            postBook.Title = "t";
+            postBook.Descrition = "d";
 
             var jsonPostBook = JsonConvert.SerializeObject(postBook);
             var strForOut = new StringContent(jsonPostBook, Encoding.UTF8, "application/json");
 
             var response = await client.PostAsync("http://localhost:51113/api/books", strForOut);
-            
+            var stringContent = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(stringContent);
         }
 
         static async Task Main(string[] args)
         {
             Console.WriteLine("1. Show all books");
             Console.WriteLine("2. Show book using Id");
+            Console.WriteLine("3. Create book");
             string input = Console.ReadLine();
             switch (input)
             {
@@ -67,6 +71,9 @@ namespace Lab4Console
                     break;
                 case "2":
                     await GetItemAsync();
+                    break;
+                case "3":
+                    await PostAsync();
                     break;
             }
             
