@@ -1,0 +1,115 @@
+﻿@model ClientServerValidation.Models.Entities.Payment
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div asp-validation-summary="ModelOnly"></div>
+
+
+<form asp-antiforgery="true" asp-action="Create" asp-controller="Payment">
+    <div class="validation" asp-validation-summary="All"></div>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label asp-for="FirstName"></label>
+            <input type="text" class="form-control" placeholder="First name" asp-for="FirstName" />
+            <span asp-validation-for="FirstName"></span>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="MiddleName"></label>
+            <input type="text" class="form-control" placeholder="Middle name" asp-for="MiddleName" />
+            <span asp-validation-for="MiddleName"></span>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="LastName"></label>
+            <input type="text" class="form-control" placeholder="Last name" asp-for="LastName" />
+            <span asp-validation-for="LastName"></span>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-3 mb-3">
+            <label asp-for="City"></label>
+            <input type="text" class="form-control" placeholder="City" asp-for="City" />
+            <span asp-validation-for="City"></span>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="Country"></label>
+            <input type="text" class="form-control" placeholder="Country" asp-for="Country" />
+            <span asp-validation-for="Country"></span>
+        </div>
+
+        <div class="col-md-5 mb-3">
+            <label asp-for="Address"></label>
+            <input type="text" class="form-control" placeholder="Adress" asp-for="Address" />
+            <span asp-validation-for="Address"></span>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-3 mb-3">
+            <label asp-for="Email"></label><br />
+            <input type="text" class="form-control" asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label asp-for="PostCode"></label><br />
+            <input type="text" class="form-control" asp-for="PostCode" required />
+            <span asp-validation-for="PostCode"></span>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-2 mb-3">
+            <label asp-for="Amount"></label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control" asp-for="Amount" aria-label="Amount (to the nearest dollar)" />
+            </div>
+            <span asp-validation-for="Amount"></span>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="Description"></label><br />
+            <textarea class="form-control" asp-for="Description" rows="3"></textarea>
+            <span asp-validation-for="Description"></span>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-3 mb-3">
+            <label asp-for="CreditCardNumber"></label><br />
+            <input type="text" class="form-control" asp-for="CreditCardNumber" />
+            <span asp-validation-for="CreditCardNumber"></span>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="ExpirationMonth"></label><br />
+            <input type="text" class="form-control" asp-for="ExpirationMonth" />
+            <span asp-validation-for="ExpirationMonth"></span>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="ExpirationYear"></label><br />
+            <input type="text" class="form-control" asp-for="ExpirationYear" />
+            <span asp-validation-for="ExpirationYear"></span>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="SecurityCode"></label><br />
+            <input type="text" class="form-control" asp-for="SecurityCode" />
+            <span asp-validation-for="SecurityCode"></span>
+        </div>
+    </div>
+
+    <div class="col-auto my-1">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
