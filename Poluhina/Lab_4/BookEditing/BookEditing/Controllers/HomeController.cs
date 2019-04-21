@@ -3,7 +3,6 @@ using BookEditing.BLL.DTO;
 using BookEditing.BLL.Interfaces;
 using BookEditing.Models;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Web.Mvc;
 
 namespace BookEditing.Controllers

@@ -1,16 +1,11 @@
 ﻿using AutoMapper;
 using BookEditing.BLL.DTO;
 using BookEditing.BLL.Interfaces;
-using BookEditing.DAL.Entities;
-using BookEditing.DAL.Interfaces;
 using BookEditing.WebAPI.Models;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace BookEditing.BLL.Services
@@ -40,7 +35,6 @@ namespace BookEditing.BLL.Services
             int id = book.Id;
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookDTO, BookApiModel>()).CreateMapper();
             var bookApiModel = mapper.Map<BookDTO, BookApiModel>(book);
-            //var id = Convert.ToInt32(Console.ReadLine());
             var putStrContent = new StringContent(JsonConvert.SerializeObject(bookApiModel), Encoding.UTF8, "application/json");
             var responce = client.PutAsync($"http://localhost:32230/api/values/{id}", putStrContent)
                 .ConfigureAwait(false)

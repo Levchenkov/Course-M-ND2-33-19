@@ -27,7 +27,9 @@ namespace BookEditing.DAL.Repositories
         }
         public void Change(Book book)
         {
+
             db.Entry(book).State = EntityState.Modified;
+
         }
         public void Remove(int id)
         {
@@ -37,7 +39,7 @@ namespace BookEditing.DAL.Repositories
         }
         public Book Get(int id)
         {
-            var book = db.Books.Where(x => x.Id == id).FirstOrDefault();
+            var book = db.Books.AsNoTracking().Where(x => x.Id == id).FirstOrDefault();
             return book;
         }
     }
