@@ -36,15 +36,27 @@ namespace BookEditing.WebAPI.Controllers
             //закончить
         }
         // PUT api/values/5
-        public void Put(int id, [FromBody]BookApiModel book)
+        //public void Put(int id, [FromBody]BookApiModel book)
+        //{
+        //    if (id == book.Id)
+        //    {
+        //        var bookApiModel = bookService.Get(id);
+        //        bookService.Change(book);
+        //    }
+        //}
+        public void Put(int id, [FromBody] BookApiModel bookApiModel)
         {
-            if (id == book.Id)
-            {
-                var bookApiModel = bookService.Get(id);
-                bookService.Change(book);
-            }
-        }
+            var book = bookService.Get(id);
 
+            book.Id = bookApiModel.Id;
+            book.Created = bookApiModel.Created;
+            book.CreatedBy = bookApiModel.CreatedBy;
+            book.Description = bookApiModel.Description;
+            book.Title = bookApiModel.Title;
+            book.Updated = bookApiModel.Updated;
+            book.UpdatedBy = bookApiModel.UpdatedBy;
+            bookService.Change(book);
+        }
         // DELETE api/values/5
         public void Delete(int id)
         {
