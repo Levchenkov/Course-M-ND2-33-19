@@ -67,6 +67,21 @@ namespace Lab4Console
             var stringContent = await response.Content.ReadAsStringAsync();
             Console.WriteLine(stringContent);
         }
+        public static async Task PutAsync()
+        {
+            var client = new HttpClient();
+            Console.WriteLine("Input Id");
+            var inputId = Convert.ToInt32(Console.ReadLine());
+            BookApi bApi = new BookApi();
+            Console.WriteLine("Write a new description");
+            var newDescription = Console.ReadLine();
+            bApi.Description = newDescription;
+            var jsonNewDescription = JsonConvert.SerializeObject(bApi);
+            var stringContent = new StringContent(jsonNewDescription, Encoding.UTF8, "application/json");
+            var response = await client.PutAsync($"http://localhost:51113/api/books/{inputId}", stringContent);
+            var responseString = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(responseString);
+        }
 
         static async Task Main(string[] args)
         {
@@ -76,6 +91,7 @@ namespace Lab4Console
                 Console.WriteLine("2. Show book using Id");
                 Console.WriteLine("3. Create book");
                 Console.WriteLine("4. Delete book");
+                Console.WriteLine("5. Edit description");
                 string input = Console.ReadLine();
                 switch (input)
                 {
@@ -90,6 +106,9 @@ namespace Lab4Console
                         break;
                     case "4":
                         await DeleteAsync();
+                        break;
+                    case "5":
+                        await PutAsync();
                         break;
                 }
 

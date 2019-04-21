@@ -56,38 +56,16 @@ namespace lab4.Controllers
         }
 
         // PUT: api/Books/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutBook(int id, Book book)
+        public void PutBook(int id, JObject input)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var jsonInput = JsonConvert.SerializeObject(input);
+            BookDTO dto = JsonConvert.DeserializeObject<BookDTO>(jsonInput);
 
-            if (id != book.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(book).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BookExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            var oldBook = db.Books.Find(id);
+            oldBook.Description = dto.Description;
+            oldBook.UpdatedTime = DateTime.Now;
+            db.Entry(oldBook).State = EntityState.Modified;
+            db.SaveChanges();
         }
 
         // POST: api/Books
