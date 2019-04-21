@@ -8,7 +8,14 @@
             background-color: #fdeffd;
         }
     </style>
+    <link rel="stylesheet" href="Content/Site.css">
+    <!--<script>
 
+            function change() {
+               var color = "red";
+                return color;
+        }
+    </script>-->
 </head>
 <body>
     <canvas id='drawingpad' width='400' height='300'></canvas>
@@ -17,7 +24,8 @@
     <script src="/Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src="/signalr/hubs"></script>
     <script>
-
+        var canvas = document.getElementById('drawingpad');
+        var ctx = canvas.getContext('2d');
         $(function () {
 
             var drawGame = {
@@ -35,8 +43,8 @@
                 endY: 0
             };
             // контекст элемента canvas
-            var canvas = document.getElementById('drawingpad');
-            var ctx = canvas.getContext('2d');
+            //var canvas = document.getElementById('drawingpad');
+            //var ctx = canvas.getContext('2d');
 
             // Ссылка на автоматически-сгенерированный прокси хаба
             var chat = $.connection.drawHub;
@@ -55,14 +63,18 @@
                 canvas.addEventListener("mouseup", mouseup, false);
             });
             // просто рисуем линию
+
+
+
             function drawLine(ctx, x1, y1, x2, y2, thickness) {
                 ctx.beginPath();
                 ctx.moveTo(x1, y1);
                 ctx.lineTo(x2, y2);
                 ctx.lineWidth = thickness;
-                ctx.strokeStyle = "#444";
+                ctx.strokeStyle = ctx.strokeStyle;
                 ctx.stroke();
             }
+
             // нажите мыши
             function mousedown(e) {
 
@@ -104,6 +116,16 @@
                 drawGame.isDrawing = false;
             }
         });
+
+        function changeColor(color) {
+            ctx.strokeStyle = color;
+        }
     </script>
+    <div class="divstyle">
+        <button class="button" onclick="changeColor('#F00000')"></button>
+        <button class="button red" onclick="changeColor('#F00000')"></button>
+        <button class="button green" onclick="changeColor('#48ff00')"></button>
+        <button class="button yellow" onclick="changeColor('#fff600')"></button>
+    </div>
 </body>
 </html>
