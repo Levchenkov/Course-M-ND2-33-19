@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        canvas {
+            position: relative;
+            background-color: #fdeffd;
+        }
+    </style>
+
+</head>
+<body>
+    <canvas id='drawingpad' width='400' height='300'></canvas>
+
+    <script src="/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="/signalr/hubs"></script>
+    <script>
+
+        $(function () {
+
+            var drawGame = {
+                // указывает, происходит ли отрисовка
+                isDrawing: false,
+                // начальная точка следующей линии
+                startX: 0,
+                startY: 0,
+            };
+            // модель линий
+            var data = {
+                startX: 0,
+                startY: 0,
+                endX: 0,
+                endY: 0
+            };
+            // контекст элемента canvas
+            var canvas = document.getElementById('drawingpad');
+            var ctx = canvas.getContext('2d');
+
+            // Ссылка на автоматически-сгенерированный прокси хаба
+            var chat = $.connection.drawHub;
+            // Объявление функции, которая хаб вызывает при получении сообщений
+            chat.client.addLine = function (data) {
+
+                // Добавление линий
+                drawLine(ctx, data.startX, data.startY, data.endX, data.endY, 1);
+            };
+
+            // Открываем соединение
+            $.connection.hub.start().done(function () {
+                // после открытия соединения устанавливаем обработчики мыши
+                canvas.addEventListener("mousedown", mousedown, false);
+                canvas.addEventListener("mousemove", mousemove, false);
+                canvas.addEventListener("mouseup", mouseup, false);
+            });
+            // просто рисуем линию
+            function drawLine(ctx, x1, y1, x2, y2, thickness) {
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.lineWidth = thickness;
+                ctx.strokeStyle = "#444";
+                ctx.stroke();
+            }
+            // нажите мыши
+            function mousedown(e) {
+
+                // получаем позиции x и y относительно верхнего левого угла элемента canvas
+                var mouseX = e.layerX || 0;
+                var mouseY = e.layerY || 0;
+                drawGame.startX = mouseX;
+                drawGame.startY = mouseY;
+                drawGame.isDrawing = true;
+            };
+
+            // перемещение мыши
+            function mousemove(e) {
+
+                // рисуем линию, если isdrawing==true
+                if (drawGame.isDrawing) {
+
+                    // получаем позиции x и y относительно верхнего левого угла элемента canvas
+                    var mouseX = e.layerX || 0;
+                    var mouseY = e.layerY || 0;
+                    if (!(mouseX == drawGame.startX &&
+                        mouseY == drawGame.startY)) {
+                        drawLine(ctx, drawGame.startX,
+                            drawGame.startY, mouseX, mouseY, 1);
+
+                        data.startX = drawGame.startX;
+                        data.startY = drawGame.startY;
+                        data.endX = mouseX;
+                        data.endY = mouseY;
+                        chat.server.send(data);
+
+                        drawGame.startX = mouseX;
+                        drawGame.startY = mouseY;
+                    }
+                }
+            };
+
+            function mouseup(e) {
+                drawGame.isDrawing = false;
+            }
+        });
+    </script>
+</body>
+</html>
