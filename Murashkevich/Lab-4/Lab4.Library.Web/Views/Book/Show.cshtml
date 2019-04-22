@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Lab4.Library.Domain.Contracts.ViewModel.BookViewModel>
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Show</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a href="/Book/Create">Add new book</a>
+    </p>
+}
+    <div>
+        @foreach (var book in Model)
+        {
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayName("Id:")
+                </dt>
+                <dd>
+                    @book.Id
+                </dd>
+                <dt>
+                    @Html.DisplayName("Title:")
+                </dt>
+                <dd>
+                    @book.Title
+                </dd>
+                <dt>
+                    @Html.DisplayName("Description:")
+                </dt>
+                <dd>
+                    @book.Description
+                </dd>
+                <dt>
+                    @Html.DisplayName("Created by:")
+                </dt>
+                <dd>
+                    @book.CreatedBy
+                </dd>
+                <dt>
+                    @Html.DisplayName("Created:")
+                </dt>
+                <dd>
+                    @book.Create.ToString()
+                </dd>
+                @if (book.UpdatedBy != null)
+                {
+                    <dt>
+                        @Html.DisplayName("Update by:")
+                    </dt>
+                    <dd>
+                        @book.UpdatedBy
+                    </dd>
+                    <dt>
+                        @Html.DisplayName("Updated:")
+                    </dt>
+                    <dd>
+                        @book.Updated.ToString()
+                    </dd>
+                }
+                else
+                {
+                    @Html.DisplayName("Don't have updates")
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="list-group">
+                        <a href="/Book/Update/@book.Id" class="list-group-item list-group-item-warning">Update</a>
+                        <a href="/Book/Delete/@book.Id" class="list-group-item list-group-item-danger">Delete</a>
+                    </div>
+
+                }
+            </dl>
+        }
+    </div>
