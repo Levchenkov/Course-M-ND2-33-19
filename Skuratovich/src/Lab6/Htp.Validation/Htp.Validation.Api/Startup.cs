@@ -73,7 +73,7 @@ namespace Htp.Validation.Api
             // global cors policy
             app.UseCors(builder =>
             {
-                builder.WithOrigins("https://localhost:5002");
+                builder.WithOrigins(new string[] { "https://localhost:5002", "https://localhost:5003", "http://localhost:5003" } );
             });
 
             app.UseHttpsRedirection();

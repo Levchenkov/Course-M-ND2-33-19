@@ -23,6 +23,32 @@ namespace Htp.Validation.Data.EntityFramework.Migrations
                     b.Property<string>("Address")
                         .IsRequired();
 
+                    b.Property<decimal>("Amount");
+
+                    b.Property<string>("City")
+                        .IsRequired();
+
+                    b.Property<string>("Country")
+                        .IsRequired();
+
+                    b.Property<string>("CreditCardNumber")
+                        .IsRequired()
+                        .HasMaxLength(16);
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(250);
+
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("ExpirationMonth")
+                        .IsRequired()
+                        .HasMaxLength(2);
+
+                    b.Property<string>("ExpirationYear")
+                        .IsRequired()
+                        .HasMaxLength(2);
+
                     b.Property<string>("FirstName")
                         .IsRequired();
 
@@ -31,6 +57,13 @@ namespace Htp.Validation.Data.EntityFramework.Migrations
 
                     b.Property<string>("MiddleName")
                         .IsRequired();
+
+                    b.Property<string>("PostCode")
+                        .IsRequired();
+
+                    b.Property<string>("SecurityCode")
+                        .IsRequired()
+                        .HasMaxLength(3);
 
                     b.HasKey("Id");
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
 export class Payments extends Component {
   static displayName = Payments.name;
@@ -22,7 +23,7 @@ export class Payments extends Component {
             <th>First Name</th>
             <th>Middle Name</th>
             <th>Last Name</th>
-            <th>Address</th>
+                    <th>Address</th>
           </tr>
         </thead>
         <tbody>
@@ -47,7 +48,10 @@ export class Payments extends Component {
     return (
       <div>
         <h1>Payments</h1>
-        <p>This component demonstrates fetching data from the server.</p>
+            <p>This component demonstrates fetching Payments from the server.</p>
+            <p>
+                <Link to="/add-payment">Create</Link>
+            </p>
         {contents}
       </div>
     );
