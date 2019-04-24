@@ -13,7 +13,7 @@ namespace Prikhodko._6th_lab.Validation
         {
             string dateValidationMessage = "Expiration date must be later than the current date";
 
-            RuleFor(x => x.Address).NotEmpty().Matches(@"[A-aZ-z \d-!\#$%&'()*+,./:;<=>?@[\\\]_`{|}~]+")
+            RuleFor(x => x.Address).NotEmpty().Matches(@"[A-aZ-z \d-\&'()*+,./:;?@[\\\]_`|]+")
                 .WithMessage("The address can include letters, digits, quotes, and commas");
             RuleFor(x => x.CVV).NotEmpty().InclusiveBetween(100, 999).WithMessage("CVV must contain 3 digits");
             RuleFor(x => x.City).NotEmpty().Matches(@"[A-aZ-z\s-]+");
