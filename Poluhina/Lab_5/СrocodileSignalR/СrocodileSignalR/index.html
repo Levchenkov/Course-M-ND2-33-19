@@ -9,61 +9,41 @@
         }
     </style>
     <link rel="stylesheet" href="Content/Site.css">
-    <!--<script>
-
-            function change() {
-               var color = "red";
-                return color;
-        }
-    </script>-->
 </head>
 <body>
     <canvas id='drawingpad' width='400' height='300'></canvas>
-
     <script src="/Scripts/jquery-3.3.1.min.js"></script>
     <script src="/Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src="/signalr/hubs"></script>
+    <script src="/Scripts/util.js"></script>
     <script>
         var canvas = document.getElementById('drawingpad');
         var ctx = canvas.getContext('2d');
         $(function () {
 
             var drawGame = {
-                // указывает, происходит ли отрисовка
                 isDrawing: false,
-                // начальная точка следующей линии
                 startX: 0,
                 startY: 0,
             };
-            // модель линий
             var data = {
                 startX: 0,
                 startY: 0,
                 endX: 0,
                 endY: 0
             };
-            // контекст элемента canvas
-            //var canvas = document.getElementById('drawingpad');
-            //var ctx = canvas.getContext('2d');
 
-            // Ссылка на автоматически-сгенерированный прокси хаба
-            var chat = $.connection.drawHub;
-            // Объявление функции, которая хаб вызывает при получении сообщений
-            chat.client.addLine = function (data) {
+            var draw = $.connection.drawHub;
+            draw.client.addLine = function (data) {
 
-                // Добавление линий
                 drawLine(ctx, data.startX, data.startY, data.endX, data.endY, 1);
             };
 
-            // Открываем соединение
             $.connection.hub.start().done(function () {
-                // после открытия соединения устанавливаем обработчики мыши
                 canvas.addEventListener("mousedown", mousedown, false);
                 canvas.addEventListener("mousemove", mousemove, false);
                 canvas.addEventListener("mouseup", mouseup, false);
             });
-            // просто рисуем линию
-
 
 
             function drawLine(ctx, x1, y1, x2, y2, thickness) {
@@ -75,10 +55,7 @@
                 ctx.stroke();
             }
 
-            // нажите мыши
             function mousedown(e) {
-
-                // получаем позиции x и y относительно верхнего левого угла элемента canvas
                 var mouseX = e.layerX || 0;
                 var mouseY = e.layerY || 0;
                 drawGame.startX = mouseX;
@@ -86,13 +63,10 @@
                 drawGame.isDrawing = true;
             };
 
-            // перемещение мыши
             function mousemove(e) {
 
-                // рисуем линию, если isdrawing==true
                 if (drawGame.isDrawing) {
 
-                    // получаем позиции x и y относительно верхнего левого угла элемента canvas
                     var mouseX = e.layerX || 0;
                     var mouseY = e.layerY || 0;
                     if (!(mouseX == drawGame.startX &&
@@ -104,7 +78,7 @@
                         data.startY = drawGame.startY;
                         data.endX = mouseX;
                         data.endY = mouseY;
-                        chat.server.send(data);
+                        draw.server.send(data);
 
                         drawGame.startX = mouseX;
                         drawGame.startY = mouseY;
@@ -121,11 +95,34 @@
             ctx.strokeStyle = color;
         }
     </script>
-    <div class="divstyle">
-        <button class="button" onclick="changeColor('#F00000')"></button>
+    <div class="divstyle">       
         <button class="button red" onclick="changeColor('#F00000')"></button>
         <button class="button green" onclick="changeColor('#48ff00')"></button>
         <button class="button yellow" onclick="changeColor('#fff600')"></button>
     </div>
+
+
+    <div class="main">
+        <div id="loginBlock">
+            Введите логин:<br />
+            <input id="txtUserName" type="text" />
+            <input id="btnLogin" type="button" value="Войти" />
+        </div>
+        <div id="chatBody">
+            <div id="header"></div>
+            <div id="inputForm">
+                <input type="text" id="message" />
+                <input type="button" id="sendmessage" value="Отправить" />
+            </div>
+            <div id="chatroom"></div>
+
+            <div id="chatusers">
+                <p><b>Все пользователи</b></p>
+            </div>
+        </div>
+        <input id="hdId" type="hidden" />
+        <input id="username" type="hidden" />
+    </div>
+
 </body>
 </html>

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using СrocodileSignalR.Models;
 
-namespace СrocodileSignalR
+namespace СrocodileSignalR.Hubs
 {
     public class DrawHub : Hub
     {
