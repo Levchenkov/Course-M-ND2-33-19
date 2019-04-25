@@ -22,16 +22,16 @@ namespace Htp.Validation.Data.EntityFramework
         //
         // dotnet ef database update
 
-        public DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            string wanted_path = Path.GetDirectoryName(Directory.GetCurrentDirectory());
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    string wanted_path = Path.GetDirectoryName(Directory.GetCurrentDirectory());
 
-            optionsBuilder.UseSqlite($"Filename={wanted_path}/app.db");
+        //    optionsBuilder.UseSqlite($"Filename={wanted_path}/app.db");
 
-            optionsBuilder.EnableSensitiveDataLogging();
-        }
+        //    optionsBuilder.EnableSensitiveDataLogging();
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

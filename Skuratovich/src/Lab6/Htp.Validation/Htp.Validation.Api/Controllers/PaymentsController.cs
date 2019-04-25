@@ -5,6 +5,7 @@ using Htp.Validation.Domain.Contracts;
 using Htp.Validation.Domain.Contracts.Comands;
 using Htp.Validation.Domain.Contracts.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Htp.Validation.Api.Controllers
 {
@@ -15,16 +16,22 @@ namespace Htp.Validation.Api.Controllers
     {
         private readonly IPaymentService paymentService;
         private readonly IUrlHelper urlHelper;
+        private readonly ILogger<PaymentsController> logger;
 
-        public PaymentsController(IPaymentService paymentService, IUrlHelper urlHelper)
+        public PaymentsController(IPaymentService paymentService, 
+            IUrlHelper urlHelper, ILogger<PaymentsController> logger)
         {
             this.paymentService = paymentService;
             this.urlHelper = urlHelper;
+
+            this.logger = logger;
         }
 
         [HttpGet(Name = "GetPayments")]
         public async Task<ActionResult> GetPayments()
         {
+            logger.LogInformation(LoggingEvents.ListItems, "List payments");
+
             var payments = await paymentService.GetAllAsync();
 
             var wrapper = new LinkedCollectionResourceWrapper<PaymentModel>(payments);
@@ -36,6 +43,8 @@ namespace Htp.Validation.Api.Controllers
         [ProducesResponseType(404)]
         public async Task<ActionResult> GetPayment(int id)
         {
+            logger.LogInformation(LoggingEvents.GetItem, "Get payment by Id");
+
             var payment = await paymentService.GetAsync(id);
 
             if (payment == null)
@@ -52,6 +61,8 @@ namespace Htp.Validation.Api.Controllers
         // public async Task<ActionResult<PaymentModel>> CreatePayment([FromBody] CreatePaymentRequest createPaymentRequest)
         public async Task<IActionResult> CreatePayment([FromBody] CreatePaymentRequest createPaymentRequest)
         {
+            logger.LogInformation(LoggingEvents.InsertItem, "Insert new payment");
+
             if (createPaymentRequest == null)
             {
                 return BadRequest();

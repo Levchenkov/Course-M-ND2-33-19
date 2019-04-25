@@ -57,9 +57,9 @@ namespace Htp.Validation.Domain.Contracts.Validators
                 .When(x => Convert.ToInt32("20" + x.ExpirationYear) == DateTime.Now.Year);
 
             RuleFor(x => x.SecurityCode)
-                .NotEmpty()
-                .Matches("[0-9]{3}")
-                .MaximumLength(3);
+            .NotEmpty()
+            .Matches("[0-9]{3}")
+            .MaximumLength(3);
         }
     }
 }
