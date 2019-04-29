@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>..\..\..\..\..\..\..\..\..\usr\local\share\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.dependencyinjection.abstractions\2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.4" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.2.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MappingProfiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Htp.Validation.Data.Contracts\Htp.Validation.Data.Contracts.csproj" />
+    <ProjectReference Include="..\Htp.Validation.Domain.Contracts\Htp.Validation.Domain.Contracts.csproj" />
+    <ProjectReference Include="..\Htp.Validation.Data.EntityFramework\Htp.Validation.Data.EntityFramework.csproj" />
+    <ProjectReference Include="..\Htp.Validation.Domain.Services\Htp.Validation.Domain.Services.csproj" />
+  </ItemGroup>
+</Project>
