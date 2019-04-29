@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Lab.Library.Domain.Contracts.ViewModels.BookViewModel>
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Show</h2>
+
+<p>
+    <a href="/Book/Add">Add new book</a>
+</p>
+
+<div>
+    <h4>BookViewModel</h4>
+    @foreach (var book in Model)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayName("Id:")
+            </dt>
+            <dd>
+                @book.Id
+            </dd>
+            <dt>
+                @Html.DisplayName("Title:")
+            </dt>
+            <dd>
+                @book.Title
+            </dd>
+            <dt>
+                @Html.DisplayName("Description:")
+            </dt>
+            <dd>
+                @book.Description
+            </dd>
+            <dt>
+                @Html.DisplayName("Author:")
+            </dt>
+            <dd>
+                @book.Author
+            </dd>
+            <dt>
+                @Html.DisplayName("Created:")
+            </dt>
+            <dd>
+                @book.Created.ToLongDateString()
+            </dd>
+            <dt>
+                @Html.DisplayName("Genre:")
+            </dt>
+            <dd>
+                @book.Genre.GenreNamEnum.ToString()
+            </dd>
+            <dt>
+                @Html.DisplayName("Is Paper:")
+            </dt>
+            <dd>
+                @book.IsPaper
+            </dd>
+            <dt>
+                @Html.DisplayName("Languages:")
+            </dt>
+            <dd>
+                @book.StringLanguage
+            </dd>
+            <dt>
+                @Html.DisplayName("Delivery Required")
+            </dt>
+            <dd>
+                @book.DeliveryRequired
+            </dd>
+        </dl>
+        <p>
+            <a href="/Book/Remove/@book.Id">Remove</a>
+        </p>
+        <p>
+            <a href="/Book/Update/@book.Id">Update</a>
+        </p>
+        <br />
+    }
+</div>
