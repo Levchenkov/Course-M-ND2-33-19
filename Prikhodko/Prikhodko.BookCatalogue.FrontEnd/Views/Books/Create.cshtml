@@ -1,0 +1,119 @@
+﻿@model Prikhodko.BookCatalogue.FrontEnd.Models.BookViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm("Create", "Books"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Book</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(book => book.Title, "Enter title here:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(book => book.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(book => book.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(book => book.Description, "Add a brief description:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(book => book.Description, 3, 40, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(book => book.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(book => book.Author, "Author's name:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <span>
+                    @Html.EditorFor(book => book.Author.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(book => book.Author.FirstName, "", new { @class = "text-danger" })
+                </span>
+                <span>
+                    @Html.EditorFor(book => book.Author.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(book => book.Author.LastName, "", new { @class = "text-danger" })
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(book => book.DateOfIssue, "Date of issue:", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(book => book.DateOfIssue, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(book => book.DateOfIssue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(book => book.IsPaper, "Is book available in paper?", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(book => book.IsPaper)
+                    @Html.ValidationMessageFor(book => book.IsPaper, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(book => book.Genre, "What genre is this book?", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EnumDropDownListFor(book => book.Genre)
+                    @Html.ValidationMessageFor(book => book.Genre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(book => book.AvailableLanguages, "What languages is book available in?", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.ListBoxFor(book => book.AvailableLanguages, new MultiSelectList(ViewBag.Languages))
+                    @Html.ValidationMessageFor(book => book.AvailableLanguages, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(book => book.DeliveryOption, "How should we deliver the book?", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="list-group">
+                    <p>
+                        @Html.LabelFor(book => book.DeliveryOption, "Takeaway", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.RadioButtonFor(book => book.DeliveryOption, "Takeaway")
+                        @Html.ValidationMessageFor(book => book.DeliveryOption, "", new { @class = "text-danger" })
+                    </p>
+                    <p>
+                        @Html.LabelFor(book => book.DeliveryOption, "Post", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.RadioButtonFor(book => book.DeliveryOption, "Post")
+                        @Html.ValidationMessageFor(book => book.DeliveryOption, "", new { @class = "text-danger" })
+                    </p>
+                    <p>
+                        @Html.LabelFor(book => book.DeliveryOption, "Courier", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.RadioButtonFor(book => book.DeliveryOption, "Courier")
+                        @Html.ValidationMessageFor(book => book.DeliveryOption, "", new { @class = "text-danger" })
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Return to home page", "../Home/Index")
+</div>

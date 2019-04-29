@@ -3,13 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day1", "Day1", "{D7DADB14-390B-42D0-9270-0B37FC47FB06}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prikhodko.BookCatalogue.Data.Contracts", "BookCatalogue\Prikhodko.BookCatalogue.Data.Contracts.csproj", "{2728AF8F-1825-4FAC-8ACA-3EBBAEF08AA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalogue", "BookCatalogue\BookCatalogue.csproj", "{2728AF8F-1825-4FAC-8ACA-3EBBAEF08AA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prikhodko.BookCatalogue.PL", "Prikhodko.BookCatalogue.PL\Prikhodko.BookCatalogue.PL.csproj", "{D29EE2ED-CA76-4140-9F31-13765B0AEBC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalogueTests", "BookCatalogueTests\BookCatalogueTests.csproj", "{47D6D8B3-B464-4250-B13D-C72C460C3643}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prikhodko.BookCatalogue.Config", "Prikhodko.BookCatalogue.Config\Prikhodko.BookCatalogue.Config.csproj", "{C731B316-017A-4E70-9D55-85B2CE6A0A8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookCatalogueConsole", "BookCatalogueConsole\BookCatalogueConsole.csproj", "{8C41D1EB-768A-401D-8299-8B238335FC4A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prikhodko.BookCatalogue.Data.EF", "Prikhodko.BookCatalogue.Data.EF\Prikhodko.BookCatalogue.Data.EF.csproj", "{89A377ED-7D8E-4EF4-9CEB-D1847A014157}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prikhodko.BookCatalogue.Service.Contracts", "Prikhodko.BookCatalogue.Service.Contracts\Prikhodko.BookCatalogue.Service.Contracts.csproj", "{FCC929BF-18C1-4AD1-86C6-04EED1EA64C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prikhodko.BookCatalogue.Service", "Prikhodko.BookCatalogue.Service\Prikhodko.BookCatalogue.Service.csproj", "{6789E26B-594D-4558-A96A-BC5B1505A0D5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FBEF3F4F-57B6-461F-809A-4F903D3417A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prikhodko.BookCatalogue.FrontEnd", "Prikhodko.BookCatalogue.FrontEnd\Prikhodko.BookCatalogue.FrontEnd.csproj", "{85A23C04-179A-47F4-ABBF-8CC0F82638D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,22 +29,33 @@ Global
 		{2728AF8F-1825-4FAC-8ACA-3EBBAEF08AA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2728AF8F-1825-4FAC-8ACA-3EBBAEF08AA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2728AF8F-1825-4FAC-8ACA-3EBBAEF08AA2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{47D6D8B3-B464-4250-B13D-C72C460C3643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{47D6D8B3-B464-4250-B13D-C72C460C3643}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{47D6D8B3-B464-4250-B13D-C72C460C3643}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{47D6D8B3-B464-4250-B13D-C72C460C3643}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8C41D1EB-768A-401D-8299-8B238335FC4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C41D1EB-768A-401D-8299-8B238335FC4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C41D1EB-768A-401D-8299-8B238335FC4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C41D1EB-768A-401D-8299-8B238335FC4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D29EE2ED-CA76-4140-9F31-13765B0AEBC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D29EE2ED-CA76-4140-9F31-13765B0AEBC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D29EE2ED-CA76-4140-9F31-13765B0AEBC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D29EE2ED-CA76-4140-9F31-13765B0AEBC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C731B316-017A-4E70-9D55-85B2CE6A0A8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C731B316-017A-4E70-9D55-85B2CE6A0A8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C731B316-017A-4E70-9D55-85B2CE6A0A8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C731B316-017A-4E70-9D55-85B2CE6A0A8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89A377ED-7D8E-4EF4-9CEB-D1847A014157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89A377ED-7D8E-4EF4-9CEB-D1847A014157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89A377ED-7D8E-4EF4-9CEB-D1847A014157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89A377ED-7D8E-4EF4-9CEB-D1847A014157}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCC929BF-18C1-4AD1-86C6-04EED1EA64C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCC929BF-18C1-4AD1-86C6-04EED1EA64C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCC929BF-18C1-4AD1-86C6-04EED1EA64C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCC929BF-18C1-4AD1-86C6-04EED1EA64C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6789E26B-594D-4558-A96A-BC5B1505A0D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6789E26B-594D-4558-A96A-BC5B1505A0D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6789E26B-594D-4558-A96A-BC5B1505A0D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6789E26B-594D-4558-A96A-BC5B1505A0D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85A23C04-179A-47F4-ABBF-8CC0F82638D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85A23C04-179A-47F4-ABBF-8CC0F82638D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85A23C04-179A-47F4-ABBF-8CC0F82638D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85A23C04-179A-47F4-ABBF-8CC0F82638D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{2728AF8F-1825-4FAC-8ACA-3EBBAEF08AA2} = {D7DADB14-390B-42D0-9270-0B37FC47FB06}
-		{47D6D8B3-B464-4250-B13D-C72C460C3643} = {D7DADB14-390B-42D0-9270-0B37FC47FB06}
-		{8C41D1EB-768A-401D-8299-8B238335FC4A} = {D7DADB14-390B-42D0-9270-0B37FC47FB06}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F8DAFB7C-011E-42FA-90A8-FB0BBD16F64C}
