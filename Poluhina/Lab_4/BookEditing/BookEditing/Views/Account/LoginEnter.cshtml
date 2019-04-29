@@ -1,0 +1,39 @@
+﻿@model BookEditing.Models.Login
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LoginEnter</title>
+</head>
+<body>
+    <div>
+        <p>@Html.ActionLink("Register", "Register", "Account")</p>
+        <h2>Sign in</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div>
+                @Html.ValidationSummary()
+                <input type="hidden" name="url" value="@ViewBag.url" />
+                <p>
+                    <label>Email</label><br />
+                    @Html.EditorFor(x => x.Email)
+                </p>
+                <p>
+                    <label>Password</label><br />
+                    @Html.EditorFor(x => x.Password)
+                </p>
+                <p><button type="submit">entrance</button></p>
+            </div>
+        }
+    </div>
+</body>
+</html>

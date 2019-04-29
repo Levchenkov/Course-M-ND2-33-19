@@ -1,0 +1,10 @@
+﻿@model BookEditing.Models.BookViewModel
+@Html.LabelFor(model => model.Title, "Title")
+<br />
+@Html.EditorFor(model => model.Title)
+<br /><br />
+@Html.LabelFor(model => model.Description, "Description")
+<br />
+@Html.TextAreaFor(model => model.Description)
+<br /><br />
+
