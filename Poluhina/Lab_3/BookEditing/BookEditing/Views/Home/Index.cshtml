@@ -1,0 +1,85 @@
+﻿@using BookEditing.Models;
+@model  IEnumerable<BookEditing.Models.BookViewModel>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Book Editor</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/bundles/bootstrap")
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-3">
+            @{Html.RenderPartial("_AddBook", new BookViewModel());}
+        </div>
+        <div class="col-md-9">
+            <h3>Book information</h3>
+            <table>
+                <tr>
+                    <td><p>Id</p></td>
+                    <td><p>Title</p></td>
+                    <td><p>Description</p></td>
+                    <td><p>Author</p></td>
+                    <td><p>Created</p></td>
+                    <td><p>Genre</p></td>
+                    <td><p>IsPaper</p></td>
+                    <td><p>Languages</p></td>
+                    <td><p>Delivery Required</p></td>
+                    <td><p></p></td>
+                    <td><p></p></td>
+                </tr>
+                @foreach (var book in Model)
+                {
+                    <tr>
+                        <td><p>@book.Id</p></td>
+                        <td><p>@book.Title</p></td>
+                        <td><p>@book.Description</p></td>
+                        <td><p>@book.Author</p></td>
+                        <td><p>@book.Created</p></td>
+                        <td><p>@book.Genre</p></td>
+                        @if (book.IsPaper == true)
+                        {
+                            <td><p>Yes</p></td>
+                        }
+                        else
+                        {
+                            <td><p>No</p></td>
+                        }
+                        <td>
+                            <p>
+                                @foreach (var b in book.Languages)
+                                {
+                                <p> @b.Text</p>
+                            }
+                                </p>
+                            </td>
+                        @if (book.DeliveryRequred == true)
+                        {
+                            <td><p>Yes</p></td>
+                        }
+                        else
+                        {
+                            <td><p>No</p></td>
+                        }
+                        <td class="bg-danger"><p>@Html.ActionLink("Delete", "Delete", new { id = book.Id })</p></td>
+                        <td class="bg-warning"><p>@Html.ActionLink("Edit", "Edit", new { id = book.Id })</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+

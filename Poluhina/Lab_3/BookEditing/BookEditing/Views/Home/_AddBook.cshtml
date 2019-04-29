@@ -1,0 +1,8 @@
+﻿@model BookEditing.Models.BookViewModel
+
+@using (Html.BeginForm("Add", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.Partial("_PartialBook");
+    <input class="btn-primary" type="submit" value="Add" />
+}

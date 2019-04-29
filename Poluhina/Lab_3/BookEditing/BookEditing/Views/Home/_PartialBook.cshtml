@@ -1,0 +1,42 @@
+﻿@model BookEditing.Models.BookViewModel
+@*@Html.HiddenFor(model => model.Id)*@
+@Html.LabelFor(model => model.Title, "Title")
+<br />
+@Html.EditorFor(model => model.Title)
+<br /><br />
+@Html.LabelFor(model => model.Description, "Description")
+<br />
+@Html.TextAreaFor(model => model.Description)
+<br /><br />
+@Html.LabelFor(model => model.Author, "Author")
+<br />
+@Html.EditorFor(model => model.Author)
+<br /><br />
+@Html.LabelFor(model => model.Created, "Created")
+<br />
+@Html.TextBoxFor(model => model.Created, new { @class = "form-control datepicker", placeholder = "Enter Drop-off date here..." })
+@Html.ValidationMessageFor(model => model.Created)
+
+<br /><br />
+@Html.LabelFor(model => model.Genre, "Genre")
+<br />
+@Html.DropDownListFor(model => model.Genre, new SelectList(new string[] { "novel", "detective", "poem", "fantasy" }))
+<br /><br />
+@Html.LabelFor(model => model.IsPaper, "IsPaper ")
+@Html.CheckBoxFor(m => m.IsPaper)
+<br />
+@Html.LabelFor(model => model.Languages, "Languages")
+<br />
+@Html.ListBoxFor(model => model.LanguagesIDs, new MultiSelectList(Model.Languages, "Value", "Text"))
+<br /><br />
+@Html.LabelFor(model => model.DeliveryRequred, "DeliveryRequred")
+<div>
+    <span>@Html.RadioButtonFor(i => i.DeliveryRequred, "true")Yes</span>
+    <span>@Html.RadioButtonFor(i => i.DeliveryRequred, "false")No</span> <br />
+
+</div>
+<br />
+
+<script type="text/javascript">
+    $(".datepicker").datepicker({ defaultDate: new Date() });
+</script>
