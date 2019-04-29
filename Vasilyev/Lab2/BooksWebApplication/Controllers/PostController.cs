@@ -14,13 +14,13 @@ namespace BooksWebApplication.Controllers
         // GET: Get
         public ActionResult Index()
         {
-            return View(BooksRepo.Books);
+            return View(BooksRepo.GetList());
         }
 
         // GET: Get/Details/5
         public ActionResult Details(int id)
         {
-            var book = BooksRepo.Books.FirstOrDefault(x => x.Id == id);
+            var book = BooksRepo.GetList().FirstOrDefault(x => x.Id == id);
             if (book == null) return new HttpNotFoundResult();
             var genres = new List<SelectListItem>();
             var names = Enum.GetNames(typeof(Genre));
@@ -41,10 +41,8 @@ namespace BooksWebApplication.Controllers
 
         // GET: Get/Create
         public ActionResult Create()
-        {
-            //BooksRepo = new BookRepository();
+        {            
             Book book = new Book();
-            //book = BooksRepo.Books.FirstOrDefault(x => x.Id == id);
             if (book == null) return new HttpNotFoundResult();
             var genres = new List<SelectListItem>();
             var names = Enum.GetNames(typeof(Genre));
@@ -84,7 +82,7 @@ namespace BooksWebApplication.Controllers
         public ActionResult Edit(int id)
         {            
             Book book = new Book();
-            book = BooksRepo.Books.FirstOrDefault(x => x.Id == id);
+            book = BooksRepo.GetList().FirstOrDefault(x => x.Id == id);
             if (book == null) return new HttpNotFoundResult();
             var genres = new List<SelectListItem>();
             var names = Enum.GetNames(typeof(Genre));

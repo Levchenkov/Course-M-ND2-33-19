@@ -1,6 +1,4 @@
-﻿@model Models.Book
-
-@*@langs Models.Langs*@
+﻿@model Http.BooksLibrary.Domain.Contracts.ViewModels.BookViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -56,11 +54,15 @@
             @Html.DisplayNameFor(model => model.Languages)
         </dt>
 
-        @foreach (var lang in Model.Languages)
+        @if(Model.Languages.Length == 0) { <dd>N/A</dd>}
+        else
         {
-            <dd>
-                @Model.AvailableLanguages[lang].Text
-            </dd>
+            foreach (var lang in Model.Languages)
+            {
+                <dd>
+                    @Model.AvailableLanguages[lang].Text
+                </dd>
+            }
         }
 
         <dt>

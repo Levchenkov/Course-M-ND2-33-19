@@ -10,11 +10,8 @@ namespace Models
     public class BookRepository : IRepository<Book>
     {
         private readonly IList<Book> data;
-        //private string path = Directory.GetCurrentDirectory() + @"\books.json";
         private string path = HttpContext.Current.Server.MapPath("~/App_Data/books.json");
         private IJsonWorker jw;
-
-        public IList<Book> Books { get { return data; } }
 
         public BookRepository()
         {
@@ -56,6 +53,11 @@ namespace Models
             }
 
             throw new Exception("Element not found");
+        }
+
+        public IList<Book> GetList()
+        {
+            return data;
         }
 
         public void Add(Book book)
