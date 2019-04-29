@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.3" />
+    <PackageReference Include="Autofac" Version="4.9.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Htp.Books.Data.Contracts\Htp.Books.Data.Contracts.csproj" />
+    <ProjectReference Include="..\Htp.Books.Common.Contracts\Htp.Books.Common.Contracts.csproj" />
+    <ProjectReference Include="..\Htp.Books.Common.Implementation\Htp.Books.Common.Implementation.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+    <Folder Include="EntityConfigurations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\20190403122616_InitialCreate.cs" />
+    <Compile Remove="Migrations\ApplicationDbContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\20190403122616_InitialCreate.Designer.cs" />
+  </ItemGroup>
+</Project>

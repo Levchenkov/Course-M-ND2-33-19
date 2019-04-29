@@ -1,0 +1,80 @@
+﻿@model Htp.Books.Domain.Contracts.ViewModels.BookViewModel
+
+
+@Html.AntiForgeryToken()
+<h4>Book</h4>
+<hr />
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<input asp-for="Id" type="hidden" />
+<input asp-for="RowVersion" type="hidden" />
+<input asp-for="LongRowVersion" type="hidden" />
+
+
+<div class="form-group">
+    <label asp-for="Title" class="control-label col-md-2"></label>
+    <div class="col-md-10">
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group">
+    <label asp-for="Description" class="control-label col-md-2"></label>
+    <div class="col-md-10">
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group">
+    <label asp-for="Author" class="control-label col-md-2"></label>
+    <div class="col-md-10">
+        <input asp-for="Author" class="form-control" />
+        <span asp-validation-for="Author" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group">
+    <label asp-for="Created" class="control-label col-md-2"></label>
+    <div class="col-md-10">
+        <input asp-for="Created" class="form-control" />
+        <span asp-validation-for="Created" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group">
+    <label asp-for="GenreId" class="control-label col-md-2"></label>
+    <div class="col-md-10">
+        <select asp-for="GenreId" asp-items="Model.Genres" class="form-control">
+            <option>--none--</option>
+        </select>
+        <span asp-validation-for="GenreId" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group">
+    <label asp-for="IsPaper" class="control-label col-md-2"></label>
+    <div class="col-md-10">
+        <input asp-for="IsPaper" />
+        <span asp-validation-for="IsPaper" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group">
+        <label asp-for="LanguageIds" class="control-label col-md-2"></label>
+        <div class="col-md-10">
+            <select asp-for="LanguageIds"
+                    asp-items="Model.Languages"
+                    class="form-control"></select>
+        </div>
+    </div>
+
+<div class="form-group">
+    <label asp-for="DeliveryRequired" class="control-label col-md-2"></label>
+    <div class="col-md-10">
+        <input asp-for="DeliveryRequired" type="radio" value="true" />Yes
+        <input asp-for="DeliveryRequired" type="radio" value="false" />No
+        <span asp-validation-for="DeliveryRequired" class="text-danger"></span>
+    </div>
+</div>

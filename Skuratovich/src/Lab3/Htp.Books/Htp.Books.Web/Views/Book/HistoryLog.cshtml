@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Htp.Books.Domain.Contracts.ViewModels.HistoryLogViewModel>
+
+@{
+    ViewBag.Title = "Book's history log";
+}
+
+<h2>Book's history log</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateTime)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateTime)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<table class="table">
+    <tr>
+        <th>
+            Current Book
+        </th>
+        <th>
+            Origin Book
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <p>@Html.DisplayFor(modelItem => item.Id)</p>
+                <partial name="BookDetailsPartitial.cshtml" model="item.CurrentBook" />
+            </td>
+            <td>
+                <p>@Html.DisplayFor(modelItem => item.UpdateTime)</p>
+                <partial name="BookDetailsPartitial.cshtml" model="item.OriginBook" />
+            </td>
+        </tr>
+    }
+</table>
+
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>

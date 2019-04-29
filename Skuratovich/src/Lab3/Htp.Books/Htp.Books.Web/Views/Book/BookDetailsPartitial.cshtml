@@ -1,0 +1,82 @@
+﻿@model Htp.Books.Domain.Contracts.ViewModels.BookViewModel
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GenreId)
+        </dt>
+
+        <dd>
+            <div class="col-md-10">
+                <select asp-for="GenreId"
+                        asp-items="Model.Genres"
+                        class="form-control"
+                        disabled="disabled"></select>
+            </div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPaper)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPaper)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LanguageIds)
+        </dt>
+
+        <dd>
+            <div class="col-md-10">
+                <select asp-for="LanguageIds"
+                        asp-items="Model.Languages"
+                        class="form-control"
+                        disabled="disabled"></select>
+            </div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryRequired)
+        </dt>
+
+        <dd>
+            <label asp-for="DeliveryRequired" >@Model.DeliveryRequired</label>
+        </dd>
+
+    </dl>
+</div>
