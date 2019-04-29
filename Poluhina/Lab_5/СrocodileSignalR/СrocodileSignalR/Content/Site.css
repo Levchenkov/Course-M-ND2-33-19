@@ -1,0 +1,22 @@
+﻿
+.button {
+    display: inline-block;
+    margin: 10px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: none;
+}
+.red {
+    background: red;
+}
+.green {
+    background: green;
+}
+.yellow {
+    background: yellow;
+}
+.divstyle{
+    padding-left:80px;
+}
