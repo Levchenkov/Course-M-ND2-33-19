@@ -1,0 +1,16 @@
+﻿@model Http.News.Domain.Contracts.ViewModels.CategoryMenuViewModel
+@foreach (var menu in Model.Categories)
+{
+    var isCurrentPageString = menu.IsCurrentPage == true ? "current-page" : "";
+    <li class="@Html.Raw(isCurrentPageString)">
+        @if (menu.Id == 0)
+        {
+            <a href="/"><i class="icon-home"></i><br/>@menu.Name</a>
+        }
+        else
+        {
+            @Html.ActionLink(@menu.Name, "Category", new {controller = "Home", name = @menu.Name, id = @menu.Id})
+        @*<a href="@Url.Content("/Home/Category/" + @menu.Name + "/" + @menu.Id)"><br />@menu.Name</a>*@
+        }
+    </li>
+}

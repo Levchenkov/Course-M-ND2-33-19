@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Kroko";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/Content/style.css" type="text/css">
+    @*<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">*@
+</head>
+<body>
+    @*<div class="row">*@
+    <div class="col4">
+        <h2>Чат-комната</h2>
+        <div class="main">
+            <div id="loginBlock">
+                Введите логин:<br />
+                <input id="txtUserName" type="text" />
+                <input id="cbMaster" type="checkbox" name="IsMaster" />
+                <label for="cbMaster">Ведущий</label>
+                <input id="btnLogin" type="button" value="Войти" />
+            </div>
+            <div id="chatBody">
+                <div id="header"></div>
+                <div id="inputForm">
+                    <input type="text" id="message" />
+                    <input type="button" id="sendmessage" value="Отправить" />
+                </div>
+                <div id="chatroom"></div>
+
+                <div id="chatusers">
+                    <p><b>Все пользователи</b></p>
+                </div>
+            </div>
+            <input id="hdId" type="hidden" />
+            <input id="username" type="hidden" />
+        </div>
+    </div>
+
+    <div class="col4">
+        <div id="hidenCanvas">
+            @*<h1 style="margin-top: 20px" align="center">jQuery Simple Draw App Demo</h1>*@
+            <canvas id="idCanvas" width="600" height="400"></canvas>
+            <div id="canvasControls">
+                <button id="btnClean">Clean</button>
+                <button id="newCanvas">Start New Game</button>
+                <div class="controls">
+                    <ul>
+                        <li class="red selected"></li>
+                        <li class="blue"></li>
+                        <li class="yellow"></li>
+                    </ul>
+                    <button id="revealColorSelect">New Color</button>
+                    <div id="colorSelect">
+                        <span id="newColor"></span>
+                        <div class="sliders">
+                            <p>
+                                <label for="red">Red</label>
+                                <input id="red" name="red" type="range" min=0 max=255 value=0>
+                            </p>
+                            <p>
+                                <label for="green">Green</label>
+                                <input id="green" name="green" type="range" min=0 max=255 value=0>
+                            </p>
+                            <p>
+                                <label for="blue">Blue</label>
+                                <input id="blue" name="blue" type="range" min=0 max=255 value=0>
+                            </p>
+                        </div>
+                        <div>
+                            <button id="addNewColor">Add Color</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*</div>*@
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="~/Scripts/app.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <!--Ссылка на библиотеку SignalR -->
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/util.js"></script>
+</body>
+</html>

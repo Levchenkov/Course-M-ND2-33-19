@@ -1,0 +1,38 @@
+﻿@model Http.News.Domain.Contracts.Dtos.ItemDetailsDto
+
+<div class="jq-rating" data-like="@Model.TotalLikes" data-isliked="@(Model.IsLiked ? "true" : "false")"></div>
+<hr>
+<div class="container" id="MyRate">
+    @using (Html.BeginForm("Details", "Home", FormMethod.Post, new { viewModel = Model, score = "$(#score).value" }))
+    {
+        <input type="text" class="rating-input" id="starRating" name="score" value="@Model.AverageRating" data-size="md" title="Total users rating:">
+        <input type="hidden" name="ArticleID" value="@Model.Id" />
+        <input type="hidden" name="CategoryID" value="@Model.CategoryId" />
+        @Html.HiddenFor(model => model.CategoryId)
+        @Html.HiddenFor(model => model.BigImageUrl)
+        @Html.HiddenFor(model => model.Content)
+        @Html.HiddenFor(model => model.MediumImageUrl)
+        @Html.HiddenFor(model => model.NumOfView)
+        @Html.HiddenFor(model => model.ShortDescription)
+        @Html.HiddenFor(model => model.SmallImageUrl)
+        @Html.HiddenFor(model => model.Title)
+        @Html.HiddenFor(model => model.AverageRating)
+        @Html.HiddenFor(model => model.CreatedBy)
+        @Html.HiddenFor(model => model.CreatedDate)
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.ModifiedBy)
+        @Html.HiddenFor(model => model.ModifiedDate)
+        @Html.HiddenFor(model => model.Rating)
+        @Html.HiddenFor(model => model.TotalRaters)
+        <br>
+    }
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+    <hr>
+</div>

@@ -1,0 +1,61 @@
+﻿@model Http.News.Domain.Contracts.ViewModels.HomePageViewModel
+
+@section topmenu {
+    @Html.Partial("_TopMenu", Model.TopMenu)
+}
+
+<!-- The hottest magazines -->
+<div class="portfolio container">
+    <div class="portfolio-title">
+        <h3>Top rating news</h3>
+    </div>
+    <div class="row">
+        @foreach (var item in Model.HottestItems)
+        {
+            <div class="work span3">
+                <img src="@Url.Content("~/" + @item.AvatarImage)" alt="#">
+                <h4>@item.Title</h4>
+                <h5>Cetegory: @item.CategoryName</h5>
+                <p>@item.ShortDescription</p>
+                <div class="icon-awesome">
+                    <a href="@Url.Content("~/" + @item.AvatarImage)" rel="prettyPhoto"><i class="icon-search"></i></a>
+                    @Html.ActionLink(" ", "Details", new { controller = "Home", categoryId = @item.CategoryId, itemId = @item.ItemId, title = @item.Title }, new { @class = "icon-link" })
+                </div>
+            </div>
+        }
+    </div>
+</div>
+        
+<!-- The lastest magazines -->
+<div class="portfolio container">
+    <div class="portfolio-title">
+        <h3>The lastest news</h3>
+    </div>
+    <div class="row">
+        @foreach (var item in Model.LatestItems)
+        {
+            <div class="work span3">
+                @try
+                {
+                    <img src="@Url.Content("~" + @item.AvatarImage)" alt="#">
+                }
+                catch
+                {
+                }
+                <h4>@item.Title</h4>
+                <p>@item.ShortDescription</p>
+                <div class="icon-awesome">
+                    @try
+                    {
+                        <a href="@Url.Content("~" + @item.AvatarImage)" rel="prettyPhoto"><i class="icon-search"></i></a>
+                    }
+                    catch
+                    {
+                    }
+                    @*<a href="@Url.Content("/Home/Details/" + @item.Title + "/" + @item.CategoryId + "/" + @item.ItemId)"><i class="icon-link"></i></a>*@
+                    @Html.ActionLink(" ", "Details", new { controller = "Home", categoryId = @item.CategoryId, itemId = @item.ItemId, title = @item.Title }, new { @class = "icon-link" })
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ITNewsWeb.Models.UsersInRoleViewModel>
+
+@{
+    ViewBag.Title = "Users With Roles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/css/jquery.dataTables.min.css">
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">
+            <b>Users with Roles using</b>
+            <a href="https://datatables.net/">jQuery Datatables plugin</a>
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="card-body">
+        <table class="table table-hover table-bordered table-condensed" id="example1">
+            <thead>
+                <tr>
+                    <td><b>Username</b></td>
+                    <td><b>Email</b></td>
+                    <td><b>Roles</b></td>
+                    <td><b>Lockout</b></td>
+                    <td><b>Lockout Date</b></td>
+                    <td><b>Options</b></td>
+                </tr>
+            </thead>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>@user.Role</td>
+                    <td>@user.LockoutEnabled</td>
+                    <td>@user.LockoutEndDateUtc</td>
+                    <td class="form-actions">
+                        <span style="color: #ff0000;">
+                            <a href="@Url.Action("ResetUserPassword", "ManageUsers", new { userId = user.UserId, UserName = user.Username})" class="btn btn-warning btn-sm">
+                                <i class="fa fa-unlock">&nbsp;</i>Reset Password
+                            </a>
+                        </span>
+                        <span style="color: #ff0000;">
+                            <a href="@Url.Action("UnlockOut", "ManageUsers", new { userId = user.UserId})" class="btn btn-info btn-sm">
+                                <i class="fa fa-unlock-alt">&nbsp;</i>Unlock User
+                            </a>
+                        </span>
+                        <span style="color: #ff0000;">
+                            <a href="@Url.Action("LockOut", "ManageUsers", new { userId = user.UserId})" class="btn btn-warning btn-sm">
+                                <i class="fa fa-lock">&nbsp;</i>Block User
+                            </a>
+                        </span>
+                        <span style="color: #ff0000;">
+                            <a href="@Url.Action("DeleteUserd", "ManageUsers", new { userId = user.UserId})" class="btn btn-danger btn-sm">
+                                <i class="fa fa-remove">&nbsp;</i>Delete User
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div class="card-footer">
+        <p class="card-title"><b>Total Users till @String.Format("{0 : dddd, MMMM d, yyyy}", DateTime.Now)  : </b><span class="label label-primary">@Model.Count()</span></p>
+    </div>
+</div>
+
+@if (ReferenceEquals(TempData["MessageValue"], "1"))
+{
+    @TempData["Message"]
+}
+
+@section scripts{
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script>
+        $(function () {
+            $("#example1").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true
+            });
+        });
+    </script>
+}

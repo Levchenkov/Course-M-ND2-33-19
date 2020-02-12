@@ -1,0 +1,33 @@
+﻿@model Http.News.Domain.Contracts.ViewModels.SearchPageViewModel
+
+@section topmenu {
+    @Html.Partial("_TopMenu", Model.TopMenu)
+}
+
+<!-- Search news -->
+<div class="portfolio container">
+    <div class="portfolio-title">
+        <h3>Found news</h3>
+    </div>
+    @if (Model.SearchItems == null || Model.SearchItems.Count <= 0)
+    {
+        <p>There is no news for this search tags!!!</p>
+    }
+    <div class="row">
+        @foreach (var item in Model.SearchItems)
+        {
+            <div class="work span3">
+                <img src="@Url.Content("~/" + item.AvatarImage)" alt="#">
+                <h4>@item.Title</h4>
+                <h5>Cetegory: @item.CategoryName</h5>
+                <p>@item.ShortDescription</p>
+                <div class="icon-awesome">
+                    <a href="@Url.Content("~/" + item.AvatarImage)" rel="prettyPhoto">
+                        <i class="icon-search"></i>
+                    </a>
+                    @Html.ActionLink(" ", "Details", new { controller = "Home", categoryId = item.CategoryId, itemId = item.ItemId, title = item.Title }, new { @class = "icon-link" })
+                </div>
+            </div>
+        }
+    </div>
+</div>

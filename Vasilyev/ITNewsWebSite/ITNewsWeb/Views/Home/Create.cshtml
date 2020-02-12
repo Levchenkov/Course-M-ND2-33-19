@@ -1,0 +1,144 @@
+﻿@model Http.News.Domain.Contracts.Dtos.ItemDetailsDto
+
+@{
+    //ViewBag.Title = "Create";
+}
+
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+<script src="~/Scripts/codemirror-4.inline-attachment.js"></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.0.3/codemirror.css" media="screen" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.0.3/codemirror.js"></script>
+<script type="text/javascript" src="~/Scripts/inline-attachment.min.js"></script>
+<script type="text/javascript" src="~/Scripts/codemirror-4.inline-attachment.js"></script>
+@*<script src="~/Scripts/easymde.js"></script>*@
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm((string)ViewBag.Title, "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.ModifiedBy)
+    @Html.HiddenFor(model => model.ModifiedDate)
+    @Html.HiddenFor(model => model.CreatedBy)
+    @Html.HiddenFor(model => model.CreatedDate)
+    @Html.HiddenFor(model => model.TotalRaters)
+    @Html.HiddenFor(model => model.Rating)
+    @Html.HiddenFor(model => model.AverageRating)
+    @Html.HiddenFor(model => model.NumOfView)
+    @Html.HiddenFor(model => model.Content)
+    @Html.HiddenFor(model => model.SmallImageUrl)
+
+    <div class="form-horizontal">
+        <h4>ItemDetailsDto</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ShortDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CategoryId, Model.CatList, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <textarea id="my-text-area">@Model.Content</textarea>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SmallImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+            @if (!string.IsNullOrEmpty(Model.SmallImageUrl))
+            {
+                <img src="@Model.SmallImageUrl" />
+
+            }
+            <div class="col-md-10">
+                <input type="file" name="ImageFile" @(string.IsNullOrEmpty(Model.SmallImageUrl) ? "required" : "") value="@Model.SmallImageUrl "/>
+            </div>
+
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.MediumImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MediumImageUrl, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MediumImageUrl, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BigImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.BigImageUrl, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BigImageUrl, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@ViewBag.Title" id="save-button" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        var easyMDE = new EasyMDE({
+            element: document.getElementById('my-text-area'),
+            showIcons: ["code", "table"] });
+
+        document.getElementById("save-button").addEventListener("click", onSubmitClick);
+
+        function onSubmitClick() {
+            document.getElementsByName("Content")[0].value = easyMDE.value();
+        }
+
+           inlineAttachment.editors.codemirror4.attach(easyMDE.codemirror,
+            {
+                uploadUrl: '@Url.Action("OnPostFile", "Home", new { handler = "File" })',
+                uploadedFieldName: 'uploadedFile',
+                jsonFieldName: 'fileName',
+                progressText: '![Uploading file...]()',
+                extraHeaders: {"RequestVerificationToken":'@Html.AntiForgeryToken()'},
+                onFileUploadResponse: function (xhr) {
+                    var result = JSON.parse(xhr.responseText);
+                    var filename = result[this.settings.jsonFieldName];
+                    if (result && filename) {
+                        var newValue;
+                        if (typeof this.settings.urlText === 'function') {
+                            newValue = this.settings.urlText.call(this, filename, result);
+                        } else {
+                            newValue = this.settings.urlText.replace(this.filenameTag, filename);
+                        }
+                        var text = this.editor.getValue().replace(this.lastValue, newValue);
+                        this.editor.setValue(text);
+                        this.settings.onFileUploaded.call(this, filename);
+                    }
+                    return false;
+                }
+            });
+    </script>
+}
